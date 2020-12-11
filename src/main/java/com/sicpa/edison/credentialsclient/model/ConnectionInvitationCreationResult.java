@@ -20,7 +20,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.sicpa.edison.credentialsclient.model.ConnectionInvitation;
+import com.sicpa.edison.credentialsclient.model.ConnectionInvitationContent;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -28,15 +28,15 @@ import java.io.IOException;
 /**
  * ConnectionInvitationCreationResult
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-10T15:22:45.234670+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-11T17:14:05.875852+01:00[Europe/Zurich]")
 public class ConnectionInvitationCreationResult {
   public static final String SERIALIZED_NAME_INVITATION_URL = "invitationUrl";
   @SerializedName(SERIALIZED_NAME_INVITATION_URL)
   private String invitationUrl;
 
-  public static final String SERIALIZED_NAME_CONNECTION_INVITATION = "connectionInvitation";
-  @SerializedName(SERIALIZED_NAME_CONNECTION_INVITATION)
-  private ConnectionInvitation connectionInvitation;
+  public static final String SERIALIZED_NAME_CONNECTION_INVITATION_CONTENT = "connectionInvitationContent";
+  @SerializedName(SERIALIZED_NAME_CONNECTION_INVITATION_CONTENT)
+  private ConnectionInvitationContent connectionInvitationContent;
 
   public static final String SERIALIZED_NAME_CONNECTION_ID = "connectionId";
   @SerializedName(SERIALIZED_NAME_CONNECTION_ID)
@@ -66,26 +66,26 @@ public class ConnectionInvitationCreationResult {
   }
 
 
-  public ConnectionInvitationCreationResult connectionInvitation(ConnectionInvitation connectionInvitation) {
+  public ConnectionInvitationCreationResult connectionInvitationContent(ConnectionInvitationContent connectionInvitationContent) {
     
-    this.connectionInvitation = connectionInvitation;
+    this.connectionInvitationContent = connectionInvitationContent;
     return this;
   }
 
    /**
-   * Get connectionInvitation
-   * @return connectionInvitation
+   * Get connectionInvitationContent
+   * @return connectionInvitationContent
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public ConnectionInvitation getConnectionInvitation() {
-    return connectionInvitation;
+  public ConnectionInvitationContent getConnectionInvitationContent() {
+    return connectionInvitationContent;
   }
 
 
-  public void setConnectionInvitation(ConnectionInvitation connectionInvitation) {
-    this.connectionInvitation = connectionInvitation;
+  public void setConnectionInvitationContent(ConnectionInvitationContent connectionInvitationContent) {
+    this.connectionInvitationContent = connectionInvitationContent;
   }
 
 
@@ -122,13 +122,13 @@ public class ConnectionInvitationCreationResult {
     }
     ConnectionInvitationCreationResult connectionInvitationCreationResult = (ConnectionInvitationCreationResult) o;
     return Objects.equals(this.invitationUrl, connectionInvitationCreationResult.invitationUrl) &&
-        Objects.equals(this.connectionInvitation, connectionInvitationCreationResult.connectionInvitation) &&
+        Objects.equals(this.connectionInvitationContent, connectionInvitationCreationResult.connectionInvitationContent) &&
         Objects.equals(this.connectionId, connectionInvitationCreationResult.connectionId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(invitationUrl, connectionInvitation, connectionId);
+    return Objects.hash(invitationUrl, connectionInvitationContent, connectionId);
   }
 
 
@@ -137,7 +137,7 @@ public class ConnectionInvitationCreationResult {
     StringBuilder sb = new StringBuilder();
     sb.append("class ConnectionInvitationCreationResult {\n");
     sb.append("    invitationUrl: ").append(toIndentedString(invitationUrl)).append("\n");
-    sb.append("    connectionInvitation: ").append(toIndentedString(connectionInvitation)).append("\n");
+    sb.append("    connectionInvitationContent: ").append(toIndentedString(connectionInvitationContent)).append("\n");
     sb.append("    connectionId: ").append(toIndentedString(connectionId)).append("\n");
     sb.append("}");
     return sb.toString();

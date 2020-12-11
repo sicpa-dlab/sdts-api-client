@@ -7,7 +7,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **Integer** |  |  [optional]
-**walletName** | **String** |  |  [optional]
+**name** | **String** |  |  [optional]
 
 
 

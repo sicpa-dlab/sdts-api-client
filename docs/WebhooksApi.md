@@ -1,6 +1,6 @@
 # WebhooksApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://localhost:8080*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -31,7 +31,7 @@ import com.sicpa.edison.credentialsclient.api.WebhooksApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("http://localhost:8080");
     
     // Configure HTTP bearer authorization: auth
     HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
@@ -100,7 +100,7 @@ import com.sicpa.edison.credentialsclient.api.WebhooksApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("http://localhost:8080");
     
     // Configure HTTP bearer authorization: auth
     HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
@@ -163,7 +163,7 @@ import com.sicpa.edison.credentialsclient.api.WebhooksApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("http://localhost:8080");
     
     // Configure HTTP bearer authorization: auth
     HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
@@ -231,7 +231,7 @@ import com.sicpa.edison.credentialsclient.api.WebhooksApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("http://localhost:8080");
     
     // Configure HTTP bearer authorization: auth
     HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
@@ -302,7 +302,7 @@ import com.sicpa.edison.credentialsclient.api.WebhooksApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("http://localhost:8080");
     
     // Configure HTTP bearer authorization: auth
     HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
@@ -373,7 +373,7 @@ import com.sicpa.edison.credentialsclient.api.WebhooksApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("http://localhost:8080");
     
     // Configure HTTP bearer authorization: auth
     HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");

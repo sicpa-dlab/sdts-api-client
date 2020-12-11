@@ -27,15 +27,15 @@ import java.io.IOException;
 /**
  * OrganizationSummary
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-10T15:22:45.234670+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-11T17:14:05.875852+01:00[Europe/Zurich]")
 public class OrganizationSummary {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
   private Integer id;
 
-  public static final String SERIALIZED_NAME_WALLET_NAME = "walletName";
-  @SerializedName(SERIALIZED_NAME_WALLET_NAME)
-  private String walletName;
+  public static final String SERIALIZED_NAME_NAME = "name";
+  @SerializedName(SERIALIZED_NAME_NAME)
+  private String name;
 
 
   public OrganizationSummary id(Integer id) {
@@ -61,26 +61,26 @@ public class OrganizationSummary {
   }
 
 
-  public OrganizationSummary walletName(String walletName) {
+  public OrganizationSummary name(String name) {
     
-    this.walletName = walletName;
+    this.name = name;
     return this;
   }
 
    /**
-   * Get walletName
-   * @return walletName
+   * Get name
+   * @return name
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public String getWalletName() {
-    return walletName;
+  public String getName() {
+    return name;
   }
 
 
-  public void setWalletName(String walletName) {
-    this.walletName = walletName;
+  public void setName(String name) {
+    this.name = name;
   }
 
 
@@ -94,12 +94,12 @@ public class OrganizationSummary {
     }
     OrganizationSummary organizationSummary = (OrganizationSummary) o;
     return Objects.equals(this.id, organizationSummary.id) &&
-        Objects.equals(this.walletName, organizationSummary.walletName);
+        Objects.equals(this.name, organizationSummary.name);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, walletName);
+    return Objects.hash(id, name);
   }
 
 
@@ -108,7 +108,7 @@ public class OrganizationSummary {
     StringBuilder sb = new StringBuilder();
     sb.append("class OrganizationSummary {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    walletName: ").append(toIndentedString(walletName)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("}");
     return sb.toString();
   }

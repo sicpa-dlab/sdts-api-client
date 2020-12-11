@@ -29,9 +29,9 @@ import java.io.IOException;
 
 import com.sicpa.edison.credentialsclient.model.ApiError;
 import com.sicpa.edison.credentialsclient.model.Connection;
+import com.sicpa.edison.credentialsclient.model.ConnectionInvitation;
 import com.sicpa.edison.credentialsclient.model.ConnectionInvitationCreate;
 import com.sicpa.edison.credentialsclient.model.ConnectionInvitationCreationResult;
-import com.sicpa.edison.credentialsclient.model.ConnectionInvitationReception;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -321,7 +321,7 @@ public class ConnectionsApi {
     /**
      * Build call for connectionsInvitationPost
      * @param X_ORGANIZATION_ID  (required)
-     * @param connectionInvitationCreate  (required)
+     * @param connectionInvitation  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -333,8 +333,8 @@ public class ConnectionsApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call connectionsInvitationPostCall(Integer X_ORGANIZATION_ID, ConnectionInvitationCreate connectionInvitationCreate, final ApiCallback _callback) throws ApiException {
-        Object localVarPostBody = connectionInvitationCreate;
+    public okhttp3.Call connectionsInvitationPostCall(Integer X_ORGANIZATION_ID, ConnectionInvitation connectionInvitation, final ApiCallback _callback) throws ApiException {
+        Object localVarPostBody = connectionInvitation;
 
         // create path and map variables
         String localVarPath = "/connections/invitation";
@@ -367,30 +367,30 @@ public class ConnectionsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call connectionsInvitationPostValidateBeforeCall(Integer X_ORGANIZATION_ID, ConnectionInvitationCreate connectionInvitationCreate, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call connectionsInvitationPostValidateBeforeCall(Integer X_ORGANIZATION_ID, ConnectionInvitation connectionInvitation, final ApiCallback _callback) throws ApiException {
         
         // verify the required parameter 'X_ORGANIZATION_ID' is set
         if (X_ORGANIZATION_ID == null) {
             throw new ApiException("Missing the required parameter 'X_ORGANIZATION_ID' when calling connectionsInvitationPost(Async)");
         }
         
-        // verify the required parameter 'connectionInvitationCreate' is set
-        if (connectionInvitationCreate == null) {
-            throw new ApiException("Missing the required parameter 'connectionInvitationCreate' when calling connectionsInvitationPost(Async)");
+        // verify the required parameter 'connectionInvitation' is set
+        if (connectionInvitation == null) {
+            throw new ApiException("Missing the required parameter 'connectionInvitation' when calling connectionsInvitationPost(Async)");
         }
         
 
-        okhttp3.Call localVarCall = connectionsInvitationPostCall(X_ORGANIZATION_ID, connectionInvitationCreate, _callback);
+        okhttp3.Call localVarCall = connectionsInvitationPostCall(X_ORGANIZATION_ID, connectionInvitation, _callback);
         return localVarCall;
 
     }
 
     /**
-     * Create a new connection invitation
+     * Receive and accept a new connection invitation
      * 
      * @param X_ORGANIZATION_ID  (required)
-     * @param connectionInvitationCreate  (required)
-     * @return ConnectionInvitationCreationResult
+     * @param connectionInvitation  (required)
+     * @return Connection
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -400,17 +400,17 @@ public class ConnectionsApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ConnectionInvitationCreationResult connectionsInvitationPost(Integer X_ORGANIZATION_ID, ConnectionInvitationCreate connectionInvitationCreate) throws ApiException {
-        ApiResponse<ConnectionInvitationCreationResult> localVarResp = connectionsInvitationPostWithHttpInfo(X_ORGANIZATION_ID, connectionInvitationCreate);
+    public Connection connectionsInvitationPost(Integer X_ORGANIZATION_ID, ConnectionInvitation connectionInvitation) throws ApiException {
+        ApiResponse<Connection> localVarResp = connectionsInvitationPostWithHttpInfo(X_ORGANIZATION_ID, connectionInvitation);
         return localVarResp.getData();
     }
 
     /**
-     * Create a new connection invitation
+     * Receive and accept a new connection invitation
      * 
      * @param X_ORGANIZATION_ID  (required)
-     * @param connectionInvitationCreate  (required)
-     * @return ApiResponse&lt;ConnectionInvitationCreationResult&gt;
+     * @param connectionInvitation  (required)
+     * @return ApiResponse&lt;Connection&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -420,17 +420,17 @@ public class ConnectionsApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<ConnectionInvitationCreationResult> connectionsInvitationPostWithHttpInfo(Integer X_ORGANIZATION_ID, ConnectionInvitationCreate connectionInvitationCreate) throws ApiException {
-        okhttp3.Call localVarCall = connectionsInvitationPostValidateBeforeCall(X_ORGANIZATION_ID, connectionInvitationCreate, null);
-        Type localVarReturnType = new TypeToken<ConnectionInvitationCreationResult>(){}.getType();
+    public ApiResponse<Connection> connectionsInvitationPostWithHttpInfo(Integer X_ORGANIZATION_ID, ConnectionInvitation connectionInvitation) throws ApiException {
+        okhttp3.Call localVarCall = connectionsInvitationPostValidateBeforeCall(X_ORGANIZATION_ID, connectionInvitation, null);
+        Type localVarReturnType = new TypeToken<Connection>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     * Create a new connection invitation (asynchronously)
+     * Receive and accept a new connection invitation (asynchronously)
      * 
      * @param X_ORGANIZATION_ID  (required)
-     * @param connectionInvitationCreate  (required)
+     * @param connectionInvitation  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -442,10 +442,10 @@ public class ConnectionsApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call connectionsInvitationPostAsync(Integer X_ORGANIZATION_ID, ConnectionInvitationCreate connectionInvitationCreate, final ApiCallback<ConnectionInvitationCreationResult> _callback) throws ApiException {
+    public okhttp3.Call connectionsInvitationPostAsync(Integer X_ORGANIZATION_ID, ConnectionInvitation connectionInvitation, final ApiCallback<Connection> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = connectionsInvitationPostValidateBeforeCall(X_ORGANIZATION_ID, connectionInvitationCreate, _callback);
-        Type localVarReturnType = new TypeToken<ConnectionInvitationCreationResult>(){}.getType();
+        okhttp3.Call localVarCall = connectionsInvitationPostValidateBeforeCall(X_ORGANIZATION_ID, connectionInvitation, _callback);
+        Type localVarReturnType = new TypeToken<Connection>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -580,25 +580,25 @@ public class ConnectionsApi {
         return localVarCall;
     }
     /**
-     * Build call for connectionsReceptionPost
+     * Build call for connectionsPost
      * @param X_ORGANIZATION_ID  (required)
-     * @param connectionInvitationReception  (required)
+     * @param connectionInvitationCreate  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call connectionsReceptionPostCall(Integer X_ORGANIZATION_ID, ConnectionInvitationReception connectionInvitationReception, final ApiCallback _callback) throws ApiException {
-        Object localVarPostBody = connectionInvitationReception;
+    public okhttp3.Call connectionsPostCall(Integer X_ORGANIZATION_ID, ConnectionInvitationCreate connectionInvitationCreate, final ApiCallback _callback) throws ApiException {
+        Object localVarPostBody = connectionInvitationCreate;
 
         // create path and map variables
-        String localVarPath = "/connections/reception";
+        String localVarPath = "/connections";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -628,85 +628,85 @@ public class ConnectionsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call connectionsReceptionPostValidateBeforeCall(Integer X_ORGANIZATION_ID, ConnectionInvitationReception connectionInvitationReception, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call connectionsPostValidateBeforeCall(Integer X_ORGANIZATION_ID, ConnectionInvitationCreate connectionInvitationCreate, final ApiCallback _callback) throws ApiException {
         
         // verify the required parameter 'X_ORGANIZATION_ID' is set
         if (X_ORGANIZATION_ID == null) {
-            throw new ApiException("Missing the required parameter 'X_ORGANIZATION_ID' when calling connectionsReceptionPost(Async)");
+            throw new ApiException("Missing the required parameter 'X_ORGANIZATION_ID' when calling connectionsPost(Async)");
         }
         
-        // verify the required parameter 'connectionInvitationReception' is set
-        if (connectionInvitationReception == null) {
-            throw new ApiException("Missing the required parameter 'connectionInvitationReception' when calling connectionsReceptionPost(Async)");
+        // verify the required parameter 'connectionInvitationCreate' is set
+        if (connectionInvitationCreate == null) {
+            throw new ApiException("Missing the required parameter 'connectionInvitationCreate' when calling connectionsPost(Async)");
         }
         
 
-        okhttp3.Call localVarCall = connectionsReceptionPostCall(X_ORGANIZATION_ID, connectionInvitationReception, _callback);
+        okhttp3.Call localVarCall = connectionsPostCall(X_ORGANIZATION_ID, connectionInvitationCreate, _callback);
         return localVarCall;
 
     }
 
     /**
-     * Receive a new connection invitation
+     * Create a new connection invitation
      * 
      * @param X_ORGANIZATION_ID  (required)
-     * @param connectionInvitationReception  (required)
-     * @return Connection
+     * @param connectionInvitationCreate  (required)
+     * @return ConnectionInvitationCreationResult
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public Connection connectionsReceptionPost(Integer X_ORGANIZATION_ID, ConnectionInvitationReception connectionInvitationReception) throws ApiException {
-        ApiResponse<Connection> localVarResp = connectionsReceptionPostWithHttpInfo(X_ORGANIZATION_ID, connectionInvitationReception);
+    public ConnectionInvitationCreationResult connectionsPost(Integer X_ORGANIZATION_ID, ConnectionInvitationCreate connectionInvitationCreate) throws ApiException {
+        ApiResponse<ConnectionInvitationCreationResult> localVarResp = connectionsPostWithHttpInfo(X_ORGANIZATION_ID, connectionInvitationCreate);
         return localVarResp.getData();
     }
 
     /**
-     * Receive a new connection invitation
+     * Create a new connection invitation
      * 
      * @param X_ORGANIZATION_ID  (required)
-     * @param connectionInvitationReception  (required)
-     * @return ApiResponse&lt;Connection&gt;
+     * @param connectionInvitationCreate  (required)
+     * @return ApiResponse&lt;ConnectionInvitationCreationResult&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Connection> connectionsReceptionPostWithHttpInfo(Integer X_ORGANIZATION_ID, ConnectionInvitationReception connectionInvitationReception) throws ApiException {
-        okhttp3.Call localVarCall = connectionsReceptionPostValidateBeforeCall(X_ORGANIZATION_ID, connectionInvitationReception, null);
-        Type localVarReturnType = new TypeToken<Connection>(){}.getType();
+    public ApiResponse<ConnectionInvitationCreationResult> connectionsPostWithHttpInfo(Integer X_ORGANIZATION_ID, ConnectionInvitationCreate connectionInvitationCreate) throws ApiException {
+        okhttp3.Call localVarCall = connectionsPostValidateBeforeCall(X_ORGANIZATION_ID, connectionInvitationCreate, null);
+        Type localVarReturnType = new TypeToken<ConnectionInvitationCreationResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     * Receive a new connection invitation (asynchronously)
+     * Create a new connection invitation (asynchronously)
      * 
      * @param X_ORGANIZATION_ID  (required)
-     * @param connectionInvitationReception  (required)
+     * @param connectionInvitationCreate  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call connectionsReceptionPostAsync(Integer X_ORGANIZATION_ID, ConnectionInvitationReception connectionInvitationReception, final ApiCallback<Connection> _callback) throws ApiException {
+    public okhttp3.Call connectionsPostAsync(Integer X_ORGANIZATION_ID, ConnectionInvitationCreate connectionInvitationCreate, final ApiCallback<ConnectionInvitationCreationResult> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = connectionsReceptionPostValidateBeforeCall(X_ORGANIZATION_ID, connectionInvitationReception, _callback);
-        Type localVarReturnType = new TypeToken<Connection>(){}.getType();
+        okhttp3.Call localVarCall = connectionsPostValidateBeforeCall(X_ORGANIZATION_ID, connectionInvitationCreate, _callback);
+        Type localVarReturnType = new TypeToken<ConnectionInvitationCreationResult>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }

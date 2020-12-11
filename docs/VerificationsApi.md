@@ -1,16 +1,16 @@
 # VerificationsApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://localhost:8080*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**verificationDelete**](VerificationsApi.md#verificationDelete) | **DELETE** /verifications/{verificationId} | Delete verification
 [**verificationGet**](VerificationsApi.md#verificationGet) | **GET** /verifications/{verificationId} | Get verification
-[**verificationTemplateDelete**](VerificationsApi.md#verificationTemplateDelete) | **DELETE** /verificationTemplates/{verificationTemplateId} | Delete verification request
-[**verificationTemplateGet**](VerificationsApi.md#verificationTemplateGet) | **GET** /verificationTemplates/{verificationTemplateId} | Get verification template
-[**verificationTemplatePut**](VerificationsApi.md#verificationTemplatePut) | **PUT** /verificationTemplates/{verificationTemplateId} | Update verification template
-[**verificationTemplatesGet**](VerificationsApi.md#verificationTemplatesGet) | **GET** /verificationTemplates | List all verification templates
-[**verificationTemplatesPost**](VerificationsApi.md#verificationTemplatesPost) | **POST** /verificationTemplates | Create a new Verification Template
+[**verificationTemplateDelete**](VerificationsApi.md#verificationTemplateDelete) | **DELETE** /verification-templates/{verificationTemplateId} | Delete verification request
+[**verificationTemplateGet**](VerificationsApi.md#verificationTemplateGet) | **GET** /verification-templates/{verificationTemplateId} | Get verification template
+[**verificationTemplatePut**](VerificationsApi.md#verificationTemplatePut) | **PUT** /verification-templates/{verificationTemplateId} | Update verification template
+[**verificationTemplatesGet**](VerificationsApi.md#verificationTemplatesGet) | **GET** /verification-templates | List all verification templates
+[**verificationTemplatesPost**](VerificationsApi.md#verificationTemplatesPost) | **POST** /verification-templates | Create a new Verification Template
 [**verificationsGet**](VerificationsApi.md#verificationsGet) | **GET** /verifications | List all verifications
 [**verificationsPost**](VerificationsApi.md#verificationsPost) | **POST** /verifications | Create a new Verification
 
@@ -34,7 +34,7 @@ import com.sicpa.edison.credentialsclient.api.VerificationsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("http://localhost:8080");
     
     // Configure HTTP bearer authorization: auth
     HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
@@ -102,7 +102,7 @@ import com.sicpa.edison.credentialsclient.api.VerificationsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("http://localhost:8080");
     
     // Configure HTTP bearer authorization: auth
     HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
@@ -171,7 +171,7 @@ import com.sicpa.edison.credentialsclient.api.VerificationsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("http://localhost:8080");
     
     // Configure HTTP bearer authorization: auth
     HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
@@ -239,7 +239,7 @@ import com.sicpa.edison.credentialsclient.api.VerificationsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("http://localhost:8080");
     
     // Configure HTTP bearer authorization: auth
     HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
@@ -308,7 +308,7 @@ import com.sicpa.edison.credentialsclient.api.VerificationsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("http://localhost:8080");
     
     // Configure HTTP bearer authorization: auth
     HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
@@ -379,7 +379,7 @@ import com.sicpa.edison.credentialsclient.api.VerificationsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("http://localhost:8080");
     
     // Configure HTTP bearer authorization: auth
     HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
@@ -446,7 +446,7 @@ import com.sicpa.edison.credentialsclient.api.VerificationsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("http://localhost:8080");
     
     // Configure HTTP bearer authorization: auth
     HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
@@ -498,7 +498,7 @@ Name | Type | Description  | Notes
 
 <a name="verificationsGet"></a>
 # **verificationsGet**
-> List&lt;VerificationSummary&gt; verificationsGet(X_ORGANIZATION_ID, state, connectionId)
+> List&lt;VerificationSummary&gt; verificationsGet(X_ORGANIZATION_ID, connectionId)
 
 List all verifications
 
@@ -515,7 +515,7 @@ import com.sicpa.edison.credentialsclient.api.VerificationsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("http://localhost:8080");
     
     // Configure HTTP bearer authorization: auth
     HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
@@ -523,10 +523,9 @@ public class Example {
 
     VerificationsApi apiInstance = new VerificationsApi(defaultClient);
     Integer X_ORGANIZATION_ID = 56; // Integer | 
-    String state = "state_example"; // String | 
     String connectionId = 3fa85f64-5717-4562-b3fc-2c963f66afa6; // String | A connection ID.
     try {
-      List<VerificationSummary> result = apiInstance.verificationsGet(X_ORGANIZATION_ID, state, connectionId);
+      List<VerificationSummary> result = apiInstance.verificationsGet(X_ORGANIZATION_ID, connectionId);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling VerificationsApi#verificationsGet");
@@ -544,7 +543,6 @@ public class Example {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **X_ORGANIZATION_ID** | **Integer**|  |
- **state** | **String**|  | [optional] [enum: requested, verified, rejected, error]
  **connectionId** | **String**| A connection ID. | [optional]
 
 ### Return type
@@ -569,7 +567,7 @@ Name | Type | Description  | Notes
 
 <a name="verificationsPost"></a>
 # **verificationsPost**
-> Verification verificationsPost(X_ORGANIZATION_ID, verificationParam)
+> Verification verificationsPost(X_ORGANIZATION_ID, verificationCreate)
 
 Create a new Verification
 
@@ -586,7 +584,7 @@ import com.sicpa.edison.credentialsclient.api.VerificationsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("http://localhost:8080");
     
     // Configure HTTP bearer authorization: auth
     HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
@@ -594,9 +592,9 @@ public class Example {
 
     VerificationsApi apiInstance = new VerificationsApi(defaultClient);
     Integer X_ORGANIZATION_ID = 56; // Integer | 
-    VerificationParam verificationParam = new VerificationParam(); // VerificationParam | 
+    VerificationCreate verificationCreate = new VerificationCreate(); // VerificationCreate | 
     try {
-      Verification result = apiInstance.verificationsPost(X_ORGANIZATION_ID, verificationParam);
+      Verification result = apiInstance.verificationsPost(X_ORGANIZATION_ID, verificationCreate);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling VerificationsApi#verificationsPost");
@@ -614,7 +612,7 @@ public class Example {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **X_ORGANIZATION_ID** | **Integer**|  |
- **verificationParam** | [**VerificationParam**](VerificationParam.md)|  |
+ **verificationCreate** | [**VerificationCreate**](VerificationCreate.md)|  |
 
 ### Return type
 

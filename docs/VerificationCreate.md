@@ -1,12 +1,12 @@
 
 
-# VerificationParam
+# VerificationCreate
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**verificationTemplateName** | **String** | The verificationTemplate name |  [optional]
+**verificationTemplateId** | **Integer** | The verification template id |  [optional]
 **connectionId** | **String** | The connection id |  [optional]
 
 

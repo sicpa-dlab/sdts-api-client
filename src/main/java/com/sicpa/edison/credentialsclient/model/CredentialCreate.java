@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * CredentialCreate
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-10T15:22:45.234670+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-11T17:14:05.875852+01:00[Europe/Zurich]")
 public class CredentialCreate {
   public static final String SERIALIZED_NAME_CONNECTION_ID = "connectionId";
   @SerializedName(SERIALIZED_NAME_CONNECTION_ID)

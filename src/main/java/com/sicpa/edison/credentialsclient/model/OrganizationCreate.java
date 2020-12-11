@@ -27,213 +27,60 @@ import java.io.IOException;
 /**
  * OrganizationCreate
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-10T15:22:45.234670+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-11T17:14:05.875852+01:00[Europe/Zurich]")
 public class OrganizationCreate {
-  public static final String SERIALIZED_NAME_LABEL = "label";
-  @SerializedName(SERIALIZED_NAME_LABEL)
-  private String label;
+  public static final String SERIALIZED_NAME_NAME = "name";
+  @SerializedName(SERIALIZED_NAME_NAME)
+  private String name;
 
-  public static final String SERIALIZED_NAME_HOST = "host";
-  @SerializedName(SERIALIZED_NAME_HOST)
-  private String host;
-
-  public static final String SERIALIZED_NAME_WALLET_NAME = "walletName";
-  @SerializedName(SERIALIZED_NAME_WALLET_NAME)
-  private String walletName;
-
-  public static final String SERIALIZED_NAME_WALLET_KEY = "walletKey";
-  @SerializedName(SERIALIZED_NAME_WALLET_KEY)
-  private String walletKey;
-
-  /**
-   * The wallet type
-   */
-  @JsonAdapter(WalletTypeEnum.Adapter.class)
-  public enum WalletTypeEnum {
-    INDY("INDY");
-
-    private String value;
-
-    WalletTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static WalletTypeEnum fromValue(String value) {
-      for (WalletTypeEnum b : WalletTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<WalletTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final WalletTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public WalletTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return WalletTypeEnum.fromValue(value);
-      }
-    }
-  }
-
-  public static final String SERIALIZED_NAME_WALLET_TYPE = "walletType";
-  @SerializedName(SERIALIZED_NAME_WALLET_TYPE)
-  private WalletTypeEnum walletType;
-
-  public static final String SERIALIZED_NAME_PUBLIC_DID = "publicDid";
-  @SerializedName(SERIALIZED_NAME_PUBLIC_DID)
-  private Boolean publicDid;
+  public static final String SERIALIZED_NAME_ISSUER = "issuer";
+  @SerializedName(SERIALIZED_NAME_ISSUER)
+  private Boolean issuer;
 
 
-  public OrganizationCreate label(String label) {
+  public OrganizationCreate name(String name) {
     
-    this.label = label;
+    this.name = name;
     return this;
   }
 
    /**
-   * The organization label
-   * @return label
+   * The organization name
+   * @return name
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "The organization label")
+  @ApiModelProperty(value = "The organization name")
 
-  public String getLabel() {
-    return label;
+  public String getName() {
+    return name;
   }
 
 
-  public void setLabel(String label) {
-    this.label = label;
+  public void setName(String name) {
+    this.name = name;
   }
 
 
-  public OrganizationCreate host(String host) {
+  public OrganizationCreate issuer(Boolean issuer) {
     
-    this.host = host;
+    this.issuer = issuer;
     return this;
   }
 
    /**
-   * The organization host
-   * @return host
+   * Determine if this organization will act as a credential issuer
+   * @return issuer
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "The organization host")
+  @ApiModelProperty(value = "Determine if this organization will act as a credential issuer")
 
-  public String getHost() {
-    return host;
+  public Boolean getIssuer() {
+    return issuer;
   }
 
 
-  public void setHost(String host) {
-    this.host = host;
-  }
-
-
-  public OrganizationCreate walletName(String walletName) {
-    
-    this.walletName = walletName;
-    return this;
-  }
-
-   /**
-   * The wallet name
-   * @return walletName
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The wallet name")
-
-  public String getWalletName() {
-    return walletName;
-  }
-
-
-  public void setWalletName(String walletName) {
-    this.walletName = walletName;
-  }
-
-
-  public OrganizationCreate walletKey(String walletKey) {
-    
-    this.walletKey = walletKey;
-    return this;
-  }
-
-   /**
-   * The wallet key
-   * @return walletKey
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The wallet key")
-
-  public String getWalletKey() {
-    return walletKey;
-  }
-
-
-  public void setWalletKey(String walletKey) {
-    this.walletKey = walletKey;
-  }
-
-
-  public OrganizationCreate walletType(WalletTypeEnum walletType) {
-    
-    this.walletType = walletType;
-    return this;
-  }
-
-   /**
-   * The wallet type
-   * @return walletType
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The wallet type")
-
-  public WalletTypeEnum getWalletType() {
-    return walletType;
-  }
-
-
-  public void setWalletType(WalletTypeEnum walletType) {
-    this.walletType = walletType;
-  }
-
-
-  public OrganizationCreate publicDid(Boolean publicDid) {
-    
-    this.publicDid = publicDid;
-    return this;
-  }
-
-   /**
-   * Determine if the did generated will be public or not
-   * @return publicDid
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "Determine if the did generated will be public or not")
-
-  public Boolean getPublicDid() {
-    return publicDid;
-  }
-
-
-  public void setPublicDid(Boolean publicDid) {
-    this.publicDid = publicDid;
+  public void setIssuer(Boolean issuer) {
+    this.issuer = issuer;
   }
 
 
@@ -246,17 +93,13 @@ public class OrganizationCreate {
       return false;
     }
     OrganizationCreate organizationCreate = (OrganizationCreate) o;
-    return Objects.equals(this.label, organizationCreate.label) &&
-        Objects.equals(this.host, organizationCreate.host) &&
-        Objects.equals(this.walletName, organizationCreate.walletName) &&
-        Objects.equals(this.walletKey, organizationCreate.walletKey) &&
-        Objects.equals(this.walletType, organizationCreate.walletType) &&
-        Objects.equals(this.publicDid, organizationCreate.publicDid);
+    return Objects.equals(this.name, organizationCreate.name) &&
+        Objects.equals(this.issuer, organizationCreate.issuer);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(label, host, walletName, walletKey, walletType, publicDid);
+    return Objects.hash(name, issuer);
   }
 
 
@@ -264,12 +107,8 @@ public class OrganizationCreate {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class OrganizationCreate {\n");
-    sb.append("    label: ").append(toIndentedString(label)).append("\n");
-    sb.append("    host: ").append(toIndentedString(host)).append("\n");
-    sb.append("    walletName: ").append(toIndentedString(walletName)).append("\n");
-    sb.append("    walletKey: ").append(toIndentedString(walletKey)).append("\n");
-    sb.append("    walletType: ").append(toIndentedString(walletType)).append("\n");
-    sb.append("    publicDid: ").append(toIndentedString(publicDid)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    issuer: ").append(toIndentedString(issuer)).append("\n");
     sb.append("}");
     return sb.toString();
   }

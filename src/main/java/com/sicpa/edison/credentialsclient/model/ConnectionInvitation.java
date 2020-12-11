@@ -20,127 +20,68 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.sicpa.edison.credentialsclient.model.ConnectionInvitationContent;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * ConnectionInvitation
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-10T15:22:45.234670+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-11T17:14:05.875852+01:00[Europe/Zurich]")
 public class ConnectionInvitation {
-  public static final String SERIALIZED_NAME_INVITATION_ID = "invitationId";
-  @SerializedName(SERIALIZED_NAME_INVITATION_ID)
-  private String invitationId;
+  public static final String SERIALIZED_NAME_CONNECTION_INVITATION_CONTENT = "connectionInvitationContent";
+  @SerializedName(SERIALIZED_NAME_CONNECTION_INVITATION_CONTENT)
+  private ConnectionInvitationContent connectionInvitationContent;
 
-  public static final String SERIALIZED_NAME_SERVICE_ENDPOINT = "serviceEndpoint";
-  @SerializedName(SERIALIZED_NAME_SERVICE_ENDPOINT)
-  private String serviceEndpoint;
-
-  public static final String SERIALIZED_NAME_RECIPIENT_KEYS = "recipientKeys";
-  @SerializedName(SERIALIZED_NAME_RECIPIENT_KEYS)
-  private List<String> recipientKeys = new ArrayList<>();
-
-  public static final String SERIALIZED_NAME_LABEL = "label";
-  @SerializedName(SERIALIZED_NAME_LABEL)
-  private String label;
+  public static final String SERIALIZED_NAME_ALIAS = "alias";
+  @SerializedName(SERIALIZED_NAME_ALIAS)
+  private String alias;
 
 
-  public ConnectionInvitation invitationId(String invitationId) {
+  public ConnectionInvitation connectionInvitationContent(ConnectionInvitationContent connectionInvitationContent) {
     
-    this.invitationId = invitationId;
+    this.connectionInvitationContent = connectionInvitationContent;
     return this;
   }
 
    /**
-   * The connection&#39;s invitation id
-   * @return invitationId
+   * Get connectionInvitationContent
+   * @return connectionInvitationContent
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "The connection's invitation id")
+  @ApiModelProperty(value = "")
 
-  public String getInvitationId() {
-    return invitationId;
+  public ConnectionInvitationContent getConnectionInvitationContent() {
+    return connectionInvitationContent;
   }
 
 
-  public void setInvitationId(String invitationId) {
-    this.invitationId = invitationId;
+  public void setConnectionInvitationContent(ConnectionInvitationContent connectionInvitationContent) {
+    this.connectionInvitationContent = connectionInvitationContent;
   }
 
 
-  public ConnectionInvitation serviceEndpoint(String serviceEndpoint) {
+  public ConnectionInvitation alias(String alias) {
     
-    this.serviceEndpoint = serviceEndpoint;
+    this.alias = alias;
     return this;
   }
 
    /**
-   * The connection&#39;s service endpoint
-   * @return serviceEndpoint
+   * Get alias
+   * @return alias
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "The connection's service endpoint")
+  @ApiModelProperty(value = "")
 
-  public String getServiceEndpoint() {
-    return serviceEndpoint;
+  public String getAlias() {
+    return alias;
   }
 
 
-  public void setServiceEndpoint(String serviceEndpoint) {
-    this.serviceEndpoint = serviceEndpoint;
-  }
-
-
-  public ConnectionInvitation recipientKeys(List<String> recipientKeys) {
-    
-    this.recipientKeys = recipientKeys;
-    return this;
-  }
-
-  public ConnectionInvitation addRecipientKeysItem(String recipientKeysItem) {
-    this.recipientKeys.add(recipientKeysItem);
-    return this;
-  }
-
-   /**
-   * The list of recipient&#39;s keys
-   * @return recipientKeys
-  **/
-  @ApiModelProperty(required = true, value = "The list of recipient's keys")
-
-  public List<String> getRecipientKeys() {
-    return recipientKeys;
-  }
-
-
-  public void setRecipientKeys(List<String> recipientKeys) {
-    this.recipientKeys = recipientKeys;
-  }
-
-
-  public ConnectionInvitation label(String label) {
-    
-    this.label = label;
-    return this;
-  }
-
-   /**
-   * The connection&#39;s label
-   * @return label
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The connection's label")
-
-  public String getLabel() {
-    return label;
-  }
-
-
-  public void setLabel(String label) {
-    this.label = label;
+  public void setAlias(String alias) {
+    this.alias = alias;
   }
 
 
@@ -153,15 +94,13 @@ public class ConnectionInvitation {
       return false;
     }
     ConnectionInvitation connectionInvitation = (ConnectionInvitation) o;
-    return Objects.equals(this.invitationId, connectionInvitation.invitationId) &&
-        Objects.equals(this.serviceEndpoint, connectionInvitation.serviceEndpoint) &&
-        Objects.equals(this.recipientKeys, connectionInvitation.recipientKeys) &&
-        Objects.equals(this.label, connectionInvitation.label);
+    return Objects.equals(this.connectionInvitationContent, connectionInvitation.connectionInvitationContent) &&
+        Objects.equals(this.alias, connectionInvitation.alias);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(invitationId, serviceEndpoint, recipientKeys, label);
+    return Objects.hash(connectionInvitationContent, alias);
   }
 
 
@@ -169,10 +108,8 @@ public class ConnectionInvitation {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class ConnectionInvitation {\n");
-    sb.append("    invitationId: ").append(toIndentedString(invitationId)).append("\n");
-    sb.append("    serviceEndpoint: ").append(toIndentedString(serviceEndpoint)).append("\n");
-    sb.append("    recipientKeys: ").append(toIndentedString(recipientKeys)).append("\n");
-    sb.append("    label: ").append(toIndentedString(label)).append("\n");
+    sb.append("    connectionInvitationContent: ").append(toIndentedString(connectionInvitationContent)).append("\n");
+    sb.append("    alias: ").append(toIndentedString(alias)).append("\n");
     sb.append("}");
     return sb.toString();
   }

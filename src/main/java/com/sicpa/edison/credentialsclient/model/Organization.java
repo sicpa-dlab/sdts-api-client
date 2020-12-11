@@ -20,37 +20,22 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.sicpa.edison.credentialsclient.model.Did;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Organization
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-10T15:22:45.234670+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-11T17:14:05.875852+01:00[Europe/Zurich]")
 public class Organization {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
   private Integer id;
 
-  public static final String SERIALIZED_NAME_LABEL = "label";
-  @SerializedName(SERIALIZED_NAME_LABEL)
-  private String label;
-
-  public static final String SERIALIZED_NAME_HOST = "host";
-  @SerializedName(SERIALIZED_NAME_HOST)
-  private String host;
-
-  public static final String SERIALIZED_NAME_WALLET_NAME = "walletName";
-  @SerializedName(SERIALIZED_NAME_WALLET_NAME)
-  private String walletName;
-
-  public static final String SERIALIZED_NAME_WALLET_KEY = "walletKey";
-  @SerializedName(SERIALIZED_NAME_WALLET_KEY)
-  private String walletKey;
+  public static final String SERIALIZED_NAME_NAME = "name";
+  @SerializedName(SERIALIZED_NAME_NAME)
+  private String name;
 
   public static final String SERIALIZED_NAME_CLIENT_ID = "clientId";
   @SerializedName(SERIALIZED_NAME_CLIENT_ID)
@@ -60,13 +45,9 @@ public class Organization {
   @SerializedName(SERIALIZED_NAME_IMAGE_URL)
   private String imageUrl;
 
-  public static final String SERIALIZED_NAME_PUBLIC_DID = "publicDid";
-  @SerializedName(SERIALIZED_NAME_PUBLIC_DID)
-  private Boolean publicDid;
-
-  public static final String SERIALIZED_NAME_DIDS = "dids";
-  @SerializedName(SERIALIZED_NAME_DIDS)
-  private List<Did> dids = null;
+  public static final String SERIALIZED_NAME_ISSUER = "issuer";
+  @SerializedName(SERIALIZED_NAME_ISSUER)
+  private Boolean issuer;
 
 
   public Organization id(Integer id) {
@@ -92,95 +73,26 @@ public class Organization {
   }
 
 
-  public Organization label(String label) {
+  public Organization name(String name) {
     
-    this.label = label;
+    this.name = name;
     return this;
   }
 
    /**
    * The organization&#39;s label
-   * @return label
+   * @return name
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The organization's label")
 
-  public String getLabel() {
-    return label;
+  public String getName() {
+    return name;
   }
 
 
-  public void setLabel(String label) {
-    this.label = label;
-  }
-
-
-  public Organization host(String host) {
-    
-    this.host = host;
-    return this;
-  }
-
-   /**
-   * The organization&#39;s host
-   * @return host
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The organization's host")
-
-  public String getHost() {
-    return host;
-  }
-
-
-  public void setHost(String host) {
-    this.host = host;
-  }
-
-
-  public Organization walletName(String walletName) {
-    
-    this.walletName = walletName;
-    return this;
-  }
-
-   /**
-   * The organization&#39;s wallet name
-   * @return walletName
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The organization's wallet name")
-
-  public String getWalletName() {
-    return walletName;
-  }
-
-
-  public void setWalletName(String walletName) {
-    this.walletName = walletName;
-  }
-
-
-  public Organization walletKey(String walletKey) {
-    
-    this.walletKey = walletKey;
-    return this;
-  }
-
-   /**
-   * The organization&#39;s wallet key
-   * @return walletKey
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The organization's wallet key")
-
-  public String getWalletKey() {
-    return walletKey;
-  }
-
-
-  public void setWalletKey(String walletKey) {
-    this.walletKey = walletKey;
+  public void setName(String name) {
+    this.name = name;
   }
 
 
@@ -230,57 +142,26 @@ public class Organization {
   }
 
 
-  public Organization publicDid(Boolean publicDid) {
+  public Organization issuer(Boolean issuer) {
     
-    this.publicDid = publicDid;
+    this.issuer = issuer;
     return this;
   }
 
    /**
-   * Defines if the organization has a public DID or not
-   * @return publicDid
+   * Defines if the organization acts as an issuer
+   * @return issuer
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "Defines if the organization has a public DID or not")
+  @ApiModelProperty(value = "Defines if the organization acts as an issuer")
 
-  public Boolean getPublicDid() {
-    return publicDid;
+  public Boolean getIssuer() {
+    return issuer;
   }
 
 
-  public void setPublicDid(Boolean publicDid) {
-    this.publicDid = publicDid;
-  }
-
-
-  public Organization dids(List<Did> dids) {
-    
-    this.dids = dids;
-    return this;
-  }
-
-  public Organization addDidsItem(Did didsItem) {
-    if (this.dids == null) {
-      this.dids = new ArrayList<>();
-    }
-    this.dids.add(didsItem);
-    return this;
-  }
-
-   /**
-   * The organization&#39;s DIDs
-   * @return dids
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The organization's DIDs")
-
-  public List<Did> getDids() {
-    return dids;
-  }
-
-
-  public void setDids(List<Did> dids) {
-    this.dids = dids;
+  public void setIssuer(Boolean issuer) {
+    this.issuer = issuer;
   }
 
 
@@ -294,19 +175,15 @@ public class Organization {
     }
     Organization organization = (Organization) o;
     return Objects.equals(this.id, organization.id) &&
-        Objects.equals(this.label, organization.label) &&
-        Objects.equals(this.host, organization.host) &&
-        Objects.equals(this.walletName, organization.walletName) &&
-        Objects.equals(this.walletKey, organization.walletKey) &&
+        Objects.equals(this.name, organization.name) &&
         Objects.equals(this.clientId, organization.clientId) &&
         Objects.equals(this.imageUrl, organization.imageUrl) &&
-        Objects.equals(this.publicDid, organization.publicDid) &&
-        Objects.equals(this.dids, organization.dids);
+        Objects.equals(this.issuer, organization.issuer);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, label, host, walletName, walletKey, clientId, imageUrl, publicDid, dids);
+    return Objects.hash(id, name, clientId, imageUrl, issuer);
   }
 
 
@@ -315,14 +192,10 @@ public class Organization {
     StringBuilder sb = new StringBuilder();
     sb.append("class Organization {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    label: ").append(toIndentedString(label)).append("\n");
-    sb.append("    host: ").append(toIndentedString(host)).append("\n");
-    sb.append("    walletName: ").append(toIndentedString(walletName)).append("\n");
-    sb.append("    walletKey: ").append(toIndentedString(walletKey)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    clientId: ").append(toIndentedString(clientId)).append("\n");
     sb.append("    imageUrl: ").append(toIndentedString(imageUrl)).append("\n");
-    sb.append("    publicDid: ").append(toIndentedString(publicDid)).append("\n");
-    sb.append("    dids: ").append(toIndentedString(dids)).append("\n");
+    sb.append("    issuer: ").append(toIndentedString(issuer)).append("\n");
     sb.append("}");
     return sb.toString();
   }

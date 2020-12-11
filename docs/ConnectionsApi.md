@@ -1,14 +1,14 @@
 # ConnectionsApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://localhost:8080*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**connectionOrganizationIdConnectionIdDelete**](ConnectionsApi.md#connectionOrganizationIdConnectionIdDelete) | **DELETE** /connections/{connectionId} | Delete connection
 [**connectionOrganizationIdConnectionIdGet**](ConnectionsApi.md#connectionOrganizationIdConnectionIdGet) | **GET** /connections/{connectionId} | Get connection
-[**connectionsInvitationPost**](ConnectionsApi.md#connectionsInvitationPost) | **POST** /connections/invitation | Create a new connection invitation
+[**connectionsInvitationPost**](ConnectionsApi.md#connectionsInvitationPost) | **POST** /connections/invitation | Receive and accept a new connection invitation
 [**connectionsOrganizationIdGet**](ConnectionsApi.md#connectionsOrganizationIdGet) | **GET** /connections | List all connections
-[**connectionsReceptionPost**](ConnectionsApi.md#connectionsReceptionPost) | **POST** /connections/reception | Receive a new connection invitation
+[**connectionsPost**](ConnectionsApi.md#connectionsPost) | **POST** /connections | Create a new connection invitation
 
 
 <a name="connectionOrganizationIdConnectionIdDelete"></a>
@@ -30,7 +30,7 @@ import com.sicpa.edison.credentialsclient.api.ConnectionsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("http://localhost:8080");
     
     // Configure HTTP bearer authorization: auth
     HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
@@ -98,7 +98,7 @@ import com.sicpa.edison.credentialsclient.api.ConnectionsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("http://localhost:8080");
     
     // Configure HTTP bearer authorization: auth
     HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
@@ -150,9 +150,9 @@ Name | Type | Description  | Notes
 
 <a name="connectionsInvitationPost"></a>
 # **connectionsInvitationPost**
-> ConnectionInvitationCreationResult connectionsInvitationPost(X_ORGANIZATION_ID, connectionInvitationCreate)
+> Connection connectionsInvitationPost(X_ORGANIZATION_ID, connectionInvitation)
 
-Create a new connection invitation
+Receive and accept a new connection invitation
 
 ### Example
 ```java
@@ -167,7 +167,7 @@ import com.sicpa.edison.credentialsclient.api.ConnectionsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("http://localhost:8080");
     
     // Configure HTTP bearer authorization: auth
     HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
@@ -175,9 +175,9 @@ public class Example {
 
     ConnectionsApi apiInstance = new ConnectionsApi(defaultClient);
     Integer X_ORGANIZATION_ID = 56; // Integer | 
-    ConnectionInvitationCreate connectionInvitationCreate = new ConnectionInvitationCreate(); // ConnectionInvitationCreate | 
+    ConnectionInvitation connectionInvitation = new ConnectionInvitation(); // ConnectionInvitation | 
     try {
-      ConnectionInvitationCreationResult result = apiInstance.connectionsInvitationPost(X_ORGANIZATION_ID, connectionInvitationCreate);
+      Connection result = apiInstance.connectionsInvitationPost(X_ORGANIZATION_ID, connectionInvitation);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling ConnectionsApi#connectionsInvitationPost");
@@ -195,11 +195,11 @@ public class Example {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **X_ORGANIZATION_ID** | **Integer**|  |
- **connectionInvitationCreate** | [**ConnectionInvitationCreate**](ConnectionInvitationCreate.md)|  |
+ **connectionInvitation** | [**ConnectionInvitation**](ConnectionInvitation.md)|  |
 
 ### Return type
 
-[**ConnectionInvitationCreationResult**](ConnectionInvitationCreationResult.md)
+[**Connection**](Connection.md)
 
 ### Authorization
 
@@ -236,7 +236,7 @@ import com.sicpa.edison.credentialsclient.api.ConnectionsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("http://localhost:8080");
     
     // Configure HTTP bearer authorization: auth
     HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
@@ -286,11 +286,11 @@ Name | Type | Description  | Notes
 **400** | Bad Request |  -  |
 **500** | Internal Server Error |  -  |
 
-<a name="connectionsReceptionPost"></a>
-# **connectionsReceptionPost**
-> Connection connectionsReceptionPost(X_ORGANIZATION_ID, connectionInvitationReception)
+<a name="connectionsPost"></a>
+# **connectionsPost**
+> ConnectionInvitationCreationResult connectionsPost(X_ORGANIZATION_ID, connectionInvitationCreate)
 
-Receive a new connection invitation
+Create a new connection invitation
 
 ### Example
 ```java
@@ -305,7 +305,7 @@ import com.sicpa.edison.credentialsclient.api.ConnectionsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("http://localhost:8080");
     
     // Configure HTTP bearer authorization: auth
     HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
@@ -313,12 +313,12 @@ public class Example {
 
     ConnectionsApi apiInstance = new ConnectionsApi(defaultClient);
     Integer X_ORGANIZATION_ID = 56; // Integer | 
-    ConnectionInvitationReception connectionInvitationReception = new ConnectionInvitationReception(); // ConnectionInvitationReception | 
+    ConnectionInvitationCreate connectionInvitationCreate = new ConnectionInvitationCreate(); // ConnectionInvitationCreate | 
     try {
-      Connection result = apiInstance.connectionsReceptionPost(X_ORGANIZATION_ID, connectionInvitationReception);
+      ConnectionInvitationCreationResult result = apiInstance.connectionsPost(X_ORGANIZATION_ID, connectionInvitationCreate);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling ConnectionsApi#connectionsReceptionPost");
+      System.err.println("Exception when calling ConnectionsApi#connectionsPost");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -333,11 +333,11 @@ public class Example {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **X_ORGANIZATION_ID** | **Integer**|  |
- **connectionInvitationReception** | [**ConnectionInvitationReception**](ConnectionInvitationReception.md)|  |
+ **connectionInvitationCreate** | [**ConnectionInvitationCreate**](ConnectionInvitationCreate.md)|  |
 
 ### Return type
 
-[**Connection**](Connection.md)
+[**ConnectionInvitationCreationResult**](ConnectionInvitationCreationResult.md)
 
 ### Authorization
 
@@ -351,7 +351,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | No Content |  -  |
+**200** | OK |  -  |
 **400** | Bad Request |  -  |
 **500** | Internal Server Error |  -  |
 

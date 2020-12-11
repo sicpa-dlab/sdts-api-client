@@ -25,43 +25,43 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
 /**
- * VerificationParam
+ * VerificationCreate
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-10T15:22:45.234670+01:00[Europe/Zurich]")
-public class VerificationParam {
-  public static final String SERIALIZED_NAME_VERIFICATION_TEMPLATE_NAME = "verificationTemplateName";
-  @SerializedName(SERIALIZED_NAME_VERIFICATION_TEMPLATE_NAME)
-  private String verificationTemplateName;
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-11T17:14:05.875852+01:00[Europe/Zurich]")
+public class VerificationCreate {
+  public static final String SERIALIZED_NAME_VERIFICATION_TEMPLATE_ID = "verificationTemplateId";
+  @SerializedName(SERIALIZED_NAME_VERIFICATION_TEMPLATE_ID)
+  private Integer verificationTemplateId;
 
   public static final String SERIALIZED_NAME_CONNECTION_ID = "connectionId";
   @SerializedName(SERIALIZED_NAME_CONNECTION_ID)
   private String connectionId;
 
 
-  public VerificationParam verificationTemplateName(String verificationTemplateName) {
+  public VerificationCreate verificationTemplateId(Integer verificationTemplateId) {
     
-    this.verificationTemplateName = verificationTemplateName;
+    this.verificationTemplateId = verificationTemplateId;
     return this;
   }
 
    /**
-   * The verificationTemplate name
-   * @return verificationTemplateName
+   * The verification template id
+   * @return verificationTemplateId
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "example", value = "The verificationTemplate name")
+  @ApiModelProperty(example = "0", value = "The verification template id")
 
-  public String getVerificationTemplateName() {
-    return verificationTemplateName;
+  public Integer getVerificationTemplateId() {
+    return verificationTemplateId;
   }
 
 
-  public void setVerificationTemplateName(String verificationTemplateName) {
-    this.verificationTemplateName = verificationTemplateName;
+  public void setVerificationTemplateId(Integer verificationTemplateId) {
+    this.verificationTemplateId = verificationTemplateId;
   }
 
 
-  public VerificationParam connectionId(String connectionId) {
+  public VerificationCreate connectionId(String connectionId) {
     
     this.connectionId = connectionId;
     return this;
@@ -92,22 +92,22 @@ public class VerificationParam {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    VerificationParam verificationParam = (VerificationParam) o;
-    return Objects.equals(this.verificationTemplateName, verificationParam.verificationTemplateName) &&
-        Objects.equals(this.connectionId, verificationParam.connectionId);
+    VerificationCreate verificationCreate = (VerificationCreate) o;
+    return Objects.equals(this.verificationTemplateId, verificationCreate.verificationTemplateId) &&
+        Objects.equals(this.connectionId, verificationCreate.connectionId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(verificationTemplateName, connectionId);
+    return Objects.hash(verificationTemplateId, connectionId);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class VerificationParam {\n");
-    sb.append("    verificationTemplateName: ").append(toIndentedString(verificationTemplateName)).append("\n");
+    sb.append("class VerificationCreate {\n");
+    sb.append("    verificationTemplateId: ").append(toIndentedString(verificationTemplateId)).append("\n");
     sb.append("    connectionId: ").append(toIndentedString(connectionId)).append("\n");
     sb.append("}");
     return sb.toString();

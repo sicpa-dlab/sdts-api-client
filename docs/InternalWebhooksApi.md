@@ -1,6 +1,6 @@
 # InternalWebhooksApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://localhost:8080*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -25,7 +25,7 @@ import com.sicpa.edison.credentialsclient.api.InternalWebhooksApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("http://localhost:8080");
 
     InternalWebhooksApi apiInstance = new InternalWebhooksApi(defaultClient);
     Integer organizationId = 56; // Integer | 

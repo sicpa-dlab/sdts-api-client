@@ -27,87 +27,60 @@ import java.io.IOException;
 /**
  * OrganizationUpdate
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-10T15:22:45.234670+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-11T17:14:05.875852+01:00[Europe/Zurich]")
 public class OrganizationUpdate {
-  public static final String SERIALIZED_NAME_LABEL = "label";
-  @SerializedName(SERIALIZED_NAME_LABEL)
-  private String label;
+  public static final String SERIALIZED_NAME_NAME = "name";
+  @SerializedName(SERIALIZED_NAME_NAME)
+  private String name;
 
-  public static final String SERIALIZED_NAME_HOST = "host";
-  @SerializedName(SERIALIZED_NAME_HOST)
-  private String host;
-
-  public static final String SERIALIZED_NAME_DID_TO_PUBLISH = "didToPublish";
-  @SerializedName(SERIALIZED_NAME_DID_TO_PUBLISH)
-  private String didToPublish;
+  public static final String SERIALIZED_NAME_ISSUER = "issuer";
+  @SerializedName(SERIALIZED_NAME_ISSUER)
+  private Boolean issuer;
 
 
-  public OrganizationUpdate label(String label) {
+  public OrganizationUpdate name(String name) {
     
-    this.label = label;
+    this.name = name;
     return this;
   }
 
    /**
-   * The organization label
-   * @return label
+   * The organization name
+   * @return name
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "The organization label")
+  @ApiModelProperty(value = "The organization name")
 
-  public String getLabel() {
-    return label;
+  public String getName() {
+    return name;
   }
 
 
-  public void setLabel(String label) {
-    this.label = label;
+  public void setName(String name) {
+    this.name = name;
   }
 
 
-  public OrganizationUpdate host(String host) {
+  public OrganizationUpdate issuer(Boolean issuer) {
     
-    this.host = host;
+    this.issuer = issuer;
     return this;
   }
 
    /**
-   * The organization host
-   * @return host
+   * Defines if the organization can issue credentials
+   * @return issuer
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "The organization host")
+  @ApiModelProperty(value = "Defines if the organization can issue credentials")
 
-  public String getHost() {
-    return host;
+  public Boolean getIssuer() {
+    return issuer;
   }
 
 
-  public void setHost(String host) {
-    this.host = host;
-  }
-
-
-  public OrganizationUpdate didToPublish(String didToPublish) {
-    
-    this.didToPublish = didToPublish;
-    return this;
-  }
-
-   /**
-   * The DID to be set as the wallet&#39;s public DID
-   * @return didToPublish
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The DID to be set as the wallet's public DID")
-
-  public String getDidToPublish() {
-    return didToPublish;
-  }
-
-
-  public void setDidToPublish(String didToPublish) {
-    this.didToPublish = didToPublish;
+  public void setIssuer(Boolean issuer) {
+    this.issuer = issuer;
   }
 
 
@@ -120,14 +93,13 @@ public class OrganizationUpdate {
       return false;
     }
     OrganizationUpdate organizationUpdate = (OrganizationUpdate) o;
-    return Objects.equals(this.label, organizationUpdate.label) &&
-        Objects.equals(this.host, organizationUpdate.host) &&
-        Objects.equals(this.didToPublish, organizationUpdate.didToPublish);
+    return Objects.equals(this.name, organizationUpdate.name) &&
+        Objects.equals(this.issuer, organizationUpdate.issuer);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(label, host, didToPublish);
+    return Objects.hash(name, issuer);
   }
 
 
@@ -135,9 +107,8 @@ public class OrganizationUpdate {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class OrganizationUpdate {\n");
-    sb.append("    label: ").append(toIndentedString(label)).append("\n");
-    sb.append("    host: ").append(toIndentedString(host)).append("\n");
-    sb.append("    didToPublish: ").append(toIndentedString(didToPublish)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    issuer: ").append(toIndentedString(issuer)).append("\n");
     sb.append("}");
     return sb.toString();
   }

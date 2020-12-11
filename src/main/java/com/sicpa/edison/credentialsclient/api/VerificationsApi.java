@@ -29,7 +29,7 @@ import java.io.IOException;
 
 import com.sicpa.edison.credentialsclient.model.ApiError;
 import com.sicpa.edison.credentialsclient.model.Verification;
-import com.sicpa.edison.credentialsclient.model.VerificationParam;
+import com.sicpa.edison.credentialsclient.model.VerificationCreate;
 import com.sicpa.edison.credentialsclient.model.VerificationSummary;
 import com.sicpa.edison.credentialsclient.model.VerificationTemplate;
 import com.sicpa.edison.credentialsclient.model.VerificationTemplateParam;
@@ -339,7 +339,7 @@ public class VerificationsApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/verificationTemplates/{verificationTemplateId}"
+        String localVarPath = "/verification-templates/{verificationTemplateId}"
             .replaceAll("\\{" + "verificationTemplateId" + "\\}", localVarApiClient.escapeString(verificationTemplateId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -467,7 +467,7 @@ public class VerificationsApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/verificationTemplates/{verificationTemplateId}"
+        String localVarPath = "/verification-templates/{verificationTemplateId}"
             .replaceAll("\\{" + "verificationTemplateId" + "\\}", localVarApiClient.escapeString(verificationTemplateId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -600,7 +600,7 @@ public class VerificationsApi {
         Object localVarPostBody = verificationTemplateParam;
 
         // create path and map variables
-        String localVarPath = "/verificationTemplates/{verificationTemplateId}"
+        String localVarPath = "/verification-templates/{verificationTemplateId}"
             .replaceAll("\\{" + "verificationTemplateId" + "\\}", localVarApiClient.escapeString(verificationTemplateId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -739,7 +739,7 @@ public class VerificationsApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/verificationTemplates";
+        String localVarPath = "/verification-templates";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -862,7 +862,7 @@ public class VerificationsApi {
         Object localVarPostBody = verificationTemplateParam;
 
         // create path and map variables
-        String localVarPath = "/verificationTemplates";
+        String localVarPath = "/verification-templates";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -977,7 +977,6 @@ public class VerificationsApi {
     /**
      * Build call for verificationsGet
      * @param X_ORGANIZATION_ID  (required)
-     * @param state  (optional)
      * @param connectionId A connection ID. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -990,7 +989,7 @@ public class VerificationsApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call verificationsGetCall(Integer X_ORGANIZATION_ID, String state, String connectionId, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call verificationsGetCall(Integer X_ORGANIZATION_ID, String connectionId, final ApiCallback _callback) throws ApiException {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -998,10 +997,6 @@ public class VerificationsApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        if (state != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("state", state));
-        }
-
         if (connectionId != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("connectionId", connectionId));
         }
@@ -1032,7 +1027,7 @@ public class VerificationsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call verificationsGetValidateBeforeCall(Integer X_ORGANIZATION_ID, String state, String connectionId, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call verificationsGetValidateBeforeCall(Integer X_ORGANIZATION_ID, String connectionId, final ApiCallback _callback) throws ApiException {
         
         // verify the required parameter 'X_ORGANIZATION_ID' is set
         if (X_ORGANIZATION_ID == null) {
@@ -1040,7 +1035,7 @@ public class VerificationsApi {
         }
         
 
-        okhttp3.Call localVarCall = verificationsGetCall(X_ORGANIZATION_ID, state, connectionId, _callback);
+        okhttp3.Call localVarCall = verificationsGetCall(X_ORGANIZATION_ID, connectionId, _callback);
         return localVarCall;
 
     }
@@ -1049,7 +1044,6 @@ public class VerificationsApi {
      * List all verifications
      * 
      * @param X_ORGANIZATION_ID  (required)
-     * @param state  (optional)
      * @param connectionId A connection ID. (optional)
      * @return List&lt;VerificationSummary&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1061,8 +1055,8 @@ public class VerificationsApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public List<VerificationSummary> verificationsGet(Integer X_ORGANIZATION_ID, String state, String connectionId) throws ApiException {
-        ApiResponse<List<VerificationSummary>> localVarResp = verificationsGetWithHttpInfo(X_ORGANIZATION_ID, state, connectionId);
+    public List<VerificationSummary> verificationsGet(Integer X_ORGANIZATION_ID, String connectionId) throws ApiException {
+        ApiResponse<List<VerificationSummary>> localVarResp = verificationsGetWithHttpInfo(X_ORGANIZATION_ID, connectionId);
         return localVarResp.getData();
     }
 
@@ -1070,7 +1064,6 @@ public class VerificationsApi {
      * List all verifications
      * 
      * @param X_ORGANIZATION_ID  (required)
-     * @param state  (optional)
      * @param connectionId A connection ID. (optional)
      * @return ApiResponse&lt;List&lt;VerificationSummary&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1082,8 +1075,8 @@ public class VerificationsApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<List<VerificationSummary>> verificationsGetWithHttpInfo(Integer X_ORGANIZATION_ID, String state, String connectionId) throws ApiException {
-        okhttp3.Call localVarCall = verificationsGetValidateBeforeCall(X_ORGANIZATION_ID, state, connectionId, null);
+    public ApiResponse<List<VerificationSummary>> verificationsGetWithHttpInfo(Integer X_ORGANIZATION_ID, String connectionId) throws ApiException {
+        okhttp3.Call localVarCall = verificationsGetValidateBeforeCall(X_ORGANIZATION_ID, connectionId, null);
         Type localVarReturnType = new TypeToken<List<VerificationSummary>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1092,7 +1085,6 @@ public class VerificationsApi {
      * List all verifications (asynchronously)
      * 
      * @param X_ORGANIZATION_ID  (required)
-     * @param state  (optional)
      * @param connectionId A connection ID. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -1105,9 +1097,9 @@ public class VerificationsApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call verificationsGetAsync(Integer X_ORGANIZATION_ID, String state, String connectionId, final ApiCallback<List<VerificationSummary>> _callback) throws ApiException {
+    public okhttp3.Call verificationsGetAsync(Integer X_ORGANIZATION_ID, String connectionId, final ApiCallback<List<VerificationSummary>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = verificationsGetValidateBeforeCall(X_ORGANIZATION_ID, state, connectionId, _callback);
+        okhttp3.Call localVarCall = verificationsGetValidateBeforeCall(X_ORGANIZATION_ID, connectionId, _callback);
         Type localVarReturnType = new TypeToken<List<VerificationSummary>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -1115,7 +1107,7 @@ public class VerificationsApi {
     /**
      * Build call for verificationsPost
      * @param X_ORGANIZATION_ID  (required)
-     * @param verificationParam  (required)
+     * @param verificationCreate  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1127,8 +1119,8 @@ public class VerificationsApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call verificationsPostCall(Integer X_ORGANIZATION_ID, VerificationParam verificationParam, final ApiCallback _callback) throws ApiException {
-        Object localVarPostBody = verificationParam;
+    public okhttp3.Call verificationsPostCall(Integer X_ORGANIZATION_ID, VerificationCreate verificationCreate, final ApiCallback _callback) throws ApiException {
+        Object localVarPostBody = verificationCreate;
 
         // create path and map variables
         String localVarPath = "/verifications";
@@ -1161,20 +1153,20 @@ public class VerificationsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call verificationsPostValidateBeforeCall(Integer X_ORGANIZATION_ID, VerificationParam verificationParam, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call verificationsPostValidateBeforeCall(Integer X_ORGANIZATION_ID, VerificationCreate verificationCreate, final ApiCallback _callback) throws ApiException {
         
         // verify the required parameter 'X_ORGANIZATION_ID' is set
         if (X_ORGANIZATION_ID == null) {
             throw new ApiException("Missing the required parameter 'X_ORGANIZATION_ID' when calling verificationsPost(Async)");
         }
         
-        // verify the required parameter 'verificationParam' is set
-        if (verificationParam == null) {
-            throw new ApiException("Missing the required parameter 'verificationParam' when calling verificationsPost(Async)");
+        // verify the required parameter 'verificationCreate' is set
+        if (verificationCreate == null) {
+            throw new ApiException("Missing the required parameter 'verificationCreate' when calling verificationsPost(Async)");
         }
         
 
-        okhttp3.Call localVarCall = verificationsPostCall(X_ORGANIZATION_ID, verificationParam, _callback);
+        okhttp3.Call localVarCall = verificationsPostCall(X_ORGANIZATION_ID, verificationCreate, _callback);
         return localVarCall;
 
     }
@@ -1183,7 +1175,7 @@ public class VerificationsApi {
      * Create a new Verification
      * 
      * @param X_ORGANIZATION_ID  (required)
-     * @param verificationParam  (required)
+     * @param verificationCreate  (required)
      * @return Verification
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1194,8 +1186,8 @@ public class VerificationsApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public Verification verificationsPost(Integer X_ORGANIZATION_ID, VerificationParam verificationParam) throws ApiException {
-        ApiResponse<Verification> localVarResp = verificationsPostWithHttpInfo(X_ORGANIZATION_ID, verificationParam);
+    public Verification verificationsPost(Integer X_ORGANIZATION_ID, VerificationCreate verificationCreate) throws ApiException {
+        ApiResponse<Verification> localVarResp = verificationsPostWithHttpInfo(X_ORGANIZATION_ID, verificationCreate);
         return localVarResp.getData();
     }
 
@@ -1203,7 +1195,7 @@ public class VerificationsApi {
      * Create a new Verification
      * 
      * @param X_ORGANIZATION_ID  (required)
-     * @param verificationParam  (required)
+     * @param verificationCreate  (required)
      * @return ApiResponse&lt;Verification&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1214,8 +1206,8 @@ public class VerificationsApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Verification> verificationsPostWithHttpInfo(Integer X_ORGANIZATION_ID, VerificationParam verificationParam) throws ApiException {
-        okhttp3.Call localVarCall = verificationsPostValidateBeforeCall(X_ORGANIZATION_ID, verificationParam, null);
+    public ApiResponse<Verification> verificationsPostWithHttpInfo(Integer X_ORGANIZATION_ID, VerificationCreate verificationCreate) throws ApiException {
+        okhttp3.Call localVarCall = verificationsPostValidateBeforeCall(X_ORGANIZATION_ID, verificationCreate, null);
         Type localVarReturnType = new TypeToken<Verification>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1224,7 +1216,7 @@ public class VerificationsApi {
      * Create a new Verification (asynchronously)
      * 
      * @param X_ORGANIZATION_ID  (required)
-     * @param verificationParam  (required)
+     * @param verificationCreate  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -1236,9 +1228,9 @@ public class VerificationsApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call verificationsPostAsync(Integer X_ORGANIZATION_ID, VerificationParam verificationParam, final ApiCallback<Verification> _callback) throws ApiException {
+    public okhttp3.Call verificationsPostAsync(Integer X_ORGANIZATION_ID, VerificationCreate verificationCreate, final ApiCallback<Verification> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = verificationsPostValidateBeforeCall(X_ORGANIZATION_ID, verificationParam, _callback);
+        okhttp3.Call localVarCall = verificationsPostValidateBeforeCall(X_ORGANIZATION_ID, verificationCreate, _callback);
         Type localVarReturnType = new TypeToken<Verification>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
