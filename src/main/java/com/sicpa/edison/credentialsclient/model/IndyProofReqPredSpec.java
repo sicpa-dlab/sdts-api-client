@@ -31,7 +31,7 @@ import java.util.List;
 /**
  * IndyProofReqPredSpec
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-11T17:14:05.875852+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-15T13:20:26.194789+01:00[Europe/Zurich]")
 public class IndyProofReqPredSpec {
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
@@ -115,7 +115,8 @@ public class IndyProofReqPredSpec {
    * Get name
    * @return name
   **/
-  @ApiModelProperty(required = true, value = "")
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
 
   public String getName() {
     return name;
@@ -160,7 +161,8 @@ public class IndyProofReqPredSpec {
    * Get getpType
    * @return getpType
   **/
-  @ApiModelProperty(required = true, value = "")
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
 
   public GetpTypeEnum getGetpType() {
     return getpType;
@@ -182,7 +184,8 @@ public class IndyProofReqPredSpec {
    * Get getpValue
    * @return getpValue
   **/
-  @ApiModelProperty(required = true, value = "")
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
 
   public Integer getGetpValue() {
     return getpValue;

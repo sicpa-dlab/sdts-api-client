@@ -20,9 +20,6 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.sicpa.edison.credentialsclient.model.IndyProofReqAttrSpec;
-import com.sicpa.edison.credentialsclient.model.IndyProofReqNonRevoked;
-import com.sicpa.edison.credentialsclient.model.IndyProofReqPredSpec;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -31,39 +28,40 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * VerificationTemplateContent
+ * The original validation request
  */
+@ApiModel(description = "The original validation request")
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-15T13:20:26.194789+01:00[Europe/Zurich]")
-public class VerificationTemplateContent {
+public class VerificationRequest {
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
   private String name;
 
-  public static final String SERIALIZED_NAME_NON_REVOKED = "nonRevoked";
-  @SerializedName(SERIALIZED_NAME_NON_REVOKED)
-  private IndyProofReqNonRevoked nonRevoked;
+  public static final String SERIALIZED_NAME_NONCE = "nonce";
+  @SerializedName(SERIALIZED_NAME_NONCE)
+  private String nonce;
 
   public static final String SERIALIZED_NAME_REQUESTED_ATTRIBUTES = "requestedAttributes";
   @SerializedName(SERIALIZED_NAME_REQUESTED_ATTRIBUTES)
-  private Map<String, IndyProofReqAttrSpec> requestedAttributes = null;
+  private Map<String, Object> requestedAttributes = null;
 
   public static final String SERIALIZED_NAME_REQUESTED_PREDICATES = "requestedPredicates";
   @SerializedName(SERIALIZED_NAME_REQUESTED_PREDICATES)
-  private Map<String, IndyProofReqPredSpec> requestedPredicates = null;
+  private Map<String, Object> requestedPredicates = null;
 
 
-  public VerificationTemplateContent name(String name) {
+  public VerificationRequest name(String name) {
     
     this.name = name;
     return this;
   }
 
    /**
-   * The verificationTemplate name
+   * Get name
    * @return name
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "example", value = "The verificationTemplate name")
+  @ApiModelProperty(value = "")
 
   public String getName() {
     return name;
@@ -75,36 +73,36 @@ public class VerificationTemplateContent {
   }
 
 
-  public VerificationTemplateContent nonRevoked(IndyProofReqNonRevoked nonRevoked) {
+  public VerificationRequest nonce(String nonce) {
     
-    this.nonRevoked = nonRevoked;
+    this.nonce = nonce;
     return this;
   }
 
    /**
-   * Get nonRevoked
-   * @return nonRevoked
+   * Get nonce
+   * @return nonce
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public IndyProofReqNonRevoked getNonRevoked() {
-    return nonRevoked;
+  public String getNonce() {
+    return nonce;
   }
 
 
-  public void setNonRevoked(IndyProofReqNonRevoked nonRevoked) {
-    this.nonRevoked = nonRevoked;
+  public void setNonce(String nonce) {
+    this.nonce = nonce;
   }
 
 
-  public VerificationTemplateContent requestedAttributes(Map<String, IndyProofReqAttrSpec> requestedAttributes) {
+  public VerificationRequest requestedAttributes(Map<String, Object> requestedAttributes) {
     
     this.requestedAttributes = requestedAttributes;
     return this;
   }
 
-  public VerificationTemplateContent putRequestedAttributesItem(String key, IndyProofReqAttrSpec requestedAttributesItem) {
+  public VerificationRequest putRequestedAttributesItem(String key, Object requestedAttributesItem) {
     if (this.requestedAttributes == null) {
       this.requestedAttributes = new HashMap<>();
     }
@@ -119,23 +117,23 @@ public class VerificationTemplateContent {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public Map<String, IndyProofReqAttrSpec> getRequestedAttributes() {
+  public Map<String, Object> getRequestedAttributes() {
     return requestedAttributes;
   }
 
 
-  public void setRequestedAttributes(Map<String, IndyProofReqAttrSpec> requestedAttributes) {
+  public void setRequestedAttributes(Map<String, Object> requestedAttributes) {
     this.requestedAttributes = requestedAttributes;
   }
 
 
-  public VerificationTemplateContent requestedPredicates(Map<String, IndyProofReqPredSpec> requestedPredicates) {
+  public VerificationRequest requestedPredicates(Map<String, Object> requestedPredicates) {
     
     this.requestedPredicates = requestedPredicates;
     return this;
   }
 
-  public VerificationTemplateContent putRequestedPredicatesItem(String key, IndyProofReqPredSpec requestedPredicatesItem) {
+  public VerificationRequest putRequestedPredicatesItem(String key, Object requestedPredicatesItem) {
     if (this.requestedPredicates == null) {
       this.requestedPredicates = new HashMap<>();
     }
@@ -150,12 +148,12 @@ public class VerificationTemplateContent {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public Map<String, IndyProofReqPredSpec> getRequestedPredicates() {
+  public Map<String, Object> getRequestedPredicates() {
     return requestedPredicates;
   }
 
 
-  public void setRequestedPredicates(Map<String, IndyProofReqPredSpec> requestedPredicates) {
+  public void setRequestedPredicates(Map<String, Object> requestedPredicates) {
     this.requestedPredicates = requestedPredicates;
   }
 
@@ -168,25 +166,25 @@ public class VerificationTemplateContent {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    VerificationTemplateContent verificationTemplateContent = (VerificationTemplateContent) o;
-    return Objects.equals(this.name, verificationTemplateContent.name) &&
-        Objects.equals(this.nonRevoked, verificationTemplateContent.nonRevoked) &&
-        Objects.equals(this.requestedAttributes, verificationTemplateContent.requestedAttributes) &&
-        Objects.equals(this.requestedPredicates, verificationTemplateContent.requestedPredicates);
+    VerificationRequest verificationRequest = (VerificationRequest) o;
+    return Objects.equals(this.name, verificationRequest.name) &&
+        Objects.equals(this.nonce, verificationRequest.nonce) &&
+        Objects.equals(this.requestedAttributes, verificationRequest.requestedAttributes) &&
+        Objects.equals(this.requestedPredicates, verificationRequest.requestedPredicates);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, nonRevoked, requestedAttributes, requestedPredicates);
+    return Objects.hash(name, nonce, requestedAttributes, requestedPredicates);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class VerificationTemplateContent {\n");
+    sb.append("class VerificationRequest {\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    nonRevoked: ").append(toIndentedString(nonRevoked)).append("\n");
+    sb.append("    nonce: ").append(toIndentedString(nonce)).append("\n");
     sb.append("    requestedAttributes: ").append(toIndentedString(requestedAttributes)).append("\n");
     sb.append("    requestedPredicates: ").append(toIndentedString(requestedPredicates)).append("\n");
     sb.append("}");

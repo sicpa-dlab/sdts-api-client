@@ -28,7 +28,7 @@ import java.io.IOException;
 /**
  * ConnectionInvitationCreationResult
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-11T17:14:05.875852+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-15T13:20:26.194789+01:00[Europe/Zurich]")
 public class ConnectionInvitationCreationResult {
   public static final String SERIALIZED_NAME_INVITATION_URL = "invitationUrl";
   @SerializedName(SERIALIZED_NAME_INVITATION_URL)
