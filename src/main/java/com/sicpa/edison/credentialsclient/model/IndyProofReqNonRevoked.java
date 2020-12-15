@@ -27,7 +27,7 @@ import java.io.IOException;
 /**
  * IndyProofReqNonRevoked
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-11T17:14:05.875852+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-15T13:20:26.194789+01:00[Europe/Zurich]")
 public class IndyProofReqNonRevoked {
   public static final String SERIALIZED_NAME_FROM = "from";
   @SerializedName(SERIALIZED_NAME_FROM)
@@ -46,8 +46,6 @@ public class IndyProofReqNonRevoked {
 
    /**
    * Get from
-   * minimum: 0
-   * maximum: 384
    * @return from
   **/
   @javax.annotation.Nullable
@@ -71,8 +69,6 @@ public class IndyProofReqNonRevoked {
 
    /**
    * Get to
-   * minimum: 0
-   * maximum: 384
    * @return to
   **/
   @javax.annotation.Nullable

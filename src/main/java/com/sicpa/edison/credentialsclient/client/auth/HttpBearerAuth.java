@@ -18,7 +18,7 @@ import com.sicpa.edison.credentialsclient.client.Pair;
 import java.util.Map;
 import java.util.List;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-11T17:14:05.875852+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-15T13:20:26.194789+01:00[Europe/Zurich]")
 public class HttpBearerAuth implements Authentication {
   private final String scheme;
   private String bearerToken;

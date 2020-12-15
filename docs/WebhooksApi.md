@@ -33,9 +33,11 @@ public class Example {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
     defaultClient.setBasePath("http://localhost:8080");
     
-    // Configure HTTP bearer authorization: auth
-    HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
-    auth.setBearerToken("BEARER TOKEN");
+    // Configure API key authorization: auth
+    ApiKeyAuth auth = (ApiKeyAuth) defaultClient.getAuthentication("auth");
+    auth.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //auth.setApiKeyPrefix("Token");
 
     WebhooksApi apiInstance = new WebhooksApi(defaultClient);
     Integer X_ORGANIZATION_ID = 56; // Integer | 
@@ -102,9 +104,11 @@ public class Example {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
     defaultClient.setBasePath("http://localhost:8080");
     
-    // Configure HTTP bearer authorization: auth
-    HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
-    auth.setBearerToken("BEARER TOKEN");
+    // Configure API key authorization: auth
+    ApiKeyAuth auth = (ApiKeyAuth) defaultClient.getAuthentication("auth");
+    auth.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //auth.setApiKeyPrefix("Token");
 
     WebhooksApi apiInstance = new WebhooksApi(defaultClient);
     try {
@@ -165,9 +169,11 @@ public class Example {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
     defaultClient.setBasePath("http://localhost:8080");
     
-    // Configure HTTP bearer authorization: auth
-    HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
-    auth.setBearerToken("BEARER TOKEN");
+    // Configure API key authorization: auth
+    ApiKeyAuth auth = (ApiKeyAuth) defaultClient.getAuthentication("auth");
+    auth.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //auth.setApiKeyPrefix("Token");
 
     WebhooksApi apiInstance = new WebhooksApi(defaultClient);
     Integer X_ORGANIZATION_ID = 56; // Integer | 
@@ -233,9 +239,11 @@ public class Example {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
     defaultClient.setBasePath("http://localhost:8080");
     
-    // Configure HTTP bearer authorization: auth
-    HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
-    auth.setBearerToken("BEARER TOKEN");
+    // Configure API key authorization: auth
+    ApiKeyAuth auth = (ApiKeyAuth) defaultClient.getAuthentication("auth");
+    auth.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //auth.setApiKeyPrefix("Token");
 
     WebhooksApi apiInstance = new WebhooksApi(defaultClient);
     Integer X_ORGANIZATION_ID = 56; // Integer | 
@@ -304,9 +312,11 @@ public class Example {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
     defaultClient.setBasePath("http://localhost:8080");
     
-    // Configure HTTP bearer authorization: auth
-    HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
-    auth.setBearerToken("BEARER TOKEN");
+    // Configure API key authorization: auth
+    ApiKeyAuth auth = (ApiKeyAuth) defaultClient.getAuthentication("auth");
+    auth.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //auth.setApiKeyPrefix("Token");
 
     WebhooksApi apiInstance = new WebhooksApi(defaultClient);
     Integer X_ORGANIZATION_ID = 56; // Integer | 
@@ -375,9 +385,11 @@ public class Example {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
     defaultClient.setBasePath("http://localhost:8080");
     
-    // Configure HTTP bearer authorization: auth
-    HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
-    auth.setBearerToken("BEARER TOKEN");
+    // Configure API key authorization: auth
+    ApiKeyAuth auth = (ApiKeyAuth) defaultClient.getAuthentication("auth");
+    auth.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //auth.setApiKeyPrefix("Token");
 
     WebhooksApi apiInstance = new WebhooksApi(defaultClient);
     Integer X_ORGANIZATION_ID = 56; // Integer | 

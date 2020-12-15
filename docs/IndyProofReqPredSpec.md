@@ -6,10 +6,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **String** |  | 
+**name** | **String** |  |  [optional]
 **nonRevoked** | [**IndyProofReqNonRevoked**](IndyProofReqNonRevoked.md) |  |  [optional]
-**getpType** | [**GetpTypeEnum**](#GetpTypeEnum) |  | 
-**getpValue** | **Integer** |  | 
+**getpType** | [**GetpTypeEnum**](#GetpTypeEnum) |  |  [optional]
+**getpValue** | **Integer** |  |  [optional]
 **restrictions** | [**List&lt;IndyProofReqPredSpecRestrictions&gt;**](IndyProofReqPredSpecRestrictions.md) |  |  [optional]
 
 

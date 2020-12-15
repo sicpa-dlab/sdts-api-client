@@ -20,6 +20,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.sicpa.edison.credentialsclient.model.VerificationRequest;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -27,7 +28,7 @@ import java.io.IOException;
 /**
  * Verification
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-11T17:14:05.875852+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-15T13:20:26.194789+01:00[Europe/Zurich]")
 public class Verification {
   public static final String SERIALIZED_NAME_VERIFICATION_ID = "verificationId";
   @SerializedName(SERIALIZED_NAME_VERIFICATION_ID)
@@ -37,17 +38,9 @@ public class Verification {
   @SerializedName(SERIALIZED_NAME_CONNECTION_ID)
   private String connectionId;
 
-  public static final String SERIALIZED_NAME_NAME = "name";
-  @SerializedName(SERIALIZED_NAME_NAME)
-  private String name;
-
-  public static final String SERIALIZED_NAME_PRESENTATION = "presentation";
-  @SerializedName(SERIALIZED_NAME_PRESENTATION)
-  private String presentation;
-
-  public static final String SERIALIZED_NAME_PRESENTATION_REQUEST = "presentationRequest";
-  @SerializedName(SERIALIZED_NAME_PRESENTATION_REQUEST)
-  private String presentationRequest;
+  public static final String SERIALIZED_NAME_VERIFICATION_REQUEST = "verificationRequest";
+  @SerializedName(SERIALIZED_NAME_VERIFICATION_REQUEST)
+  private VerificationRequest verificationRequest;
 
   /**
    * The current state of the verification
@@ -159,72 +152,26 @@ public class Verification {
   }
 
 
-  public Verification name(String name) {
+  public Verification verificationRequest(VerificationRequest verificationRequest) {
     
-    this.name = name;
+    this.verificationRequest = verificationRequest;
     return this;
   }
 
    /**
-   * The name of the validation
-   * @return name
+   * Get verificationRequest
+   * @return verificationRequest
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "example", value = "The name of the validation")
+  @ApiModelProperty(value = "")
 
-  public String getName() {
-    return name;
+  public VerificationRequest getVerificationRequest() {
+    return verificationRequest;
   }
 
 
-  public void setName(String name) {
-    this.name = name;
-  }
-
-
-  public Verification presentation(String presentation) {
-    
-    this.presentation = presentation;
-    return this;
-  }
-
-   /**
-   * The validated data
-   * @return presentation
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "null", value = "The validated data")
-
-  public String getPresentation() {
-    return presentation;
-  }
-
-
-  public void setPresentation(String presentation) {
-    this.presentation = presentation;
-  }
-
-
-  public Verification presentationRequest(String presentationRequest) {
-    
-    this.presentationRequest = presentationRequest;
-    return this;
-  }
-
-   /**
-   * The original validation request
-   * @return presentationRequest
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "null", value = "The original validation request")
-
-  public String getPresentationRequest() {
-    return presentationRequest;
-  }
-
-
-  public void setPresentationRequest(String presentationRequest) {
-    this.presentationRequest = presentationRequest;
+  public void setVerificationRequest(VerificationRequest verificationRequest) {
+    this.verificationRequest = verificationRequest;
   }
 
 
@@ -308,9 +255,7 @@ public class Verification {
     Verification verification = (Verification) o;
     return Objects.equals(this.verificationId, verification.verificationId) &&
         Objects.equals(this.connectionId, verification.connectionId) &&
-        Objects.equals(this.name, verification.name) &&
-        Objects.equals(this.presentation, verification.presentation) &&
-        Objects.equals(this.presentationRequest, verification.presentationRequest) &&
+        Objects.equals(this.verificationRequest, verification.verificationRequest) &&
         Objects.equals(this.state, verification.state) &&
         Objects.equals(this.createdAt, verification.createdAt) &&
         Objects.equals(this.updatedAt, verification.updatedAt);
@@ -318,7 +263,7 @@ public class Verification {
 
   @Override
   public int hashCode() {
-    return Objects.hash(verificationId, connectionId, name, presentation, presentationRequest, state, createdAt, updatedAt);
+    return Objects.hash(verificationId, connectionId, verificationRequest, state, createdAt, updatedAt);
   }
 
 
@@ -328,9 +273,7 @@ public class Verification {
     sb.append("class Verification {\n");
     sb.append("    verificationId: ").append(toIndentedString(verificationId)).append("\n");
     sb.append("    connectionId: ").append(toIndentedString(connectionId)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    presentation: ").append(toIndentedString(presentation)).append("\n");
-    sb.append("    presentationRequest: ").append(toIndentedString(presentationRequest)).append("\n");
+    sb.append("    verificationRequest: ").append(toIndentedString(verificationRequest)).append("\n");
     sb.append("    state: ").append(toIndentedString(state)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("    updatedAt: ").append(toIndentedString(updatedAt)).append("\n");
