@@ -299,7 +299,7 @@ Name | Type | Description  | Notes
 
 <a name="verificationTemplatePut"></a>
 # **verificationTemplatePut**
-> VerificationTemplate verificationTemplatePut(X_ORGANIZATION_ID, verificationTemplateId, verificationTemplateParam)
+> VerificationTemplate verificationTemplatePut(X_ORGANIZATION_ID, verificationTemplateId, verificationTemplateUpdate)
 
 Update verification template
 
@@ -327,9 +327,9 @@ public class Example {
     VerificationsApi apiInstance = new VerificationsApi(defaultClient);
     Integer X_ORGANIZATION_ID = 56; // Integer | 
     Integer verificationTemplateId = 56; // Integer | A verification template ID.
-    VerificationTemplateParam verificationTemplateParam = new VerificationTemplateParam(); // VerificationTemplateParam | 
+    VerificationTemplateUpdate verificationTemplateUpdate = new VerificationTemplateUpdate(); // VerificationTemplateUpdate | 
     try {
-      VerificationTemplate result = apiInstance.verificationTemplatePut(X_ORGANIZATION_ID, verificationTemplateId, verificationTemplateParam);
+      VerificationTemplate result = apiInstance.verificationTemplatePut(X_ORGANIZATION_ID, verificationTemplateId, verificationTemplateUpdate);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling VerificationsApi#verificationTemplatePut");
@@ -348,7 +348,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **X_ORGANIZATION_ID** | **Integer**|  |
  **verificationTemplateId** | **Integer**| A verification template ID. |
- **verificationTemplateParam** | [**VerificationTemplateParam**](VerificationTemplateParam.md)|  |
+ **verificationTemplateUpdate** | [**VerificationTemplateUpdate**](VerificationTemplateUpdate.md)|  |
 
 ### Return type
 
@@ -441,7 +441,7 @@ Name | Type | Description  | Notes
 
 <a name="verificationTemplatesPost"></a>
 # **verificationTemplatesPost**
-> VerificationTemplate verificationTemplatesPost(X_ORGANIZATION_ID, verificationTemplateParam)
+> VerificationTemplate verificationTemplatesPost(X_ORGANIZATION_ID, verificationTemplateCreate)
 
 Create a new Verification Template
 
@@ -468,9 +468,9 @@ public class Example {
 
     VerificationsApi apiInstance = new VerificationsApi(defaultClient);
     Integer X_ORGANIZATION_ID = 56; // Integer | 
-    VerificationTemplateParam verificationTemplateParam = new VerificationTemplateParam(); // VerificationTemplateParam | 
+    VerificationTemplateCreate verificationTemplateCreate = new VerificationTemplateCreate(); // VerificationTemplateCreate | 
     try {
-      VerificationTemplate result = apiInstance.verificationTemplatesPost(X_ORGANIZATION_ID, verificationTemplateParam);
+      VerificationTemplate result = apiInstance.verificationTemplatesPost(X_ORGANIZATION_ID, verificationTemplateCreate);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling VerificationsApi#verificationTemplatesPost");
@@ -488,7 +488,7 @@ public class Example {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **X_ORGANIZATION_ID** | **Integer**|  |
- **verificationTemplateParam** | [**VerificationTemplateParam**](VerificationTemplateParam.md)|  |
+ **verificationTemplateCreate** | [**VerificationTemplateCreate**](VerificationTemplateCreate.md)|  |
 
 ### Return type
 

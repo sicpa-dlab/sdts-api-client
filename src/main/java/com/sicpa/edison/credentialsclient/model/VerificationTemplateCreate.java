@@ -26,10 +26,10 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
 /**
- * VerificationTemplateParam
+ * VerificationTemplateCreate
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-15T13:20:26.194789+01:00[Europe/Zurich]")
-public class VerificationTemplateParam {
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-23T15:13:07.571806+01:00[Europe/Zurich]")
+public class VerificationTemplateCreate {
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
   private String name;
@@ -39,18 +39,18 @@ public class VerificationTemplateParam {
   private VerificationTemplateContent content;
 
 
-  public VerificationTemplateParam name(String name) {
+  public VerificationTemplateCreate name(String name) {
     
     this.name = name;
     return this;
   }
 
    /**
-   * Get name
+   * The verificationTemplate name
    * @return name
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(value = "The verificationTemplate name")
 
   public String getName() {
     return name;
@@ -62,7 +62,7 @@ public class VerificationTemplateParam {
   }
 
 
-  public VerificationTemplateParam content(VerificationTemplateContent content) {
+  public VerificationTemplateCreate content(VerificationTemplateContent content) {
     
     this.content = content;
     return this;
@@ -93,9 +93,9 @@ public class VerificationTemplateParam {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    VerificationTemplateParam verificationTemplateParam = (VerificationTemplateParam) o;
-    return Objects.equals(this.name, verificationTemplateParam.name) &&
-        Objects.equals(this.content, verificationTemplateParam.content);
+    VerificationTemplateCreate verificationTemplateCreate = (VerificationTemplateCreate) o;
+    return Objects.equals(this.name, verificationTemplateCreate.name) &&
+        Objects.equals(this.content, verificationTemplateCreate.content);
   }
 
   @Override
@@ -107,7 +107,7 @@ public class VerificationTemplateParam {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class VerificationTemplateParam {\n");
+    sb.append("class VerificationTemplateCreate {\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    content: ").append(toIndentedString(content)).append("\n");
     sb.append("}");

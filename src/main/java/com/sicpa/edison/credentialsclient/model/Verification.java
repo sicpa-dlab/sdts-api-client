@@ -24,11 +24,12 @@ import com.sicpa.edison.credentialsclient.model.VerificationRequest;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.time.OffsetDateTime;
 
 /**
  * Verification
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-15T13:20:26.194789+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-23T15:13:07.571806+01:00[Europe/Zurich]")
 public class Verification {
   public static final String SERIALIZED_NAME_VERIFICATION_ID = "verificationId";
   @SerializedName(SERIALIZED_NAME_VERIFICATION_ID)
@@ -43,17 +44,17 @@ public class Verification {
   private VerificationRequest verificationRequest;
 
   /**
-   * The current state of the verification
+   * The verification state
    */
   @JsonAdapter(StateEnum.Adapter.class)
   public enum StateEnum {
-    REQUESTED("requested"),
+    SUCCESS("SUCCESS"),
     
-    VERIFIED("verified"),
+    PENDING("PENDING"),
     
-    REJECTED("rejected"),
+    FAILURE("FAILURE"),
     
-    ERROR("error");
+    ERROR("ERROR");
 
     private String value;
 
@@ -99,11 +100,11 @@ public class Verification {
 
   public static final String SERIALIZED_NAME_CREATED_AT = "createdAt";
   @SerializedName(SERIALIZED_NAME_CREATED_AT)
-  private String createdAt;
+  private OffsetDateTime createdAt;
 
   public static final String SERIALIZED_NAME_UPDATED_AT = "updatedAt";
   @SerializedName(SERIALIZED_NAME_UPDATED_AT)
-  private String updatedAt;
+  private OffsetDateTime updatedAt;
 
 
   public Verification verificationId(String verificationId) {
@@ -182,11 +183,11 @@ public class Verification {
   }
 
    /**
-   * The current state of the verification
+   * The verification state
    * @return state
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "verified", value = "The current state of the verification")
+  @ApiModelProperty(value = "The verification state")
 
   public StateEnum getState() {
     return state;
@@ -198,48 +199,48 @@ public class Verification {
   }
 
 
-  public Verification createdAt(String createdAt) {
+  public Verification createdAt(OffsetDateTime createdAt) {
     
     this.createdAt = createdAt;
     return this;
   }
 
    /**
-   * The time when the verification was created
+   * The creation date 
    * @return createdAt
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "2020-11-12 06:27:47.780760Z", value = "The time when the verification was created")
+  @ApiModelProperty(value = "The creation date ")
 
-  public String getCreatedAt() {
+  public OffsetDateTime getCreatedAt() {
     return createdAt;
   }
 
 
-  public void setCreatedAt(String createdAt) {
+  public void setCreatedAt(OffsetDateTime createdAt) {
     this.createdAt = createdAt;
   }
 
 
-  public Verification updatedAt(String updatedAt) {
+  public Verification updatedAt(OffsetDateTime updatedAt) {
     
     this.updatedAt = updatedAt;
     return this;
   }
 
    /**
-   * The time when the verification was updated
+   * The update date
    * @return updatedAt
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "2020-11-12 06:27:50.407160Z", value = "The time when the verification was updated")
+  @ApiModelProperty(value = "The update date")
 
-  public String getUpdatedAt() {
+  public OffsetDateTime getUpdatedAt() {
     return updatedAt;
   }
 
 
-  public void setUpdatedAt(String updatedAt) {
+  public void setUpdatedAt(OffsetDateTime updatedAt) {
     this.updatedAt = updatedAt;
   }
 

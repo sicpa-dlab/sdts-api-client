@@ -28,7 +28,7 @@ import java.io.IOException;
 /**
  * VerificationTemplate
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-15T13:20:26.194789+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-23T15:13:07.571806+01:00[Europe/Zurich]")
 public class VerificationTemplate {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -58,7 +58,7 @@ public class VerificationTemplate {
    * @return id
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "0", value = "The verificationTemplate id")
+  @ApiModelProperty(value = "The verificationTemplate id")
 
   public Integer getId() {
     return id;

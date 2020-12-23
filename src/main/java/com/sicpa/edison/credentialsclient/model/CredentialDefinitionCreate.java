@@ -27,7 +27,7 @@ import java.io.IOException;
 /**
  * CredentialDefinitionCreate
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-15T13:20:26.194789+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-23T15:13:07.571806+01:00[Europe/Zurich]")
 public class CredentialDefinitionCreate {
   public static final String SERIALIZED_NAME_SCHEMA_ID = "schemaId";
   @SerializedName(SERIALIZED_NAME_SCHEMA_ID)
@@ -103,7 +103,7 @@ public class CredentialDefinitionCreate {
    * @return supportRevocation
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "Revocation supported flag")
+  @ApiModelProperty(example = "false", value = "Revocation supported flag")
 
   public Boolean getSupportRevocation() {
     return supportRevocation;
@@ -127,7 +127,7 @@ public class CredentialDefinitionCreate {
    * @return revocationRegistrySize
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "4", value = "")
 
   public Integer getRevocationRegistrySize() {
     return revocationRegistrySize;

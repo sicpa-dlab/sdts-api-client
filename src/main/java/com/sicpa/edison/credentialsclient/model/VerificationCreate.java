@@ -27,7 +27,7 @@ import java.io.IOException;
 /**
  * VerificationCreate
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-15T13:20:26.194789+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-23T15:13:07.571806+01:00[Europe/Zurich]")
 public class VerificationCreate {
   public static final String SERIALIZED_NAME_VERIFICATION_TEMPLATE_ID = "verificationTemplateId";
   @SerializedName(SERIALIZED_NAME_VERIFICATION_TEMPLATE_ID)
@@ -36,6 +36,10 @@ public class VerificationCreate {
   public static final String SERIALIZED_NAME_CONNECTION_ID = "connectionId";
   @SerializedName(SERIALIZED_NAME_CONNECTION_ID)
   private String connectionId;
+
+  public static final String SERIALIZED_NAME_COMMENT = "comment";
+  @SerializedName(SERIALIZED_NAME_COMMENT)
+  private String comment;
 
 
   public VerificationCreate verificationTemplateId(Integer verificationTemplateId) {
@@ -84,6 +88,29 @@ public class VerificationCreate {
   }
 
 
+  public VerificationCreate comment(String comment) {
+    
+    this.comment = comment;
+    return this;
+  }
+
+   /**
+   * An optional comment
+   * @return comment
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "An optional comment")
+
+  public String getComment() {
+    return comment;
+  }
+
+
+  public void setComment(String comment) {
+    this.comment = comment;
+  }
+
+
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -94,12 +121,13 @@ public class VerificationCreate {
     }
     VerificationCreate verificationCreate = (VerificationCreate) o;
     return Objects.equals(this.verificationTemplateId, verificationCreate.verificationTemplateId) &&
-        Objects.equals(this.connectionId, verificationCreate.connectionId);
+        Objects.equals(this.connectionId, verificationCreate.connectionId) &&
+        Objects.equals(this.comment, verificationCreate.comment);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(verificationTemplateId, connectionId);
+    return Objects.hash(verificationTemplateId, connectionId, comment);
   }
 
 
@@ -109,6 +137,7 @@ public class VerificationCreate {
     sb.append("class VerificationCreate {\n");
     sb.append("    verificationTemplateId: ").append(toIndentedString(verificationTemplateId)).append("\n");
     sb.append("    connectionId: ").append(toIndentedString(connectionId)).append("\n");
+    sb.append("    comment: ").append(toIndentedString(comment)).append("\n");
     sb.append("}");
     return sb.toString();
   }

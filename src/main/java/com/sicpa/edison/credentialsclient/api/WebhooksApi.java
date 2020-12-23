@@ -700,7 +700,7 @@ public class WebhooksApi {
         return localVarCall;
     }
     /**
-     * Build call for webhooksGet
+     * Build call for webhooksGet1
      * @param X_ORGANIZATION_ID  (required)
      * @param active Filter active webhooks (optional)
      * @param _callback Callback for upload/download progress
@@ -714,7 +714,7 @@ public class WebhooksApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call webhooksGetCall(Integer X_ORGANIZATION_ID, Boolean active, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call webhooksGet1Call(Integer X_ORGANIZATION_ID, Boolean active, final ApiCallback _callback) throws ApiException {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -752,15 +752,15 @@ public class WebhooksApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call webhooksGetValidateBeforeCall(Integer X_ORGANIZATION_ID, Boolean active, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call webhooksGet1ValidateBeforeCall(Integer X_ORGANIZATION_ID, Boolean active, final ApiCallback _callback) throws ApiException {
         
         // verify the required parameter 'X_ORGANIZATION_ID' is set
         if (X_ORGANIZATION_ID == null) {
-            throw new ApiException("Missing the required parameter 'X_ORGANIZATION_ID' when calling webhooksGet(Async)");
+            throw new ApiException("Missing the required parameter 'X_ORGANIZATION_ID' when calling webhooksGet1(Async)");
         }
         
 
-        okhttp3.Call localVarCall = webhooksGetCall(X_ORGANIZATION_ID, active, _callback);
+        okhttp3.Call localVarCall = webhooksGet1Call(X_ORGANIZATION_ID, active, _callback);
         return localVarCall;
 
     }
@@ -780,8 +780,8 @@ public class WebhooksApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public List<Webhook> webhooksGet(Integer X_ORGANIZATION_ID, Boolean active) throws ApiException {
-        ApiResponse<List<Webhook>> localVarResp = webhooksGetWithHttpInfo(X_ORGANIZATION_ID, active);
+    public List<Webhook> webhooksGet1(Integer X_ORGANIZATION_ID, Boolean active) throws ApiException {
+        ApiResponse<List<Webhook>> localVarResp = webhooksGet1WithHttpInfo(X_ORGANIZATION_ID, active);
         return localVarResp.getData();
     }
 
@@ -800,8 +800,8 @@ public class WebhooksApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<List<Webhook>> webhooksGetWithHttpInfo(Integer X_ORGANIZATION_ID, Boolean active) throws ApiException {
-        okhttp3.Call localVarCall = webhooksGetValidateBeforeCall(X_ORGANIZATION_ID, active, null);
+    public ApiResponse<List<Webhook>> webhooksGet1WithHttpInfo(Integer X_ORGANIZATION_ID, Boolean active) throws ApiException {
+        okhttp3.Call localVarCall = webhooksGet1ValidateBeforeCall(X_ORGANIZATION_ID, active, null);
         Type localVarReturnType = new TypeToken<List<Webhook>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -822,9 +822,9 @@ public class WebhooksApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call webhooksGetAsync(Integer X_ORGANIZATION_ID, Boolean active, final ApiCallback<List<Webhook>> _callback) throws ApiException {
+    public okhttp3.Call webhooksGet1Async(Integer X_ORGANIZATION_ID, Boolean active, final ApiCallback<List<Webhook>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = webhooksGetValidateBeforeCall(X_ORGANIZATION_ID, active, _callback);
+        okhttp3.Call localVarCall = webhooksGet1ValidateBeforeCall(X_ORGANIZATION_ID, active, _callback);
         Type localVarReturnType = new TypeToken<List<Webhook>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;

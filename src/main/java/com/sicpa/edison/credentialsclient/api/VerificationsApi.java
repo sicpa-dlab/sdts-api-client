@@ -32,8 +32,9 @@ import com.sicpa.edison.credentialsclient.model.Verification;
 import com.sicpa.edison.credentialsclient.model.VerificationCreate;
 import com.sicpa.edison.credentialsclient.model.VerificationSummary;
 import com.sicpa.edison.credentialsclient.model.VerificationTemplate;
-import com.sicpa.edison.credentialsclient.model.VerificationTemplateParam;
+import com.sicpa.edison.credentialsclient.model.VerificationTemplateCreate;
 import com.sicpa.edison.credentialsclient.model.VerificationTemplateSummary;
+import com.sicpa.edison.credentialsclient.model.VerificationTemplateUpdate;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -584,7 +585,7 @@ public class VerificationsApi {
      * Build call for verificationTemplatePut
      * @param X_ORGANIZATION_ID  (required)
      * @param verificationTemplateId A verification template ID. (required)
-     * @param verificationTemplateParam  (required)
+     * @param verificationTemplateUpdate  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -596,8 +597,8 @@ public class VerificationsApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call verificationTemplatePutCall(Integer X_ORGANIZATION_ID, Integer verificationTemplateId, VerificationTemplateParam verificationTemplateParam, final ApiCallback _callback) throws ApiException {
-        Object localVarPostBody = verificationTemplateParam;
+    public okhttp3.Call verificationTemplatePutCall(Integer X_ORGANIZATION_ID, Integer verificationTemplateId, VerificationTemplateUpdate verificationTemplateUpdate, final ApiCallback _callback) throws ApiException {
+        Object localVarPostBody = verificationTemplateUpdate;
 
         // create path and map variables
         String localVarPath = "/verification-templates/{verificationTemplateId}"
@@ -631,7 +632,7 @@ public class VerificationsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call verificationTemplatePutValidateBeforeCall(Integer X_ORGANIZATION_ID, Integer verificationTemplateId, VerificationTemplateParam verificationTemplateParam, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call verificationTemplatePutValidateBeforeCall(Integer X_ORGANIZATION_ID, Integer verificationTemplateId, VerificationTemplateUpdate verificationTemplateUpdate, final ApiCallback _callback) throws ApiException {
         
         // verify the required parameter 'X_ORGANIZATION_ID' is set
         if (X_ORGANIZATION_ID == null) {
@@ -643,13 +644,13 @@ public class VerificationsApi {
             throw new ApiException("Missing the required parameter 'verificationTemplateId' when calling verificationTemplatePut(Async)");
         }
         
-        // verify the required parameter 'verificationTemplateParam' is set
-        if (verificationTemplateParam == null) {
-            throw new ApiException("Missing the required parameter 'verificationTemplateParam' when calling verificationTemplatePut(Async)");
+        // verify the required parameter 'verificationTemplateUpdate' is set
+        if (verificationTemplateUpdate == null) {
+            throw new ApiException("Missing the required parameter 'verificationTemplateUpdate' when calling verificationTemplatePut(Async)");
         }
         
 
-        okhttp3.Call localVarCall = verificationTemplatePutCall(X_ORGANIZATION_ID, verificationTemplateId, verificationTemplateParam, _callback);
+        okhttp3.Call localVarCall = verificationTemplatePutCall(X_ORGANIZATION_ID, verificationTemplateId, verificationTemplateUpdate, _callback);
         return localVarCall;
 
     }
@@ -659,7 +660,7 @@ public class VerificationsApi {
      * 
      * @param X_ORGANIZATION_ID  (required)
      * @param verificationTemplateId A verification template ID. (required)
-     * @param verificationTemplateParam  (required)
+     * @param verificationTemplateUpdate  (required)
      * @return VerificationTemplate
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -670,8 +671,8 @@ public class VerificationsApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public VerificationTemplate verificationTemplatePut(Integer X_ORGANIZATION_ID, Integer verificationTemplateId, VerificationTemplateParam verificationTemplateParam) throws ApiException {
-        ApiResponse<VerificationTemplate> localVarResp = verificationTemplatePutWithHttpInfo(X_ORGANIZATION_ID, verificationTemplateId, verificationTemplateParam);
+    public VerificationTemplate verificationTemplatePut(Integer X_ORGANIZATION_ID, Integer verificationTemplateId, VerificationTemplateUpdate verificationTemplateUpdate) throws ApiException {
+        ApiResponse<VerificationTemplate> localVarResp = verificationTemplatePutWithHttpInfo(X_ORGANIZATION_ID, verificationTemplateId, verificationTemplateUpdate);
         return localVarResp.getData();
     }
 
@@ -680,7 +681,7 @@ public class VerificationsApi {
      * 
      * @param X_ORGANIZATION_ID  (required)
      * @param verificationTemplateId A verification template ID. (required)
-     * @param verificationTemplateParam  (required)
+     * @param verificationTemplateUpdate  (required)
      * @return ApiResponse&lt;VerificationTemplate&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -691,8 +692,8 @@ public class VerificationsApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<VerificationTemplate> verificationTemplatePutWithHttpInfo(Integer X_ORGANIZATION_ID, Integer verificationTemplateId, VerificationTemplateParam verificationTemplateParam) throws ApiException {
-        okhttp3.Call localVarCall = verificationTemplatePutValidateBeforeCall(X_ORGANIZATION_ID, verificationTemplateId, verificationTemplateParam, null);
+    public ApiResponse<VerificationTemplate> verificationTemplatePutWithHttpInfo(Integer X_ORGANIZATION_ID, Integer verificationTemplateId, VerificationTemplateUpdate verificationTemplateUpdate) throws ApiException {
+        okhttp3.Call localVarCall = verificationTemplatePutValidateBeforeCall(X_ORGANIZATION_ID, verificationTemplateId, verificationTemplateUpdate, null);
         Type localVarReturnType = new TypeToken<VerificationTemplate>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -702,7 +703,7 @@ public class VerificationsApi {
      * 
      * @param X_ORGANIZATION_ID  (required)
      * @param verificationTemplateId A verification template ID. (required)
-     * @param verificationTemplateParam  (required)
+     * @param verificationTemplateUpdate  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -714,9 +715,9 @@ public class VerificationsApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call verificationTemplatePutAsync(Integer X_ORGANIZATION_ID, Integer verificationTemplateId, VerificationTemplateParam verificationTemplateParam, final ApiCallback<VerificationTemplate> _callback) throws ApiException {
+    public okhttp3.Call verificationTemplatePutAsync(Integer X_ORGANIZATION_ID, Integer verificationTemplateId, VerificationTemplateUpdate verificationTemplateUpdate, final ApiCallback<VerificationTemplate> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = verificationTemplatePutValidateBeforeCall(X_ORGANIZATION_ID, verificationTemplateId, verificationTemplateParam, _callback);
+        okhttp3.Call localVarCall = verificationTemplatePutValidateBeforeCall(X_ORGANIZATION_ID, verificationTemplateId, verificationTemplateUpdate, _callback);
         Type localVarReturnType = new TypeToken<VerificationTemplate>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -846,7 +847,7 @@ public class VerificationsApi {
     /**
      * Build call for verificationTemplatesPost
      * @param X_ORGANIZATION_ID  (required)
-     * @param verificationTemplateParam  (required)
+     * @param verificationTemplateCreate  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -858,8 +859,8 @@ public class VerificationsApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call verificationTemplatesPostCall(Integer X_ORGANIZATION_ID, VerificationTemplateParam verificationTemplateParam, final ApiCallback _callback) throws ApiException {
-        Object localVarPostBody = verificationTemplateParam;
+    public okhttp3.Call verificationTemplatesPostCall(Integer X_ORGANIZATION_ID, VerificationTemplateCreate verificationTemplateCreate, final ApiCallback _callback) throws ApiException {
+        Object localVarPostBody = verificationTemplateCreate;
 
         // create path and map variables
         String localVarPath = "/verification-templates";
@@ -892,20 +893,20 @@ public class VerificationsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call verificationTemplatesPostValidateBeforeCall(Integer X_ORGANIZATION_ID, VerificationTemplateParam verificationTemplateParam, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call verificationTemplatesPostValidateBeforeCall(Integer X_ORGANIZATION_ID, VerificationTemplateCreate verificationTemplateCreate, final ApiCallback _callback) throws ApiException {
         
         // verify the required parameter 'X_ORGANIZATION_ID' is set
         if (X_ORGANIZATION_ID == null) {
             throw new ApiException("Missing the required parameter 'X_ORGANIZATION_ID' when calling verificationTemplatesPost(Async)");
         }
         
-        // verify the required parameter 'verificationTemplateParam' is set
-        if (verificationTemplateParam == null) {
-            throw new ApiException("Missing the required parameter 'verificationTemplateParam' when calling verificationTemplatesPost(Async)");
+        // verify the required parameter 'verificationTemplateCreate' is set
+        if (verificationTemplateCreate == null) {
+            throw new ApiException("Missing the required parameter 'verificationTemplateCreate' when calling verificationTemplatesPost(Async)");
         }
         
 
-        okhttp3.Call localVarCall = verificationTemplatesPostCall(X_ORGANIZATION_ID, verificationTemplateParam, _callback);
+        okhttp3.Call localVarCall = verificationTemplatesPostCall(X_ORGANIZATION_ID, verificationTemplateCreate, _callback);
         return localVarCall;
 
     }
@@ -914,7 +915,7 @@ public class VerificationsApi {
      * Create a new Verification Template
      * 
      * @param X_ORGANIZATION_ID  (required)
-     * @param verificationTemplateParam  (required)
+     * @param verificationTemplateCreate  (required)
      * @return VerificationTemplate
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -925,8 +926,8 @@ public class VerificationsApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public VerificationTemplate verificationTemplatesPost(Integer X_ORGANIZATION_ID, VerificationTemplateParam verificationTemplateParam) throws ApiException {
-        ApiResponse<VerificationTemplate> localVarResp = verificationTemplatesPostWithHttpInfo(X_ORGANIZATION_ID, verificationTemplateParam);
+    public VerificationTemplate verificationTemplatesPost(Integer X_ORGANIZATION_ID, VerificationTemplateCreate verificationTemplateCreate) throws ApiException {
+        ApiResponse<VerificationTemplate> localVarResp = verificationTemplatesPostWithHttpInfo(X_ORGANIZATION_ID, verificationTemplateCreate);
         return localVarResp.getData();
     }
 
@@ -934,7 +935,7 @@ public class VerificationsApi {
      * Create a new Verification Template
      * 
      * @param X_ORGANIZATION_ID  (required)
-     * @param verificationTemplateParam  (required)
+     * @param verificationTemplateCreate  (required)
      * @return ApiResponse&lt;VerificationTemplate&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -945,8 +946,8 @@ public class VerificationsApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<VerificationTemplate> verificationTemplatesPostWithHttpInfo(Integer X_ORGANIZATION_ID, VerificationTemplateParam verificationTemplateParam) throws ApiException {
-        okhttp3.Call localVarCall = verificationTemplatesPostValidateBeforeCall(X_ORGANIZATION_ID, verificationTemplateParam, null);
+    public ApiResponse<VerificationTemplate> verificationTemplatesPostWithHttpInfo(Integer X_ORGANIZATION_ID, VerificationTemplateCreate verificationTemplateCreate) throws ApiException {
+        okhttp3.Call localVarCall = verificationTemplatesPostValidateBeforeCall(X_ORGANIZATION_ID, verificationTemplateCreate, null);
         Type localVarReturnType = new TypeToken<VerificationTemplate>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -955,7 +956,7 @@ public class VerificationsApi {
      * Create a new Verification Template (asynchronously)
      * 
      * @param X_ORGANIZATION_ID  (required)
-     * @param verificationTemplateParam  (required)
+     * @param verificationTemplateCreate  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -967,9 +968,9 @@ public class VerificationsApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call verificationTemplatesPostAsync(Integer X_ORGANIZATION_ID, VerificationTemplateParam verificationTemplateParam, final ApiCallback<VerificationTemplate> _callback) throws ApiException {
+    public okhttp3.Call verificationTemplatesPostAsync(Integer X_ORGANIZATION_ID, VerificationTemplateCreate verificationTemplateCreate, final ApiCallback<VerificationTemplate> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = verificationTemplatesPostValidateBeforeCall(X_ORGANIZATION_ID, verificationTemplateParam, _callback);
+        okhttp3.Call localVarCall = verificationTemplatesPostValidateBeforeCall(X_ORGANIZATION_ID, verificationTemplateCreate, _callback);
         Type localVarReturnType = new TypeToken<VerificationTemplate>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;

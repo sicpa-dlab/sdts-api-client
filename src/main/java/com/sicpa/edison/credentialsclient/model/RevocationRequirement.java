@@ -23,64 +23,65 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.time.OffsetDateTime;
 
 /**
- * VerificationTemplateSummary
+ * RevocationRequirement
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-23T15:13:07.571806+01:00[Europe/Zurich]")
-public class VerificationTemplateSummary {
-  public static final String SERIALIZED_NAME_ID = "id";
-  @SerializedName(SERIALIZED_NAME_ID)
-  private Integer id;
+public class RevocationRequirement {
+  public static final String SERIALIZED_NAME_VALID_AT = "validAt";
+  @SerializedName(SERIALIZED_NAME_VALID_AT)
+  private OffsetDateTime validAt;
 
-  public static final String SERIALIZED_NAME_NAME = "name";
-  @SerializedName(SERIALIZED_NAME_NAME)
-  private String name;
+  public static final String SERIALIZED_NAME_VALID_NOW = "validNow";
+  @SerializedName(SERIALIZED_NAME_VALID_NOW)
+  private Boolean validNow;
 
 
-  public VerificationTemplateSummary id(Integer id) {
+  public RevocationRequirement validAt(OffsetDateTime validAt) {
     
-    this.id = id;
+    this.validAt = validAt;
     return this;
   }
 
    /**
-   * The verificationTemplate id
-   * @return id
+   * Date at which the credential should be valid
+   * @return validAt
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "0", value = "The verificationTemplate id")
+  @ApiModelProperty(value = "Date at which the credential should be valid")
 
-  public Integer getId() {
-    return id;
+  public OffsetDateTime getValidAt() {
+    return validAt;
   }
 
 
-  public void setId(Integer id) {
-    this.id = id;
+  public void setValidAt(OffsetDateTime validAt) {
+    this.validAt = validAt;
   }
 
 
-  public VerificationTemplateSummary name(String name) {
+  public RevocationRequirement validNow(Boolean validNow) {
     
-    this.name = name;
+    this.validNow = validNow;
     return this;
   }
 
    /**
-   * The verificationTemplate name
-   * @return name
+   * Defines if the credential should be valid at the current date
+   * @return validNow
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "example", value = "The verificationTemplate name")
+  @ApiModelProperty(value = "Defines if the credential should be valid at the current date")
 
-  public String getName() {
-    return name;
+  public Boolean getValidNow() {
+    return validNow;
   }
 
 
-  public void setName(String name) {
-    this.name = name;
+  public void setValidNow(Boolean validNow) {
+    this.validNow = validNow;
   }
 
 
@@ -92,23 +93,23 @@ public class VerificationTemplateSummary {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    VerificationTemplateSummary verificationTemplateSummary = (VerificationTemplateSummary) o;
-    return Objects.equals(this.id, verificationTemplateSummary.id) &&
-        Objects.equals(this.name, verificationTemplateSummary.name);
+    RevocationRequirement revocationRequirement = (RevocationRequirement) o;
+    return Objects.equals(this.validAt, revocationRequirement.validAt) &&
+        Objects.equals(this.validNow, revocationRequirement.validNow);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name);
+    return Objects.hash(validAt, validNow);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class VerificationTemplateSummary {\n");
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("class RevocationRequirement {\n");
+    sb.append("    validAt: ").append(toIndentedString(validAt)).append("\n");
+    sb.append("    validNow: ").append(toIndentedString(validNow)).append("\n");
     sb.append("}");
     return sb.toString();
   }

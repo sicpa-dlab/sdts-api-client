@@ -56,7 +56,7 @@ public class InternalWebhooksApi {
     }
 
     /**
-     * Build call for webhooksGet1
+     * Build call for webhooksGet
      * @param organizationId  (required)
      * @param acaPyTopic  (required)
      * @param acaPyFilter  (required)
@@ -71,7 +71,7 @@ public class InternalWebhooksApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call webhooksGet1Call(Integer organizationId, String acaPyTopic, String acaPyFilter, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call webhooksGetCall(Integer organizationId, String acaPyTopic, String acaPyFilter, final ApiCallback _callback) throws ApiException {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -113,25 +113,25 @@ public class InternalWebhooksApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call webhooksGet1ValidateBeforeCall(Integer organizationId, String acaPyTopic, String acaPyFilter, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call webhooksGetValidateBeforeCall(Integer organizationId, String acaPyTopic, String acaPyFilter, final ApiCallback _callback) throws ApiException {
         
         // verify the required parameter 'organizationId' is set
         if (organizationId == null) {
-            throw new ApiException("Missing the required parameter 'organizationId' when calling webhooksGet1(Async)");
+            throw new ApiException("Missing the required parameter 'organizationId' when calling webhooksGet(Async)");
         }
         
         // verify the required parameter 'acaPyTopic' is set
         if (acaPyTopic == null) {
-            throw new ApiException("Missing the required parameter 'acaPyTopic' when calling webhooksGet1(Async)");
+            throw new ApiException("Missing the required parameter 'acaPyTopic' when calling webhooksGet(Async)");
         }
         
         // verify the required parameter 'acaPyFilter' is set
         if (acaPyFilter == null) {
-            throw new ApiException("Missing the required parameter 'acaPyFilter' when calling webhooksGet1(Async)");
+            throw new ApiException("Missing the required parameter 'acaPyFilter' when calling webhooksGet(Async)");
         }
         
 
-        okhttp3.Call localVarCall = webhooksGet1Call(organizationId, acaPyTopic, acaPyFilter, _callback);
+        okhttp3.Call localVarCall = webhooksGetCall(organizationId, acaPyTopic, acaPyFilter, _callback);
         return localVarCall;
 
     }
@@ -152,8 +152,8 @@ public class InternalWebhooksApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public List<Webhook> webhooksGet1(Integer organizationId, String acaPyTopic, String acaPyFilter) throws ApiException {
-        ApiResponse<List<Webhook>> localVarResp = webhooksGet1WithHttpInfo(organizationId, acaPyTopic, acaPyFilter);
+    public List<Webhook> webhooksGet(Integer organizationId, String acaPyTopic, String acaPyFilter) throws ApiException {
+        ApiResponse<List<Webhook>> localVarResp = webhooksGetWithHttpInfo(organizationId, acaPyTopic, acaPyFilter);
         return localVarResp.getData();
     }
 
@@ -173,8 +173,8 @@ public class InternalWebhooksApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<List<Webhook>> webhooksGet1WithHttpInfo(Integer organizationId, String acaPyTopic, String acaPyFilter) throws ApiException {
-        okhttp3.Call localVarCall = webhooksGet1ValidateBeforeCall(organizationId, acaPyTopic, acaPyFilter, null);
+    public ApiResponse<List<Webhook>> webhooksGetWithHttpInfo(Integer organizationId, String acaPyTopic, String acaPyFilter) throws ApiException {
+        okhttp3.Call localVarCall = webhooksGetValidateBeforeCall(organizationId, acaPyTopic, acaPyFilter, null);
         Type localVarReturnType = new TypeToken<List<Webhook>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -196,9 +196,9 @@ public class InternalWebhooksApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call webhooksGet1Async(Integer organizationId, String acaPyTopic, String acaPyFilter, final ApiCallback<List<Webhook>> _callback) throws ApiException {
+    public okhttp3.Call webhooksGetAsync(Integer organizationId, String acaPyTopic, String acaPyFilter, final ApiCallback<List<Webhook>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = webhooksGet1ValidateBeforeCall(organizationId, acaPyTopic, acaPyFilter, _callback);
+        okhttp3.Call localVarCall = webhooksGetValidateBeforeCall(organizationId, acaPyTopic, acaPyFilter, _callback);
         Type localVarReturnType = new TypeToken<List<Webhook>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;

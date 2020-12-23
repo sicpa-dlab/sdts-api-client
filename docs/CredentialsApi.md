@@ -7,8 +7,8 @@ Method | HTTP request | Description
 [**credentialCredentialIdDelete**](CredentialsApi.md#credentialCredentialIdDelete) | **DELETE** /credentials/{credentialId} | Delete the specified credential
 [**credentialCredentialIdGet**](CredentialsApi.md#credentialCredentialIdGet) | **GET** /credentials/{credentialId} | Get the specified credential
 [**credentialsGet**](CredentialsApi.md#credentialsGet) | **GET** /credentials | List all credentials
-[**issuanceCredentialCredentialIdDelete**](CredentialsApi.md#issuanceCredentialCredentialIdDelete) | **DELETE** /credentials-issuance/{credentialId} | Delete the specified issued credential
-[**issuanceCredentialCredentialIdGet**](CredentialsApi.md#issuanceCredentialCredentialIdGet) | **GET** /credentials-issuance/{credentialId} | Get the specified issued credential
+[**issuanceCredentialCredentialIdDelete**](CredentialsApi.md#issuanceCredentialCredentialIdDelete) | **DELETE** /credentials-issuance/{credentialExchangeId} | Delete the specified issued credential
+[**issuanceCredentialCredentialIdGet**](CredentialsApi.md#issuanceCredentialCredentialIdGet) | **GET** /credentials-issuance/{credentialExchangeId} | Get the specified issued credential
 [**issuanceCredentialPost**](CredentialsApi.md#issuanceCredentialPost) | **POST** /credentials-issuance | Issue new credentials
 [**issuanceCredentialsGet**](CredentialsApi.md#issuanceCredentialsGet) | **GET** /credentials-issuance | List all issued credentials
 
@@ -225,7 +225,7 @@ Name | Type | Description  | Notes
 
 <a name="issuanceCredentialCredentialIdDelete"></a>
 # **issuanceCredentialCredentialIdDelete**
-> issuanceCredentialCredentialIdDelete(X_ORGANIZATION_ID, credentialId)
+> issuanceCredentialCredentialIdDelete(X_ORGANIZATION_ID, credentialExchangeId)
 
 Delete the specified issued credential
 
@@ -252,9 +252,9 @@ public class Example {
 
     CredentialsApi apiInstance = new CredentialsApi(defaultClient);
     Integer X_ORGANIZATION_ID = 56; // Integer | 
-    String credentialId = "credentialId_example"; // String | An credential exchange ID.
+    String credentialExchangeId = "credentialExchangeId_example"; // String | An credential exchange ID.
     try {
-      apiInstance.issuanceCredentialCredentialIdDelete(X_ORGANIZATION_ID, credentialId);
+      apiInstance.issuanceCredentialCredentialIdDelete(X_ORGANIZATION_ID, credentialExchangeId);
     } catch (ApiException e) {
       System.err.println("Exception when calling CredentialsApi#issuanceCredentialCredentialIdDelete");
       System.err.println("Status code: " + e.getCode());
@@ -271,7 +271,7 @@ public class Example {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **X_ORGANIZATION_ID** | **Integer**|  |
- **credentialId** | **String**| An credential exchange ID. |
+ **credentialExchangeId** | **String**| An credential exchange ID. |
 
 ### Return type
 
@@ -295,7 +295,7 @@ null (empty response body)
 
 <a name="issuanceCredentialCredentialIdGet"></a>
 # **issuanceCredentialCredentialIdGet**
-> CredentialExchange issuanceCredentialCredentialIdGet(X_ORGANIZATION_ID, credentialId)
+> CredentialExchange issuanceCredentialCredentialIdGet(X_ORGANIZATION_ID, credentialExchangeId)
 
 Get the specified issued credential
 
@@ -322,9 +322,9 @@ public class Example {
 
     CredentialsApi apiInstance = new CredentialsApi(defaultClient);
     Integer X_ORGANIZATION_ID = 56; // Integer | 
-    String credentialId = "credentialId_example"; // String | An credential exchange ID.
+    String credentialExchangeId = "credentialExchangeId_example"; // String | An credential exchange ID.
     try {
-      CredentialExchange result = apiInstance.issuanceCredentialCredentialIdGet(X_ORGANIZATION_ID, credentialId);
+      CredentialExchange result = apiInstance.issuanceCredentialCredentialIdGet(X_ORGANIZATION_ID, credentialExchangeId);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling CredentialsApi#issuanceCredentialCredentialIdGet");
@@ -342,7 +342,7 @@ public class Example {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **X_ORGANIZATION_ID** | **Integer**|  |
- **credentialId** | **String**| An credential exchange ID. |
+ **credentialExchangeId** | **String**| An credential exchange ID. |
 
 ### Return type
 

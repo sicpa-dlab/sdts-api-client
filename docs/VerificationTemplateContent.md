@@ -6,10 +6,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **String** | The verificationTemplate name |  [optional]
-**nonRevoked** | [**IndyProofReqNonRevoked**](IndyProofReqNonRevoked.md) |  |  [optional]
-**requestedAttributes** | [**Map&lt;String, IndyProofReqAttrSpec&gt;**](IndyProofReqAttrSpec.md) |  |  [optional]
-**requestedPredicates** | [**Map&lt;String, IndyProofReqPredSpec&gt;**](IndyProofReqPredSpec.md) |  |  [optional]
+**requestedAttributes** | [**List&lt;RequestedAttribute&gt;**](RequestedAttribute.md) | The requested attributes. In order for the verification to be successful, all requested attribute should be validated |  [optional]
+**requestedPredicates** | [**List&lt;RequestedPredicate&gt;**](RequestedPredicate.md) | The requested predicates. In order for the verification to be successful, all requested predicates should be validated |  [optional]
+**revocationRequirement** | [**RevocationRequirement**](RevocationRequirement.md) |  |  [optional]
 
 
 

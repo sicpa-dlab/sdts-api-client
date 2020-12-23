@@ -20,34 +20,36 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.sicpa.edison.credentialsclient.model.RequestedAttribute;
+import com.sicpa.edison.credentialsclient.model.RequestedPredicate;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.util.HashMap;
+import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
- * The original validation request
+ * The verification request
  */
-@ApiModel(description = "The original validation request")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-15T13:20:26.194789+01:00[Europe/Zurich]")
+@ApiModel(description = "The verification request")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-23T15:13:07.571806+01:00[Europe/Zurich]")
 public class VerificationRequest {
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
   private String name;
 
-  public static final String SERIALIZED_NAME_NONCE = "nonce";
-  @SerializedName(SERIALIZED_NAME_NONCE)
-  private String nonce;
-
   public static final String SERIALIZED_NAME_REQUESTED_ATTRIBUTES = "requestedAttributes";
   @SerializedName(SERIALIZED_NAME_REQUESTED_ATTRIBUTES)
-  private Map<String, Object> requestedAttributes = null;
+  private List<RequestedAttribute> requestedAttributes = null;
 
   public static final String SERIALIZED_NAME_REQUESTED_PREDICATES = "requestedPredicates";
   @SerializedName(SERIALIZED_NAME_REQUESTED_PREDICATES)
-  private Map<String, Object> requestedPredicates = null;
+  private List<RequestedPredicate> requestedPredicates = null;
+
+  public static final String SERIALIZED_NAME_VALID_AT = "validAt";
+  @SerializedName(SERIALIZED_NAME_VALID_AT)
+  private OffsetDateTime validAt;
 
 
   public VerificationRequest name(String name) {
@@ -57,11 +59,11 @@ public class VerificationRequest {
   }
 
    /**
-   * Get name
+   * The verification request name
    * @return name
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(value = "The verification request name")
 
   public String getName() {
     return name;
@@ -73,88 +75,88 @@ public class VerificationRequest {
   }
 
 
-  public VerificationRequest nonce(String nonce) {
-    
-    this.nonce = nonce;
-    return this;
-  }
-
-   /**
-   * Get nonce
-   * @return nonce
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
-
-  public String getNonce() {
-    return nonce;
-  }
-
-
-  public void setNonce(String nonce) {
-    this.nonce = nonce;
-  }
-
-
-  public VerificationRequest requestedAttributes(Map<String, Object> requestedAttributes) {
+  public VerificationRequest requestedAttributes(List<RequestedAttribute> requestedAttributes) {
     
     this.requestedAttributes = requestedAttributes;
     return this;
   }
 
-  public VerificationRequest putRequestedAttributesItem(String key, Object requestedAttributesItem) {
+  public VerificationRequest addRequestedAttributesItem(RequestedAttribute requestedAttributesItem) {
     if (this.requestedAttributes == null) {
-      this.requestedAttributes = new HashMap<>();
+      this.requestedAttributes = new ArrayList<>();
     }
-    this.requestedAttributes.put(key, requestedAttributesItem);
+    this.requestedAttributes.add(requestedAttributesItem);
     return this;
   }
 
    /**
-   * Get requestedAttributes
+   * The requested attributes
    * @return requestedAttributes
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(value = "The requested attributes")
 
-  public Map<String, Object> getRequestedAttributes() {
+  public List<RequestedAttribute> getRequestedAttributes() {
     return requestedAttributes;
   }
 
 
-  public void setRequestedAttributes(Map<String, Object> requestedAttributes) {
+  public void setRequestedAttributes(List<RequestedAttribute> requestedAttributes) {
     this.requestedAttributes = requestedAttributes;
   }
 
 
-  public VerificationRequest requestedPredicates(Map<String, Object> requestedPredicates) {
+  public VerificationRequest requestedPredicates(List<RequestedPredicate> requestedPredicates) {
     
     this.requestedPredicates = requestedPredicates;
     return this;
   }
 
-  public VerificationRequest putRequestedPredicatesItem(String key, Object requestedPredicatesItem) {
+  public VerificationRequest addRequestedPredicatesItem(RequestedPredicate requestedPredicatesItem) {
     if (this.requestedPredicates == null) {
-      this.requestedPredicates = new HashMap<>();
+      this.requestedPredicates = new ArrayList<>();
     }
-    this.requestedPredicates.put(key, requestedPredicatesItem);
+    this.requestedPredicates.add(requestedPredicatesItem);
     return this;
   }
 
    /**
-   * Get requestedPredicates
+   * The requested predicates
    * @return requestedPredicates
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(value = "The requested predicates")
 
-  public Map<String, Object> getRequestedPredicates() {
+  public List<RequestedPredicate> getRequestedPredicates() {
     return requestedPredicates;
   }
 
 
-  public void setRequestedPredicates(Map<String, Object> requestedPredicates) {
+  public void setRequestedPredicates(List<RequestedPredicate> requestedPredicates) {
     this.requestedPredicates = requestedPredicates;
+  }
+
+
+  public VerificationRequest validAt(OffsetDateTime validAt) {
+    
+    this.validAt = validAt;
+    return this;
+  }
+
+   /**
+   * The date at which the credential should be valid
+   * @return validAt
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The date at which the credential should be valid")
+
+  public OffsetDateTime getValidAt() {
+    return validAt;
+  }
+
+
+  public void setValidAt(OffsetDateTime validAt) {
+    this.validAt = validAt;
   }
 
 
@@ -168,14 +170,14 @@ public class VerificationRequest {
     }
     VerificationRequest verificationRequest = (VerificationRequest) o;
     return Objects.equals(this.name, verificationRequest.name) &&
-        Objects.equals(this.nonce, verificationRequest.nonce) &&
         Objects.equals(this.requestedAttributes, verificationRequest.requestedAttributes) &&
-        Objects.equals(this.requestedPredicates, verificationRequest.requestedPredicates);
+        Objects.equals(this.requestedPredicates, verificationRequest.requestedPredicates) &&
+        Objects.equals(this.validAt, verificationRequest.validAt);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, nonce, requestedAttributes, requestedPredicates);
+    return Objects.hash(name, requestedAttributes, requestedPredicates, validAt);
   }
 
 
@@ -184,9 +186,9 @@ public class VerificationRequest {
     StringBuilder sb = new StringBuilder();
     sb.append("class VerificationRequest {\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    nonce: ").append(toIndentedString(nonce)).append("\n");
     sb.append("    requestedAttributes: ").append(toIndentedString(requestedAttributes)).append("\n");
     sb.append("    requestedPredicates: ").append(toIndentedString(requestedPredicates)).append("\n");
+    sb.append("    validAt: ").append(toIndentedString(validAt)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -20,66 +20,35 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.sicpa.edison.credentialsclient.model.IndyProofReqNonRevoked;
+import com.sicpa.edison.credentialsclient.model.Restriction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
- * IndyProofReqAttrSpec
+ * The requested attributes. In order for the verification to be successful, all requested attribute should be validated
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-15T13:20:26.194789+01:00[Europe/Zurich]")
-public class IndyProofReqAttrSpec {
-  public static final String SERIALIZED_NAME_NAME = "name";
-  @SerializedName(SERIALIZED_NAME_NAME)
-  private String name;
-
+@ApiModel(description = "The requested attributes. In order for the verification to be successful, all requested attribute should be validated")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-23T15:13:07.571806+01:00[Europe/Zurich]")
+public class RequestedAttribute {
   public static final String SERIALIZED_NAME_NAMES = "names";
   @SerializedName(SERIALIZED_NAME_NAMES)
   private List<String> names = null;
 
-  public static final String SERIALIZED_NAME_NON_REVOKED = "nonRevoked";
-  @SerializedName(SERIALIZED_NAME_NON_REVOKED)
-  private IndyProofReqNonRevoked nonRevoked;
-
   public static final String SERIALIZED_NAME_RESTRICTIONS = "restrictions";
   @SerializedName(SERIALIZED_NAME_RESTRICTIONS)
-  private List<Map<String, String>> restrictions = null;
+  private List<Restriction> restrictions = null;
 
 
-  public IndyProofReqAttrSpec name(String name) {
-    
-    this.name = name;
-    return this;
-  }
-
-   /**
-   * Get name
-   * @return name
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
-
-  public String getName() {
-    return name;
-  }
-
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-
-  public IndyProofReqAttrSpec names(List<String> names) {
+  public RequestedAttribute names(List<String> names) {
     
     this.names = names;
     return this;
   }
 
-  public IndyProofReqAttrSpec addNamesItem(String namesItem) {
+  public RequestedAttribute addNamesItem(String namesItem) {
     if (this.names == null) {
       this.names = new ArrayList<>();
     }
@@ -88,11 +57,11 @@ public class IndyProofReqAttrSpec {
   }
 
    /**
-   * Get names
+   * List of attribute names
    * @return names
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(value = "List of attribute names")
 
   public List<String> getNames() {
     return names;
@@ -104,36 +73,13 @@ public class IndyProofReqAttrSpec {
   }
 
 
-  public IndyProofReqAttrSpec nonRevoked(IndyProofReqNonRevoked nonRevoked) {
-    
-    this.nonRevoked = nonRevoked;
-    return this;
-  }
-
-   /**
-   * Get nonRevoked
-   * @return nonRevoked
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
-
-  public IndyProofReqNonRevoked getNonRevoked() {
-    return nonRevoked;
-  }
-
-
-  public void setNonRevoked(IndyProofReqNonRevoked nonRevoked) {
-    this.nonRevoked = nonRevoked;
-  }
-
-
-  public IndyProofReqAttrSpec restrictions(List<Map<String, String>> restrictions) {
+  public RequestedAttribute restrictions(List<Restriction> restrictions) {
     
     this.restrictions = restrictions;
     return this;
   }
 
-  public IndyProofReqAttrSpec addRestrictionsItem(Map<String, String> restrictionsItem) {
+  public RequestedAttribute addRestrictionsItem(Restriction restrictionsItem) {
     if (this.restrictions == null) {
       this.restrictions = new ArrayList<>();
     }
@@ -142,18 +88,18 @@ public class IndyProofReqAttrSpec {
   }
 
    /**
-   * Get restrictions
+   * The attribute restrictions. At least one restriction should be valid in order for the verification to be successful. (Not considering predicates, revocation requirements...)
    * @return restrictions
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(value = "The attribute restrictions. At least one restriction should be valid in order for the verification to be successful. (Not considering predicates, revocation requirements...)")
 
-  public List<Map<String, String>> getRestrictions() {
+  public List<Restriction> getRestrictions() {
     return restrictions;
   }
 
 
-  public void setRestrictions(List<Map<String, String>> restrictions) {
+  public void setRestrictions(List<Restriction> restrictions) {
     this.restrictions = restrictions;
   }
 
@@ -166,26 +112,22 @@ public class IndyProofReqAttrSpec {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    IndyProofReqAttrSpec indyProofReqAttrSpec = (IndyProofReqAttrSpec) o;
-    return Objects.equals(this.name, indyProofReqAttrSpec.name) &&
-        Objects.equals(this.names, indyProofReqAttrSpec.names) &&
-        Objects.equals(this.nonRevoked, indyProofReqAttrSpec.nonRevoked) &&
-        Objects.equals(this.restrictions, indyProofReqAttrSpec.restrictions);
+    RequestedAttribute requestedAttribute = (RequestedAttribute) o;
+    return Objects.equals(this.names, requestedAttribute.names) &&
+        Objects.equals(this.restrictions, requestedAttribute.restrictions);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, names, nonRevoked, restrictions);
+    return Objects.hash(names, restrictions);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class IndyProofReqAttrSpec {\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("class RequestedAttribute {\n");
     sb.append("    names: ").append(toIndentedString(names)).append("\n");
-    sb.append("    nonRevoked: ").append(toIndentedString(nonRevoked)).append("\n");
     sb.append("    restrictions: ").append(toIndentedString(restrictions)).append("\n");
     sb.append("}");
     return sb.toString();

@@ -9,7 +9,7 @@ Method | HTTP request | Description
 [**webhookWebhookIdDelete**](WebhooksApi.md#webhookWebhookIdDelete) | **DELETE** /webhooks/{webhookId} | Delete webhook
 [**webhookWebhookIdGet**](WebhooksApi.md#webhookWebhookIdGet) | **GET** /webhooks/{webhookId} | Get webhook
 [**webhookWebhookIdPut**](WebhooksApi.md#webhookWebhookIdPut) | **PUT** /webhooks/{webhookId} | Update a webhook
-[**webhooksGet**](WebhooksApi.md#webhooksGet) | **GET** /webhooks | List all webhooks
+[**webhooksGet1**](WebhooksApi.md#webhooksGet1) | **GET** /webhooks | List all webhooks
 
 
 <a name="webhookPost"></a>
@@ -364,9 +364,9 @@ Name | Type | Description  | Notes
 **400** | Bad Request |  -  |
 **500** | Internal Server Error |  -  |
 
-<a name="webhooksGet"></a>
-# **webhooksGet**
-> List&lt;Webhook&gt; webhooksGet(X_ORGANIZATION_ID, active)
+<a name="webhooksGet1"></a>
+# **webhooksGet1**
+> List&lt;Webhook&gt; webhooksGet1(X_ORGANIZATION_ID, active)
 
 List all webhooks
 
@@ -395,10 +395,10 @@ public class Example {
     Integer X_ORGANIZATION_ID = 56; // Integer | 
     Boolean active = true; // Boolean | Filter active webhooks
     try {
-      List<Webhook> result = apiInstance.webhooksGet(X_ORGANIZATION_ID, active);
+      List<Webhook> result = apiInstance.webhooksGet1(X_ORGANIZATION_ID, active);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling WebhooksApi#webhooksGet");
+      System.err.println("Exception when calling WebhooksApi#webhooksGet1");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());

@@ -9,9 +9,9 @@ Name | Type | Description | Notes
 **verificationId** | **String** | The verification id |  [optional]
 **connectionId** | **String** | The connection id |  [optional]
 **verificationRequest** | [**VerificationRequest**](VerificationRequest.md) |  |  [optional]
-**state** | [**StateEnum**](#StateEnum) | The current state of the verification |  [optional]
-**createdAt** | **String** | The time when the verification was created |  [optional]
-**updatedAt** | **String** | The time when the verification was updated |  [optional]
+**state** | [**StateEnum**](#StateEnum) | The verification state |  [optional]
+**createdAt** | [**OffsetDateTime**](OffsetDateTime.md) | The creation date  |  [optional]
+**updatedAt** | [**OffsetDateTime**](OffsetDateTime.md) | The update date |  [optional]
 
 
 
@@ -19,10 +19,10 @@ Name | Type | Description | Notes
 
 Name | Value
 ---- | -----
-REQUESTED | &quot;requested&quot;
-VERIFIED | &quot;verified&quot;
-REJECTED | &quot;rejected&quot;
-ERROR | &quot;error&quot;
+SUCCESS | &quot;SUCCESS&quot;
+PENDING | &quot;PENDING&quot;
+FAILURE | &quot;FAILURE&quot;
+ERROR | &quot;ERROR&quot;
 
 
 

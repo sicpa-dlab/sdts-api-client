@@ -25,62 +25,63 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
 /**
- * VerificationTemplateSummary
+ * A list of predicate restrictions
  */
+@ApiModel(description = "A list of predicate restrictions")
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-23T15:13:07.571806+01:00[Europe/Zurich]")
-public class VerificationTemplateSummary {
-  public static final String SERIALIZED_NAME_ID = "id";
-  @SerializedName(SERIALIZED_NAME_ID)
-  private Integer id;
+public class Restriction {
+  public static final String SERIALIZED_NAME_CREDENTIAL_DEFINITION_ID = "credentialDefinitionId";
+  @SerializedName(SERIALIZED_NAME_CREDENTIAL_DEFINITION_ID)
+  private String credentialDefinitionId;
 
-  public static final String SERIALIZED_NAME_NAME = "name";
-  @SerializedName(SERIALIZED_NAME_NAME)
-  private String name;
+  public static final String SERIALIZED_NAME_SCHEMA_ID = "schemaId";
+  @SerializedName(SERIALIZED_NAME_SCHEMA_ID)
+  private String schemaId;
 
 
-  public VerificationTemplateSummary id(Integer id) {
+  public Restriction credentialDefinitionId(String credentialDefinitionId) {
     
-    this.id = id;
+    this.credentialDefinitionId = credentialDefinitionId;
     return this;
   }
 
    /**
-   * The verificationTemplate id
-   * @return id
+   * A credential definition ID
+   * @return credentialDefinitionId
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "0", value = "The verificationTemplate id")
+  @ApiModelProperty(value = "A credential definition ID")
 
-  public Integer getId() {
-    return id;
+  public String getCredentialDefinitionId() {
+    return credentialDefinitionId;
   }
 
 
-  public void setId(Integer id) {
-    this.id = id;
+  public void setCredentialDefinitionId(String credentialDefinitionId) {
+    this.credentialDefinitionId = credentialDefinitionId;
   }
 
 
-  public VerificationTemplateSummary name(String name) {
+  public Restriction schemaId(String schemaId) {
     
-    this.name = name;
+    this.schemaId = schemaId;
     return this;
   }
 
    /**
-   * The verificationTemplate name
-   * @return name
+   * A schema ID
+   * @return schemaId
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "example", value = "The verificationTemplate name")
+  @ApiModelProperty(value = "A schema ID")
 
-  public String getName() {
-    return name;
+  public String getSchemaId() {
+    return schemaId;
   }
 
 
-  public void setName(String name) {
-    this.name = name;
+  public void setSchemaId(String schemaId) {
+    this.schemaId = schemaId;
   }
 
 
@@ -92,23 +93,23 @@ public class VerificationTemplateSummary {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    VerificationTemplateSummary verificationTemplateSummary = (VerificationTemplateSummary) o;
-    return Objects.equals(this.id, verificationTemplateSummary.id) &&
-        Objects.equals(this.name, verificationTemplateSummary.name);
+    Restriction restriction = (Restriction) o;
+    return Objects.equals(this.credentialDefinitionId, restriction.credentialDefinitionId) &&
+        Objects.equals(this.schemaId, restriction.schemaId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name);
+    return Objects.hash(credentialDefinitionId, schemaId);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class VerificationTemplateSummary {\n");
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("class Restriction {\n");
+    sb.append("    credentialDefinitionId: ").append(toIndentedString(credentialDefinitionId)).append("\n");
+    sb.append("    schemaId: ").append(toIndentedString(schemaId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

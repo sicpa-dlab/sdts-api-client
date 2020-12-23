@@ -6,10 +6,10 @@ servers:
 - description: Generated server url
   url: http://localhost:8080
 tags:
-- description: The Internal Webhooks API
-  name: Internal webhooks
 - description: The Webhooks API
   name: Webhooks
+- description: The Internal Webhooks API
+  name: Internal webhooks
 - description: The Verifications API
   name: Verifications
 - description: The Messages API
@@ -567,7 +567,7 @@ paths:
       - Credentials
       x-contentType: application/json
       x-accepts: application/json
-  /credentials-issuance/{credentialId}:
+  /credentials-issuance/{credentialExchangeId}:
     delete:
       operationId: issuanceCredentialCredentialIdDelete
       parameters:
@@ -582,7 +582,7 @@ paths:
       - description: An credential exchange ID.
         explode: false
         in: path
-        name: credentialId
+        name: credentialExchangeId
         required: true
         schema:
           type: string
@@ -622,7 +622,7 @@ paths:
       - description: An credential exchange ID.
         explode: false
         in: path
-        name: credentialId
+        name: credentialExchangeId
         required: true
         schema:
           type: string
@@ -1354,7 +1354,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/VerificationTemplateParam'
+              $ref: '#/components/schemas/VerificationTemplateUpdate'
         required: true
       responses:
         "200":
@@ -1436,7 +1436,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/VerificationTemplateParam'
+              $ref: '#/components/schemas/VerificationTemplateCreate'
         required: true
       responses:
         "200":
@@ -1643,9 +1643,60 @@ paths:
       - Verifications
       x-contentType: application/json
       x-accepts: application/json
-  /webhooks:
+  /internal/webhooks:
     get:
       operationId: webhooksGet
+      parameters:
+      - explode: true
+        in: query
+        name: organizationId
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: acaPyTopic
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: acaPyFilter
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Webhook'
+                type: array
+          description: OK
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      summary: 'List an organization''s active webhooks with given type '
+      tags:
+      - Internal webhooks
+      x-accepts: application/json
+  /webhooks:
+    get:
+      operationId: webhooksGet_1
       parameters:
       - explode: false
         in: header
@@ -1905,57 +1956,6 @@ paths:
       tags:
       - Webhooks
       x-accepts: application/json
-  /internal/webhooks:
-    get:
-      operationId: webhooksGet_1
-      parameters:
-      - explode: true
-        in: query
-        name: organizationId
-        required: true
-        schema:
-          format: int32
-          type: integer
-        style: form
-      - explode: true
-        in: query
-        name: acaPyTopic
-        required: true
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: acaPyFilter
-        required: true
-        schema:
-          type: string
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/Webhook'
-                type: array
-          description: OK
-        "400":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "500":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      summary: 'List an organization''s active webhooks with given type '
-      tags:
-      - Internal webhooks
-      x-accepts: application/json
 components:
   requestBodies:
     inline_object:
@@ -2103,7 +2103,7 @@ components:
       type: object
     CredentialDefinitionCreate:
       example:
-        supportRevocation: true
+        supportRevocation: false
         schemaId: WgWxqztrNooG92RXvxSTWv:2:schema_name:1.0
         tag: default
         revocationRegistrySize: 4
@@ -2119,8 +2119,10 @@ components:
           type: string
         supportRevocation:
           description: Revocation supported flag
+          example: false
           type: boolean
         revocationRegistrySize:
+          example: 4
           format: int32
           minimum: 4
           type: integer
@@ -2388,108 +2390,92 @@ components:
             type: string
           type: array
       type: object
-    IndyProofReqAttrSpec:
+    RequestedAttribute:
+      description: The requested attributes. In order for the verification to be successful,
+        all requested attribute should be validated
       example:
         names:
         - names
         - names
-        nonRevoked:
-          from: 0
-          to: 6
-        name: name
         restrictions:
-        - key: restrictions
-        - key: restrictions
+        - schemaId: schemaId
+          credentialDefinitionId: credentialDefinitionId
+        - schemaId: schemaId
+          credentialDefinitionId: credentialDefinitionId
       properties:
-        name:
-          type: string
         names:
+          description: List of attribute names
           items:
+            description: List of attribute names
             type: string
           type: array
-        nonRevoked:
-          $ref: '#/components/schemas/IndyProofReqNonRevoked'
         restrictions:
+          description: The attribute restrictions. At least one restriction should
+            be valid in order for the verification to be successful. (Not considering
+            predicates, revocation requirements...)
           items:
-            additionalProperties:
-              type: string
-            type: object
+            $ref: '#/components/schemas/Restriction'
           type: array
       type: object
-    IndyProofReqNonRevoked:
+    RequestedPredicate:
+      description: The requested predicates. In order for the verification to be successful,
+        all requested predicates should be validated
       example:
-        from: 0
-        to: 6
-      properties:
-        from:
-          format: int32
-          type: integer
-        to:
-          format: int32
-          type: integer
-      type: object
-    IndyProofReqPredSpec:
-      example:
-        nonRevoked:
-          from: 0
-          to: 6
-        getpType: <
+        predicateValue: 6
+        predicateType: LESS_THAN
         name: name
         restrictions:
-        - schemaVersion: schemaVersion
-          credDefId: credDefId
-          issuerDid: issuerDid
-          schemaId: schemaId
-          schemaIssuerDid: schemaIssuerDid
-          schemaName: schemaName
-        - schemaVersion: schemaVersion
-          credDefId: credDefId
-          issuerDid: issuerDid
-          schemaId: schemaId
-          schemaIssuerDid: schemaIssuerDid
-          schemaName: schemaName
-        getpValue: 1
+        - schemaId: schemaId
+          credentialDefinitionId: credentialDefinitionId
+        - schemaId: schemaId
+          credentialDefinitionId: credentialDefinitionId
       properties:
         name:
+          description: A predicate name
           type: string
-        nonRevoked:
-          $ref: '#/components/schemas/IndyProofReqNonRevoked'
-        getpType:
+        predicateType:
+          description: A predicate type
           enum:
-          - <
-          - <=
-          - '>='
-          - '>'
+          - LESS_THAN
+          - LESS_THAN_OR_EQUAL_TO
+          - GREATER_THAN_OR_EQUAL_TO
+          - GREATER_THAN
           type: string
-        getpValue:
+        predicateValue:
+          description: A predicate value
           format: int32
           type: integer
         restrictions:
+          description: A list of predicate restrictions
           items:
-            $ref: '#/components/schemas/IndyProofReqPredSpecRestrictions'
+            $ref: '#/components/schemas/Restriction'
           type: array
       type: object
-    IndyProofReqPredSpecRestrictions:
+    Restriction:
+      description: A list of predicate restrictions
       example:
-        schemaVersion: schemaVersion
-        credDefId: credDefId
-        issuerDid: issuerDid
         schemaId: schemaId
-        schemaIssuerDid: schemaIssuerDid
-        schemaName: schemaName
+        credentialDefinitionId: credentialDefinitionId
       properties:
-        credDefId:
-          type: string
-        issuerDid:
+        credentialDefinitionId:
+          description: A credential definition ID
           type: string
         schemaId:
+          description: A schema ID
           type: string
-        schemaIssuerDid:
+      type: object
+    RevocationRequirement:
+      example:
+        validNow: true
+        validAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        validAt:
+          description: Date at which the credential should be valid
+          format: date-time
           type: string
-        schemaName:
-          type: string
-        schemaVersion:
-          type: string
+        validNow:
+          description: Defines if the credential should be valid at the current date
+          type: boolean
       type: object
     VerificationTemplate:
       example:
@@ -2498,46 +2484,45 @@ components:
         id: 0
         content:
           requestedAttributes:
-            key:
-              names:
-              - names
-              - names
-              nonRevoked:
-                from: 0
-                to: 6
-              name: name
-              restrictions:
-              - key: restrictions
-              - key: restrictions
-          nonRevoked:
-            from: 0
-            to: 6
-          name: example
+          - names:
+            - names
+            - names
+            restrictions:
+            - schemaId: schemaId
+              credentialDefinitionId: credentialDefinitionId
+            - schemaId: schemaId
+              credentialDefinitionId: credentialDefinitionId
+          - names:
+            - names
+            - names
+            restrictions:
+            - schemaId: schemaId
+              credentialDefinitionId: credentialDefinitionId
+            - schemaId: schemaId
+              credentialDefinitionId: credentialDefinitionId
+          revocationRequirement:
+            validNow: true
+            validAt: 2000-01-23T04:56:07.000+00:00
           requestedPredicates:
-            key:
-              nonRevoked:
-                from: 0
-                to: 6
-              getpType: <
-              name: name
-              restrictions:
-              - schemaVersion: schemaVersion
-                credDefId: credDefId
-                issuerDid: issuerDid
-                schemaId: schemaId
-                schemaIssuerDid: schemaIssuerDid
-                schemaName: schemaName
-              - schemaVersion: schemaVersion
-                credDefId: credDefId
-                issuerDid: issuerDid
-                schemaId: schemaId
-                schemaIssuerDid: schemaIssuerDid
-                schemaName: schemaName
-              getpValue: 1
+          - predicateValue: 6
+            predicateType: LESS_THAN
+            name: name
+            restrictions:
+            - schemaId: schemaId
+              credentialDefinitionId: credentialDefinitionId
+            - schemaId: schemaId
+              credentialDefinitionId: credentialDefinitionId
+          - predicateValue: 6
+            predicateType: LESS_THAN
+            name: name
+            restrictions:
+            - schemaId: schemaId
+              credentialDefinitionId: credentialDefinitionId
+            - schemaId: schemaId
+              credentialDefinitionId: credentialDefinitionId
       properties:
         id:
           description: The verificationTemplate id
-          example: 0
           format: int32
           type: integer
         name:
@@ -2555,101 +2540,103 @@ components:
     VerificationTemplateContent:
       example:
         requestedAttributes:
-          key:
-            names:
-            - names
-            - names
-            nonRevoked:
-              from: 0
-              to: 6
-            name: name
-            restrictions:
-            - key: restrictions
-            - key: restrictions
-        nonRevoked:
-          from: 0
-          to: 6
-        name: example
+        - names:
+          - names
+          - names
+          restrictions:
+          - schemaId: schemaId
+            credentialDefinitionId: credentialDefinitionId
+          - schemaId: schemaId
+            credentialDefinitionId: credentialDefinitionId
+        - names:
+          - names
+          - names
+          restrictions:
+          - schemaId: schemaId
+            credentialDefinitionId: credentialDefinitionId
+          - schemaId: schemaId
+            credentialDefinitionId: credentialDefinitionId
+        revocationRequirement:
+          validNow: true
+          validAt: 2000-01-23T04:56:07.000+00:00
         requestedPredicates:
-          key:
-            nonRevoked:
-              from: 0
-              to: 6
-            getpType: <
-            name: name
-            restrictions:
-            - schemaVersion: schemaVersion
-              credDefId: credDefId
-              issuerDid: issuerDid
-              schemaId: schemaId
-              schemaIssuerDid: schemaIssuerDid
-              schemaName: schemaName
-            - schemaVersion: schemaVersion
-              credDefId: credDefId
-              issuerDid: issuerDid
-              schemaId: schemaId
-              schemaIssuerDid: schemaIssuerDid
-              schemaName: schemaName
-            getpValue: 1
+        - predicateValue: 6
+          predicateType: LESS_THAN
+          name: name
+          restrictions:
+          - schemaId: schemaId
+            credentialDefinitionId: credentialDefinitionId
+          - schemaId: schemaId
+            credentialDefinitionId: credentialDefinitionId
+        - predicateValue: 6
+          predicateType: LESS_THAN
+          name: name
+          restrictions:
+          - schemaId: schemaId
+            credentialDefinitionId: credentialDefinitionId
+          - schemaId: schemaId
+            credentialDefinitionId: credentialDefinitionId
       properties:
-        name:
-          description: The verificationTemplate name
-          example: example
-          type: string
-        nonRevoked:
-          $ref: '#/components/schemas/IndyProofReqNonRevoked'
         requestedAttributes:
-          additionalProperties:
-            $ref: '#/components/schemas/IndyProofReqAttrSpec'
-          type: object
+          description: The requested attributes. In order for the verification to
+            be successful, all requested attribute should be validated
+          items:
+            $ref: '#/components/schemas/RequestedAttribute'
+          type: array
         requestedPredicates:
-          additionalProperties:
-            $ref: '#/components/schemas/IndyProofReqPredSpec'
-          type: object
+          description: The requested predicates. In order for the verification to
+            be successful, all requested predicates should be validated
+          items:
+            $ref: '#/components/schemas/RequestedPredicate'
+          type: array
+        revocationRequirement:
+          $ref: '#/components/schemas/RevocationRequirement'
       type: object
-    VerificationTemplateParam:
+    VerificationTemplateUpdate:
       example:
-        name: name
+        name: example
         content:
           requestedAttributes:
-            key:
-              names:
-              - names
-              - names
-              nonRevoked:
-                from: 0
-                to: 6
-              name: name
-              restrictions:
-              - key: restrictions
-              - key: restrictions
-          nonRevoked:
-            from: 0
-            to: 6
-          name: example
+          - names:
+            - names
+            - names
+            restrictions:
+            - schemaId: schemaId
+              credentialDefinitionId: credentialDefinitionId
+            - schemaId: schemaId
+              credentialDefinitionId: credentialDefinitionId
+          - names:
+            - names
+            - names
+            restrictions:
+            - schemaId: schemaId
+              credentialDefinitionId: credentialDefinitionId
+            - schemaId: schemaId
+              credentialDefinitionId: credentialDefinitionId
+          revocationRequirement:
+            validNow: true
+            validAt: 2000-01-23T04:56:07.000+00:00
           requestedPredicates:
-            key:
-              nonRevoked:
-                from: 0
-                to: 6
-              getpType: <
-              name: name
-              restrictions:
-              - schemaVersion: schemaVersion
-                credDefId: credDefId
-                issuerDid: issuerDid
-                schemaId: schemaId
-                schemaIssuerDid: schemaIssuerDid
-                schemaName: schemaName
-              - schemaVersion: schemaVersion
-                credDefId: credDefId
-                issuerDid: issuerDid
-                schemaId: schemaId
-                schemaIssuerDid: schemaIssuerDid
-                schemaName: schemaName
-              getpValue: 1
+          - predicateValue: 6
+            predicateType: LESS_THAN
+            name: name
+            restrictions:
+            - schemaId: schemaId
+              credentialDefinitionId: credentialDefinitionId
+            - schemaId: schemaId
+              credentialDefinitionId: credentialDefinitionId
+          - predicateValue: 6
+            predicateType: LESS_THAN
+            name: name
+            restrictions:
+            - schemaId: schemaId
+              credentialDefinitionId: credentialDefinitionId
+            - schemaId: schemaId
+              credentialDefinitionId: credentialDefinitionId
       properties:
         name:
+          description: The verification template name
+          example: example
           type: string
         content:
           $ref: '#/components/schemas/VerificationTemplateContent'
@@ -2669,20 +2656,98 @@ components:
           example: example
           type: string
       type: object
+    VerificationTemplateCreate:
+      example:
+        name: name
+        content:
+          requestedAttributes:
+          - names:
+            - names
+            - names
+            restrictions:
+            - schemaId: schemaId
+              credentialDefinitionId: credentialDefinitionId
+            - schemaId: schemaId
+              credentialDefinitionId: credentialDefinitionId
+          - names:
+            - names
+            - names
+            restrictions:
+            - schemaId: schemaId
+              credentialDefinitionId: credentialDefinitionId
+            - schemaId: schemaId
+              credentialDefinitionId: credentialDefinitionId
+          revocationRequirement:
+            validNow: true
+            validAt: 2000-01-23T04:56:07.000+00:00
+          requestedPredicates:
+          - predicateValue: 6
+            predicateType: LESS_THAN
+            name: name
+            restrictions:
+            - schemaId: schemaId
+              credentialDefinitionId: credentialDefinitionId
+            - schemaId: schemaId
+              credentialDefinitionId: credentialDefinitionId
+          - predicateValue: 6
+            predicateType: LESS_THAN
+            name: name
+            restrictions:
+            - schemaId: schemaId
+              credentialDefinitionId: credentialDefinitionId
+            - schemaId: schemaId
+              credentialDefinitionId: credentialDefinitionId
+      properties:
+        name:
+          description: The verificationTemplate name
+          type: string
+        content:
+          $ref: '#/components/schemas/VerificationTemplateContent'
+      type: object
     Verification:
       example:
         verificationRequest:
           requestedAttributes:
-            key: '{}'
+          - names:
+            - names
+            - names
+            restrictions:
+            - schemaId: schemaId
+              credentialDefinitionId: credentialDefinitionId
+            - schemaId: schemaId
+              credentialDefinitionId: credentialDefinitionId
+          - names:
+            - names
+            - names
+            restrictions:
+            - schemaId: schemaId
+              credentialDefinitionId: credentialDefinitionId
+            - schemaId: schemaId
+              credentialDefinitionId: credentialDefinitionId
+          validAt: 2000-01-23T04:56:07.000+00:00
           name: name
           requestedPredicates:
-            key: '{}'
-          nonce: nonce
-        createdAt: 2020-11-12 06:27:47.780760Z
+          - predicateValue: 6
+            predicateType: LESS_THAN
+            name: name
+            restrictions:
+            - schemaId: schemaId
+              credentialDefinitionId: credentialDefinitionId
+            - schemaId: schemaId
+              credentialDefinitionId: credentialDefinitionId
+          - predicateValue: 6
+            predicateType: LESS_THAN
+            name: name
+            restrictions:
+            - schemaId: schemaId
+              credentialDefinitionId: credentialDefinitionId
+            - schemaId: schemaId
+              credentialDefinitionId: credentialDefinitionId
+        createdAt: 2000-01-23T04:56:07.000+00:00
         connectionId: 3fa85f64-5717-4562-b3fc-2c963f66afa6
-        state: verified
+        state: SUCCESS
         verificationId: ac32f24e-2f90-4e90-9427-c59482078a4b
-        updatedAt: 2020-11-12 06:27:50.407160Z
+        updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
         verificationId:
           description: The verification id
@@ -2695,78 +2760,98 @@ components:
         verificationRequest:
           $ref: '#/components/schemas/VerificationRequest'
         state:
-          description: The current state of the verification
+          description: The verification state
           enum:
-          - requested
-          - verified
-          - rejected
-          - error
-          example: verified
+          - SUCCESS
+          - PENDING
+          - FAILURE
+          - ERROR
           type: string
         createdAt:
-          description: The time when the verification was created
-          example: 2020-11-12 06:27:47.780760Z
+          description: 'The creation date '
+          format: date-time
           type: string
         updatedAt:
-          description: The time when the verification was updated
-          example: 2020-11-12 06:27:50.407160Z
+          description: The update date
+          format: date-time
           type: string
       type: object
     VerificationRequest:
-      description: The original validation request
+      description: The verification request
       example:
         requestedAttributes:
-          key: '{}'
+        - names:
+          - names
+          - names
+          restrictions:
+          - schemaId: schemaId
+            credentialDefinitionId: credentialDefinitionId
+          - schemaId: schemaId
+            credentialDefinitionId: credentialDefinitionId
+        - names:
+          - names
+          - names
+          restrictions:
+          - schemaId: schemaId
+            credentialDefinitionId: credentialDefinitionId
+          - schemaId: schemaId
+            credentialDefinitionId: credentialDefinitionId
+        validAt: 2000-01-23T04:56:07.000+00:00
         name: name
         requestedPredicates:
-          key: '{}'
-        nonce: nonce
+        - predicateValue: 6
+          predicateType: LESS_THAN
+          name: name
+          restrictions:
+          - schemaId: schemaId
+            credentialDefinitionId: credentialDefinitionId
+          - schemaId: schemaId
+            credentialDefinitionId: credentialDefinitionId
+        - predicateValue: 6
+          predicateType: LESS_THAN
+          name: name
+          restrictions:
+          - schemaId: schemaId
+            credentialDefinitionId: credentialDefinitionId
+          - schemaId: schemaId
+            credentialDefinitionId: credentialDefinitionId
       properties:
         name:
-          type: string
-        nonce:
+          description: The verification request name
           type: string
         requestedAttributes:
-          additionalProperties:
-            type: object
-          type: object
+          description: The requested attributes
+          items:
+            $ref: '#/components/schemas/RequestedAttribute'
+          type: array
         requestedPredicates:
-          additionalProperties:
-            type: object
-          type: object
+          description: The requested predicates
+          items:
+            $ref: '#/components/schemas/RequestedPredicate'
+          type: array
+        validAt:
+          description: The date at which the credential should be valid
+          format: date-time
+          type: string
       type: object
     VerificationSummary:
       example:
         name: example
-        connectionId: 3fa85f64-5717-4562-b3fc-2c963f66afa6
-        state: verified
         verificationId: ac32f24e-2f90-4e90-9427-c59482078a4b
       properties:
-        verificationId:
-          description: The verification id
-          example: ac32f24e-2f90-4e90-9427-c59482078a4b
-          type: string
-        connectionId:
-          description: The connection id
-          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
-          type: string
         name:
           description: The name of the validation
           example: example
           type: string
-        state:
-          description: The current state of the verification
-          enum:
-          - requested
-          - verified
-          - rejected
-          - error
-          example: verified
+        verificationId:
+          description: The verification id
+          example: ac32f24e-2f90-4e90-9427-c59482078a4b
           type: string
       type: object
     VerificationCreate:
       example:
         connectionId: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        comment: comment
         verificationTemplateId: 0
       properties:
         verificationTemplateId:
@@ -2777,60 +2862,11 @@ components:
         connectionId:
           description: The connection id
           example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
           type: string
-      type: object
-    WebhookCreate:
-      example:
-        name: name
-        active: true
-        url: url
-        webhookTypes:
-        - id: 0
-          filters:
-          - 6
-          - 6
-        - id: 0
-          filters:
-          - 6
-          - 6
-      properties:
-        url:
-          description: The webhook's url
+        comment:
+          description: An optional comment
           type: string
-        name:
-          description: The webhook's name
-          type: string
-        active:
-          description: Defines if the webhook is active or not
-          type: boolean
-        webhookTypes:
-          description: The webhook types associated with this webhook
-          items:
-            $ref: '#/components/schemas/WebhookWebhookTypeUpsert'
-          type: array
-      required:
-      - name
-      - url
-      type: object
-    WebhookWebhookTypeUpsert:
-      description: The webhook types associated with this webhook
-      example:
-        id: 0
-        filters:
-        - 6
-        - 6
-      properties:
-        id:
-          description: The webhook type id
-          format: int32
-          type: integer
-        filters:
-          description: List of webhook type filters id
-          items:
-            description: List of webhook type filters id
-            format: int32
-            type: integer
-          type: array
       type: object
     Webhook:
       example:
@@ -2930,6 +2966,59 @@ components:
         description:
           description: The webhook type description
           type: string
+      type: object
+    WebhookCreate:
+      example:
+        name: name
+        active: true
+        url: url
+        webhookTypes:
+        - id: 0
+          filters:
+          - 6
+          - 6
+        - id: 0
+          filters:
+          - 6
+          - 6
+      properties:
+        url:
+          description: The webhook's url
+          type: string
+        name:
+          description: The webhook's name
+          type: string
+        active:
+          description: Defines if the webhook is active or not
+          type: boolean
+        webhookTypes:
+          description: The webhook types associated with this webhook
+          items:
+            $ref: '#/components/schemas/WebhookWebhookTypeUpsert'
+          type: array
+      required:
+      - name
+      - url
+      type: object
+    WebhookWebhookTypeUpsert:
+      description: The webhook types associated with this webhook
+      example:
+        id: 0
+        filters:
+        - 6
+        - 6
+      properties:
+        id:
+          description: The webhook type id
+          format: int32
+          type: integer
+        filters:
+          description: List of webhook type filters id
+          items:
+            description: List of webhook type filters id
+            format: int32
+            type: integer
+          type: array
       type: object
     WebhookUpdate:
       example:

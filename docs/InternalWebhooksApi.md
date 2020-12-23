@@ -4,12 +4,12 @@ All URIs are relative to *http://localhost:8080*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**webhooksGet1**](InternalWebhooksApi.md#webhooksGet1) | **GET** /internal/webhooks | List an organization&#39;s active webhooks with given type 
+[**webhooksGet**](InternalWebhooksApi.md#webhooksGet) | **GET** /internal/webhooks | List an organization&#39;s active webhooks with given type 
 
 
-<a name="webhooksGet1"></a>
-# **webhooksGet1**
-> List&lt;Webhook&gt; webhooksGet1(organizationId, acaPyTopic, acaPyFilter)
+<a name="webhooksGet"></a>
+# **webhooksGet**
+> List&lt;Webhook&gt; webhooksGet(organizationId, acaPyTopic, acaPyFilter)
 
 List an organization&#39;s active webhooks with given type 
 
@@ -32,10 +32,10 @@ public class Example {
     String acaPyTopic = "acaPyTopic_example"; // String | 
     String acaPyFilter = "acaPyFilter_example"; // String | 
     try {
-      List<Webhook> result = apiInstance.webhooksGet1(organizationId, acaPyTopic, acaPyFilter);
+      List<Webhook> result = apiInstance.webhooksGet(organizationId, acaPyTopic, acaPyFilter);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling InternalWebhooksApi#webhooksGet1");
+      System.err.println("Exception when calling InternalWebhooksApi#webhooksGet");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
