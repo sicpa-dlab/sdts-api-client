@@ -28,8 +28,12 @@ import java.io.IOException;
 /**
  * Credential
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-23T15:13:07.571806+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-01T13:54:17.068559+01:00[Europe/Zurich]")
 public class Credential {
+  public static final String SERIALIZED_NAME_CREDENTIAL_ID = "credentialId";
+  @SerializedName(SERIALIZED_NAME_CREDENTIAL_ID)
+  private String credentialId;
+
   public static final String SERIALIZED_NAME_SCHEMA_ID = "schemaId";
   @SerializedName(SERIALIZED_NAME_SCHEMA_ID)
   private String schemaId;
@@ -45,6 +49,29 @@ public class Credential {
   public static final String SERIALIZED_NAME_CREDENTIAL_PROPOSAL = "credentialProposal";
   @SerializedName(SERIALIZED_NAME_CREDENTIAL_PROPOSAL)
   private CredentialProposal credentialProposal;
+
+
+  public Credential credentialId(String credentialId) {
+    
+    this.credentialId = credentialId;
+    return this;
+  }
+
+   /**
+   * Get credentialId
+   * @return credentialId
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public String getCredentialId() {
+    return credentialId;
+  }
+
+
+  public void setCredentialId(String credentialId) {
+    this.credentialId = credentialId;
+  }
 
 
   public Credential schemaId(String schemaId) {
@@ -148,7 +175,8 @@ public class Credential {
       return false;
     }
     Credential credential = (Credential) o;
-    return Objects.equals(this.schemaId, credential.schemaId) &&
+    return Objects.equals(this.credentialId, credential.credentialId) &&
+        Objects.equals(this.schemaId, credential.schemaId) &&
         Objects.equals(this.credentialDefinitionId, credential.credentialDefinitionId) &&
         Objects.equals(this.comment, credential.comment) &&
         Objects.equals(this.credentialProposal, credential.credentialProposal);
@@ -156,7 +184,7 @@ public class Credential {
 
   @Override
   public int hashCode() {
-    return Objects.hash(schemaId, credentialDefinitionId, comment, credentialProposal);
+    return Objects.hash(credentialId, schemaId, credentialDefinitionId, comment, credentialProposal);
   }
 
 
@@ -164,6 +192,7 @@ public class Credential {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Credential {\n");
+    sb.append("    credentialId: ").append(toIndentedString(credentialId)).append("\n");
     sb.append("    schemaId: ").append(toIndentedString(schemaId)).append("\n");
     sb.append("    credentialDefinitionId: ").append(toIndentedString(credentialDefinitionId)).append("\n");
     sb.append("    comment: ").append(toIndentedString(comment)).append("\n");
