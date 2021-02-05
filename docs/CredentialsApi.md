@@ -7,8 +7,8 @@ Method | HTTP request | Description
 [**credentialCredentialIdDelete**](CredentialsApi.md#credentialCredentialIdDelete) | **DELETE** /credentials/{credentialId} | Delete the specified credential
 [**credentialCredentialIdGet**](CredentialsApi.md#credentialCredentialIdGet) | **GET** /credentials/{credentialId} | Get the specified credential
 [**credentialsGet**](CredentialsApi.md#credentialsGet) | **GET** /credentials | List all credentials
-[**issuanceCredentialCredentialIdDelete**](CredentialsApi.md#issuanceCredentialCredentialIdDelete) | **DELETE** /credentials-issuance/{credentialExchangeId} | Delete the specified issued credential
-[**issuanceCredentialCredentialIdGet**](CredentialsApi.md#issuanceCredentialCredentialIdGet) | **GET** /credentials-issuance/{credentialExchangeId} | Get the specified issued credential
+[**issuanceCredentialCredentialIdDelete**](CredentialsApi.md#issuanceCredentialCredentialIdDelete) | **DELETE** /credentials-issuance/{issuanceId} | Delete the specified issued credential
+[**issuanceCredentialCredentialIdGet**](CredentialsApi.md#issuanceCredentialCredentialIdGet) | **GET** /credentials-issuance/{issuanceId} | Get the specified issued credential
 [**issuanceCredentialPost**](CredentialsApi.md#issuanceCredentialPost) | **POST** /credentials-issuance | Issue new credentials
 [**issuanceCredentialsGet**](CredentialsApi.md#issuanceCredentialsGet) | **GET** /credentials-issuance | List all issued credentials
 
@@ -225,7 +225,7 @@ Name | Type | Description  | Notes
 
 <a name="issuanceCredentialCredentialIdDelete"></a>
 # **issuanceCredentialCredentialIdDelete**
-> issuanceCredentialCredentialIdDelete(X_ORGANIZATION_ID, credentialExchangeId)
+> issuanceCredentialCredentialIdDelete(X_ORGANIZATION_ID, issuanceId)
 
 Delete the specified issued credential
 
@@ -252,9 +252,9 @@ public class Example {
 
     CredentialsApi apiInstance = new CredentialsApi(defaultClient);
     Integer X_ORGANIZATION_ID = 56; // Integer | 
-    String credentialExchangeId = "credentialExchangeId_example"; // String | An credential exchange ID.
+    String issuanceId = "issuanceId_example"; // String | An credential issuance ID.
     try {
-      apiInstance.issuanceCredentialCredentialIdDelete(X_ORGANIZATION_ID, credentialExchangeId);
+      apiInstance.issuanceCredentialCredentialIdDelete(X_ORGANIZATION_ID, issuanceId);
     } catch (ApiException e) {
       System.err.println("Exception when calling CredentialsApi#issuanceCredentialCredentialIdDelete");
       System.err.println("Status code: " + e.getCode());
@@ -271,7 +271,7 @@ public class Example {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **X_ORGANIZATION_ID** | **Integer**|  |
- **credentialExchangeId** | **String**| An credential exchange ID. |
+ **issuanceId** | **String**| An credential issuance ID. |
 
 ### Return type
 
@@ -295,7 +295,7 @@ null (empty response body)
 
 <a name="issuanceCredentialCredentialIdGet"></a>
 # **issuanceCredentialCredentialIdGet**
-> CredentialExchange issuanceCredentialCredentialIdGet(X_ORGANIZATION_ID, credentialExchangeId)
+> CredentialIssuance issuanceCredentialCredentialIdGet(X_ORGANIZATION_ID, issuanceId)
 
 Get the specified issued credential
 
@@ -322,9 +322,9 @@ public class Example {
 
     CredentialsApi apiInstance = new CredentialsApi(defaultClient);
     Integer X_ORGANIZATION_ID = 56; // Integer | 
-    String credentialExchangeId = "credentialExchangeId_example"; // String | An credential exchange ID.
+    String issuanceId = "issuanceId_example"; // String | An credential issuance ID.
     try {
-      CredentialExchange result = apiInstance.issuanceCredentialCredentialIdGet(X_ORGANIZATION_ID, credentialExchangeId);
+      CredentialIssuance result = apiInstance.issuanceCredentialCredentialIdGet(X_ORGANIZATION_ID, issuanceId);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling CredentialsApi#issuanceCredentialCredentialIdGet");
@@ -342,11 +342,11 @@ public class Example {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **X_ORGANIZATION_ID** | **Integer**|  |
- **credentialExchangeId** | **String**| An credential exchange ID. |
+ **issuanceId** | **String**| An credential issuance ID. |
 
 ### Return type
 
-[**CredentialExchange**](CredentialExchange.md)
+[**CredentialIssuance**](CredentialIssuance.md)
 
 ### Authorization
 
@@ -366,7 +366,7 @@ Name | Type | Description  | Notes
 
 <a name="issuanceCredentialPost"></a>
 # **issuanceCredentialPost**
-> CredentialExchange issuanceCredentialPost(X_ORGANIZATION_ID, credentialCreate)
+> CredentialIssuance issuanceCredentialPost(X_ORGANIZATION_ID, credentialCreate)
 
 Issue new credentials
 
@@ -395,7 +395,7 @@ public class Example {
     Integer X_ORGANIZATION_ID = 56; // Integer | 
     CredentialCreate credentialCreate = new CredentialCreate(); // CredentialCreate | 
     try {
-      CredentialExchange result = apiInstance.issuanceCredentialPost(X_ORGANIZATION_ID, credentialCreate);
+      CredentialIssuance result = apiInstance.issuanceCredentialPost(X_ORGANIZATION_ID, credentialCreate);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling CredentialsApi#issuanceCredentialPost");
@@ -417,7 +417,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CredentialExchange**](CredentialExchange.md)
+[**CredentialIssuance**](CredentialIssuance.md)
 
 ### Authorization
 
@@ -437,7 +437,7 @@ Name | Type | Description  | Notes
 
 <a name="issuanceCredentialsGet"></a>
 # **issuanceCredentialsGet**
-> List&lt;CredentialExchange&gt; issuanceCredentialsGet(X_ORGANIZATION_ID)
+> List&lt;CredentialIssuance&gt; issuanceCredentialsGet(X_ORGANIZATION_ID)
 
 List all issued credentials
 
@@ -465,7 +465,7 @@ public class Example {
     CredentialsApi apiInstance = new CredentialsApi(defaultClient);
     Integer X_ORGANIZATION_ID = 56; // Integer | 
     try {
-      List<CredentialExchange> result = apiInstance.issuanceCredentialsGet(X_ORGANIZATION_ID);
+      List<CredentialIssuance> result = apiInstance.issuanceCredentialsGet(X_ORGANIZATION_ID);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling CredentialsApi#issuanceCredentialsGet");
@@ -486,7 +486,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**List&lt;CredentialExchange&gt;**](CredentialExchange.md)
+[**List&lt;CredentialIssuance&gt;**](CredentialIssuance.md)
 
 ### Authorization
 

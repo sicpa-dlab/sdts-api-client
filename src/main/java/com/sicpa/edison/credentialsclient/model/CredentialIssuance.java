@@ -27,13 +27,13 @@ import java.io.IOException;
 import java.time.OffsetDateTime;
 
 /**
- * CredentialExchange
+ * CredentialIssuance
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-23T15:13:07.571806+01:00[Europe/Zurich]")
-public class CredentialExchange {
-  public static final String SERIALIZED_NAME_CREDENTIAL_EXCHANGE_ID = "credentialExchangeId";
-  @SerializedName(SERIALIZED_NAME_CREDENTIAL_EXCHANGE_ID)
-  private String credentialExchangeId;
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-01T13:54:17.068559+01:00[Europe/Zurich]")
+public class CredentialIssuance {
+  public static final String SERIALIZED_NAME_ISSUANCE_ID = "issuanceId";
+  @SerializedName(SERIALIZED_NAME_ISSUANCE_ID)
+  private String issuanceId;
 
   public static final String SERIALIZED_NAME_ERROR_MESSAGE = "errorMessage";
   @SerializedName(SERIALIZED_NAME_ERROR_MESSAGE)
@@ -52,30 +52,30 @@ public class CredentialExchange {
   private Credential credential;
 
 
-  public CredentialExchange credentialExchangeId(String credentialExchangeId) {
+  public CredentialIssuance issuanceId(String issuanceId) {
     
-    this.credentialExchangeId = credentialExchangeId;
+    this.issuanceId = issuanceId;
     return this;
   }
 
    /**
-   * A credential exchange ID
-   * @return credentialExchangeId
+   * A credential issuance ID
+   * @return issuanceId
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "A credential exchange ID")
+  @ApiModelProperty(value = "A credential issuance ID")
 
-  public String getCredentialExchangeId() {
-    return credentialExchangeId;
+  public String getIssuanceId() {
+    return issuanceId;
   }
 
 
-  public void setCredentialExchangeId(String credentialExchangeId) {
-    this.credentialExchangeId = credentialExchangeId;
+  public void setIssuanceId(String issuanceId) {
+    this.issuanceId = issuanceId;
   }
 
 
-  public CredentialExchange errorMessage(String errorMessage) {
+  public CredentialIssuance errorMessage(String errorMessage) {
     
     this.errorMessage = errorMessage;
     return this;
@@ -98,7 +98,7 @@ public class CredentialExchange {
   }
 
 
-  public CredentialExchange state(String state) {
+  public CredentialIssuance state(String state) {
     
     this.state = state;
     return this;
@@ -121,7 +121,7 @@ public class CredentialExchange {
   }
 
 
-  public CredentialExchange updatedAt(OffsetDateTime updatedAt) {
+  public CredentialIssuance updatedAt(OffsetDateTime updatedAt) {
     
     this.updatedAt = updatedAt;
     return this;
@@ -144,7 +144,7 @@ public class CredentialExchange {
   }
 
 
-  public CredentialExchange credential(Credential credential) {
+  public CredentialIssuance credential(Credential credential) {
     
     this.credential = credential;
     return this;
@@ -175,25 +175,25 @@ public class CredentialExchange {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CredentialExchange credentialExchange = (CredentialExchange) o;
-    return Objects.equals(this.credentialExchangeId, credentialExchange.credentialExchangeId) &&
-        Objects.equals(this.errorMessage, credentialExchange.errorMessage) &&
-        Objects.equals(this.state, credentialExchange.state) &&
-        Objects.equals(this.updatedAt, credentialExchange.updatedAt) &&
-        Objects.equals(this.credential, credentialExchange.credential);
+    CredentialIssuance credentialIssuance = (CredentialIssuance) o;
+    return Objects.equals(this.issuanceId, credentialIssuance.issuanceId) &&
+        Objects.equals(this.errorMessage, credentialIssuance.errorMessage) &&
+        Objects.equals(this.state, credentialIssuance.state) &&
+        Objects.equals(this.updatedAt, credentialIssuance.updatedAt) &&
+        Objects.equals(this.credential, credentialIssuance.credential);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(credentialExchangeId, errorMessage, state, updatedAt, credential);
+    return Objects.hash(issuanceId, errorMessage, state, updatedAt, credential);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class CredentialExchange {\n");
-    sb.append("    credentialExchangeId: ").append(toIndentedString(credentialExchangeId)).append("\n");
+    sb.append("class CredentialIssuance {\n");
+    sb.append("    issuanceId: ").append(toIndentedString(issuanceId)).append("\n");
     sb.append("    errorMessage: ").append(toIndentedString(errorMessage)).append("\n");
     sb.append("    state: ").append(toIndentedString(state)).append("\n");
     sb.append("    updatedAt: ").append(toIndentedString(updatedAt)).append("\n");

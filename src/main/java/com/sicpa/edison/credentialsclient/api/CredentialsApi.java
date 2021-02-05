@@ -30,7 +30,7 @@ import java.io.IOException;
 import com.sicpa.edison.credentialsclient.model.ApiError;
 import com.sicpa.edison.credentialsclient.model.Credential;
 import com.sicpa.edison.credentialsclient.model.CredentialCreate;
-import com.sicpa.edison.credentialsclient.model.CredentialExchange;
+import com.sicpa.edison.credentialsclient.model.CredentialIssuance;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -442,7 +442,7 @@ public class CredentialsApi {
     /**
      * Build call for issuanceCredentialCredentialIdDelete
      * @param X_ORGANIZATION_ID  (required)
-     * @param credentialExchangeId An credential exchange ID. (required)
+     * @param issuanceId An credential issuance ID. (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -454,12 +454,12 @@ public class CredentialsApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call issuanceCredentialCredentialIdDeleteCall(Integer X_ORGANIZATION_ID, String credentialExchangeId, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call issuanceCredentialCredentialIdDeleteCall(Integer X_ORGANIZATION_ID, String issuanceId, final ApiCallback _callback) throws ApiException {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/credentials-issuance/{credentialExchangeId}"
-            .replaceAll("\\{" + "credentialExchangeId" + "\\}", localVarApiClient.escapeString(credentialExchangeId.toString()));
+        String localVarPath = "/credentials-issuance/{issuanceId}"
+            .replaceAll("\\{" + "issuanceId" + "\\}", localVarApiClient.escapeString(issuanceId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -489,20 +489,20 @@ public class CredentialsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call issuanceCredentialCredentialIdDeleteValidateBeforeCall(Integer X_ORGANIZATION_ID, String credentialExchangeId, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call issuanceCredentialCredentialIdDeleteValidateBeforeCall(Integer X_ORGANIZATION_ID, String issuanceId, final ApiCallback _callback) throws ApiException {
         
         // verify the required parameter 'X_ORGANIZATION_ID' is set
         if (X_ORGANIZATION_ID == null) {
             throw new ApiException("Missing the required parameter 'X_ORGANIZATION_ID' when calling issuanceCredentialCredentialIdDelete(Async)");
         }
         
-        // verify the required parameter 'credentialExchangeId' is set
-        if (credentialExchangeId == null) {
-            throw new ApiException("Missing the required parameter 'credentialExchangeId' when calling issuanceCredentialCredentialIdDelete(Async)");
+        // verify the required parameter 'issuanceId' is set
+        if (issuanceId == null) {
+            throw new ApiException("Missing the required parameter 'issuanceId' when calling issuanceCredentialCredentialIdDelete(Async)");
         }
         
 
-        okhttp3.Call localVarCall = issuanceCredentialCredentialIdDeleteCall(X_ORGANIZATION_ID, credentialExchangeId, _callback);
+        okhttp3.Call localVarCall = issuanceCredentialCredentialIdDeleteCall(X_ORGANIZATION_ID, issuanceId, _callback);
         return localVarCall;
 
     }
@@ -511,7 +511,7 @@ public class CredentialsApi {
      * Delete the specified issued credential
      * 
      * @param X_ORGANIZATION_ID  (required)
-     * @param credentialExchangeId An credential exchange ID. (required)
+     * @param issuanceId An credential issuance ID. (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -521,15 +521,15 @@ public class CredentialsApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public void issuanceCredentialCredentialIdDelete(Integer X_ORGANIZATION_ID, String credentialExchangeId) throws ApiException {
-        issuanceCredentialCredentialIdDeleteWithHttpInfo(X_ORGANIZATION_ID, credentialExchangeId);
+    public void issuanceCredentialCredentialIdDelete(Integer X_ORGANIZATION_ID, String issuanceId) throws ApiException {
+        issuanceCredentialCredentialIdDeleteWithHttpInfo(X_ORGANIZATION_ID, issuanceId);
     }
 
     /**
      * Delete the specified issued credential
      * 
      * @param X_ORGANIZATION_ID  (required)
-     * @param credentialExchangeId An credential exchange ID. (required)
+     * @param issuanceId An credential issuance ID. (required)
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -540,8 +540,8 @@ public class CredentialsApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> issuanceCredentialCredentialIdDeleteWithHttpInfo(Integer X_ORGANIZATION_ID, String credentialExchangeId) throws ApiException {
-        okhttp3.Call localVarCall = issuanceCredentialCredentialIdDeleteValidateBeforeCall(X_ORGANIZATION_ID, credentialExchangeId, null);
+    public ApiResponse<Void> issuanceCredentialCredentialIdDeleteWithHttpInfo(Integer X_ORGANIZATION_ID, String issuanceId) throws ApiException {
+        okhttp3.Call localVarCall = issuanceCredentialCredentialIdDeleteValidateBeforeCall(X_ORGANIZATION_ID, issuanceId, null);
         return localVarApiClient.execute(localVarCall);
     }
 
@@ -549,7 +549,7 @@ public class CredentialsApi {
      * Delete the specified issued credential (asynchronously)
      * 
      * @param X_ORGANIZATION_ID  (required)
-     * @param credentialExchangeId An credential exchange ID. (required)
+     * @param issuanceId An credential issuance ID. (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -561,16 +561,16 @@ public class CredentialsApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call issuanceCredentialCredentialIdDeleteAsync(Integer X_ORGANIZATION_ID, String credentialExchangeId, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call issuanceCredentialCredentialIdDeleteAsync(Integer X_ORGANIZATION_ID, String issuanceId, final ApiCallback<Void> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = issuanceCredentialCredentialIdDeleteValidateBeforeCall(X_ORGANIZATION_ID, credentialExchangeId, _callback);
+        okhttp3.Call localVarCall = issuanceCredentialCredentialIdDeleteValidateBeforeCall(X_ORGANIZATION_ID, issuanceId, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
     /**
      * Build call for issuanceCredentialCredentialIdGet
      * @param X_ORGANIZATION_ID  (required)
-     * @param credentialExchangeId An credential exchange ID. (required)
+     * @param issuanceId An credential issuance ID. (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -582,12 +582,12 @@ public class CredentialsApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call issuanceCredentialCredentialIdGetCall(Integer X_ORGANIZATION_ID, String credentialExchangeId, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call issuanceCredentialCredentialIdGetCall(Integer X_ORGANIZATION_ID, String issuanceId, final ApiCallback _callback) throws ApiException {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/credentials-issuance/{credentialExchangeId}"
-            .replaceAll("\\{" + "credentialExchangeId" + "\\}", localVarApiClient.escapeString(credentialExchangeId.toString()));
+        String localVarPath = "/credentials-issuance/{issuanceId}"
+            .replaceAll("\\{" + "issuanceId" + "\\}", localVarApiClient.escapeString(issuanceId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -617,20 +617,20 @@ public class CredentialsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call issuanceCredentialCredentialIdGetValidateBeforeCall(Integer X_ORGANIZATION_ID, String credentialExchangeId, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call issuanceCredentialCredentialIdGetValidateBeforeCall(Integer X_ORGANIZATION_ID, String issuanceId, final ApiCallback _callback) throws ApiException {
         
         // verify the required parameter 'X_ORGANIZATION_ID' is set
         if (X_ORGANIZATION_ID == null) {
             throw new ApiException("Missing the required parameter 'X_ORGANIZATION_ID' when calling issuanceCredentialCredentialIdGet(Async)");
         }
         
-        // verify the required parameter 'credentialExchangeId' is set
-        if (credentialExchangeId == null) {
-            throw new ApiException("Missing the required parameter 'credentialExchangeId' when calling issuanceCredentialCredentialIdGet(Async)");
+        // verify the required parameter 'issuanceId' is set
+        if (issuanceId == null) {
+            throw new ApiException("Missing the required parameter 'issuanceId' when calling issuanceCredentialCredentialIdGet(Async)");
         }
         
 
-        okhttp3.Call localVarCall = issuanceCredentialCredentialIdGetCall(X_ORGANIZATION_ID, credentialExchangeId, _callback);
+        okhttp3.Call localVarCall = issuanceCredentialCredentialIdGetCall(X_ORGANIZATION_ID, issuanceId, _callback);
         return localVarCall;
 
     }
@@ -639,8 +639,8 @@ public class CredentialsApi {
      * Get the specified issued credential
      * 
      * @param X_ORGANIZATION_ID  (required)
-     * @param credentialExchangeId An credential exchange ID. (required)
-     * @return CredentialExchange
+     * @param issuanceId An credential issuance ID. (required)
+     * @return CredentialIssuance
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -650,8 +650,8 @@ public class CredentialsApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public CredentialExchange issuanceCredentialCredentialIdGet(Integer X_ORGANIZATION_ID, String credentialExchangeId) throws ApiException {
-        ApiResponse<CredentialExchange> localVarResp = issuanceCredentialCredentialIdGetWithHttpInfo(X_ORGANIZATION_ID, credentialExchangeId);
+    public CredentialIssuance issuanceCredentialCredentialIdGet(Integer X_ORGANIZATION_ID, String issuanceId) throws ApiException {
+        ApiResponse<CredentialIssuance> localVarResp = issuanceCredentialCredentialIdGetWithHttpInfo(X_ORGANIZATION_ID, issuanceId);
         return localVarResp.getData();
     }
 
@@ -659,8 +659,8 @@ public class CredentialsApi {
      * Get the specified issued credential
      * 
      * @param X_ORGANIZATION_ID  (required)
-     * @param credentialExchangeId An credential exchange ID. (required)
-     * @return ApiResponse&lt;CredentialExchange&gt;
+     * @param issuanceId An credential issuance ID. (required)
+     * @return ApiResponse&lt;CredentialIssuance&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -670,9 +670,9 @@ public class CredentialsApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<CredentialExchange> issuanceCredentialCredentialIdGetWithHttpInfo(Integer X_ORGANIZATION_ID, String credentialExchangeId) throws ApiException {
-        okhttp3.Call localVarCall = issuanceCredentialCredentialIdGetValidateBeforeCall(X_ORGANIZATION_ID, credentialExchangeId, null);
-        Type localVarReturnType = new TypeToken<CredentialExchange>(){}.getType();
+    public ApiResponse<CredentialIssuance> issuanceCredentialCredentialIdGetWithHttpInfo(Integer X_ORGANIZATION_ID, String issuanceId) throws ApiException {
+        okhttp3.Call localVarCall = issuanceCredentialCredentialIdGetValidateBeforeCall(X_ORGANIZATION_ID, issuanceId, null);
+        Type localVarReturnType = new TypeToken<CredentialIssuance>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -680,7 +680,7 @@ public class CredentialsApi {
      * Get the specified issued credential (asynchronously)
      * 
      * @param X_ORGANIZATION_ID  (required)
-     * @param credentialExchangeId An credential exchange ID. (required)
+     * @param issuanceId An credential issuance ID. (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -692,10 +692,10 @@ public class CredentialsApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call issuanceCredentialCredentialIdGetAsync(Integer X_ORGANIZATION_ID, String credentialExchangeId, final ApiCallback<CredentialExchange> _callback) throws ApiException {
+    public okhttp3.Call issuanceCredentialCredentialIdGetAsync(Integer X_ORGANIZATION_ID, String issuanceId, final ApiCallback<CredentialIssuance> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = issuanceCredentialCredentialIdGetValidateBeforeCall(X_ORGANIZATION_ID, credentialExchangeId, _callback);
-        Type localVarReturnType = new TypeToken<CredentialExchange>(){}.getType();
+        okhttp3.Call localVarCall = issuanceCredentialCredentialIdGetValidateBeforeCall(X_ORGANIZATION_ID, issuanceId, _callback);
+        Type localVarReturnType = new TypeToken<CredentialIssuance>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -771,7 +771,7 @@ public class CredentialsApi {
      * 
      * @param X_ORGANIZATION_ID  (required)
      * @param credentialCreate  (required)
-     * @return CredentialExchange
+     * @return CredentialIssuance
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -781,8 +781,8 @@ public class CredentialsApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public CredentialExchange issuanceCredentialPost(Integer X_ORGANIZATION_ID, CredentialCreate credentialCreate) throws ApiException {
-        ApiResponse<CredentialExchange> localVarResp = issuanceCredentialPostWithHttpInfo(X_ORGANIZATION_ID, credentialCreate);
+    public CredentialIssuance issuanceCredentialPost(Integer X_ORGANIZATION_ID, CredentialCreate credentialCreate) throws ApiException {
+        ApiResponse<CredentialIssuance> localVarResp = issuanceCredentialPostWithHttpInfo(X_ORGANIZATION_ID, credentialCreate);
         return localVarResp.getData();
     }
 
@@ -791,7 +791,7 @@ public class CredentialsApi {
      * 
      * @param X_ORGANIZATION_ID  (required)
      * @param credentialCreate  (required)
-     * @return ApiResponse&lt;CredentialExchange&gt;
+     * @return ApiResponse&lt;CredentialIssuance&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -801,9 +801,9 @@ public class CredentialsApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<CredentialExchange> issuanceCredentialPostWithHttpInfo(Integer X_ORGANIZATION_ID, CredentialCreate credentialCreate) throws ApiException {
+    public ApiResponse<CredentialIssuance> issuanceCredentialPostWithHttpInfo(Integer X_ORGANIZATION_ID, CredentialCreate credentialCreate) throws ApiException {
         okhttp3.Call localVarCall = issuanceCredentialPostValidateBeforeCall(X_ORGANIZATION_ID, credentialCreate, null);
-        Type localVarReturnType = new TypeToken<CredentialExchange>(){}.getType();
+        Type localVarReturnType = new TypeToken<CredentialIssuance>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -823,10 +823,10 @@ public class CredentialsApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call issuanceCredentialPostAsync(Integer X_ORGANIZATION_ID, CredentialCreate credentialCreate, final ApiCallback<CredentialExchange> _callback) throws ApiException {
+    public okhttp3.Call issuanceCredentialPostAsync(Integer X_ORGANIZATION_ID, CredentialCreate credentialCreate, final ApiCallback<CredentialIssuance> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = issuanceCredentialPostValidateBeforeCall(X_ORGANIZATION_ID, credentialCreate, _callback);
-        Type localVarReturnType = new TypeToken<CredentialExchange>(){}.getType();
+        Type localVarReturnType = new TypeToken<CredentialIssuance>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -895,7 +895,7 @@ public class CredentialsApi {
      * List all issued credentials
      * 
      * @param X_ORGANIZATION_ID  (required)
-     * @return List&lt;CredentialExchange&gt;
+     * @return List&lt;CredentialIssuance&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -905,8 +905,8 @@ public class CredentialsApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public List<CredentialExchange> issuanceCredentialsGet(Integer X_ORGANIZATION_ID) throws ApiException {
-        ApiResponse<List<CredentialExchange>> localVarResp = issuanceCredentialsGetWithHttpInfo(X_ORGANIZATION_ID);
+    public List<CredentialIssuance> issuanceCredentialsGet(Integer X_ORGANIZATION_ID) throws ApiException {
+        ApiResponse<List<CredentialIssuance>> localVarResp = issuanceCredentialsGetWithHttpInfo(X_ORGANIZATION_ID);
         return localVarResp.getData();
     }
 
@@ -914,7 +914,7 @@ public class CredentialsApi {
      * List all issued credentials
      * 
      * @param X_ORGANIZATION_ID  (required)
-     * @return ApiResponse&lt;List&lt;CredentialExchange&gt;&gt;
+     * @return ApiResponse&lt;List&lt;CredentialIssuance&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -924,9 +924,9 @@ public class CredentialsApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<List<CredentialExchange>> issuanceCredentialsGetWithHttpInfo(Integer X_ORGANIZATION_ID) throws ApiException {
+    public ApiResponse<List<CredentialIssuance>> issuanceCredentialsGetWithHttpInfo(Integer X_ORGANIZATION_ID) throws ApiException {
         okhttp3.Call localVarCall = issuanceCredentialsGetValidateBeforeCall(X_ORGANIZATION_ID, null);
-        Type localVarReturnType = new TypeToken<List<CredentialExchange>>(){}.getType();
+        Type localVarReturnType = new TypeToken<List<CredentialIssuance>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -945,10 +945,10 @@ public class CredentialsApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call issuanceCredentialsGetAsync(Integer X_ORGANIZATION_ID, final ApiCallback<List<CredentialExchange>> _callback) throws ApiException {
+    public okhttp3.Call issuanceCredentialsGetAsync(Integer X_ORGANIZATION_ID, final ApiCallback<List<CredentialIssuance>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = issuanceCredentialsGetValidateBeforeCall(X_ORGANIZATION_ID, _callback);
-        Type localVarReturnType = new TypeToken<List<CredentialExchange>>(){}.getType();
+        Type localVarReturnType = new TypeToken<List<CredentialIssuance>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }

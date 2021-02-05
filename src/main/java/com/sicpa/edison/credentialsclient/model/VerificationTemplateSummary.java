@@ -27,7 +27,7 @@ import java.io.IOException;
 /**
  * VerificationTemplateSummary
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-12-23T15:13:07.571806+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-01T13:54:17.068559+01:00[Europe/Zurich]")
 public class VerificationTemplateSummary {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)

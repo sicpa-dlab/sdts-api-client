@@ -18,6 +18,8 @@ tags:
   name: Schemas
 - description: The Clients API
   name: Clients
+- description: The Revocations API
+  name: revocations
 - description: The Credentials Issuance API
   name: Credentials
 - description: The Credential Definitions API
@@ -355,53 +357,6 @@ paths:
       - Connections
       x-contentType: application/json
       x-accepts: application/json
-  /credential-definitions/{credentialDefinitionId}:
-    get:
-      operationId: clientClientIdGet_1
-      parameters:
-      - explode: false
-        in: header
-        name: X-ORGANIZATION-ID
-        required: true
-        schema:
-          format: int32
-          type: integer
-        style: simple
-      - description: A credentialDefinition ID.
-        example: 0
-        explode: false
-        in: path
-        name: credentialDefinitionId
-        required: true
-        schema:
-          pattern: ([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):3:CL:(([1-9][0-9]*)|([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+)):(.+)?$
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CredentialDefinition'
-          description: OK
-        "400":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "500":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - auth: []
-      summary: Get credentialDefinition
-      tags:
-      - Credential Definitions
-      x-accepts: application/json
   /credential-definitions:
     post:
       operationId: credentialDefinitionPost
@@ -485,6 +440,53 @@ paths:
       tags:
       - Credential Definitions
       x-accepts: application/json
+  /credential-definitions/{credentialDefinitionId}:
+    get:
+      operationId: clientClientIdGet_1
+      parameters:
+      - explode: false
+        in: header
+        name: X-ORGANIZATION-ID
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      - description: A credentialDefinition ID.
+        example: 0
+        explode: false
+        in: path
+        name: credentialDefinitionId
+        required: true
+        schema:
+          pattern: ([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):3:CL:(([1-9][0-9]*)|([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+)):(.+)?$
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CredentialDefinition'
+          description: OK
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - auth: []
+      summary: Get credentialDefinition
+      tags:
+      - Credential Definitions
+      x-accepts: application/json
   /credentials-issuance:
     get:
       operationId: issuanceCredentialsGet
@@ -503,7 +505,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/CredentialExchange'
+                  $ref: '#/components/schemas/CredentialIssuance'
                 type: array
           description: OK
         "400":
@@ -546,7 +548,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CredentialExchange'
+                $ref: '#/components/schemas/CredentialIssuance'
           description: OK
         "400":
           content:
@@ -567,7 +569,7 @@ paths:
       - Credentials
       x-contentType: application/json
       x-accepts: application/json
-  /credentials-issuance/{credentialExchangeId}:
+  /credentials-issuance/{issuanceId}:
     delete:
       operationId: issuanceCredentialCredentialIdDelete
       parameters:
@@ -579,10 +581,10 @@ paths:
           format: int32
           type: integer
         style: simple
-      - description: An credential exchange ID.
+      - description: An credential issuance ID.
         explode: false
         in: path
-        name: credentialExchangeId
+        name: issuanceId
         required: true
         schema:
           type: string
@@ -619,10 +621,10 @@ paths:
           format: int32
           type: integer
         style: simple
-      - description: An credential exchange ID.
+      - description: An credential issuance ID.
         explode: false
         in: path
-        name: credentialExchangeId
+        name: issuanceId
         required: true
         schema:
           type: string
@@ -632,7 +634,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CredentialExchange'
+                $ref: '#/components/schemas/CredentialIssuance'
           description: OK
         "400":
           content:
@@ -1113,9 +1115,9 @@ paths:
       - Organizations
       x-contentType: application/json
       x-accepts: application/json
-  /schemas:
+  /revocations:
     post:
-      operationId: schemaPost
+      operationId: revocationPost
       parameters:
       - explode: false
         in: header
@@ -1129,15 +1131,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SchemaCreate'
+              $ref: '#/components/schemas/RevocationCreate'
         required: true
       responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SchemaSummary'
-          description: OK
+        "204":
+          description: No Content
         "400":
           content:
             '*/*':
@@ -1152,11 +1150,11 @@ paths:
           description: Internal Server Error
       security:
       - auth: []
-      summary: Create a new schema
+      summary: Revoke credential
       tags:
-      - Schemas
+      - revocations
       x-contentType: application/json
-      x-accepts: application/json
+      x-accepts: '*/*'
   /schemas/{schemaId}:
     get:
       operationId: schemaSchemaIdGet
@@ -1203,6 +1201,50 @@ paths:
       summary: Get schema
       tags:
       - Schemas
+      x-accepts: application/json
+  /schemas:
+    post:
+      operationId: schemaPost
+      parameters:
+      - explode: false
+        in: header
+        name: X-ORGANIZATION-ID
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SchemaCreate'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchemaSummary'
+          description: OK
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - auth: []
+      summary: Create a new schema
+      tags:
+      - Schemas
+      x-contentType: application/json
       x-accepts: application/json
   /schemas/created:
     get:
@@ -2093,17 +2135,9 @@ components:
         alias:
           type: string
       type: object
-    CredentialDefinition:
-      example:
-        id: id
-      properties:
-        id:
-          pattern: ([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):3:CL:(([1-9][0-9]*)|([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+)):(.+)?$
-          type: string
-      type: object
     CredentialDefinitionCreate:
       example:
-        supportRevocation: false
+        supportRevocation: true
         schemaId: WgWxqztrNooG92RXvxSTWv:2:schema_name:1.0
         tag: default
         revocationRegistrySize: 4
@@ -2119,7 +2153,6 @@ components:
           type: string
         supportRevocation:
           description: Revocation supported flag
-          example: false
           type: boolean
         revocationRegistrySize:
           example: 4
@@ -2133,6 +2166,14 @@ components:
       properties:
         id:
           description: The credential definition's id
+          pattern: ([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):3:CL:(([1-9][0-9]*)|([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+)):(.+)?$
+          type: string
+      type: object
+    CredentialDefinition:
+      example:
+        id: id
+      properties:
+        id:
           pattern: ([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):3:CL:(([1-9][0-9]*)|([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+)):(.+)?$
           type: string
       type: object
@@ -2192,9 +2233,12 @@ components:
           - name: name
             value: value
         schemaId: schemaId
+        credentialId: credentialId
         comment: comment
         credentialDefinitionId: credentialDefinitionId
       properties:
+        credentialId:
+          type: string
         schemaId:
           description: A schema ID
           pattern: ^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+$
@@ -2209,7 +2253,7 @@ components:
         credentialProposal:
           $ref: '#/components/schemas/CredentialProposal'
       type: object
-    CredentialExchange:
+    CredentialIssuance:
       example:
         credential:
           credentialProposal:
@@ -2219,15 +2263,16 @@ components:
             - name: name
               value: value
           schemaId: schemaId
+          credentialId: credentialId
           comment: comment
           credentialDefinitionId: credentialDefinitionId
+        issuanceId: issuanceId
         errorMessage: errorMessage
         state: state
-        credentialExchangeId: credentialExchangeId
         updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
-        credentialExchangeId:
-          description: A credential exchange ID
+        issuanceId:
+          description: A credential issuance ID
           type: string
         errorMessage:
           description: Optional error message
@@ -2326,6 +2371,42 @@ components:
           description: Determine if this organization will act as a credential issuer
           type: boolean
       type: object
+    RevocationCreate:
+      example:
+        issuanceId: issuanceId
+      properties:
+        issuanceId:
+          description: A credential issuance ID
+          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+          type: string
+      type: object
+    Schema:
+      example:
+        attributesName:
+        - attributesName
+        - attributesName
+        name: name
+        id: id
+        version: version
+      properties:
+        id:
+          description: The schema's id
+          pattern: ^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+$
+          type: string
+        name:
+          description: The schema's name
+          type: string
+        version:
+          description: The schema's version
+          pattern: ^[0-9.]+$
+          type: string
+        attributesName:
+          description: The schema's attributes
+          items:
+            description: The schema's attributes
+            type: string
+          type: array
+      type: object
     SchemaCreate:
       example:
         attributesName:
@@ -2362,33 +2443,6 @@ components:
           description: The schema's id
           pattern: ^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+$
           type: string
-      type: object
-    Schema:
-      example:
-        attributesName:
-        - attributesName
-        - attributesName
-        name: name
-        id: id
-        version: version
-      properties:
-        id:
-          description: The schema's id
-          pattern: ^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+$
-          type: string
-        name:
-          description: The schema's name
-          type: string
-        version:
-          description: The schema's version
-          pattern: ^[0-9.]+$
-          type: string
-        attributesName:
-          description: The schema's attributes
-          items:
-            description: The schema's attributes
-            type: string
-          type: array
       type: object
     RequestedAttribute:
       description: The requested attributes. In order for the verification to be successful,

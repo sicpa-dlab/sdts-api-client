@@ -25,62 +25,35 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
 /**
- * OrganizationCreate
+ * RevocationCreate
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-01T13:54:17.068559+01:00[Europe/Zurich]")
-public class OrganizationCreate {
-  public static final String SERIALIZED_NAME_NAME = "name";
-  @SerializedName(SERIALIZED_NAME_NAME)
-  private String name;
-
-  public static final String SERIALIZED_NAME_ISSUER = "issuer";
-  @SerializedName(SERIALIZED_NAME_ISSUER)
-  private Boolean issuer;
+public class RevocationCreate {
+  public static final String SERIALIZED_NAME_ISSUANCE_ID = "issuanceId";
+  @SerializedName(SERIALIZED_NAME_ISSUANCE_ID)
+  private String issuanceId;
 
 
-  public OrganizationCreate name(String name) {
+  public RevocationCreate issuanceId(String issuanceId) {
     
-    this.name = name;
+    this.issuanceId = issuanceId;
     return this;
   }
 
    /**
-   * The organization name
-   * @return name
+   * A credential issuance ID
+   * @return issuanceId
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "The organization name")
+  @ApiModelProperty(value = "A credential issuance ID")
 
-  public String getName() {
-    return name;
+  public String getIssuanceId() {
+    return issuanceId;
   }
 
 
-  public void setName(String name) {
-    this.name = name;
-  }
-
-
-  public OrganizationCreate issuer(Boolean issuer) {
-    
-    this.issuer = issuer;
-    return this;
-  }
-
-   /**
-   * Determine if this organization will act as a credential issuer
-   * @return issuer
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "Determine if this organization will act as a credential issuer")
-
-  public Boolean getIssuer() {
-    return issuer;
-  }
-
-
-  public void setIssuer(Boolean issuer) {
-    this.issuer = issuer;
+  public void setIssuanceId(String issuanceId) {
+    this.issuanceId = issuanceId;
   }
 
 
@@ -92,23 +65,21 @@ public class OrganizationCreate {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    OrganizationCreate organizationCreate = (OrganizationCreate) o;
-    return Objects.equals(this.name, organizationCreate.name) &&
-        Objects.equals(this.issuer, organizationCreate.issuer);
+    RevocationCreate revocationCreate = (RevocationCreate) o;
+    return Objects.equals(this.issuanceId, revocationCreate.issuanceId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, issuer);
+    return Objects.hash(issuanceId);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class OrganizationCreate {\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    issuer: ").append(toIndentedString(issuer)).append("\n");
+    sb.append("class RevocationCreate {\n");
+    sb.append("    issuanceId: ").append(toIndentedString(issuanceId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

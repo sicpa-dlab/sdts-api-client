@@ -1,12 +1,12 @@
 
 
-# CredentialExchange
+# CredentialIssuance
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**credentialExchangeId** | **String** | A credential exchange ID |  [optional]
+**issuanceId** | **String** | A credential issuance ID |  [optional]
 **errorMessage** | **String** | Optional error message |  [optional]
 **state** | **String** | State of the credential transaction |  [optional]
 **updatedAt** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]
