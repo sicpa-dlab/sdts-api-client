@@ -27,7 +27,7 @@ import java.io.IOException;
 /**
  * RevocationCreate
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-01T13:54:17.068559+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-05T10:45:45.459026+01:00[Europe/Zurich]")
 public class RevocationCreate {
   public static final String SERIALIZED_NAME_ISSUANCE_ID = "issuanceId";
   @SerializedName(SERIALIZED_NAME_ISSUANCE_ID)

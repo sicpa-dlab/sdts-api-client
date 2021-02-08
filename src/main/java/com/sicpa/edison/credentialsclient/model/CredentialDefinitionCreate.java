@@ -27,7 +27,7 @@ import java.io.IOException;
 /**
  * CredentialDefinitionCreate
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-01T13:54:17.068559+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-05T10:45:45.459026+01:00[Europe/Zurich]")
 public class CredentialDefinitionCreate {
   public static final String SERIALIZED_NAME_SCHEMA_ID = "schemaId";
   @SerializedName(SERIALIZED_NAME_SCHEMA_ID)
@@ -40,10 +40,6 @@ public class CredentialDefinitionCreate {
   public static final String SERIALIZED_NAME_SUPPORT_REVOCATION = "supportRevocation";
   @SerializedName(SERIALIZED_NAME_SUPPORT_REVOCATION)
   private Boolean supportRevocation;
-
-  public static final String SERIALIZED_NAME_REVOCATION_REGISTRY_SIZE = "revocationRegistrySize";
-  @SerializedName(SERIALIZED_NAME_REVOCATION_REGISTRY_SIZE)
-  private Integer revocationRegistrySize;
 
 
   public CredentialDefinitionCreate schemaId(String schemaId) {
@@ -115,30 +111,6 @@ public class CredentialDefinitionCreate {
   }
 
 
-  public CredentialDefinitionCreate revocationRegistrySize(Integer revocationRegistrySize) {
-    
-    this.revocationRegistrySize = revocationRegistrySize;
-    return this;
-  }
-
-   /**
-   * Get revocationRegistrySize
-   * minimum: 4
-   * @return revocationRegistrySize
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "4", value = "")
-
-  public Integer getRevocationRegistrySize() {
-    return revocationRegistrySize;
-  }
-
-
-  public void setRevocationRegistrySize(Integer revocationRegistrySize) {
-    this.revocationRegistrySize = revocationRegistrySize;
-  }
-
-
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -150,13 +122,12 @@ public class CredentialDefinitionCreate {
     CredentialDefinitionCreate credentialDefinitionCreate = (CredentialDefinitionCreate) o;
     return Objects.equals(this.schemaId, credentialDefinitionCreate.schemaId) &&
         Objects.equals(this.tag, credentialDefinitionCreate.tag) &&
-        Objects.equals(this.supportRevocation, credentialDefinitionCreate.supportRevocation) &&
-        Objects.equals(this.revocationRegistrySize, credentialDefinitionCreate.revocationRegistrySize);
+        Objects.equals(this.supportRevocation, credentialDefinitionCreate.supportRevocation);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(schemaId, tag, supportRevocation, revocationRegistrySize);
+    return Objects.hash(schemaId, tag, supportRevocation);
   }
 
 
@@ -167,7 +138,6 @@ public class CredentialDefinitionCreate {
     sb.append("    schemaId: ").append(toIndentedString(schemaId)).append("\n");
     sb.append("    tag: ").append(toIndentedString(tag)).append("\n");
     sb.append("    supportRevocation: ").append(toIndentedString(supportRevocation)).append("\n");
-    sb.append("    revocationRegistrySize: ").append(toIndentedString(revocationRegistrySize)).append("\n");
     sb.append("}");
     return sb.toString();
   }
