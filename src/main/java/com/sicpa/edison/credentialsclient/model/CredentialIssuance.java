@@ -29,7 +29,7 @@ import java.time.OffsetDateTime;
 /**
  * CredentialIssuance
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-05T10:45:45.459026+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-24T16:36:10.832178+01:00[Europe/Zurich]")
 public class CredentialIssuance {
   public static final String SERIALIZED_NAME_ISSUANCE_ID = "issuanceId";
   @SerializedName(SERIALIZED_NAME_ISSUANCE_ID)
@@ -62,8 +62,7 @@ public class CredentialIssuance {
    * A credential issuance ID
    * @return issuanceId
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "A credential issuance ID")
+  @ApiModelProperty(required = true, value = "A credential issuance ID")
 
   public String getIssuanceId() {
     return issuanceId;
@@ -108,8 +107,7 @@ public class CredentialIssuance {
    * State of the credential transaction
    * @return state
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "State of the credential transaction")
+  @ApiModelProperty(required = true, value = "State of the credential transaction")
 
   public String getState() {
     return state;
@@ -154,8 +152,7 @@ public class CredentialIssuance {
    * Get credential
    * @return credential
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public Credential getCredential() {
     return credential;

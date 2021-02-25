@@ -27,7 +27,7 @@ import java.io.IOException;
 /**
  * VerificationCreate
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-05T10:45:45.459026+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-24T16:36:10.832178+01:00[Europe/Zurich]")
 public class VerificationCreate {
   public static final String SERIALIZED_NAME_VERIFICATION_TEMPLATE_ID = "verificationTemplateId";
   @SerializedName(SERIALIZED_NAME_VERIFICATION_TEMPLATE_ID)
@@ -52,8 +52,7 @@ public class VerificationCreate {
    * The verification template id
    * @return verificationTemplateId
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "0", value = "The verification template id")
+  @ApiModelProperty(example = "0", required = true, value = "The verification template id")
 
   public Integer getVerificationTemplateId() {
     return verificationTemplateId;
@@ -75,8 +74,7 @@ public class VerificationCreate {
    * The connection id
    * @return connectionId
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "3fa85f64-5717-4562-b3fc-2c963f66afa6", value = "The connection id")
+  @ApiModelProperty(example = "3fa85f64-5717-4562-b3fc-2c963f66afa6", required = true, value = "The connection id")
 
   public String getConnectionId() {
     return connectionId;

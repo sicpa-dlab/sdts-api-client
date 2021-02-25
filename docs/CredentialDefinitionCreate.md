@@ -6,9 +6,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**schemaId** | **String** | Schema identifier |  [optional]
-**tag** | **String** | Credential definition identifier tag |  [optional]
-**supportRevocation** | **Boolean** | Revocation supported flag |  [optional]
+**schemaId** | **String** | Schema identifier | 
+**tag** | **String** | Credential definition identifier tag | 
+**supportRevocation** | **Boolean** | Revocation supported flag | 
 
 
 

@@ -27,7 +27,7 @@ import java.io.IOException;
 /**
  * OrganizationCreate
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-05T10:45:45.459026+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-24T16:36:10.832178+01:00[Europe/Zurich]")
 public class OrganizationCreate {
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
@@ -48,8 +48,7 @@ public class OrganizationCreate {
    * The organization name
    * @return name
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The organization name")
+  @ApiModelProperty(required = true, value = "The organization name")
 
   public String getName() {
     return name;
@@ -71,8 +70,7 @@ public class OrganizationCreate {
    * Determine if this organization will act as a credential issuer
    * @return issuer
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "Determine if this organization will act as a credential issuer")
+  @ApiModelProperty(required = true, value = "Determine if this organization will act as a credential issuer")
 
   public Boolean getIssuer() {
     return issuer;

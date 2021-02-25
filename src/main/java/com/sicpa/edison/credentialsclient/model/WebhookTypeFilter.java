@@ -28,7 +28,7 @@ import java.io.IOException;
  * List of filters available
  */
 @ApiModel(description = "List of filters available")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-05T10:45:45.459026+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-24T16:36:10.832178+01:00[Europe/Zurich]")
 public class WebhookTypeFilter {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -53,8 +53,7 @@ public class WebhookTypeFilter {
    * The webhook type id
    * @return id
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The webhook type id")
+  @ApiModelProperty(required = true, value = "The webhook type id")
 
   public Integer getId() {
     return id;
@@ -76,8 +75,7 @@ public class WebhookTypeFilter {
    * The webhook type name
    * @return name
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The webhook type name")
+  @ApiModelProperty(required = true, value = "The webhook type name")
 
   public String getName() {
     return name;

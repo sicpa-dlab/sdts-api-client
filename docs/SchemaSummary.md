@@ -6,7 +6,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **String** | The schema&#39;s id |  [optional]
+**id** | **String** | The schema&#39;s id | 
 
 
 

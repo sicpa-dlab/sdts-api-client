@@ -6,9 +6,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**invitationUrl** | **String** | Invitation URL |  [optional]
-**connectionInvitationContent** | [**ConnectionInvitationContent**](ConnectionInvitationContent.md) |  |  [optional]
-**connectionId** | **String** |  |  [optional]
+**invitationUrl** | **String** | Invitation URL | 
+**connectionInvitationContent** | [**ConnectionInvitationContent**](ConnectionInvitationContent.md) |  | 
+**connectionId** | **String** |  | 
 
 
 

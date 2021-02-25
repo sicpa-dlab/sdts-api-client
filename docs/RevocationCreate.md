@@ -6,7 +6,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**issuanceId** | **String** | A credential issuance ID |  [optional]
+**issuanceId** | **String** | A credential issuance ID | 
 
 
 

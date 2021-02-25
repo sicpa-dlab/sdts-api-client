@@ -30,7 +30,7 @@ import java.util.List;
  * The webhook types associated with this webhook
  */
 @ApiModel(description = "The webhook types associated with this webhook")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-05T10:45:45.459026+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-24T16:36:10.832178+01:00[Europe/Zurich]")
 public class WebhookWebhookTypeUpsert {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -38,7 +38,7 @@ public class WebhookWebhookTypeUpsert {
 
   public static final String SERIALIZED_NAME_FILTERS = "filters";
   @SerializedName(SERIALIZED_NAME_FILTERS)
-  private List<Integer> filters = null;
+  private List<Integer> filters = new ArrayList<>();
 
 
   public WebhookWebhookTypeUpsert id(Integer id) {
@@ -51,8 +51,7 @@ public class WebhookWebhookTypeUpsert {
    * The webhook type id
    * @return id
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The webhook type id")
+  @ApiModelProperty(required = true, value = "The webhook type id")
 
   public Integer getId() {
     return id;
@@ -71,9 +70,6 @@ public class WebhookWebhookTypeUpsert {
   }
 
   public WebhookWebhookTypeUpsert addFiltersItem(Integer filtersItem) {
-    if (this.filters == null) {
-      this.filters = new ArrayList<>();
-    }
     this.filters.add(filtersItem);
     return this;
   }
@@ -82,8 +78,7 @@ public class WebhookWebhookTypeUpsert {
    * List of webhook type filters id
    * @return filters
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "List of webhook type filters id")
+  @ApiModelProperty(required = true, value = "List of webhook type filters id")
 
   public List<Integer> getFilters() {
     return filters;

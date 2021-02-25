@@ -6,7 +6,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**connectionInvitationContent** | [**ConnectionInvitationContent**](ConnectionInvitationContent.md) |  |  [optional]
+**connectionInvitationContent** | [**ConnectionInvitationContent**](ConnectionInvitationContent.md) |  | 
 **alias** | **String** |  |  [optional]
 
 

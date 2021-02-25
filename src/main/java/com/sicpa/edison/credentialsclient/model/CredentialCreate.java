@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * CredentialCreate
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-05T10:45:45.459026+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-24T16:36:10.832178+01:00[Europe/Zurich]")
 public class CredentialCreate {
   public static final String SERIALIZED_NAME_CONNECTION_ID = "connectionId";
   @SerializedName(SERIALIZED_NAME_CONNECTION_ID)
@@ -50,7 +50,7 @@ public class CredentialCreate {
 
   public static final String SERIALIZED_NAME_ATTRIBUTES = "attributes";
   @SerializedName(SERIALIZED_NAME_ATTRIBUTES)
-  private List<CredentialAttribute> attributes = null;
+  private List<CredentialAttribute> attributes = new ArrayList<>();
 
 
   public CredentialCreate connectionId(String connectionId) {
@@ -63,8 +63,7 @@ public class CredentialCreate {
    * A connection ID
    * @return connectionId
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "3fa85f64-5717-4562-b3fc-2c963f66afa6", value = "A connection ID")
+  @ApiModelProperty(example = "3fa85f64-5717-4562-b3fc-2c963f66afa6", required = true, value = "A connection ID")
 
   public String getConnectionId() {
     return connectionId;
@@ -86,8 +85,7 @@ public class CredentialCreate {
    * A schema ID
    * @return schemaId
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "A schema ID")
+  @ApiModelProperty(required = true, value = "A schema ID")
 
   public String getSchemaId() {
     return schemaId;
@@ -109,8 +107,7 @@ public class CredentialCreate {
    * A credential definition ID
    * @return credentialDefinitionId
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "A credential definition ID")
+  @ApiModelProperty(required = true, value = "A credential definition ID")
 
   public String getCredentialDefinitionId() {
     return credentialDefinitionId;
@@ -152,9 +149,6 @@ public class CredentialCreate {
   }
 
   public CredentialCreate addAttributesItem(CredentialAttribute attributesItem) {
-    if (this.attributes == null) {
-      this.attributes = new ArrayList<>();
-    }
     this.attributes.add(attributesItem);
     return this;
   }
@@ -163,8 +157,7 @@ public class CredentialCreate {
    * A list of credential attributes
    * @return attributes
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "A list of credential attributes")
+  @ApiModelProperty(required = true, value = "A list of credential attributes")
 
   public List<CredentialAttribute> getAttributes() {
     return attributes;

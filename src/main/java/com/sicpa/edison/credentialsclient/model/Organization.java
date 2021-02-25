@@ -27,7 +27,7 @@ import java.io.IOException;
 /**
  * Organization
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-05T10:45:45.459026+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-24T16:36:10.832178+01:00[Europe/Zurich]")
 public class Organization {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -60,8 +60,7 @@ public class Organization {
    * The organization&#39;s id
    * @return id
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The organization's id")
+  @ApiModelProperty(required = true, value = "The organization's id")
 
   public Integer getId() {
     return id;
@@ -83,8 +82,7 @@ public class Organization {
    * The organization&#39;s label
    * @return name
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The organization's label")
+  @ApiModelProperty(required = true, value = "The organization's label")
 
   public String getName() {
     return name;
@@ -106,8 +104,7 @@ public class Organization {
    * The organization&#39;s clientId
    * @return clientId
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The organization's clientId")
+  @ApiModelProperty(required = true, value = "The organization's clientId")
 
   public Integer getClientId() {
     return clientId;
@@ -152,8 +149,7 @@ public class Organization {
    * Defines if the organization acts as an issuer
    * @return issuer
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "Defines if the organization acts as an issuer")
+  @ApiModelProperty(required = true, value = "Defines if the organization acts as an issuer")
 
   public Boolean getIssuer() {
     return issuer;

@@ -27,7 +27,7 @@ import java.io.IOException;
 /**
  * CredentialDefinitionSummary
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-05T10:45:45.459026+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-24T16:36:10.832178+01:00[Europe/Zurich]")
 public class CredentialDefinitionSummary {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -44,8 +44,7 @@ public class CredentialDefinitionSummary {
    * The credential definition&#39;s id
    * @return id
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The credential definition's id")
+  @ApiModelProperty(required = true, value = "The credential definition's id")
 
   public String getId() {
     return id;

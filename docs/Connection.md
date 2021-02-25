@@ -7,8 +7,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **label** | **String** | The connection&#39;s label |  [optional]
-**connectionId** | **String** |  |  [optional]
-**state** | [**StateEnum**](#StateEnum) |  |  [optional]
+**connectionId** | **String** |  | 
+**state** | [**StateEnum**](#StateEnum) |  | 
 
 
 

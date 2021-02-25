@@ -57,7 +57,7 @@ public class InternalWebhooksApi {
 
     /**
      * Build call for webhooksGet
-     * @param organizationId  (required)
+     * @param walletId  (required)
      * @param acaPyTopic  (required)
      * @param acaPyFilter  (required)
      * @param _callback Callback for upload/download progress
@@ -71,7 +71,7 @@ public class InternalWebhooksApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call webhooksGetCall(Integer organizationId, String acaPyTopic, String acaPyFilter, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call webhooksGetCall(String walletId, String acaPyTopic, String acaPyFilter, final ApiCallback _callback) throws ApiException {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -79,8 +79,8 @@ public class InternalWebhooksApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        if (organizationId != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("organizationId", organizationId));
+        if (walletId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("walletId", walletId));
         }
 
         if (acaPyTopic != null) {
@@ -113,11 +113,11 @@ public class InternalWebhooksApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call webhooksGetValidateBeforeCall(Integer organizationId, String acaPyTopic, String acaPyFilter, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call webhooksGetValidateBeforeCall(String walletId, String acaPyTopic, String acaPyFilter, final ApiCallback _callback) throws ApiException {
         
-        // verify the required parameter 'organizationId' is set
-        if (organizationId == null) {
-            throw new ApiException("Missing the required parameter 'organizationId' when calling webhooksGet(Async)");
+        // verify the required parameter 'walletId' is set
+        if (walletId == null) {
+            throw new ApiException("Missing the required parameter 'walletId' when calling webhooksGet(Async)");
         }
         
         // verify the required parameter 'acaPyTopic' is set
@@ -131,7 +131,7 @@ public class InternalWebhooksApi {
         }
         
 
-        okhttp3.Call localVarCall = webhooksGetCall(organizationId, acaPyTopic, acaPyFilter, _callback);
+        okhttp3.Call localVarCall = webhooksGetCall(walletId, acaPyTopic, acaPyFilter, _callback);
         return localVarCall;
 
     }
@@ -139,7 +139,7 @@ public class InternalWebhooksApi {
     /**
      * List an organization&#39;s active webhooks with given type 
      * 
-     * @param organizationId  (required)
+     * @param walletId  (required)
      * @param acaPyTopic  (required)
      * @param acaPyFilter  (required)
      * @return List&lt;Webhook&gt;
@@ -152,15 +152,15 @@ public class InternalWebhooksApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public List<Webhook> webhooksGet(Integer organizationId, String acaPyTopic, String acaPyFilter) throws ApiException {
-        ApiResponse<List<Webhook>> localVarResp = webhooksGetWithHttpInfo(organizationId, acaPyTopic, acaPyFilter);
+    public List<Webhook> webhooksGet(String walletId, String acaPyTopic, String acaPyFilter) throws ApiException {
+        ApiResponse<List<Webhook>> localVarResp = webhooksGetWithHttpInfo(walletId, acaPyTopic, acaPyFilter);
         return localVarResp.getData();
     }
 
     /**
      * List an organization&#39;s active webhooks with given type 
      * 
-     * @param organizationId  (required)
+     * @param walletId  (required)
      * @param acaPyTopic  (required)
      * @param acaPyFilter  (required)
      * @return ApiResponse&lt;List&lt;Webhook&gt;&gt;
@@ -173,8 +173,8 @@ public class InternalWebhooksApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<List<Webhook>> webhooksGetWithHttpInfo(Integer organizationId, String acaPyTopic, String acaPyFilter) throws ApiException {
-        okhttp3.Call localVarCall = webhooksGetValidateBeforeCall(organizationId, acaPyTopic, acaPyFilter, null);
+    public ApiResponse<List<Webhook>> webhooksGetWithHttpInfo(String walletId, String acaPyTopic, String acaPyFilter) throws ApiException {
+        okhttp3.Call localVarCall = webhooksGetValidateBeforeCall(walletId, acaPyTopic, acaPyFilter, null);
         Type localVarReturnType = new TypeToken<List<Webhook>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -182,7 +182,7 @@ public class InternalWebhooksApi {
     /**
      * List an organization&#39;s active webhooks with given type  (asynchronously)
      * 
-     * @param organizationId  (required)
+     * @param walletId  (required)
      * @param acaPyTopic  (required)
      * @param acaPyFilter  (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -196,9 +196,9 @@ public class InternalWebhooksApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call webhooksGetAsync(Integer organizationId, String acaPyTopic, String acaPyFilter, final ApiCallback<List<Webhook>> _callback) throws ApiException {
+    public okhttp3.Call webhooksGetAsync(String walletId, String acaPyTopic, String acaPyFilter, final ApiCallback<List<Webhook>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = webhooksGetValidateBeforeCall(organizationId, acaPyTopic, acaPyFilter, _callback);
+        okhttp3.Call localVarCall = webhooksGetValidateBeforeCall(walletId, acaPyTopic, acaPyFilter, _callback);
         Type localVarReturnType = new TypeToken<List<Webhook>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;

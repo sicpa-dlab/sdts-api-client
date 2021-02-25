@@ -6,8 +6,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**verificationTemplateId** | **Integer** | The verification template id |  [optional]
-**connectionId** | **String** | The connection id |  [optional]
+**verificationTemplateId** | **Integer** | The verification template id | 
+**connectionId** | **String** | The connection id | 
 **comment** | **String** | An optional comment |  [optional]
 
 

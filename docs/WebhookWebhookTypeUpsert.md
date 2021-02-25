@@ -7,8 +7,8 @@ The webhook types associated with this webhook
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **Integer** | The webhook type id |  [optional]
-**filters** | **List&lt;Integer&gt;** | List of webhook type filters id |  [optional]
+**id** | **Integer** | The webhook type id | 
+**filters** | **List&lt;Integer&gt;** | List of webhook type filters id | 
 
 
 

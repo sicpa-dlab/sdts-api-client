@@ -28,7 +28,7 @@ import java.io.IOException;
 /**
  * VerificationTemplate
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-05T10:45:45.459026+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-24T16:36:10.832178+01:00[Europe/Zurich]")
 public class VerificationTemplate {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -57,8 +57,7 @@ public class VerificationTemplate {
    * The verificationTemplate id
    * @return id
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The verificationTemplate id")
+  @ApiModelProperty(required = true, value = "The verificationTemplate id")
 
   public Integer getId() {
     return id;
@@ -80,8 +79,7 @@ public class VerificationTemplate {
    * The verificationTemplate name
    * @return name
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "example", value = "The verificationTemplate name")
+  @ApiModelProperty(example = "example", required = true, value = "The verificationTemplate name")
 
   public String getName() {
     return name;
@@ -103,8 +101,7 @@ public class VerificationTemplate {
    * Get content
    * @return content
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public VerificationTemplateContent getContent() {
     return content;
@@ -126,8 +123,7 @@ public class VerificationTemplate {
    * The organization id
    * @return organizationId
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "1", value = "The organization id")
+  @ApiModelProperty(example = "1", required = true, value = "The organization id")
 
   public Integer getOrganizationId() {
     return organizationId;

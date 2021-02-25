@@ -16,10 +16,10 @@ tags:
   name: Messages
 - description: The Schemas API
   name: Schemas
+- description: The Revocations API
+  name: Revocations
 - description: The Clients API
   name: Clients
-- description: The Revocations API
-  name: revocations
 - description: The Credentials API
   name: Credentials
 - description: The Credential Definitions API
@@ -1154,53 +1154,9 @@ paths:
       - auth: []
       summary: Revoke credential
       tags:
-      - revocations
+      - Revocations
       x-contentType: application/json
       x-accepts: '*/*'
-  /schemas:
-    post:
-      operationId: schemaPost
-      parameters:
-      - explode: false
-        in: header
-        name: X-ORGANIZATION-ID
-        required: true
-        schema:
-          format: int32
-          type: integer
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/SchemaCreate'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SchemaSummary'
-          description: OK
-        "400":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "500":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - auth: []
-      summary: Create a new schema
-      tags:
-      - Schemas
-      x-contentType: application/json
-      x-accepts: application/json
   /schemas/{schemaId}:
     get:
       operationId: schemaSchemaIdGet
@@ -1247,6 +1203,50 @@ paths:
       summary: Get schema
       tags:
       - Schemas
+      x-accepts: application/json
+  /schemas:
+    post:
+      operationId: schemaPost
+      parameters:
+      - explode: false
+        in: header
+        name: X-ORGANIZATION-ID
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SchemaCreate'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchemaSummary'
+          description: OK
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - auth: []
+      summary: Create a new schema
+      tags:
+      - Schemas
+      x-contentType: application/json
       x-accepts: application/json
   /schemas/created:
     get:
@@ -1693,11 +1693,10 @@ paths:
       parameters:
       - explode: true
         in: query
-        name: organizationId
+        name: walletId
         required: true
         schema:
-          format: int32
-          type: integer
+          type: string
         style: form
       - explode: true
         in: query
@@ -2029,6 +2028,8 @@ components:
       properties:
         name:
           type: string
+      required:
+      - name
       type: object
     Client:
       example:
@@ -2040,6 +2041,9 @@ components:
           type: integer
         name:
           type: string
+      required:
+      - id
+      - name
       type: object
     Connection:
       example:
@@ -2062,6 +2066,9 @@ components:
           - ERROR
           - INACTIVE
           type: string
+      required:
+      - connectionId
+      - state
       type: object
     ConnectionInvitationCreate:
       example:
@@ -2097,7 +2104,9 @@ components:
           description: The connection's label
           type: string
       required:
+      - invitationId
       - recipientKeys
+      - serviceEndpoint
       type: object
     ConnectionInvitationCreationResult:
       example:
@@ -2120,6 +2129,10 @@ components:
         connectionId:
           pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
           type: string
+      required:
+      - connectionId
+      - connectionInvitationContent
+      - invitationUrl
       type: object
     ConnectionInvitation:
       example:
@@ -2136,6 +2149,8 @@ components:
           $ref: '#/components/schemas/ConnectionInvitationContent'
         alias:
           type: string
+      required:
+      - connectionInvitationContent
       type: object
     CredentialDefinition:
       example:
@@ -2144,6 +2159,8 @@ components:
         id:
           pattern: ([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):3:CL:(([1-9][0-9]*)|([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+)):(.+)?$
           type: string
+      required:
+      - id
       type: object
     CredentialDefinitionCreate:
       example:
@@ -2163,6 +2180,10 @@ components:
         supportRevocation:
           description: Revocation supported flag
           type: boolean
+      required:
+      - schemaId
+      - supportRevocation
+      - tag
       type: object
     CredentialDefinitionSummary:
       example:
@@ -2172,6 +2193,8 @@ components:
           description: The credential definition's id
           pattern: ([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):3:CL:(([1-9][0-9]*)|([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+)):(.+)?$
           type: string
+      required:
+      - id
       type: object
     Credential:
       example:
@@ -2262,6 +2285,11 @@ components:
           items:
             $ref: '#/components/schemas/CredentialAttribute'
           type: array
+      required:
+      - attributes
+      - connectionId
+      - credentialDefinitionId
+      - schemaId
       type: object
     CredentialIssuance:
       example:
@@ -2295,6 +2323,10 @@ components:
           type: string
         credential:
           $ref: '#/components/schemas/Credential'
+      required:
+      - credential
+      - issuanceId
+      - state
       type: object
     Message:
       example:
@@ -2306,6 +2338,9 @@ components:
         connectionId:
           pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
           type: string
+      required:
+      - connectionId
+      - text
       type: object
     Organization:
       example:
@@ -2331,6 +2366,11 @@ components:
         issuer:
           description: Defines if the organization acts as an issuer
           type: boolean
+      required:
+      - clientId
+      - id
+      - issuer
+      - name
       type: object
     OrganizationUpdate:
       example:
@@ -2343,6 +2383,8 @@ components:
         issuer:
           description: Defines if the organization can issue credentials
           type: boolean
+      required:
+      - name
       type: object
     OrganizationSummary:
       example:
@@ -2366,6 +2408,9 @@ components:
         issuer:
           description: Determine if this organization will act as a credential issuer
           type: boolean
+      required:
+      - issuer
+      - name
       type: object
     RevocationCreate:
       example:
@@ -2375,6 +2420,40 @@ components:
           description: A credential issuance ID
           pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
           type: string
+      required:
+      - issuanceId
+      type: object
+    Schema:
+      example:
+        attributesName:
+        - attributesName
+        - attributesName
+        name: name
+        id: id
+        version: version
+      properties:
+        id:
+          description: The schema's id
+          pattern: ^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+$
+          type: string
+        name:
+          description: The schema's name
+          type: string
+        version:
+          description: The schema's version
+          pattern: ^[0-9.]+$
+          type: string
+        attributesName:
+          description: The schema's attributes
+          items:
+            description: The schema's attributes
+            type: string
+          type: array
+      required:
+      - attributesName
+      - id
+      - name
+      - version
       type: object
     SchemaCreate:
       example:
@@ -2412,33 +2491,8 @@ components:
           description: The schema's id
           pattern: ^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+$
           type: string
-      type: object
-    Schema:
-      example:
-        attributesName:
-        - attributesName
-        - attributesName
-        name: name
-        id: id
-        version: version
-      properties:
-        id:
-          description: The schema's id
-          pattern: ^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+$
-          type: string
-        name:
-          description: The schema's name
-          type: string
-        version:
-          description: The schema's version
-          pattern: ^[0-9.]+$
-          type: string
-        attributesName:
-          description: The schema's attributes
-          items:
-            description: The schema's attributes
-            type: string
-          type: array
+      required:
+      - id
       type: object
     RequestedAttribute:
       description: The requested attributes. In order for the verification to be successful,
@@ -2586,6 +2640,11 @@ components:
           example: 1
           format: int32
           type: integer
+      required:
+      - content
+      - id
+      - name
+      - organizationId
       type: object
     VerificationTemplateContent:
       example:
@@ -2753,6 +2812,9 @@ components:
           type: string
         content:
           $ref: '#/components/schemas/VerificationTemplateContent'
+      required:
+      - content
+      - name
       type: object
     Verification:
       example:
@@ -2917,6 +2979,9 @@ components:
         comment:
           description: An optional comment
           type: string
+      required:
+      - connectionId
+      - verificationTemplateId
       type: object
     Webhook:
       example:
@@ -2968,6 +3033,12 @@ components:
           items:
             $ref: '#/components/schemas/WebhookType'
           type: array
+      required:
+      - active
+      - id
+      - name
+      - url
+      - webhookTypes
       type: object
     WebhookType:
       description: The webhook types associated with this webhook
@@ -2998,6 +3069,10 @@ components:
           items:
             $ref: '#/components/schemas/WebhookTypeFilter'
           type: array
+      required:
+      - filters
+      - id
+      - name
       type: object
     WebhookTypeFilter:
       description: List of filters available
@@ -3016,6 +3091,9 @@ components:
         description:
           description: The webhook type description
           type: string
+      required:
+      - id
+      - name
       type: object
     WebhookCreate:
       example:
@@ -3047,8 +3125,10 @@ components:
             $ref: '#/components/schemas/WebhookWebhookTypeUpsert'
           type: array
       required:
+      - active
       - name
       - url
+      - webhookTypes
       type: object
     WebhookWebhookTypeUpsert:
       description: The webhook types associated with this webhook
@@ -3069,6 +3149,9 @@ components:
             format: int32
             type: integer
           type: array
+      required:
+      - filters
+      - id
       type: object
     WebhookUpdate:
       example:

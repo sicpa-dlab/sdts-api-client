@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * WebhookCreate
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-05T10:45:45.459026+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-24T16:36:10.832178+01:00[Europe/Zurich]")
 public class WebhookCreate {
   public static final String SERIALIZED_NAME_URL = "url";
   @SerializedName(SERIALIZED_NAME_URL)
@@ -46,7 +46,7 @@ public class WebhookCreate {
 
   public static final String SERIALIZED_NAME_WEBHOOK_TYPES = "webhookTypes";
   @SerializedName(SERIALIZED_NAME_WEBHOOK_TYPES)
-  private List<WebhookWebhookTypeUpsert> webhookTypes = null;
+  private List<WebhookWebhookTypeUpsert> webhookTypes = new ArrayList<>();
 
 
   public WebhookCreate url(String url) {
@@ -103,8 +103,7 @@ public class WebhookCreate {
    * Defines if the webhook is active or not
    * @return active
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "Defines if the webhook is active or not")
+  @ApiModelProperty(required = true, value = "Defines if the webhook is active or not")
 
   public Boolean getActive() {
     return active;
@@ -123,9 +122,6 @@ public class WebhookCreate {
   }
 
   public WebhookCreate addWebhookTypesItem(WebhookWebhookTypeUpsert webhookTypesItem) {
-    if (this.webhookTypes == null) {
-      this.webhookTypes = new ArrayList<>();
-    }
     this.webhookTypes.add(webhookTypesItem);
     return this;
   }
@@ -134,8 +130,7 @@ public class WebhookCreate {
    * The webhook types associated with this webhook
    * @return webhookTypes
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The webhook types associated with this webhook")
+  @ApiModelProperty(required = true, value = "The webhook types associated with this webhook")
 
   public List<WebhookWebhookTypeUpsert> getWebhookTypes() {
     return webhookTypes;

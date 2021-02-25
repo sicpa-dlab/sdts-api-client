@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * Schema
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-05T10:45:45.459026+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-24T16:36:10.832178+01:00[Europe/Zurich]")
 public class Schema {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -45,7 +45,7 @@ public class Schema {
 
   public static final String SERIALIZED_NAME_ATTRIBUTES_NAME = "attributesName";
   @SerializedName(SERIALIZED_NAME_ATTRIBUTES_NAME)
-  private List<String> attributesName = null;
+  private List<String> attributesName = new ArrayList<>();
 
 
   public Schema id(String id) {
@@ -58,8 +58,7 @@ public class Schema {
    * The schema&#39;s id
    * @return id
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The schema's id")
+  @ApiModelProperty(required = true, value = "The schema's id")
 
   public String getId() {
     return id;
@@ -81,8 +80,7 @@ public class Schema {
    * The schema&#39;s name
    * @return name
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The schema's name")
+  @ApiModelProperty(required = true, value = "The schema's name")
 
   public String getName() {
     return name;
@@ -104,8 +102,7 @@ public class Schema {
    * The schema&#39;s version
    * @return version
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The schema's version")
+  @ApiModelProperty(required = true, value = "The schema's version")
 
   public String getVersion() {
     return version;
@@ -124,9 +121,6 @@ public class Schema {
   }
 
   public Schema addAttributesNameItem(String attributesNameItem) {
-    if (this.attributesName == null) {
-      this.attributesName = new ArrayList<>();
-    }
     this.attributesName.add(attributesNameItem);
     return this;
   }
@@ -135,8 +129,7 @@ public class Schema {
    * The schema&#39;s attributes
    * @return attributesName
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The schema's attributes")
+  @ApiModelProperty(required = true, value = "The schema's attributes")
 
   public List<String> getAttributesName() {
     return attributesName;

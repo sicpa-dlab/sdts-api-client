@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 <a name="webhooksGet"></a>
 # **webhooksGet**
-> List&lt;Webhook&gt; webhooksGet(organizationId, acaPyTopic, acaPyFilter)
+> List&lt;Webhook&gt; webhooksGet(walletId, acaPyTopic, acaPyFilter)
 
 List an organization&#39;s active webhooks with given type 
 
@@ -28,11 +28,11 @@ public class Example {
     defaultClient.setBasePath("http://localhost:8080");
 
     InternalWebhooksApi apiInstance = new InternalWebhooksApi(defaultClient);
-    Integer organizationId = 56; // Integer | 
+    String walletId = "walletId_example"; // String | 
     String acaPyTopic = "acaPyTopic_example"; // String | 
     String acaPyFilter = "acaPyFilter_example"; // String | 
     try {
-      List<Webhook> result = apiInstance.webhooksGet(organizationId, acaPyTopic, acaPyFilter);
+      List<Webhook> result = apiInstance.webhooksGet(walletId, acaPyTopic, acaPyFilter);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling InternalWebhooksApi#webhooksGet");
@@ -49,7 +49,7 @@ public class Example {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **organizationId** | **Integer**|  |
+ **walletId** | **String**|  |
  **acaPyTopic** | **String**|  |
  **acaPyFilter** | **String**|  |
 

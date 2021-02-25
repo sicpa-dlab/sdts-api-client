@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * Webhook
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-05T10:45:45.459026+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-24T16:36:10.832178+01:00[Europe/Zurich]")
 public class Webhook {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -54,7 +54,7 @@ public class Webhook {
 
   public static final String SERIALIZED_NAME_WEBHOOK_TYPES = "webhookTypes";
   @SerializedName(SERIALIZED_NAME_WEBHOOK_TYPES)
-  private List<WebhookType> webhookTypes = null;
+  private List<WebhookType> webhookTypes = new ArrayList<>();
 
 
   public Webhook id(Integer id) {
@@ -67,8 +67,7 @@ public class Webhook {
    * The webhook&#39;s id
    * @return id
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The webhook's id")
+  @ApiModelProperty(required = true, value = "The webhook's id")
 
   public Integer getId() {
     return id;
@@ -90,8 +89,7 @@ public class Webhook {
    * The webhook&#39;s name
    * @return name
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The webhook's name")
+  @ApiModelProperty(required = true, value = "The webhook's name")
 
   public String getName() {
     return name;
@@ -113,8 +111,7 @@ public class Webhook {
    * The webhook&#39;s url
    * @return url
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The webhook's url")
+  @ApiModelProperty(required = true, value = "The webhook's url")
 
   public String getUrl() {
     return url;
@@ -136,8 +133,7 @@ public class Webhook {
    * Defines if the webhook is active or not
    * @return active
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "Defines if the webhook is active or not")
+  @ApiModelProperty(required = true, value = "Defines if the webhook is active or not")
 
   public Boolean getActive() {
     return active;
@@ -179,9 +175,6 @@ public class Webhook {
   }
 
   public Webhook addWebhookTypesItem(WebhookType webhookTypesItem) {
-    if (this.webhookTypes == null) {
-      this.webhookTypes = new ArrayList<>();
-    }
     this.webhookTypes.add(webhookTypesItem);
     return this;
   }
@@ -190,8 +183,7 @@ public class Webhook {
    * The webhook types associated with this webhook
    * @return webhookTypes
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The webhook types associated with this webhook")
+  @ApiModelProperty(required = true, value = "The webhook types associated with this webhook")
 
   public List<WebhookType> getWebhookTypes() {
     return webhookTypes;

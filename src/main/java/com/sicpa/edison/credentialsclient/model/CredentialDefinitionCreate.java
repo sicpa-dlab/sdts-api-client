@@ -27,7 +27,7 @@ import java.io.IOException;
 /**
  * CredentialDefinitionCreate
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-05T10:45:45.459026+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-24T16:36:10.832178+01:00[Europe/Zurich]")
 public class CredentialDefinitionCreate {
   public static final String SERIALIZED_NAME_SCHEMA_ID = "schemaId";
   @SerializedName(SERIALIZED_NAME_SCHEMA_ID)
@@ -52,8 +52,7 @@ public class CredentialDefinitionCreate {
    * Schema identifier
    * @return schemaId
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "WgWxqztrNooG92RXvxSTWv:2:schema_name:1.0", value = "Schema identifier")
+  @ApiModelProperty(example = "WgWxqztrNooG92RXvxSTWv:2:schema_name:1.0", required = true, value = "Schema identifier")
 
   public String getSchemaId() {
     return schemaId;
@@ -75,8 +74,7 @@ public class CredentialDefinitionCreate {
    * Credential definition identifier tag
    * @return tag
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "default", value = "Credential definition identifier tag")
+  @ApiModelProperty(example = "default", required = true, value = "Credential definition identifier tag")
 
   public String getTag() {
     return tag;
@@ -98,8 +96,7 @@ public class CredentialDefinitionCreate {
    * Revocation supported flag
    * @return supportRevocation
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "Revocation supported flag")
+  @ApiModelProperty(required = true, value = "Revocation supported flag")
 
   public Boolean getSupportRevocation() {
     return supportRevocation;

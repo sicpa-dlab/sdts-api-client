@@ -6,8 +6,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **String** | The verificationTemplate name |  [optional]
-**content** | [**VerificationTemplateContent**](VerificationTemplateContent.md) |  |  [optional]
+**name** | **String** | The verificationTemplate name | 
+**content** | [**VerificationTemplateContent**](VerificationTemplateContent.md) |  | 
 
 
 

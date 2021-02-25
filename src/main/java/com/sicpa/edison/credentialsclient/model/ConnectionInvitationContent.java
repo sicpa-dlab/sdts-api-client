@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * ConnectionInvitationContent
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-05T10:45:45.459026+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-24T16:36:10.832178+01:00[Europe/Zurich]")
 public class ConnectionInvitationContent {
   public static final String SERIALIZED_NAME_INVITATION_ID = "invitationId";
   @SerializedName(SERIALIZED_NAME_INVITATION_ID)
@@ -58,8 +58,7 @@ public class ConnectionInvitationContent {
    * The connection&#39;s invitation id
    * @return invitationId
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The connection's invitation id")
+  @ApiModelProperty(required = true, value = "The connection's invitation id")
 
   public String getInvitationId() {
     return invitationId;
@@ -81,8 +80,7 @@ public class ConnectionInvitationContent {
    * The connection&#39;s service endpoint
    * @return serviceEndpoint
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The connection's service endpoint")
+  @ApiModelProperty(required = true, value = "The connection's service endpoint")
 
   public String getServiceEndpoint() {
     return serviceEndpoint;
