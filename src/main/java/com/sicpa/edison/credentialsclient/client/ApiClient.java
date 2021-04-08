@@ -54,7 +54,7 @@ import com.sicpa.edison.credentialsclient.client.auth.ApiKeyAuth;
 
 public class ApiClient {
 
-    private String basePath = "http://localhost";
+    private String basePath = "http://localhost:8080";
     private boolean debugging = false;
     private Map<String, String> defaultHeaderMap = new HashMap<String, String>();
     private Map<String, String> defaultCookieMap = new HashMap<String, String>();
@@ -84,8 +84,7 @@ public class ApiClient {
         initHttpClient();
 
         // Setup authentications (key: authentication name, value: authentication).
-        authentications.put("auth", new HttpBearerAuth("bearer"));
-        // Prevent the authentications from being modified.
+        authentications.put("auth", new ApiKeyAuth("header", "X-CLIENT-ID"));        // Prevent the authentications from being modified.
         authentications = Collections.unmodifiableMap(authentications);
     }
 
