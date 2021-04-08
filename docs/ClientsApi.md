@@ -1,6 +1,6 @@
 # ClientsApi
 
-All URIs are relative to *http://localhost:8080*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -27,7 +27,7 @@ import com.sicpa.edison.credentialsclient.api.ClientsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost:8080");
+    defaultClient.setBasePath("http://localhost");
 
     ClientsApi apiInstance = new ClientsApi(defaultClient);
     Integer clientId = 0; // Integer | An client ID.
@@ -89,7 +89,7 @@ import com.sicpa.edison.credentialsclient.api.ClientsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost:8080");
+    defaultClient.setBasePath("http://localhost");
 
     ClientsApi apiInstance = new ClientsApi(defaultClient);
     ClientCreate clientCreate = new ClientCreate(); // ClientCreate | 
@@ -151,7 +151,7 @@ import com.sicpa.edison.credentialsclient.api.ClientsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost:8080");
+    defaultClient.setBasePath("http://localhost");
 
     ClientsApi apiInstance = new ClientsApi(defaultClient);
     try {

@@ -1,6 +1,6 @@
 # MessagesApi
 
-All URIs are relative to *http://localhost:8080*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -26,13 +26,11 @@ import com.sicpa.edison.credentialsclient.api.MessagesApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost:8080");
+    defaultClient.setBasePath("http://localhost");
     
-    // Configure API key authorization: auth
-    ApiKeyAuth auth = (ApiKeyAuth) defaultClient.getAuthentication("auth");
-    auth.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //auth.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: auth
+    HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
+    auth.setBearerToken("BEARER TOKEN");
 
     MessagesApi apiInstance = new MessagesApi(defaultClient);
     Integer X_ORGANIZATION_ID = 56; // Integer | 

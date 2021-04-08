@@ -3,8 +3,7 @@ info:
   title: Edison Credentials API
   version: 0.0.1
 servers:
-- description: Generated server url
-  url: http://localhost:8080
+- url: /
 tags:
 - description: The Webhooks API
   name: Webhooks
@@ -14,12 +13,12 @@ tags:
   name: Verifications
 - description: The Messages API
   name: Messages
+- description: The Clients API
+  name: Clients
 - description: The Schemas API
   name: Schemas
 - description: The Revocations API
   name: Revocations
-- description: The Clients API
-  name: Clients
 - description: The Credentials API
   name: Credentials
 - description: The Credential Definitions API
@@ -31,1262 +30,6 @@ tags:
 - description: The Credentials Issuance API
   name: Credentials Issuance
 paths:
-  /clients:
-    get:
-      operationId: clientsGet
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/Client'
-                type: array
-          description: OK
-        "400":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "500":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      summary: List all clients
-      tags:
-      - Clients
-      x-accepts: application/json
-    post:
-      operationId: clientPost
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ClientCreate'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Client'
-          description: OK
-        "400":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "500":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      summary: Create a new client
-      tags:
-      - Clients
-      x-contentType: application/json
-      x-accepts: application/json
-  /clients/{clientId}:
-    get:
-      operationId: clientClientIdGet
-      parameters:
-      - description: An client ID.
-        example: 0
-        explode: false
-        in: path
-        name: clientId
-        required: true
-        schema:
-          format: int32
-          type: integer
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Client'
-          description: OK
-        "400":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "500":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      summary: Get client
-      tags:
-      - Clients
-      x-accepts: application/json
-  /connections/{connectionId}:
-    delete:
-      operationId: connectionOrganizationIdConnectionIdDelete
-      parameters:
-      - explode: false
-        in: header
-        name: X-ORGANIZATION-ID
-        required: true
-        schema:
-          format: int32
-          type: integer
-        style: simple
-      - description: A connection ID.
-        example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
-        explode: false
-        in: path
-        name: connectionId
-        required: true
-        schema:
-          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
-          type: string
-        style: simple
-      responses:
-        "200":
-          description: OK
-        "400":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "500":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - auth: []
-      summary: Delete connection
-      tags:
-      - Connections
-      x-accepts: '*/*'
-    get:
-      operationId: connectionOrganizationIdConnectionIdGet
-      parameters:
-      - explode: false
-        in: header
-        name: X-ORGANIZATION-ID
-        required: true
-        schema:
-          format: int32
-          type: integer
-        style: simple
-      - description: A connection ID.
-        example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
-        explode: false
-        in: path
-        name: connectionId
-        required: true
-        schema:
-          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Connection'
-          description: OK
-        "400":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "500":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - auth: []
-      summary: Get connection
-      tags:
-      - Connections
-      x-accepts: application/json
-  /connections:
-    get:
-      operationId: connectionsOrganizationIdGet
-      parameters:
-      - explode: false
-        in: header
-        name: X-ORGANIZATION-ID
-        required: true
-        schema:
-          format: int32
-          type: integer
-        style: simple
-      - description: Filter result by connection state.
-        explode: true
-        in: query
-        name: state
-        required: false
-        schema:
-          enum:
-          - INIT
-          - INVITATION
-          - REQUEST
-          - RESPONSE
-          - ACTIVE
-          - ERROR
-          - INACTIVE
-          type: string
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/Connection'
-                type: array
-          description: OK
-        "400":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "500":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - auth: []
-      summary: List all connections
-      tags:
-      - Connections
-      x-accepts: application/json
-    post:
-      operationId: connectionsPost
-      parameters:
-      - explode: false
-        in: header
-        name: X-ORGANIZATION-ID
-        required: true
-        schema:
-          format: int32
-          type: integer
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ConnectionInvitationCreate'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ConnectionInvitationCreationResult'
-          description: OK
-        "400":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "500":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - auth: []
-      summary: Create a new connection invitation
-      tags:
-      - Connections
-      x-contentType: application/json
-      x-accepts: application/json
-  /connections/invitation:
-    post:
-      operationId: connectionsInvitationPost
-      parameters:
-      - explode: false
-        in: header
-        name: X-ORGANIZATION-ID
-        required: true
-        schema:
-          format: int32
-          type: integer
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ConnectionInvitation'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Connection'
-          description: OK
-        "400":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "500":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - auth: []
-      summary: Receive and accept a new connection invitation
-      tags:
-      - Connections
-      x-contentType: application/json
-      x-accepts: application/json
-  /credential-definitions/{credentialDefinitionId}:
-    get:
-      operationId: clientClientIdGet_1
-      parameters:
-      - explode: false
-        in: header
-        name: X-ORGANIZATION-ID
-        required: true
-        schema:
-          format: int32
-          type: integer
-        style: simple
-      - description: A credentialDefinition ID.
-        example: 0
-        explode: false
-        in: path
-        name: credentialDefinitionId
-        required: true
-        schema:
-          pattern: ([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):3:CL:(([1-9][0-9]*)|([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+)):(.+)?$
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CredentialDefinition'
-          description: OK
-        "400":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "500":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - auth: []
-      summary: Get credentialDefinition
-      tags:
-      - Credential Definitions
-      x-accepts: application/json
-  /credential-definitions:
-    post:
-      operationId: credentialDefinitionPost
-      parameters:
-      - explode: false
-        in: header
-        name: X-ORGANIZATION-ID
-        required: true
-        schema:
-          format: int32
-          type: integer
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CredentialDefinitionCreate'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CredentialDefinitionSummary'
-          description: OK
-        "400":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "500":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - auth: []
-      summary: Create a new credentialDefinition
-      tags:
-      - Credential Definitions
-      x-contentType: application/json
-      x-accepts: application/json
-  /credential-definitions/created:
-    get:
-      operationId: credentialDefinitionsCreatedGet
-      parameters:
-      - explode: false
-        in: header
-        name: X-ORGANIZATION-ID
-        required: true
-        schema:
-          format: int32
-          type: integer
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/CredentialDefinitionSummary'
-                type: array
-          description: OK
-        "400":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "500":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - auth: []
-      summary: Get created credential definitions
-      tags:
-      - Credential Definitions
-      x-accepts: application/json
-  /credentials/{credentialId}:
-    delete:
-      operationId: credentialCredentialIdDelete
-      parameters:
-      - explode: false
-        in: header
-        name: X-ORGANIZATION-ID
-        required: true
-        schema:
-          format: int32
-          type: integer
-        style: simple
-      - description: A credential ID.
-        explode: false
-        in: path
-        name: credentialId
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "204":
-          description: No Content
-        "400":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "500":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - auth: []
-      summary: Delete the specified credential
-      tags:
-      - Credentials
-      x-accepts: '*/*'
-    get:
-      operationId: credentialCredentialIdGet
-      parameters:
-      - explode: false
-        in: header
-        name: X-ORGANIZATION-ID
-        required: true
-        schema:
-          format: int32
-          type: integer
-        style: simple
-      - description: A credential ID.
-        explode: false
-        in: path
-        name: credentialId
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Credential'
-          description: OK
-        "400":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "500":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - auth: []
-      summary: Get the specified credential
-      tags:
-      - Credentials
-      x-accepts: application/json
-  /credentials:
-    get:
-      operationId: credentialsGet
-      parameters:
-      - explode: false
-        in: header
-        name: X-ORGANIZATION-ID
-        required: true
-        schema:
-          format: int32
-          type: integer
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/Credential'
-                type: array
-          description: OK
-        "400":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "500":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - auth: []
-      summary: List all credentials
-      tags:
-      - Credentials
-      x-accepts: application/json
-  /credentials-issuance:
-    get:
-      operationId: issuanceCredentialsGet
-      parameters:
-      - explode: false
-        in: header
-        name: X-ORGANIZATION-ID
-        required: true
-        schema:
-          format: int32
-          type: integer
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/CredentialIssuance'
-                type: array
-          description: OK
-        "400":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "500":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - auth: []
-      summary: List all credential issuance
-      tags:
-      - Credentials Issuance
-      x-accepts: application/json
-    post:
-      operationId: issuanceCredentialPost
-      parameters:
-      - explode: false
-        in: header
-        name: X-ORGANIZATION-ID
-        required: true
-        schema:
-          format: int32
-          type: integer
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CredentialCreate'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CredentialIssuance'
-          description: OK
-        "400":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "500":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - auth: []
-      summary: Issue new credentials
-      tags:
-      - Credentials Issuance
-      x-contentType: application/json
-      x-accepts: application/json
-  /credentials-issuance/{issuanceId}:
-    delete:
-      operationId: issuanceCredentialCredentialIdDelete
-      parameters:
-      - explode: false
-        in: header
-        name: X-ORGANIZATION-ID
-        required: true
-        schema:
-          format: int32
-          type: integer
-        style: simple
-      - description: An credential issuance ID.
-        explode: false
-        in: path
-        name: issuanceId
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "204":
-          description: No Content
-        "400":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "500":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - auth: []
-      summary: Delete the specified credential issuance
-      tags:
-      - Credentials Issuance
-      x-accepts: '*/*'
-    get:
-      operationId: issuanceCredentialCredentialIdGet
-      parameters:
-      - explode: false
-        in: header
-        name: X-ORGANIZATION-ID
-        required: true
-        schema:
-          format: int32
-          type: integer
-        style: simple
-      - description: An credential issuance ID.
-        explode: false
-        in: path
-        name: issuanceId
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CredentialIssuance'
-          description: OK
-        "400":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "500":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - auth: []
-      summary: Get the specified credential issuance
-      tags:
-      - Credentials Issuance
-      x-accepts: application/json
-  /messages:
-    post:
-      operationId: messagePost
-      parameters:
-      - explode: false
-        in: header
-        name: X-ORGANIZATION-ID
-        required: true
-        schema:
-          format: int32
-          type: integer
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Message'
-        required: true
-      responses:
-        "204":
-          description: No Content
-        "400":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "500":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - auth: []
-      summary: Sends a message
-      tags:
-      - Messages
-      x-contentType: application/json
-      x-accepts: '*/*'
-  /organizations/{organizationId}:
-    delete:
-      operationId: organizationOrganizationIdDelete
-      parameters:
-      - description: An organization ID.
-        example: 0
-        explode: false
-        in: path
-        name: organizationId
-        required: true
-        schema:
-          format: int32
-          type: integer
-        style: simple
-      responses:
-        "200":
-          description: OK
-        "400":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "500":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - auth: []
-      summary: Delete organization
-      tags:
-      - Organizations
-      x-accepts: '*/*'
-    get:
-      operationId: organizationOrganizationIdGet
-      parameters:
-      - description: An organization ID.
-        example: 0
-        explode: false
-        in: path
-        name: organizationId
-        required: true
-        schema:
-          format: int32
-          type: integer
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Organization'
-          description: OK
-        "400":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "500":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - auth: []
-      summary: Get organization
-      tags:
-      - Organizations
-      x-accepts: application/json
-    put:
-      operationId: organizationOrganizationIdPut
-      parameters:
-      - description: An organization ID.
-        example: 0
-        explode: false
-        in: path
-        name: organizationId
-        required: true
-        schema:
-          format: int32
-          type: integer
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OrganizationUpdate'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Organization'
-          description: OK
-        "400":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "500":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - auth: []
-      summary: Update organization
-      tags:
-      - Organizations
-      x-contentType: application/json
-      x-accepts: application/json
-  /organizations/{organizationId}/image:
-    delete:
-      operationId: organizationOrganizationIdImageDelete
-      parameters:
-      - description: An organization ID.
-        example: 0
-        explode: false
-        in: path
-        name: organizationId
-        required: true
-        schema:
-          format: int32
-          type: integer
-        style: simple
-      responses:
-        "204":
-          description: No Content
-        "400":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "500":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - auth: []
-      summary: Delete organization image
-      tags:
-      - Organizations
-      x-accepts: '*/*'
-    get:
-      operationId: organizationOrganizationIdImageGet
-      parameters:
-      - description: An organization ID.
-        example: 0
-        explode: false
-        in: path
-        name: organizationId
-        required: true
-        schema:
-          format: int32
-          type: integer
-        style: simple
-      responses:
-        "200":
-          description: OK
-        "400":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "500":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - auth: []
-      summary: Get organization image
-      tags:
-      - Organizations
-      x-accepts: '*/*'
-    put:
-      operationId: organizationOrganizationIdImagePut
-      parameters:
-      - description: An organization ID.
-        example: 0
-        explode: false
-        in: path
-        name: organizationId
-        required: true
-        schema:
-          format: int32
-          type: integer
-        style: simple
-      requestBody:
-        $ref: '#/components/requestBodies/inline_object'
-        content:
-          application/json:
-            schema:
-              properties:
-                file:
-                  description: The image to upload. Only PNG and JPEG images are supported
-                  format: binary
-                  type: string
-              type: object
-      responses:
-        "204":
-          description: No Content
-        "400":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "500":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - auth: []
-      summary: Update organization image
-      tags:
-      - Organizations
-      x-contentType: application/json
-      x-accepts: '*/*'
-  /organizations:
-    get:
-      operationId: organizationsGet
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/OrganizationSummary'
-                type: array
-          description: OK
-        "400":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "500":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - auth: []
-      summary: List all organizations
-      tags:
-      - Organizations
-      x-accepts: application/json
-    post:
-      operationId: organizationsPost
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OrganizationCreate'
-        required: true
-      responses:
-        "200":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/Organization'
-          description: OK
-        "400":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "500":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - auth: []
-      summary: Create a new organization and setup a new wallet
-      tags:
-      - Organizations
-      x-contentType: application/json
-      x-accepts: '*/*'
-  /revocations:
-    post:
-      operationId: revocationPost
-      parameters:
-      - explode: false
-        in: header
-        name: X-ORGANIZATION-ID
-        required: true
-        schema:
-          format: int32
-          type: integer
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RevocationCreate'
-        required: true
-      responses:
-        "204":
-          description: No Content
-        "400":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "500":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - auth: []
-      summary: Revoke credential
-      tags:
-      - Revocations
-      x-contentType: application/json
-      x-accepts: '*/*'
-  /schemas/{schemaId}:
-    get:
-      operationId: schemaSchemaIdGet
-      parameters:
-      - explode: false
-        in: header
-        name: X-ORGANIZATION-ID
-        required: true
-        schema:
-          format: int32
-          type: integer
-        style: simple
-      - description: A schema ID.
-        example: 0
-        explode: false
-        in: path
-        name: schemaId
-        required: true
-        schema:
-          pattern: ^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+$
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Schema'
-          description: OK
-        "400":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "500":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - auth: []
-      summary: Get schema
-      tags:
-      - Schemas
-      x-accepts: application/json
-  /schemas:
-    post:
-      operationId: schemaPost
-      parameters:
-      - explode: false
-        in: header
-        name: X-ORGANIZATION-ID
-        required: true
-        schema:
-          format: int32
-          type: integer
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/SchemaCreate'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SchemaSummary'
-          description: OK
-        "400":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "500":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - auth: []
-      summary: Create a new schema
-      tags:
-      - Schemas
-      x-contentType: application/json
-      x-accepts: application/json
-  /schemas/created:
-    get:
-      operationId: schemasCreatedGet
-      parameters:
-      - explode: false
-        in: header
-        name: X-ORGANIZATION-ID
-        required: true
-        schema:
-          format: int32
-          type: integer
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/SchemaSummary'
-                type: array
-          description: OK
-        "400":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "500":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - auth: []
-      summary: Get created schemas
-      tags:
-      - Schemas
-      x-accepts: application/json
   /verification-templates/{verificationTemplateId}:
     delete:
       operationId: verificationTemplateDelete
@@ -1687,6 +430,401 @@ paths:
       - Verifications
       x-contentType: application/json
       x-accepts: application/json
+  /connections/{connectionId}:
+    delete:
+      operationId: connectionOrganizationIdConnectionIdDelete
+      parameters:
+      - explode: false
+        in: header
+        name: X-ORGANIZATION-ID
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      - description: A connection ID.
+        example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        explode: false
+        in: path
+        name: connectionId
+        required: true
+        schema:
+          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: OK
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - auth: []
+      summary: Delete connection
+      tags:
+      - Connections
+      x-accepts: '*/*'
+    get:
+      operationId: connectionOrganizationIdConnectionIdGet
+      parameters:
+      - explode: false
+        in: header
+        name: X-ORGANIZATION-ID
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      - description: A connection ID.
+        example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        explode: false
+        in: path
+        name: connectionId
+        required: true
+        schema:
+          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Connection'
+          description: OK
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - auth: []
+      summary: Get connection
+      tags:
+      - Connections
+      x-accepts: application/json
+  /connections:
+    get:
+      operationId: connectionsOrganizationIdGet
+      parameters:
+      - explode: false
+        in: header
+        name: X-ORGANIZATION-ID
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      - description: Filter result by connection state.
+        explode: true
+        in: query
+        name: state
+        required: false
+        schema:
+          enum:
+          - INIT
+          - INVITATION
+          - REQUEST
+          - RESPONSE
+          - ACTIVE
+          - ERROR
+          - INACTIVE
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Connection'
+                type: array
+          description: OK
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - auth: []
+      summary: List all connections
+      tags:
+      - Connections
+      x-accepts: application/json
+    post:
+      operationId: connectionsPost
+      parameters:
+      - explode: false
+        in: header
+        name: X-ORGANIZATION-ID
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConnectionInvitationCreate'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectionInvitationCreationResult'
+          description: OK
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - auth: []
+      summary: Create a new connection invitation
+      tags:
+      - Connections
+      x-contentType: application/json
+      x-accepts: application/json
+  /connections/invitation:
+    post:
+      operationId: connectionsInvitationPost
+      parameters:
+      - explode: false
+        in: header
+        name: X-ORGANIZATION-ID
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConnectionInvitation'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Connection'
+          description: OK
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - auth: []
+      summary: Receive and accept a new connection invitation
+      tags:
+      - Connections
+      x-contentType: application/json
+      x-accepts: application/json
+  /credentials/{credentialId}:
+    delete:
+      operationId: credentialCredentialIdDelete
+      parameters:
+      - explode: false
+        in: header
+        name: X-ORGANIZATION-ID
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      - description: A credential ID.
+        explode: false
+        in: path
+        name: credentialId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - auth: []
+      summary: Delete the specified credential
+      tags:
+      - Credentials
+      x-accepts: '*/*'
+    get:
+      operationId: credentialCredentialIdGet
+      parameters:
+      - explode: false
+        in: header
+        name: X-ORGANIZATION-ID
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      - description: A credential ID.
+        explode: false
+        in: path
+        name: credentialId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Credential'
+          description: OK
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - auth: []
+      summary: Get the specified credential
+      tags:
+      - Credentials
+      x-accepts: application/json
+  /credentials:
+    get:
+      operationId: credentialsGet
+      parameters:
+      - explode: false
+        in: header
+        name: X-ORGANIZATION-ID
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Credential'
+                type: array
+          description: OK
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - auth: []
+      summary: List all credentials
+      tags:
+      - Credentials
+      x-accepts: application/json
+  /revocations:
+    post:
+      operationId: revocationPost
+      parameters:
+      - explode: false
+        in: header
+        name: X-ORGANIZATION-ID
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RevocationCreate'
+        required: true
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - auth: []
+      summary: Revoke credential
+      tags:
+      - Revocations
+      x-contentType: application/json
+      x-accepts: '*/*'
   /internal/webhooks:
     get:
       operationId: webhooksGet
@@ -1736,96 +874,6 @@ paths:
       summary: 'List an organization''s active webhooks with given type '
       tags:
       - Internal webhooks
-      x-accepts: application/json
-  /webhooks:
-    get:
-      operationId: webhooksGet_1
-      parameters:
-      - explode: false
-        in: header
-        name: X-ORGANIZATION-ID
-        required: true
-        schema:
-          format: int32
-          type: integer
-        style: simple
-      - description: Filter active webhooks
-        explode: true
-        in: query
-        name: active
-        required: false
-        schema:
-          type: boolean
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/Webhook'
-                type: array
-          description: OK
-        "400":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "500":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - auth: []
-      summary: List all webhooks
-      tags:
-      - Webhooks
-      x-accepts: application/json
-    post:
-      operationId: webhookPost
-      parameters:
-      - explode: false
-        in: header
-        name: X-ORGANIZATION-ID
-        required: true
-        schema:
-          format: int32
-          type: integer
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/WebhookCreate'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Webhook'
-          description: OK
-        "400":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "500":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - auth: []
-      summary: Create a new webhook
-      tags:
-      - Webhooks
-      x-contentType: application/json
       x-accepts: application/json
   /webhooks/{webhookId}:
     delete:
@@ -1969,6 +1017,96 @@ paths:
       - Webhooks
       x-contentType: application/json
       x-accepts: application/json
+  /webhooks:
+    get:
+      operationId: webhooksGet_1
+      parameters:
+      - explode: false
+        in: header
+        name: X-ORGANIZATION-ID
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      - description: Filter active webhooks
+        explode: true
+        in: query
+        name: active
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Webhook'
+                type: array
+          description: OK
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - auth: []
+      summary: List all webhooks
+      tags:
+      - Webhooks
+      x-accepts: application/json
+    post:
+      operationId: webhookPost
+      parameters:
+      - explode: false
+        in: header
+        name: X-ORGANIZATION-ID
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookCreate'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+          description: OK
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - auth: []
+      summary: Create a new webhook
+      tags:
+      - Webhooks
+      x-contentType: application/json
+      x-accepts: application/json
   /webhooks/types:
     get:
       operationId: webhookTypesGet
@@ -1999,6 +1137,867 @@ paths:
       tags:
       - Webhooks
       x-accepts: application/json
+  /messages:
+    post:
+      operationId: messagePost
+      parameters:
+      - explode: false
+        in: header
+        name: X-ORGANIZATION-ID
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Message'
+        required: true
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - auth: []
+      summary: Sends a message
+      tags:
+      - Messages
+      x-contentType: application/json
+      x-accepts: '*/*'
+  /organizations/{organizationId}/image:
+    delete:
+      operationId: organizationOrganizationIdImageDelete
+      parameters:
+      - description: An organization ID.
+        example: 0
+        explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - auth: []
+      summary: Delete organization image
+      tags:
+      - Organizations
+      x-accepts: '*/*'
+    get:
+      operationId: organizationOrganizationIdImageGet
+      parameters:
+      - description: An organization ID.
+        example: 0
+        explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      responses:
+        "200":
+          description: OK
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - auth: []
+      summary: Get organization image
+      tags:
+      - Organizations
+      x-accepts: '*/*'
+    put:
+      operationId: organizationOrganizationIdImagePut
+      parameters:
+      - description: An organization ID.
+        example: 0
+        explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/inline_object'
+        content:
+          application/json:
+            schema:
+              properties:
+                file:
+                  description: The image to upload. Only PNG and JPEG images are supported
+                  format: binary
+                  type: string
+              type: object
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - auth: []
+      summary: Update organization image
+      tags:
+      - Organizations
+      x-contentType: application/json
+      x-accepts: '*/*'
+  /organizations/{organizationId}:
+    delete:
+      operationId: organizationOrganizationIdDelete
+      parameters:
+      - description: An organization ID.
+        example: 0
+        explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      responses:
+        "200":
+          description: OK
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - auth: []
+      summary: Delete organization
+      tags:
+      - Organizations
+      x-accepts: '*/*'
+    get:
+      operationId: organizationOrganizationIdGet
+      parameters:
+      - description: An organization ID.
+        example: 0
+        explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+          description: OK
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - auth: []
+      summary: Get organization
+      tags:
+      - Organizations
+      x-accepts: application/json
+    put:
+      operationId: organizationOrganizationIdPut
+      parameters:
+      - description: An organization ID.
+        example: 0
+        explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationUpdate'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+          description: OK
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - auth: []
+      summary: Update organization
+      tags:
+      - Organizations
+      x-contentType: application/json
+      x-accepts: application/json
+  /organizations:
+    get:
+      operationId: organizationsGet
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OrganizationSummary'
+                type: array
+          description: OK
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - auth: []
+      summary: List all organizations
+      tags:
+      - Organizations
+      x-accepts: application/json
+    post:
+      operationId: organizationsPost
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationCreate'
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Organization'
+          description: OK
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - auth: []
+      summary: Create a new organization and setup a new wallet
+      tags:
+      - Organizations
+      x-contentType: application/json
+      x-accepts: '*/*'
+  /schemas/created:
+    get:
+      operationId: schemasCreatedGet
+      parameters:
+      - explode: false
+        in: header
+        name: X-ORGANIZATION-ID
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/SchemaSummary'
+                type: array
+          description: OK
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - auth: []
+      summary: Get created schemas
+      tags:
+      - Schemas
+      x-accepts: application/json
+  /schemas:
+    post:
+      operationId: schemaPost
+      parameters:
+      - explode: false
+        in: header
+        name: X-ORGANIZATION-ID
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SchemaCreate'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchemaSummary'
+          description: OK
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - auth: []
+      summary: Create a new schema
+      tags:
+      - Schemas
+      x-contentType: application/json
+      x-accepts: application/json
+  /schemas/{schemaId}:
+    get:
+      operationId: schemaSchemaIdGet
+      parameters:
+      - explode: false
+        in: header
+        name: X-ORGANIZATION-ID
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      - description: A schema ID.
+        example: 0
+        explode: false
+        in: path
+        name: schemaId
+        required: true
+        schema:
+          pattern: ^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+$
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schema'
+          description: OK
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - auth: []
+      summary: Get schema
+      tags:
+      - Schemas
+      x-accepts: application/json
+  /clients:
+    get:
+      operationId: clientsGet
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Client'
+                type: array
+          description: OK
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      summary: List all clients
+      tags:
+      - Clients
+      x-accepts: application/json
+    post:
+      operationId: clientPost
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientCreate'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+          description: OK
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      summary: Create a new client
+      tags:
+      - Clients
+      x-contentType: application/json
+      x-accepts: application/json
+  /clients/{clientId}:
+    get:
+      operationId: clientClientIdGet
+      parameters:
+      - description: An client ID.
+        example: 0
+        explode: false
+        in: path
+        name: clientId
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+          description: OK
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      summary: Get client
+      tags:
+      - Clients
+      x-accepts: application/json
+  /credential-definitions:
+    post:
+      operationId: credentialDefinitionPost
+      parameters:
+      - explode: false
+        in: header
+        name: X-ORGANIZATION-ID
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CredentialDefinitionCreate'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CredentialDefinitionSummary'
+          description: OK
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - auth: []
+      summary: Create a new credentialDefinition
+      tags:
+      - Credential Definitions
+      x-contentType: application/json
+      x-accepts: application/json
+  /credential-definitions/{credentialDefinitionId}:
+    get:
+      operationId: clientClientIdGet_1
+      parameters:
+      - explode: false
+        in: header
+        name: X-ORGANIZATION-ID
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      - description: A credentialDefinition ID.
+        example: 0
+        explode: false
+        in: path
+        name: credentialDefinitionId
+        required: true
+        schema:
+          pattern: ([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):3:CL:(([1-9][0-9]*)|([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+)):(.+)?$
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CredentialDefinition'
+          description: OK
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - auth: []
+      summary: Get credentialDefinition
+      tags:
+      - Credential Definitions
+      x-accepts: application/json
+  /credential-definitions/created:
+    get:
+      operationId: credentialDefinitionsCreatedGet
+      parameters:
+      - explode: false
+        in: header
+        name: X-ORGANIZATION-ID
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CredentialDefinitionSummary'
+                type: array
+          description: OK
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - auth: []
+      summary: Get created credential definitions
+      tags:
+      - Credential Definitions
+      x-accepts: application/json
+  /credentials-issuance:
+    get:
+      operationId: issuanceCredentialsGet
+      parameters:
+      - explode: false
+        in: header
+        name: X-ORGANIZATION-ID
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CredentialIssuance'
+                type: array
+          description: OK
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - auth: []
+      summary: List all credential issuance
+      tags:
+      - Credentials Issuance
+      x-accepts: application/json
+    post:
+      operationId: issuanceCredentialPost
+      parameters:
+      - explode: false
+        in: header
+        name: X-ORGANIZATION-ID
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CredentialCreate'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CredentialIssuance'
+          description: OK
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - auth: []
+      summary: Issue new credentials
+      tags:
+      - Credentials Issuance
+      x-contentType: application/json
+      x-accepts: application/json
+  /credentials-issuance/{issuanceId}:
+    delete:
+      operationId: issuanceCredentialCredentialIdDelete
+      parameters:
+      - explode: false
+        in: header
+        name: X-ORGANIZATION-ID
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      - description: An credential issuance ID.
+        explode: false
+        in: path
+        name: issuanceId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - auth: []
+      summary: Delete the specified credential issuance
+      tags:
+      - Credentials Issuance
+      x-accepts: '*/*'
+    get:
+      operationId: issuanceCredentialCredentialIdGet
+      parameters:
+      - explode: false
+        in: header
+        name: X-ORGANIZATION-ID
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      - description: An credential issuance ID.
+        explode: false
+        in: path
+        name: issuanceId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CredentialIssuance'
+          description: OK
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - auth: []
+      summary: Get the specified credential issuance
+      tags:
+      - Credentials Issuance
+      x-accepts: application/json
 components:
   requestBodies:
     inline_object:
@@ -2021,478 +2020,6 @@ components:
           type: string
         path:
           type: string
-      type: object
-    ClientCreate:
-      example:
-        name: name
-      properties:
-        name:
-          type: string
-      required:
-      - name
-      type: object
-    Client:
-      example:
-        name: name
-        id: 0
-      properties:
-        id:
-          format: int32
-          type: integer
-        name:
-          type: string
-      required:
-      - id
-      - name
-      type: object
-    Connection:
-      example:
-        connectionId: connectionId
-        label: label
-        state: INIT
-      properties:
-        label:
-          description: The connection's label
-          type: string
-        connectionId:
-          type: string
-        state:
-          enum:
-          - INIT
-          - INVITATION
-          - REQUEST
-          - RESPONSE
-          - ACTIVE
-          - ERROR
-          - INACTIVE
-          type: string
-      required:
-      - connectionId
-      - state
-      type: object
-    ConnectionInvitationCreate:
-      example:
-        alias: Some alias
-      properties:
-        alias:
-          description: Connection alias
-          example: Some alias
-          type: string
-      type: object
-    ConnectionInvitationContent:
-      example:
-        recipientKeys:
-        - recipientKeys
-        - recipientKeys
-        invitationId: invitationId
-        serviceEndpoint: serviceEndpoint
-        label: label
-      properties:
-        invitationId:
-          description: The connection's invitation id
-          type: string
-        serviceEndpoint:
-          description: The connection's service endpoint
-          type: string
-        recipientKeys:
-          description: The list of recipient's keys
-          items:
-            description: The list of recipient's keys
-            type: string
-          type: array
-        label:
-          description: The connection's label
-          type: string
-      required:
-      - invitationId
-      - recipientKeys
-      - serviceEndpoint
-      type: object
-    ConnectionInvitationCreationResult:
-      example:
-        invitationUrl: http://192.168.56.101:8020/invite?c_i=eyJAdHlwZSI6Li4ufQ==
-        connectionId: connectionId
-        connectionInvitationContent:
-          recipientKeys:
-          - recipientKeys
-          - recipientKeys
-          invitationId: invitationId
-          serviceEndpoint: serviceEndpoint
-          label: label
-      properties:
-        invitationUrl:
-          description: Invitation URL
-          example: http://192.168.56.101:8020/invite?c_i=eyJAdHlwZSI6Li4ufQ==
-          type: string
-        connectionInvitationContent:
-          $ref: '#/components/schemas/ConnectionInvitationContent'
-        connectionId:
-          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
-          type: string
-      required:
-      - connectionId
-      - connectionInvitationContent
-      - invitationUrl
-      type: object
-    ConnectionInvitation:
-      example:
-        alias: alias
-        connectionInvitationContent:
-          recipientKeys:
-          - recipientKeys
-          - recipientKeys
-          invitationId: invitationId
-          serviceEndpoint: serviceEndpoint
-          label: label
-      properties:
-        connectionInvitationContent:
-          $ref: '#/components/schemas/ConnectionInvitationContent'
-        alias:
-          type: string
-      required:
-      - connectionInvitationContent
-      type: object
-    CredentialDefinition:
-      example:
-        id: id
-      properties:
-        id:
-          pattern: ([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):3:CL:(([1-9][0-9]*)|([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+)):(.+)?$
-          type: string
-      required:
-      - id
-      type: object
-    CredentialDefinitionCreate:
-      example:
-        supportRevocation: true
-        schemaId: WgWxqztrNooG92RXvxSTWv:2:schema_name:1.0
-        tag: default
-      properties:
-        schemaId:
-          description: Schema identifier
-          example: WgWxqztrNooG92RXvxSTWv:2:schema_name:1.0
-          pattern: ^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+$
-          type: string
-        tag:
-          description: Credential definition identifier tag
-          example: default
-          type: string
-        supportRevocation:
-          description: Revocation supported flag
-          type: boolean
-      required:
-      - schemaId
-      - supportRevocation
-      - tag
-      type: object
-    CredentialDefinitionSummary:
-      example:
-        id: id
-      properties:
-        id:
-          description: The credential definition's id
-          pattern: ([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):3:CL:(([1-9][0-9]*)|([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+)):(.+)?$
-          type: string
-      required:
-      - id
-      type: object
-    Credential:
-      example:
-        credentialProposal:
-          attributes:
-          - name: name
-            value: value
-          - name: name
-            value: value
-        schemaId: schemaId
-        credentialId: credentialId
-        comment: comment
-        credentialDefinitionId: credentialDefinitionId
-      properties:
-        credentialId:
-          type: string
-        schemaId:
-          description: A schema ID
-          pattern: ^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+$
-          type: string
-        credentialDefinitionId:
-          description: A credential definition ID
-          pattern: ([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):3:CL:(([1-9][0-9]*)|([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+)):(.+)?$
-          type: string
-        comment:
-          description: A human readable comment
-          type: string
-        credentialProposal:
-          $ref: '#/components/schemas/CredentialProposal'
-      type: object
-    CredentialAttribute:
-      description: A list of credential attributes
-      example:
-        name: name
-        value: value
-      properties:
-        name:
-          description: A credential attribute name
-          type: string
-        value:
-          description: A credential attribute value
-          type: string
-      type: object
-    CredentialProposal:
-      example:
-        attributes:
-        - name: name
-          value: value
-        - name: name
-          value: value
-      properties:
-        attributes:
-          description: A list of credential attributes
-          items:
-            $ref: '#/components/schemas/CredentialAttribute'
-          type: array
-      type: object
-    CredentialCreate:
-      example:
-        schemaId: schemaId
-        connectionId: 3fa85f64-5717-4562-b3fc-2c963f66afa6
-        comment: comment
-        attributes:
-        - name: name
-          value: value
-        - name: name
-          value: value
-        credentialDefinitionId: credentialDefinitionId
-      properties:
-        connectionId:
-          description: A connection ID
-          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
-          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
-          type: string
-        schemaId:
-          description: A schema ID
-          pattern: ^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+$
-          type: string
-        credentialDefinitionId:
-          description: A credential definition ID
-          pattern: ([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):3:CL:(([1-9][0-9]*)|([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+)):(.+)?$
-          type: string
-        comment:
-          description: A human readable comment
-          type: string
-        attributes:
-          description: A list of credential attributes
-          items:
-            $ref: '#/components/schemas/CredentialAttribute'
-          type: array
-      required:
-      - attributes
-      - connectionId
-      - credentialDefinitionId
-      - schemaId
-      type: object
-    CredentialIssuance:
-      example:
-        credential:
-          credentialProposal:
-            attributes:
-            - name: name
-              value: value
-            - name: name
-              value: value
-          schemaId: schemaId
-          credentialId: credentialId
-          comment: comment
-          credentialDefinitionId: credentialDefinitionId
-        issuanceId: issuanceId
-        errorMessage: errorMessage
-        state: state
-        updatedAt: 2000-01-23T04:56:07.000+00:00
-      properties:
-        issuanceId:
-          description: A credential issuance ID
-          type: string
-        errorMessage:
-          description: Optional error message
-          type: string
-        state:
-          description: State of the credential transaction
-          type: string
-        updatedAt:
-          format: date-time
-          type: string
-        credential:
-          $ref: '#/components/schemas/Credential'
-      required:
-      - credential
-      - issuanceId
-      - state
-      type: object
-    Message:
-      example:
-        connectionId: connectionId
-        text: text
-      properties:
-        text:
-          type: string
-        connectionId:
-          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
-          type: string
-      required:
-      - connectionId
-      - text
-      type: object
-    Organization:
-      example:
-        clientId: 6
-        imageUrl: imageUrl
-        name: name
-        id: 0
-        issuer: true
-      properties:
-        id:
-          description: The organization's id
-          format: int32
-          type: integer
-        name:
-          description: The organization's label
-          type: string
-        clientId:
-          description: The organization's clientId
-          format: int32
-          type: integer
-        imageUrl:
-          type: string
-        issuer:
-          description: Defines if the organization acts as an issuer
-          type: boolean
-      required:
-      - clientId
-      - id
-      - issuer
-      - name
-      type: object
-    OrganizationUpdate:
-      example:
-        name: name
-        issuer: true
-      properties:
-        name:
-          description: The organization name
-          type: string
-        issuer:
-          description: Defines if the organization can issue credentials
-          type: boolean
-      required:
-      - name
-      type: object
-    OrganizationSummary:
-      example:
-        name: name
-        id: 0
-      properties:
-        id:
-          format: int32
-          type: integer
-        name:
-          type: string
-      type: object
-    OrganizationCreate:
-      example:
-        name: name
-        issuer: true
-      properties:
-        name:
-          description: The organization name
-          type: string
-        issuer:
-          description: Determine if this organization will act as a credential issuer
-          type: boolean
-      required:
-      - issuer
-      - name
-      type: object
-    RevocationCreate:
-      example:
-        issuanceId: issuanceId
-      properties:
-        issuanceId:
-          description: A credential issuance ID
-          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
-          type: string
-      required:
-      - issuanceId
-      type: object
-    Schema:
-      example:
-        attributesName:
-        - attributesName
-        - attributesName
-        name: name
-        id: id
-        version: version
-      properties:
-        id:
-          description: The schema's id
-          pattern: ^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+$
-          type: string
-        name:
-          description: The schema's name
-          type: string
-        version:
-          description: The schema's version
-          pattern: ^[0-9.]+$
-          type: string
-        attributesName:
-          description: The schema's attributes
-          items:
-            description: The schema's attributes
-            type: string
-          type: array
-      required:
-      - attributesName
-      - id
-      - name
-      - version
-      type: object
-    SchemaCreate:
-      example:
-        attributesName:
-        - attributesName
-        - attributesName
-        name: prefs
-        version: "1.0"
-      properties:
-        name:
-          description: Schema name
-          example: prefs
-          type: string
-        version:
-          description: Schema version
-          example: "1.0"
-          pattern: ^[0-9.]+$
-          type: string
-        attributesName:
-          description: List of schema attributes
-          items:
-            description: List of schema attributes
-            type: string
-          type: array
-      required:
-      - attributesName
-      - name
-      - version
-      type: object
-    SchemaSummary:
-      example:
-        id: id
-      properties:
-        id:
-          description: The schema's id
-          pattern: ^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+$
-          type: string
-      required:
-      - id
       type: object
     RequestedAttribute:
       description: The requested attributes. In order for the verification to be successful,
@@ -2983,6 +2510,186 @@ components:
       - connectionId
       - verificationTemplateId
       type: object
+    Connection:
+      example:
+        connectionId: connectionId
+        label: label
+        state: INIT
+      properties:
+        label:
+          description: The connection's label
+          type: string
+        connectionId:
+          type: string
+        state:
+          enum:
+          - INIT
+          - INVITATION
+          - REQUEST
+          - RESPONSE
+          - ACTIVE
+          - ERROR
+          - INACTIVE
+          type: string
+      required:
+      - connectionId
+      - state
+      type: object
+    ConnectionInvitationCreate:
+      example:
+        alias: Some alias
+      properties:
+        alias:
+          description: Connection alias
+          example: Some alias
+          type: string
+      type: object
+    ConnectionInvitationContent:
+      example:
+        imgUrl: imgUrl
+        recipientKeys:
+        - recipientKeys
+        - recipientKeys
+        invitationId: invitationId
+        serviceEndpoint: serviceEndpoint
+        label: label
+      properties:
+        invitationId:
+          description: The connection's invitation id
+          type: string
+        serviceEndpoint:
+          description: The connection's service endpoint
+          type: string
+        recipientKeys:
+          description: The list of recipient's keys
+          items:
+            description: The list of recipient's keys
+            type: string
+          type: array
+        label:
+          description: The connection's label
+          type: string
+        imgUrl:
+          description: The Agent image URL
+          type: string
+      required:
+      - invitationId
+      - recipientKeys
+      - serviceEndpoint
+      type: object
+    ConnectionInvitationCreationResult:
+      example:
+        invitationUrl: http://192.168.56.101:8020/invite?c_i=eyJAdHlwZSI6Li4ufQ==
+        connectionId: connectionId
+        connectionInvitationContent:
+          imgUrl: imgUrl
+          recipientKeys:
+          - recipientKeys
+          - recipientKeys
+          invitationId: invitationId
+          serviceEndpoint: serviceEndpoint
+          label: label
+      properties:
+        invitationUrl:
+          description: Invitation URL
+          example: http://192.168.56.101:8020/invite?c_i=eyJAdHlwZSI6Li4ufQ==
+          type: string
+        connectionInvitationContent:
+          $ref: '#/components/schemas/ConnectionInvitationContent'
+        connectionId:
+          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+          type: string
+      required:
+      - connectionId
+      - connectionInvitationContent
+      - invitationUrl
+      type: object
+    ConnectionInvitation:
+      example:
+        alias: alias
+        connectionInvitationContent:
+          imgUrl: imgUrl
+          recipientKeys:
+          - recipientKeys
+          - recipientKeys
+          invitationId: invitationId
+          serviceEndpoint: serviceEndpoint
+          label: label
+      properties:
+        connectionInvitationContent:
+          $ref: '#/components/schemas/ConnectionInvitationContent'
+        alias:
+          type: string
+      required:
+      - connectionInvitationContent
+      type: object
+    Credential:
+      example:
+        credentialProposal:
+          attributes:
+          - name: name
+            value: value
+          - name: name
+            value: value
+        schemaId: schemaId
+        credentialId: credentialId
+        comment: comment
+        credentialDefinitionId: credentialDefinitionId
+      properties:
+        credentialId:
+          type: string
+        schemaId:
+          description: A schema ID
+          pattern: ^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+$
+          type: string
+        credentialDefinitionId:
+          description: A credential definition ID
+          pattern: ([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):3:CL:(([1-9][0-9]*)|([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+)):(.+)?$
+          type: string
+        comment:
+          description: A human readable comment
+          type: string
+        credentialProposal:
+          $ref: '#/components/schemas/CredentialProposal'
+      type: object
+    CredentialAttribute:
+      description: A list of credential attributes
+      example:
+        name: name
+        value: value
+      properties:
+        name:
+          description: A credential attribute name
+          type: string
+        value:
+          description: A credential attribute value
+          type: string
+      type: object
+    CredentialProposal:
+      example:
+        attributes:
+        - name: name
+          value: value
+        - name: name
+          value: value
+      properties:
+        attributes:
+          description: A list of credential attributes
+          items:
+            $ref: '#/components/schemas/CredentialAttribute'
+          type: array
+      type: object
+    RevocationCreate:
+      example:
+        issuanceId: issuanceId
+      properties:
+        issuanceId:
+          description: A credential issuance ID
+          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+          type: string
+      required:
+      - issuanceId
+      type: object
     Webhook:
       example:
         name: name
@@ -3185,6 +2892,316 @@ components:
       required:
       - webhookTypes
       type: object
+    Message:
+      example:
+        connectionId: connectionId
+        text: text
+      properties:
+        text:
+          type: string
+        connectionId:
+          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+          type: string
+      required:
+      - connectionId
+      - text
+      type: object
+    OrganizationUpdate:
+      example:
+        imageUrl: imageUrl
+        name: name
+        issuer: true
+      properties:
+        name:
+          description: The organization name
+          type: string
+        issuer:
+          description: Defines if the organization can issue credentials
+          type: boolean
+        imageUrl:
+          description: The image url of the Organization
+          type: string
+      required:
+      - name
+      type: object
+    Organization:
+      example:
+        clientId: 6
+        imageUrl: imageUrl
+        name: name
+        id: 0
+        issuer: true
+      properties:
+        id:
+          description: The organization's id
+          format: int32
+          type: integer
+        name:
+          description: The organization's label
+          type: string
+        clientId:
+          description: The organization's clientId
+          format: int32
+          type: integer
+        imageUrl:
+          description: The image url of the Organization
+          type: string
+        issuer:
+          description: Defines if the organization acts as an issuer
+          type: boolean
+      required:
+      - clientId
+      - id
+      - issuer
+      - name
+      type: object
+    OrganizationSummary:
+      example:
+        imgUrl: imgUrl
+        name: name
+        id: 0
+      properties:
+        id:
+          format: int32
+          type: integer
+        name:
+          type: string
+        imgUrl:
+          type: string
+      type: object
+    OrganizationCreate:
+      example:
+        imageUrl: imageUrl
+        name: name
+        issuer: true
+      properties:
+        name:
+          description: The organization name
+          type: string
+        issuer:
+          description: Determine if this organization will act as a credential issuer
+          type: boolean
+        imageUrl:
+          description: The image url of the Organization
+          type: string
+      required:
+      - issuer
+      - name
+      type: object
+    SchemaSummary:
+      example:
+        id: id
+      properties:
+        id:
+          description: The schema's id
+          pattern: ^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+$
+          type: string
+      required:
+      - id
+      type: object
+    SchemaCreate:
+      example:
+        attributesName:
+        - attributesName
+        - attributesName
+        name: prefs
+        version: "1.0"
+      properties:
+        name:
+          description: Schema name
+          example: prefs
+          type: string
+        version:
+          description: Schema version
+          example: "1.0"
+          pattern: ^[0-9.]+$
+          type: string
+        attributesName:
+          description: List of schema attributes
+          items:
+            description: List of schema attributes
+            type: string
+          type: array
+      required:
+      - attributesName
+      - name
+      - version
+      type: object
+    Schema:
+      example:
+        attributesName:
+        - attributesName
+        - attributesName
+        name: name
+        id: id
+        version: version
+      properties:
+        id:
+          description: The schema's id
+          pattern: ^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+$
+          type: string
+        name:
+          description: The schema's name
+          type: string
+        version:
+          description: The schema's version
+          pattern: ^[0-9.]+$
+          type: string
+        attributesName:
+          description: The schema's attributes
+          items:
+            description: The schema's attributes
+            type: string
+          type: array
+      required:
+      - attributesName
+      - id
+      - name
+      - version
+      type: object
+    Client:
+      example:
+        name: name
+        id: 0
+      properties:
+        id:
+          format: int32
+          type: integer
+        name:
+          type: string
+      required:
+      - id
+      - name
+      type: object
+    ClientCreate:
+      example:
+        name: name
+      properties:
+        name:
+          type: string
+      required:
+      - name
+      type: object
+    CredentialDefinitionCreate:
+      example:
+        supportRevocation: true
+        schemaId: WgWxqztrNooG92RXvxSTWv:2:schema_name:1.0
+        tag: default
+      properties:
+        schemaId:
+          description: Schema identifier
+          example: WgWxqztrNooG92RXvxSTWv:2:schema_name:1.0
+          pattern: ^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+$
+          type: string
+        tag:
+          description: Credential definition identifier tag
+          example: default
+          type: string
+        supportRevocation:
+          description: Revocation supported flag
+          type: boolean
+      required:
+      - schemaId
+      - supportRevocation
+      - tag
+      type: object
+    CredentialDefinitionSummary:
+      example:
+        id: id
+      properties:
+        id:
+          description: The credential definition's id
+          pattern: ([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):3:CL:(([1-9][0-9]*)|([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+)):(.+)?$
+          type: string
+      required:
+      - id
+      type: object
+    CredentialDefinition:
+      example:
+        id: id
+      properties:
+        id:
+          pattern: ([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):3:CL:(([1-9][0-9]*)|([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+)):(.+)?$
+          type: string
+      required:
+      - id
+      type: object
+    CredentialCreate:
+      example:
+        schemaId: schemaId
+        connectionId: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        comment: comment
+        attributes:
+        - name: name
+          value: value
+        - name: name
+          value: value
+        credentialDefinitionId: credentialDefinitionId
+      properties:
+        connectionId:
+          description: A connection ID
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+          type: string
+        schemaId:
+          description: A schema ID
+          pattern: ^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+$
+          type: string
+        credentialDefinitionId:
+          description: A credential definition ID
+          pattern: ([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):3:CL:(([1-9][0-9]*)|([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+)):(.+)?$
+          type: string
+        comment:
+          description: A human readable comment
+          type: string
+        attributes:
+          description: A list of credential attributes
+          items:
+            $ref: '#/components/schemas/CredentialAttribute'
+          type: array
+      required:
+      - attributes
+      - connectionId
+      - credentialDefinitionId
+      - schemaId
+      type: object
+    CredentialIssuance:
+      example:
+        credential:
+          credentialProposal:
+            attributes:
+            - name: name
+              value: value
+            - name: name
+              value: value
+          schemaId: schemaId
+          credentialId: credentialId
+          comment: comment
+          credentialDefinitionId: credentialDefinitionId
+        issuanceId: issuanceId
+        errorMessage: errorMessage
+        state: state
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        issuanceId:
+          description: A credential issuance ID
+          type: string
+        errorMessage:
+          description: Optional error message
+          type: string
+        state:
+          description: State of the credential transaction
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        credential:
+          $ref: '#/components/schemas/Credential'
+      required:
+      - credential
+      - issuanceId
+      - state
+      type: object
     inline_object:
       properties:
         file:
@@ -3194,8 +3211,7 @@ components:
       type: object
   securitySchemes:
     auth:
-      description: Only for local testing !
-      in: header
-      name: X-CLIENT-ID
-      type: apiKey
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
 

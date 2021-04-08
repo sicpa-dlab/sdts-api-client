@@ -28,7 +28,7 @@ import java.io.IOException;
 /**
  * InlineObject
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-24T16:36:10.832178+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-04-08T17:35:55.199434+02:00[Europe/Zurich]")
 public class InlineObject {
   public static final String SERIALIZED_NAME_FILE = "file";
   @SerializedName(SERIALIZED_NAME_FILE)

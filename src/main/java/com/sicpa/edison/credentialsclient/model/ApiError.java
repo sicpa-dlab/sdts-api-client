@@ -28,7 +28,7 @@ import java.time.OffsetDateTime;
 /**
  * ApiError
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-24T16:36:10.832178+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-04-08T17:35:55.199434+02:00[Europe/Zurich]")
 public class ApiError {
   public static final String SERIALIZED_NAME_TIMESTAMP = "timestamp";
   @SerializedName(SERIALIZED_NAME_TIMESTAMP)

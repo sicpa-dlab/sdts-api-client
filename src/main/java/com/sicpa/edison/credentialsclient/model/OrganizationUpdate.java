@@ -27,7 +27,7 @@ import java.io.IOException;
 /**
  * OrganizationUpdate
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-24T16:36:10.832178+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-04-08T17:35:55.199434+02:00[Europe/Zurich]")
 public class OrganizationUpdate {
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
@@ -36,6 +36,10 @@ public class OrganizationUpdate {
   public static final String SERIALIZED_NAME_ISSUER = "issuer";
   @SerializedName(SERIALIZED_NAME_ISSUER)
   private Boolean issuer;
+
+  public static final String SERIALIZED_NAME_IMAGE_URL = "imageUrl";
+  @SerializedName(SERIALIZED_NAME_IMAGE_URL)
+  private String imageUrl;
 
 
   public OrganizationUpdate name(String name) {
@@ -83,6 +87,29 @@ public class OrganizationUpdate {
   }
 
 
+  public OrganizationUpdate imageUrl(String imageUrl) {
+    
+    this.imageUrl = imageUrl;
+    return this;
+  }
+
+   /**
+   * The image url of the Organization
+   * @return imageUrl
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The image url of the Organization")
+
+  public String getImageUrl() {
+    return imageUrl;
+  }
+
+
+  public void setImageUrl(String imageUrl) {
+    this.imageUrl = imageUrl;
+  }
+
+
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -93,12 +120,13 @@ public class OrganizationUpdate {
     }
     OrganizationUpdate organizationUpdate = (OrganizationUpdate) o;
     return Objects.equals(this.name, organizationUpdate.name) &&
-        Objects.equals(this.issuer, organizationUpdate.issuer);
+        Objects.equals(this.issuer, organizationUpdate.issuer) &&
+        Objects.equals(this.imageUrl, organizationUpdate.imageUrl);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, issuer);
+    return Objects.hash(name, issuer, imageUrl);
   }
 
 
@@ -108,6 +136,7 @@ public class OrganizationUpdate {
     sb.append("class OrganizationUpdate {\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    issuer: ").append(toIndentedString(issuer)).append("\n");
+    sb.append("    imageUrl: ").append(toIndentedString(imageUrl)).append("\n");
     sb.append("}");
     return sb.toString();
   }

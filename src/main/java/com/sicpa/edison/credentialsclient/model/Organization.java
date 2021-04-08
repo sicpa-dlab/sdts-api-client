@@ -27,7 +27,7 @@ import java.io.IOException;
 /**
  * Organization
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-24T16:36:10.832178+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-04-08T17:35:55.199434+02:00[Europe/Zurich]")
 public class Organization {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -123,11 +123,11 @@ public class Organization {
   }
 
    /**
-   * Get imageUrl
+   * The image url of the Organization
    * @return imageUrl
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(value = "The image url of the Organization")
 
   public String getImageUrl() {
     return imageUrl;

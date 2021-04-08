@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * ConnectionInvitationContent
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-24T16:36:10.832178+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-04-08T17:35:55.199434+02:00[Europe/Zurich]")
 public class ConnectionInvitationContent {
   public static final String SERIALIZED_NAME_INVITATION_ID = "invitationId";
   @SerializedName(SERIALIZED_NAME_INVITATION_ID)
@@ -46,6 +46,10 @@ public class ConnectionInvitationContent {
   public static final String SERIALIZED_NAME_LABEL = "label";
   @SerializedName(SERIALIZED_NAME_LABEL)
   private String label;
+
+  public static final String SERIALIZED_NAME_IMG_URL = "imgUrl";
+  @SerializedName(SERIALIZED_NAME_IMG_URL)
+  private String imgUrl;
 
 
   public ConnectionInvitationContent invitationId(String invitationId) {
@@ -142,6 +146,29 @@ public class ConnectionInvitationContent {
   }
 
 
+  public ConnectionInvitationContent imgUrl(String imgUrl) {
+    
+    this.imgUrl = imgUrl;
+    return this;
+  }
+
+   /**
+   * The Agent image URL
+   * @return imgUrl
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The Agent image URL")
+
+  public String getImgUrl() {
+    return imgUrl;
+  }
+
+
+  public void setImgUrl(String imgUrl) {
+    this.imgUrl = imgUrl;
+  }
+
+
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -154,12 +181,13 @@ public class ConnectionInvitationContent {
     return Objects.equals(this.invitationId, connectionInvitationContent.invitationId) &&
         Objects.equals(this.serviceEndpoint, connectionInvitationContent.serviceEndpoint) &&
         Objects.equals(this.recipientKeys, connectionInvitationContent.recipientKeys) &&
-        Objects.equals(this.label, connectionInvitationContent.label);
+        Objects.equals(this.label, connectionInvitationContent.label) &&
+        Objects.equals(this.imgUrl, connectionInvitationContent.imgUrl);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(invitationId, serviceEndpoint, recipientKeys, label);
+    return Objects.hash(invitationId, serviceEndpoint, recipientKeys, label, imgUrl);
   }
 
 
@@ -171,6 +199,7 @@ public class ConnectionInvitationContent {
     sb.append("    serviceEndpoint: ").append(toIndentedString(serviceEndpoint)).append("\n");
     sb.append("    recipientKeys: ").append(toIndentedString(recipientKeys)).append("\n");
     sb.append("    label: ").append(toIndentedString(label)).append("\n");
+    sb.append("    imgUrl: ").append(toIndentedString(imgUrl)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -27,7 +27,7 @@ import java.io.IOException;
 /**
  * OrganizationSummary
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-24T16:36:10.832178+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-04-08T17:35:55.199434+02:00[Europe/Zurich]")
 public class OrganizationSummary {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -36,6 +36,10 @@ public class OrganizationSummary {
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
   private String name;
+
+  public static final String SERIALIZED_NAME_IMG_URL = "imgUrl";
+  @SerializedName(SERIALIZED_NAME_IMG_URL)
+  private String imgUrl;
 
 
   public OrganizationSummary id(Integer id) {
@@ -84,6 +88,29 @@ public class OrganizationSummary {
   }
 
 
+  public OrganizationSummary imgUrl(String imgUrl) {
+    
+    this.imgUrl = imgUrl;
+    return this;
+  }
+
+   /**
+   * Get imgUrl
+   * @return imgUrl
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public String getImgUrl() {
+    return imgUrl;
+  }
+
+
+  public void setImgUrl(String imgUrl) {
+    this.imgUrl = imgUrl;
+  }
+
+
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -94,12 +121,13 @@ public class OrganizationSummary {
     }
     OrganizationSummary organizationSummary = (OrganizationSummary) o;
     return Objects.equals(this.id, organizationSummary.id) &&
-        Objects.equals(this.name, organizationSummary.name);
+        Objects.equals(this.name, organizationSummary.name) &&
+        Objects.equals(this.imgUrl, organizationSummary.imgUrl);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name);
+    return Objects.hash(id, name, imgUrl);
   }
 
 
@@ -109,6 +137,7 @@ public class OrganizationSummary {
     sb.append("class OrganizationSummary {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    imgUrl: ").append(toIndentedString(imgUrl)).append("\n");
     sb.append("}");
     return sb.toString();
   }

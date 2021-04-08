@@ -28,7 +28,7 @@ import java.io.IOException;
  * A list of predicate restrictions
  */
 @ApiModel(description = "A list of predicate restrictions")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-02-24T16:36:10.832178+01:00[Europe/Zurich]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-04-08T17:35:55.199434+02:00[Europe/Zurich]")
 public class Restriction {
   public static final String SERIALIZED_NAME_CREDENTIAL_DEFINITION_ID = "credentialDefinitionId";
   @SerializedName(SERIALIZED_NAME_CREDENTIAL_DEFINITION_ID)
