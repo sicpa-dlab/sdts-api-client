@@ -10,9 +10,6 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
 
     steps:
     - uses: actions/checkout@v2
@@ -24,7 +21,7 @@ jobs:
         server-id: github
         settings-path: ${{ github.workspace }}
 
-    - name: Build artifact with Maven
+    - name: Build with Maven
       run: mvn -B package --file pom.xml
 
     - name: Publish to GitHub Packages Apache Maven
