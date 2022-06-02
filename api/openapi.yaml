@@ -3,7 +3,7 @@ info:
   title: Edison Credentials API
   version: 0.0.1
 servers:
-- url: /edison-credentials-api
+- url: /
 tags:
 - name: Verifications
   description: The Verifications API
