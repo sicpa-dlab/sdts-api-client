@@ -1,3 +1,0 @@
-buildPack: maven
-buildPackGitRef: master
-buildPackGitURL: https://github.com/jenkins-x-buildpacks/jenkins-x-classic.git
