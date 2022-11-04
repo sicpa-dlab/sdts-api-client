@@ -1,15 +1,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.sicpa.edison</groupId>
-    <artifactId>edison-credentials-client</artifactId>
+    <groupId>${groupId}</groupId>
+    <artifactId>${artifactId}</artifactId>
     <packaging>jar</packaging>
     <name>edison-credentials-client</name>
-    <version>0.0.44</version>
-    <url>https://github.com/openapitools/openapi-generator</url>
-    <description>OpenAPI Java</description>
+    <version>${artifactVersion}</version>
+    <url>https://github.com/sicpa-dlab/edison-credentials-client</url>
+    <description>OpenAPI Generated client for Edison credentials API</description>
 
     <properties>
+        <groupId>com.sicpa.edison</groupId>
+        <artifactId>edison-credentials-client</artifactId>
+        <artifactVersion>0.0.44</artifactVersion>
         <!-- used to configure the SCM (releases) -->
         <github.repository>sicpa-dlab/edison-credentials-client</github.repository>
         <!--
@@ -68,10 +71,15 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
+                            <!-- these are necessary for the generated README.md to be relevant -->
+                            <groupId>${groupId}</groupId>
+                            <artifactId>${artifactId}</artifactId>
+                            <artifactVersion>${artifactVersion}</artifactVersion>
+
                             <inputSpec>${project.basedir}/api/openapi.yaml</inputSpec>
                             <generatorName>java</generatorName>
-                            <generateModelDocumentation>false</generateModelDocumentation>
-                            <generateApiDocumentation>false</generateApiDocumentation>
+                            <generateModelDocumentation>true</generateModelDocumentation>
+                            <generateApiDocumentation>true</generateApiDocumentation>
 
                             <modelPackage>${project.groupId}.credentialsclient.model</modelPackage>
                             <apiPackage>${project.groupId}.credentialsclient.api</apiPackage>
