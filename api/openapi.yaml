@@ -490,7 +490,7 @@ paths:
       security:
       - auth: []
   /organizations/{organizationId}/endorse:
-    put:
+    get:
       tags:
       - Organizations
       summary: Request for the organization transactions to be endorsed
