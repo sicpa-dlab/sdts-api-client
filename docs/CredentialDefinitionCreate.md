@@ -2,6 +2,7 @@
 
 # CredentialDefinitionCreate
 
+
 ## Properties
 
 Name | Type | Description | Notes

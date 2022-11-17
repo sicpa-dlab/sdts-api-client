@@ -2,6 +2,7 @@
 
 # Organization
 
+
 ## Properties
 
 Name | Type | Description | Notes
@@ -10,7 +11,7 @@ Name | Type | Description | Notes
 **name** | **String** | The organization&#39;s label | 
 **clientId** | **Integer** | The organization&#39;s clientId | 
 **imageUrl** | **String** | The image url of the Organization |  [optional]
-**issuer** | **Boolean** | Defines if the organization acts as an issuer | 
+**publicDid** | [**PublicDid**](PublicDid.md) |  |  [optional]
 
 
 

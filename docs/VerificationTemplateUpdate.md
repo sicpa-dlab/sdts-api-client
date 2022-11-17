@@ -2,6 +2,7 @@
 
 # VerificationTemplateUpdate
 
+
 ## Properties
 
 Name | Type | Description | Notes

@@ -3,35 +3,36 @@ info:
   title: Edison Credentials API
   version: 0.0.1
 servers:
-- url: /
+- url: /edison-credentials-api
 tags:
-- name: Verifications
-  description: The Verifications API
+- name: Revocations
+  description: Revoke issued credentials
 - name: Webhooks
   description: The Webhooks API
-- name: Messages
-  description: The Messages API
-- name: Schemas
-  description: The Schemas API
-- name: Revocations
-  description: The Revocations API
-- name: Credentials
-  description: The Credentials API
 - name: Credential Definitions
-  description: The Credential Definitions API
+  description: Create and retrieve credential definitions
 - name: Connections
-  description: The Connections API
-- name: Organizations
-  description: The Organizations API
+  description: "Create and receive invitations, manage existing connections"
+- name: Schemas
+  description: Create and retrieve schemas
+- name: Messages
+  description: Send basic messages through established connections
 - name: Credentials Issuance
-  description: The Credentials Issuance API
+  description: Issue credentials over established connections and retrieve issued
+    credentials.
+- name: Organizations
+  description: Create and manage organizations
+- name: Credentials
+  description: Retrieve and manage credentials held in the organization wallet.
+- name: Verifications
+  description: Manage verification templates and verify credentials
 paths:
   /webhooks/{webhookId}:
     get:
       tags:
       - Webhooks
-      summary: Get webhook
-      operationId: webhookWebhookIdGet
+      summary: Get a webhook configuration
+      operationId: getWebhookById
       parameters:
       - name: X-ORGANIZATION-ID
         in: header
@@ -70,11 +71,11 @@ paths:
     put:
       tags:
       - Webhooks
-      summary: Update a webhook
-      description: The update is done in such manner that all fields passed in the
-        payload updates the existing entity. Null valuesin the payload will indicate
-        that no changes will be applied to the existing entity.
-      operationId: webhookWebhookIdPut
+      summary: Update a webhook configuration
+      description: This updates all fields passed in the payload. Null valuesin the
+        payload indicate that no changes will be applied to the currently persisted
+        value.
+      operationId: updateWebhook
       parameters:
       - name: X-ORGANIZATION-ID
         in: header
@@ -119,8 +120,8 @@ paths:
     delete:
       tags:
       - Webhooks
-      summary: Delete webhook
-      operationId: webhookWebhookIdDelete
+      summary: Delete a webhook configuration
+      operationId: deleteWebhook
       parameters:
       - name: X-ORGANIZATION-ID
         in: header
@@ -157,7 +158,7 @@ paths:
       tags:
       - Verifications
       summary: Get verification template
-      operationId: verificationTemplateGet
+      operationId: getVerificationTemplateById
       parameters:
       - name: X-ORGANIZATION-ID
         in: header
@@ -197,7 +198,7 @@ paths:
       tags:
       - Verifications
       summary: Update verification template
-      operationId: verificationTemplatePut
+      operationId: updateVerificationTemplate
       parameters:
       - name: X-ORGANIZATION-ID
         in: header
@@ -242,8 +243,8 @@ paths:
     delete:
       tags:
       - Verifications
-      summary: Delete verification request
-      operationId: verificationTemplateDelete
+      summary: Delete a verification template
+      operationId: deleteVerificationTemplate
       parameters:
       - name: X-ORGANIZATION-ID
         in: header
@@ -279,8 +280,8 @@ paths:
     get:
       tags:
       - Organizations
-      summary: Get organization
-      operationId: organizationOrganizationIdGet
+      summary: Get an organization
+      operationId: getOrganizationById
       parameters:
       - name: organizationId
         in: path
@@ -314,8 +315,8 @@ paths:
     put:
       tags:
       - Organizations
-      summary: Update organization
-      operationId: organizationOrganizationIdPut
+      summary: Update an organization
+      operationId: updateOrganization
       parameters:
       - name: organizationId
         in: path
@@ -355,8 +356,8 @@ paths:
     delete:
       tags:
       - Organizations
-      summary: Delete organization
-      operationId: organizationOrganizationIdDelete
+      summary: Delete an organization
+      operationId: deleteOrganization
       parameters:
       - name: organizationId
         in: path
@@ -387,8 +388,8 @@ paths:
     get:
       tags:
       - Organizations
-      summary: Get organization image
-      operationId: organizationOrganizationIdImageGet
+      summary: Get an organization's image
+      operationId: getOrganizationImageById
       parameters:
       - name: organizationId
         in: path
@@ -418,8 +419,8 @@ paths:
     put:
       tags:
       - Organizations
-      summary: Update organization image
-      operationId: organizationOrganizationIdImagePut
+      summary: Update an organization image
+      operationId: updateOrganizationImage
       parameters:
       - name: organizationId
         in: path
@@ -461,8 +462,8 @@ paths:
     delete:
       tags:
       - Organizations
-      summary: Delete organization image
-      operationId: organizationOrganizationIdImageDelete
+      summary: Delete an organization image
+      operationId: deleteOrganizationImage
       parameters:
       - name: organizationId
         in: path
@@ -489,48 +490,12 @@ paths:
           description: No Content
       security:
       - auth: []
-  /organizations/{organizationId}/endorse:
-    get:
-      tags:
-      - Organizations
-      summary: Request for the organization transactions to be endorsed
-      operationId: endorseOrganization
-      parameters:
-      - name: organizationId
-        in: path
-        description: An organization ID.
-        required: true
-        schema:
-          type: integer
-          format: int32
-        example: 0
-      responses:
-        "500":
-          description: Internal Server Error
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "400":
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PublicDid'
-      security:
-      - auth: []
   /webhooks:
     get:
       tags:
       - Webhooks
-      summary: List all webhooks
-      operationId: webhooksGet
+      summary: List all webhook configurations
+      operationId: listWebhooks
       parameters:
       - name: X-ORGANIZATION-ID
         in: header
@@ -540,7 +505,7 @@ paths:
           format: int32
       - name: active
         in: query
-        description: Filter active webhooks
+        description: List only active webhooks
         required: false
         schema:
           type: boolean
@@ -570,8 +535,8 @@ paths:
     post:
       tags:
       - Webhooks
-      summary: Create a new webhook
-      operationId: webhookPost
+      summary: Create a new webhook configuration
+      operationId: createWebhook
       parameters:
       - name: X-ORGANIZATION-ID
         in: header
@@ -610,8 +575,8 @@ paths:
     get:
       tags:
       - Verifications
-      summary: List all verifications
-      operationId: verificationsGet
+      summary: List all verification entries
+      operationId: listVerifications
       parameters:
       - name: X-ORGANIZATION-ID
         in: header
@@ -653,8 +618,8 @@ paths:
     post:
       tags:
       - Verifications
-      summary: Create a new Verification
-      operationId: verificationsPost
+      summary: Create a new verification
+      operationId: createVerification
       parameters:
       - name: X-ORGANIZATION-ID
         in: header
@@ -694,7 +659,7 @@ paths:
       tags:
       - Verifications
       summary: List all verification templates
-      operationId: verificationTemplatesGet
+      operationId: listVerificationTemplates
       parameters:
       - name: X-ORGANIZATION-ID
         in: header
@@ -728,8 +693,8 @@ paths:
     post:
       tags:
       - Verifications
-      summary: Create a new Verification Template
-      operationId: verificationTemplatesPost
+      summary: Create a new verification template
+      operationId: createVerificationTemplate
       parameters:
       - name: X-ORGANIZATION-ID
         in: header
@@ -769,7 +734,10 @@ paths:
       tags:
       - Schemas
       summary: Create a new schema
-      operationId: schemaPost
+      description: "(ASYNC) create and anchor a new schema on the ledger. This is\
+        \ an asynchronous operation, to follow anchoring progress, use webhooks or\
+        \ check the schema's status from the API."
+      operationId: createSchema
       parameters:
       - name: X-ORGANIZATION-ID
         in: header
@@ -808,8 +776,8 @@ paths:
     post:
       tags:
       - Revocations
-      summary: Revoke credential
-      operationId: revocationPost
+      summary: Revoke a credential
+      operationId: revoke
       parameters:
       - name: X-ORGANIZATION-ID
         in: header
@@ -845,7 +813,7 @@ paths:
       tags:
       - Organizations
       summary: List all organizations
-      operationId: organizationsGet
+      operationId: listOrganizations
       responses:
         "500":
           description: Internal Server Error
@@ -873,7 +841,7 @@ paths:
       tags:
       - Organizations
       summary: Create a new organization and setup a new wallet
-      operationId: organizationsPost
+      operationId: createOrganization
       requestBody:
         content:
           application/json:
@@ -906,7 +874,7 @@ paths:
       tags:
       - Messages
       summary: Sends a message
-      operationId: messagePost
+      operationId: sendMessage
       parameters:
       - name: X-ORGANIZATION-ID
         in: header
@@ -941,8 +909,9 @@ paths:
     get:
       tags:
       - Credentials Issuance
-      summary: List all credential issuance
-      operationId: issuanceCredentialsGet
+      summary: List all credentials
+      description: List all credentials issued by an organization
+      operationId: listCredentialIssuances
       parameters:
       - name: X-ORGANIZATION-ID
         in: header
@@ -976,8 +945,11 @@ paths:
     post:
       tags:
       - Credentials Issuance
-      summary: Issue new credentials
-      operationId: issuanceCredentialPost
+      summary: Issue a new credential
+      description: "(ASYNC) Issue a new credential to an existing established connection.\
+        \ This operation is asynchronous, to follow the progress of the issuance,\
+        \ use webhooks or check the issuance status using the API."
+      operationId: issueCredential
       parameters:
       - name: X-ORGANIZATION-ID
         in: header
@@ -1016,8 +988,11 @@ paths:
     post:
       tags:
       - Credential Definitions
-      summary: Create a new credentialDefinition
-      operationId: credentialDefinitionPost
+      summary: Create a new credential definition
+      description: "(ASYNC) create and anchor a new schema on the ledger. This is\
+        \ an asynchronous operation, to follow anchoring progress, use webhooks or\
+        \ check the schema's status from the API."
+      operationId: createCredentialDefinition
       parameters:
       - name: X-ORGANIZATION-ID
         in: header
@@ -1056,8 +1031,9 @@ paths:
     get:
       tags:
       - Connections
-      summary: List all connections
-      operationId: connectionsOrganizationIdGet
+      summary: List connections
+      description: List all connection records from the organization's wallet.
+      operationId: listConnections
       parameters:
       - name: X-ORGANIZATION-ID
         in: header
@@ -1106,7 +1082,9 @@ paths:
       tags:
       - Connections
       summary: Create a new connection invitation
-      operationId: connectionsPost
+      description: Creates a new connection invitation to be consumed by external
+        agents.
+      operationId: createInvitation
       parameters:
       - name: X-ORGANIZATION-ID
         in: header
@@ -1146,7 +1124,10 @@ paths:
       tags:
       - Connections
       summary: Receive and accept a new connection invitation
-      operationId: connectionsInvitationPost
+      description: (ASYNC) Consume a connection invitation and established. Establishing
+        connection is asynchronous. Usewebhooks or check the connection status from
+        the API to follow the connection process.
+      operationId: receiveInvitation
       parameters:
       - name: X-ORGANIZATION-ID
         in: header
@@ -1185,8 +1166,8 @@ paths:
     get:
       tags:
       - Webhooks
-      summary: List all webhook types and their respective filters
-      operationId: webhookTypesGet
+      summary: List available webhook types and their respective filters
+      operationId: getWebhookTypes
       responses:
         "500":
           description: Internal Server Error
@@ -1214,8 +1195,8 @@ paths:
     get:
       tags:
       - Verifications
-      summary: Get verification
-      operationId: verificationGet
+      summary: Get a verification entry
+      operationId: getVerificationById
       parameters:
       - name: X-ORGANIZATION-ID
         in: header
@@ -1254,8 +1235,9 @@ paths:
     delete:
       tags:
       - Verifications
-      summary: Delete verification
-      operationId: verificationDelete
+      summary: Delete a verification entry
+      description: "Delete log entry for a verification, this does not cancel a verification."
+      operationId: deleteVerificationEntry
       parameters:
       - name: X-ORGANIZATION-ID
         in: header
@@ -1292,7 +1274,9 @@ paths:
       tags:
       - Schemas
       summary: Get schema
-      operationId: schemaSchemaIdGet
+      description: Retrieve a schema. Anchored flag can be used to ensure the schema
+        is ready to use.
+      operationId: getSchemaById
       parameters:
       - name: X-ORGANIZATION-ID
         in: header
@@ -1333,8 +1317,8 @@ paths:
     get:
       tags:
       - Schemas
-      summary: Get created schemas
-      operationId: schemasCreatedGet
+      summary: List created schemas
+      operationId: listSchemas
       parameters:
       - name: X-ORGANIZATION-ID
         in: header
@@ -1369,8 +1353,11 @@ paths:
     get:
       tags:
       - Organizations
-      summary: Retrieve DIDs used for issuance by an given organization.
-      operationId: organizationPublicDidsGet
+      summary: Retrieve public DIDs for a given organization.
+      description: "Retrieve public DIDs along with their status regarding ledger\
+        \ writes. DIDs in state READY_TO_WRITE are fully ready to operate on the ledger\
+        \ (publish schemas, credential definitions, etc.)"
+      operationId: listOrganizationDids
       parameters:
       - name: organizationId
         in: path
@@ -1403,12 +1390,52 @@ paths:
                   $ref: '#/components/schemas/Did'
       security:
       - auth: []
+  /organizations/{organizationId}/endorse:
+    get:
+      tags:
+      - Organizations
+      summary: Request endorsement. Mandatory for issuers.
+      description: "(ASYNC) Request for endorsement of the organization transactions.\
+        \ Mandatory for issuers. This is an asynchronous operation, to follow progress,\
+        \ use webhooks or check the public DID status from the API."
+      operationId: endorseOrganization
+      parameters:
+      - name: organizationId
+        in: path
+        description: An organization ID.
+        required: true
+        schema:
+          type: integer
+          format: int32
+        example: 0
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicDid'
+      security:
+      - auth: []
   /credentials:
     get:
       tags:
       - Credentials
-      summary: List all credentials
-      operationId: credentialsGet
+      summary: List credentials
+      description: List all credentials in the organization's wallet.
+      operationId: listCredentials
       parameters:
       - name: X-ORGANIZATION-ID
         in: header
@@ -1443,8 +1470,9 @@ paths:
     get:
       tags:
       - Credentials
-      summary: Get the specified credential
-      operationId: credentialCredentialIdGet
+      summary: Get a credential
+      description: Get a single credential from the organization's wallet.
+      operationId: getCredentialById
       parameters:
       - name: X-ORGANIZATION-ID
         in: header
@@ -1482,8 +1510,9 @@ paths:
     delete:
       tags:
       - Credentials
-      summary: Delete the specified credential
-      operationId: credentialCredentialIdDelete
+      summary: Delete a credential
+      description: Delete a credential from the organization's wallet.
+      operationId: deleteCredential
       parameters:
       - name: X-ORGANIZATION-ID
         in: header
@@ -1518,8 +1547,10 @@ paths:
     get:
       tags:
       - Credentials Issuance
-      summary: Get the specified credential issuance
-      operationId: issuanceCredentialCredentialIdGet
+      summary: Get a credential issuance
+      description: Get the specified credential issuance. Can be used to check on
+        the issuance state.
+      operationId: getCredentialIssuanceById
       parameters:
       - name: X-ORGANIZATION-ID
         in: header
@@ -1557,8 +1588,10 @@ paths:
     delete:
       tags:
       - Credentials Issuance
-      summary: Delete the specified credential issuance
-      operationId: issuanceCredentialCredentialIdDelete
+      summary: Delete a credential issuance record
+      description: Delete the specified credential issuance record (this does not
+        delete the credential from a remote wallet).
+      operationId: deleteCredentialIssuance
       parameters:
       - name: X-ORGANIZATION-ID
         in: header
@@ -1593,7 +1626,7 @@ paths:
     get:
       tags:
       - Credential Definitions
-      summary: Get credentialDefinition
+      summary: Get a single credential definition
       operationId: getCredentialDefinitionById
       parameters:
       - name: X-ORGANIZATION-ID
@@ -1635,8 +1668,8 @@ paths:
     get:
       tags:
       - Credential Definitions
-      summary: Get created credential definitions
-      operationId: credentialDefinitionsCreatedGet
+      summary: List all created credential definitions
+      operationId: listCredentialDefinitions
       parameters:
       - name: X-ORGANIZATION-ID
         in: header
@@ -1672,7 +1705,8 @@ paths:
       tags:
       - Connections
       summary: Get connection
-      operationId: connectionOrganizationIdConnectionIdGet
+      description: Retrieve a connection record from the organization's wallet
+      operationId: getConnectionById
       parameters:
       - name: X-ORGANIZATION-ID
         in: header
@@ -1713,7 +1747,8 @@ paths:
       tags:
       - Connections
       summary: Delete connection
-      operationId: connectionOrganizationIdConnectionIdDelete
+      description: Delete a connection from the organization's wallet.
+      operationId: deleteConnection
       parameters:
       - name: X-ORGANIZATION-ID
         in: header
@@ -2503,5 +2538,5 @@ components:
       type: oauth2
       flows:
         clientCredentials:
-          tokenUrl: https://signin.adaptivespace.io/oauth2/token
-          scopes: { }
+          tokenUrl: https://signin.adaptivespace.io
+          scopes: {}

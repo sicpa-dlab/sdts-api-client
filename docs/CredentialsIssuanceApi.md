@@ -1,20 +1,22 @@
 # CredentialsIssuanceApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://localhost/edison-credentials-api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**issuanceCredentialCredentialIdDelete**](CredentialsIssuanceApi.md#issuanceCredentialCredentialIdDelete) | **DELETE** /credentials-issuance/{issuanceId} | Delete the specified credential issuance
-[**issuanceCredentialCredentialIdGet**](CredentialsIssuanceApi.md#issuanceCredentialCredentialIdGet) | **GET** /credentials-issuance/{issuanceId} | Get the specified credential issuance
-[**issuanceCredentialPost**](CredentialsIssuanceApi.md#issuanceCredentialPost) | **POST** /credentials-issuance | Issue new credentials
-[**issuanceCredentialsGet**](CredentialsIssuanceApi.md#issuanceCredentialsGet) | **GET** /credentials-issuance | List all credential issuance
+[**deleteCredentialIssuance**](CredentialsIssuanceApi.md#deleteCredentialIssuance) | **DELETE** /credentials-issuance/{issuanceId} | Delete a credential issuance record
+[**getCredentialIssuanceById**](CredentialsIssuanceApi.md#getCredentialIssuanceById) | **GET** /credentials-issuance/{issuanceId} | Get a credential issuance
+[**issueCredential**](CredentialsIssuanceApi.md#issueCredential) | **POST** /credentials-issuance | Issue a new credential
+[**listCredentialIssuances**](CredentialsIssuanceApi.md#listCredentialIssuances) | **GET** /credentials-issuance | List all credentials
 
 
-<a name="issuanceCredentialCredentialIdDelete"></a>
-# **issuanceCredentialCredentialIdDelete**
-> issuanceCredentialCredentialIdDelete(X_ORGANIZATION_ID, issuanceId)
+<a name="deleteCredentialIssuance"></a>
+# **deleteCredentialIssuance**
+> deleteCredentialIssuance(X_ORGANIZATION_ID, issuanceId)
 
-Delete the specified credential issuance
+Delete a credential issuance record
+
+Delete the specified credential issuance record (this does not delete the credential from a remote wallet).
 
 ### Example
 ```java
@@ -29,19 +31,19 @@ import com.sicpa.edison.credentialsclient.api.CredentialsIssuanceApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("http://localhost/edison-credentials-api");
     
-    // Configure HTTP bearer authorization: auth
-    HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
-    auth.setBearerToken("BEARER TOKEN");
+    // Configure OAuth2 access token for authorization: auth
+    OAuth auth = (OAuth) defaultClient.getAuthentication("auth");
+    auth.setAccessToken("YOUR ACCESS TOKEN");
 
     CredentialsIssuanceApi apiInstance = new CredentialsIssuanceApi(defaultClient);
     Integer X_ORGANIZATION_ID = 56; // Integer | 
     String issuanceId = "issuanceId_example"; // String | An credential issuance ID.
     try {
-      apiInstance.issuanceCredentialCredentialIdDelete(X_ORGANIZATION_ID, issuanceId);
+      apiInstance.deleteCredentialIssuance(X_ORGANIZATION_ID, issuanceId);
     } catch (ApiException e) {
-      System.err.println("Exception when calling CredentialsIssuanceApi#issuanceCredentialCredentialIdDelete");
+      System.err.println("Exception when calling CredentialsIssuanceApi#deleteCredentialIssuance");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -74,15 +76,17 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | No Content |  -  |
-**400** | Bad Request |  -  |
 **500** | Internal Server Error |  -  |
+**400** | Bad Request |  -  |
+**204** | No Content |  -  |
 
-<a name="issuanceCredentialCredentialIdGet"></a>
-# **issuanceCredentialCredentialIdGet**
-> CredentialIssuance issuanceCredentialCredentialIdGet(X_ORGANIZATION_ID, issuanceId)
+<a name="getCredentialIssuanceById"></a>
+# **getCredentialIssuanceById**
+> CredentialIssuance getCredentialIssuanceById(X_ORGANIZATION_ID, issuanceId)
 
-Get the specified credential issuance
+Get a credential issuance
+
+Get the specified credential issuance. Can be used to check on the issuance state.
 
 ### Example
 ```java
@@ -97,20 +101,20 @@ import com.sicpa.edison.credentialsclient.api.CredentialsIssuanceApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("http://localhost/edison-credentials-api");
     
-    // Configure HTTP bearer authorization: auth
-    HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
-    auth.setBearerToken("BEARER TOKEN");
+    // Configure OAuth2 access token for authorization: auth
+    OAuth auth = (OAuth) defaultClient.getAuthentication("auth");
+    auth.setAccessToken("YOUR ACCESS TOKEN");
 
     CredentialsIssuanceApi apiInstance = new CredentialsIssuanceApi(defaultClient);
     Integer X_ORGANIZATION_ID = 56; // Integer | 
     String issuanceId = "issuanceId_example"; // String | An credential issuance ID.
     try {
-      CredentialIssuance result = apiInstance.issuanceCredentialCredentialIdGet(X_ORGANIZATION_ID, issuanceId);
+      CredentialIssuance result = apiInstance.getCredentialIssuanceById(X_ORGANIZATION_ID, issuanceId);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling CredentialsIssuanceApi#issuanceCredentialCredentialIdGet");
+      System.err.println("Exception when calling CredentialsIssuanceApi#getCredentialIssuanceById");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -138,20 +142,22 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json, */*
+ - **Accept**: */*, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**400** | Bad Request |  -  |
 **500** | Internal Server Error |  -  |
+**400** | Bad Request |  -  |
+**200** | OK |  -  |
 
-<a name="issuanceCredentialPost"></a>
-# **issuanceCredentialPost**
-> CredentialIssuance issuanceCredentialPost(X_ORGANIZATION_ID, credentialCreate)
+<a name="issueCredential"></a>
+# **issueCredential**
+> CredentialIssuance issueCredential(X_ORGANIZATION_ID, credentialCreate)
 
-Issue new credentials
+Issue a new credential
+
+(ASYNC) Issue a new credential to an existing established connection. This operation is asynchronous, to follow the progress of the issuance, use webhooks or check the issuance status using the API.
 
 ### Example
 ```java
@@ -166,20 +172,20 @@ import com.sicpa.edison.credentialsclient.api.CredentialsIssuanceApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("http://localhost/edison-credentials-api");
     
-    // Configure HTTP bearer authorization: auth
-    HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
-    auth.setBearerToken("BEARER TOKEN");
+    // Configure OAuth2 access token for authorization: auth
+    OAuth auth = (OAuth) defaultClient.getAuthentication("auth");
+    auth.setAccessToken("YOUR ACCESS TOKEN");
 
     CredentialsIssuanceApi apiInstance = new CredentialsIssuanceApi(defaultClient);
     Integer X_ORGANIZATION_ID = 56; // Integer | 
     CredentialCreate credentialCreate = new CredentialCreate(); // CredentialCreate | 
     try {
-      CredentialIssuance result = apiInstance.issuanceCredentialPost(X_ORGANIZATION_ID, credentialCreate);
+      CredentialIssuance result = apiInstance.issueCredential(X_ORGANIZATION_ID, credentialCreate);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling CredentialsIssuanceApi#issuanceCredentialPost");
+      System.err.println("Exception when calling CredentialsIssuanceApi#issueCredential");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -207,20 +213,22 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: application/json, */*
+ - **Accept**: */*, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**400** | Bad Request |  -  |
 **500** | Internal Server Error |  -  |
+**400** | Bad Request |  -  |
+**200** | OK |  -  |
 
-<a name="issuanceCredentialsGet"></a>
-# **issuanceCredentialsGet**
-> List&lt;CredentialIssuance&gt; issuanceCredentialsGet(X_ORGANIZATION_ID)
+<a name="listCredentialIssuances"></a>
+# **listCredentialIssuances**
+> List&lt;CredentialIssuance&gt; listCredentialIssuances(X_ORGANIZATION_ID)
 
-List all credential issuance
+List all credentials
+
+List all credentials issued by an organization
 
 ### Example
 ```java
@@ -235,19 +243,19 @@ import com.sicpa.edison.credentialsclient.api.CredentialsIssuanceApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("http://localhost/edison-credentials-api");
     
-    // Configure HTTP bearer authorization: auth
-    HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
-    auth.setBearerToken("BEARER TOKEN");
+    // Configure OAuth2 access token for authorization: auth
+    OAuth auth = (OAuth) defaultClient.getAuthentication("auth");
+    auth.setAccessToken("YOUR ACCESS TOKEN");
 
     CredentialsIssuanceApi apiInstance = new CredentialsIssuanceApi(defaultClient);
     Integer X_ORGANIZATION_ID = 56; // Integer | 
     try {
-      List<CredentialIssuance> result = apiInstance.issuanceCredentialsGet(X_ORGANIZATION_ID);
+      List<CredentialIssuance> result = apiInstance.listCredentialIssuances(X_ORGANIZATION_ID);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling CredentialsIssuanceApi#issuanceCredentialsGet");
+      System.err.println("Exception when calling CredentialsIssuanceApi#listCredentialIssuances");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -274,12 +282,12 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json, */*
+ - **Accept**: */*, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**400** | Bad Request |  -  |
 **500** | Internal Server Error |  -  |
+**400** | Bad Request |  -  |
+**200** | OK |  -  |
 

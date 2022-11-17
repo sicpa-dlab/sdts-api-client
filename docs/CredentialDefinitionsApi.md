@@ -1,88 +1,21 @@
 # CredentialDefinitionsApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://localhost/edison-credentials-api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**clientClientIdGet1**](CredentialDefinitionsApi.md#clientClientIdGet1) | **GET** /credential-definitions/{credentialDefinitionId} | Get credentialDefinition
-[**credentialDefinitionPost**](CredentialDefinitionsApi.md#credentialDefinitionPost) | **POST** /credential-definitions | Create a new credentialDefinition
-[**credentialDefinitionsCreatedGet**](CredentialDefinitionsApi.md#credentialDefinitionsCreatedGet) | **GET** /credential-definitions/created | Get created credential definitions
+[**createCredentialDefinition**](CredentialDefinitionsApi.md#createCredentialDefinition) | **POST** /credential-definitions | Create a new credential definition
+[**getCredentialDefinitionById**](CredentialDefinitionsApi.md#getCredentialDefinitionById) | **GET** /credential-definitions/{credentialDefinitionId} | Get a single credential definition
+[**listCredentialDefinitions**](CredentialDefinitionsApi.md#listCredentialDefinitions) | **GET** /credential-definitions/created | List all created credential definitions
 
 
-<a name="clientClientIdGet1"></a>
-# **clientClientIdGet1**
-> CredentialDefinition clientClientIdGet1(X_ORGANIZATION_ID, credentialDefinitionId)
+<a name="createCredentialDefinition"></a>
+# **createCredentialDefinition**
+> CredentialDefinitionSummary createCredentialDefinition(X_ORGANIZATION_ID, credentialDefinitionCreate)
 
-Get credentialDefinition
+Create a new credential definition
 
-### Example
-```java
-// Import classes:
-import com.sicpa.edison.credentialsclient.client.ApiClient;
-import com.sicpa.edison.credentialsclient.client.ApiException;
-import com.sicpa.edison.credentialsclient.client.Configuration;
-import com.sicpa.edison.credentialsclient.client.auth.*;
-import com.sicpa.edison.credentialsclient.client.models.*;
-import com.sicpa.edison.credentialsclient.api.CredentialDefinitionsApi;
-
-public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
-    
-    // Configure HTTP bearer authorization: auth
-    HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
-    auth.setBearerToken("BEARER TOKEN");
-
-    CredentialDefinitionsApi apiInstance = new CredentialDefinitionsApi(defaultClient);
-    Integer X_ORGANIZATION_ID = 56; // Integer | 
-    String credentialDefinitionId = 0; // String | A credentialDefinition ID.
-    try {
-      CredentialDefinition result = apiInstance.clientClientIdGet1(X_ORGANIZATION_ID, credentialDefinitionId);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling CredentialDefinitionsApi#clientClientIdGet1");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-  }
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **X_ORGANIZATION_ID** | **Integer**|  |
- **credentialDefinitionId** | **String**| A credentialDefinition ID. |
-
-### Return type
-
-[**CredentialDefinition**](CredentialDefinition.md)
-
-### Authorization
-
-[auth](../README.md#auth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json, */*
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | OK |  -  |
-**400** | Bad Request |  -  |
-**500** | Internal Server Error |  -  |
-
-<a name="credentialDefinitionPost"></a>
-# **credentialDefinitionPost**
-> CredentialDefinitionSummary credentialDefinitionPost(X_ORGANIZATION_ID, credentialDefinitionCreate)
-
-Create a new credentialDefinition
+(ASYNC) create and anchor a new schema on the ledger. This is an asynchronous operation, to follow anchoring progress, use webhooks or check the schema&#39;s status from the API.
 
 ### Example
 ```java
@@ -97,20 +30,20 @@ import com.sicpa.edison.credentialsclient.api.CredentialDefinitionsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("http://localhost/edison-credentials-api");
     
-    // Configure HTTP bearer authorization: auth
-    HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
-    auth.setBearerToken("BEARER TOKEN");
+    // Configure OAuth2 access token for authorization: auth
+    OAuth auth = (OAuth) defaultClient.getAuthentication("auth");
+    auth.setAccessToken("YOUR ACCESS TOKEN");
 
     CredentialDefinitionsApi apiInstance = new CredentialDefinitionsApi(defaultClient);
     Integer X_ORGANIZATION_ID = 56; // Integer | 
     CredentialDefinitionCreate credentialDefinitionCreate = new CredentialDefinitionCreate(); // CredentialDefinitionCreate | 
     try {
-      CredentialDefinitionSummary result = apiInstance.credentialDefinitionPost(X_ORGANIZATION_ID, credentialDefinitionCreate);
+      CredentialDefinitionSummary result = apiInstance.createCredentialDefinition(X_ORGANIZATION_ID, credentialDefinitionCreate);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling CredentialDefinitionsApi#credentialDefinitionPost");
+      System.err.println("Exception when calling CredentialDefinitionsApi#createCredentialDefinition");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -138,20 +71,20 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: application/json, */*
+ - **Accept**: */*, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**400** | Bad Request |  -  |
 **500** | Internal Server Error |  -  |
+**400** | Bad Request |  -  |
+**200** | OK |  -  |
 
-<a name="credentialDefinitionsCreatedGet"></a>
-# **credentialDefinitionsCreatedGet**
-> List&lt;CredentialDefinitionSummary&gt; credentialDefinitionsCreatedGet(X_ORGANIZATION_ID)
+<a name="getCredentialDefinitionById"></a>
+# **getCredentialDefinitionById**
+> CredentialDefinition getCredentialDefinitionById(X_ORGANIZATION_ID, credentialDefinitionId)
 
-Get created credential definitions
+Get a single credential definition
 
 ### Example
 ```java
@@ -166,19 +99,88 @@ import com.sicpa.edison.credentialsclient.api.CredentialDefinitionsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("http://localhost/edison-credentials-api");
     
-    // Configure HTTP bearer authorization: auth
-    HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
-    auth.setBearerToken("BEARER TOKEN");
+    // Configure OAuth2 access token for authorization: auth
+    OAuth auth = (OAuth) defaultClient.getAuthentication("auth");
+    auth.setAccessToken("YOUR ACCESS TOKEN");
+
+    CredentialDefinitionsApi apiInstance = new CredentialDefinitionsApi(defaultClient);
+    Integer X_ORGANIZATION_ID = 56; // Integer | 
+    String credentialDefinitionId = "0"; // String | A credentialDefinition ID.
+    try {
+      CredentialDefinition result = apiInstance.getCredentialDefinitionById(X_ORGANIZATION_ID, credentialDefinitionId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling CredentialDefinitionsApi#getCredentialDefinitionById");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **X_ORGANIZATION_ID** | **Integer**|  |
+ **credentialDefinitionId** | **String**| A credentialDefinition ID. |
+
+### Return type
+
+[**CredentialDefinition**](CredentialDefinition.md)
+
+### Authorization
+
+[auth](../README.md#auth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: */*, application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**500** | Internal Server Error |  -  |
+**400** | Bad Request |  -  |
+**200** | OK |  -  |
+
+<a name="listCredentialDefinitions"></a>
+# **listCredentialDefinitions**
+> List&lt;CredentialDefinitionSummary&gt; listCredentialDefinitions(X_ORGANIZATION_ID)
+
+List all created credential definitions
+
+### Example
+```java
+// Import classes:
+import com.sicpa.edison.credentialsclient.client.ApiClient;
+import com.sicpa.edison.credentialsclient.client.ApiException;
+import com.sicpa.edison.credentialsclient.client.Configuration;
+import com.sicpa.edison.credentialsclient.client.auth.*;
+import com.sicpa.edison.credentialsclient.client.models.*;
+import com.sicpa.edison.credentialsclient.api.CredentialDefinitionsApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost/edison-credentials-api");
+    
+    // Configure OAuth2 access token for authorization: auth
+    OAuth auth = (OAuth) defaultClient.getAuthentication("auth");
+    auth.setAccessToken("YOUR ACCESS TOKEN");
 
     CredentialDefinitionsApi apiInstance = new CredentialDefinitionsApi(defaultClient);
     Integer X_ORGANIZATION_ID = 56; // Integer | 
     try {
-      List<CredentialDefinitionSummary> result = apiInstance.credentialDefinitionsCreatedGet(X_ORGANIZATION_ID);
+      List<CredentialDefinitionSummary> result = apiInstance.listCredentialDefinitions(X_ORGANIZATION_ID);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling CredentialDefinitionsApi#credentialDefinitionsCreatedGet");
+      System.err.println("Exception when calling CredentialDefinitionsApi#listCredentialDefinitions");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -205,12 +207,12 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json, */*
+ - **Accept**: */*, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**400** | Bad Request |  -  |
 **500** | Internal Server Error |  -  |
+**400** | Bad Request |  -  |
+**200** | OK |  -  |
 

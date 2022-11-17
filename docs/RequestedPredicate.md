@@ -3,6 +3,7 @@
 # RequestedPredicate
 
 The requested predicates. In order for the verification to be successful, all requested predicates should be validated
+
 ## Properties
 
 Name | Type | Description | Notes

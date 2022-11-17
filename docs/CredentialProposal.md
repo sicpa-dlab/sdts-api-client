@@ -2,6 +2,7 @@
 
 # CredentialProposal
 
+
 ## Properties
 
 Name | Type | Description | Notes

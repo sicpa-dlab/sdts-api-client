@@ -2,6 +2,7 @@
 
 # VerificationTemplateCreate
 
+
 ## Properties
 
 Name | Type | Description | Notes

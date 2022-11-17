@@ -3,6 +3,7 @@
 # WebhookType
 
 The webhook types associated with this webhook
+
 ## Properties
 
 Name | Type | Description | Notes

@@ -2,6 +2,7 @@
 
 # Schema
 
+
 ## Properties
 
 Name | Type | Description | Notes
@@ -10,6 +11,7 @@ Name | Type | Description | Notes
 **name** | **String** | The schema&#39;s name | 
 **version** | **String** | The schema&#39;s version | 
 **attributesName** | **List&lt;String&gt;** | The schema&#39;s attributes | 
+**anchored** | **Boolean** | Whether the schema is anchored or not | 
 
 
 

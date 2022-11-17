@@ -2,6 +2,7 @@
 
 # Verification
 
+
 ## Properties
 
 Name | Type | Description | Notes
@@ -10,8 +11,8 @@ Name | Type | Description | Notes
 **connectionId** | **String** | The connection id |  [optional]
 **verificationRequest** | [**VerificationRequest**](VerificationRequest.md) |  |  [optional]
 **state** | [**StateEnum**](#StateEnum) | The verification state |  [optional]
-**createdAt** | [**OffsetDateTime**](OffsetDateTime.md) | The creation date  |  [optional]
-**updatedAt** | [**OffsetDateTime**](OffsetDateTime.md) | The update date |  [optional]
+**createdAt** | **OffsetDateTime** | The creation date  |  [optional]
+**updatedAt** | **OffsetDateTime** | The update date |  [optional]
 
 
 
