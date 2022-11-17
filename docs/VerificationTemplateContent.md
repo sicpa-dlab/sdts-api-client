@@ -2,6 +2,8 @@
 
 # VerificationTemplateContent
 
+The verification template content
+
 ## Properties
 
 Name | Type | Description | Notes

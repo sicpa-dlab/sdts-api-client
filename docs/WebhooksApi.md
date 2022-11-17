@@ -1,22 +1,22 @@
 # WebhooksApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://localhost/edison-credentials-api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**webhookPost**](WebhooksApi.md#webhookPost) | **POST** /webhooks | Create a new webhook
-[**webhookTypesGet**](WebhooksApi.md#webhookTypesGet) | **GET** /webhooks/types | List all webhook types and their respective filters
-[**webhookWebhookIdDelete**](WebhooksApi.md#webhookWebhookIdDelete) | **DELETE** /webhooks/{webhookId} | Delete webhook
-[**webhookWebhookIdGet**](WebhooksApi.md#webhookWebhookIdGet) | **GET** /webhooks/{webhookId} | Get webhook
-[**webhookWebhookIdPut**](WebhooksApi.md#webhookWebhookIdPut) | **PUT** /webhooks/{webhookId} | Update a webhook
-[**webhooksGet1**](WebhooksApi.md#webhooksGet1) | **GET** /webhooks | List all webhooks
+[**createWebhook**](WebhooksApi.md#createWebhook) | **POST** /webhooks | Create a new webhook configuration
+[**deleteWebhook**](WebhooksApi.md#deleteWebhook) | **DELETE** /webhooks/{webhookId} | Delete a webhook configuration
+[**getWebhookById**](WebhooksApi.md#getWebhookById) | **GET** /webhooks/{webhookId} | Get a webhook configuration
+[**getWebhookTypes**](WebhooksApi.md#getWebhookTypes) | **GET** /webhooks/types | List available webhook types and their respective filters
+[**listWebhooks**](WebhooksApi.md#listWebhooks) | **GET** /webhooks | List all webhook configurations
+[**updateWebhook**](WebhooksApi.md#updateWebhook) | **PUT** /webhooks/{webhookId} | Update a webhook configuration
 
 
-<a name="webhookPost"></a>
-# **webhookPost**
-> Webhook webhookPost(X_ORGANIZATION_ID, webhookCreate)
+<a name="createWebhook"></a>
+# **createWebhook**
+> Webhook createWebhook(X_ORGANIZATION_ID, webhookCreate)
 
-Create a new webhook
+Create a new webhook configuration
 
 ### Example
 ```java
@@ -31,20 +31,20 @@ import com.sicpa.edison.credentialsclient.api.WebhooksApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("http://localhost/edison-credentials-api");
     
-    // Configure HTTP bearer authorization: auth
-    HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
-    auth.setBearerToken("BEARER TOKEN");
+    // Configure OAuth2 access token for authorization: auth
+    OAuth auth = (OAuth) defaultClient.getAuthentication("auth");
+    auth.setAccessToken("YOUR ACCESS TOKEN");
 
     WebhooksApi apiInstance = new WebhooksApi(defaultClient);
     Integer X_ORGANIZATION_ID = 56; // Integer | 
     WebhookCreate webhookCreate = new WebhookCreate(); // WebhookCreate | 
     try {
-      Webhook result = apiInstance.webhookPost(X_ORGANIZATION_ID, webhookCreate);
+      Webhook result = apiInstance.createWebhook(X_ORGANIZATION_ID, webhookCreate);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling WebhooksApi#webhookPost");
+      System.err.println("Exception when calling WebhooksApi#createWebhook");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -72,20 +72,20 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: application/json, */*
+ - **Accept**: */*, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**400** | Bad Request |  -  |
 **500** | Internal Server Error |  -  |
+**400** | Bad Request |  -  |
+**200** | OK |  -  |
 
-<a name="webhookTypesGet"></a>
-# **webhookTypesGet**
-> List&lt;WebhookType&gt; webhookTypesGet()
+<a name="deleteWebhook"></a>
+# **deleteWebhook**
+> deleteWebhook(X_ORGANIZATION_ID, webhookId)
 
-List all webhook types and their respective filters
+Delete a webhook configuration
 
 ### Example
 ```java
@@ -100,82 +100,19 @@ import com.sicpa.edison.credentialsclient.api.WebhooksApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("http://localhost/edison-credentials-api");
     
-    // Configure HTTP bearer authorization: auth
-    HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
-    auth.setBearerToken("BEARER TOKEN");
-
-    WebhooksApi apiInstance = new WebhooksApi(defaultClient);
-    try {
-      List<WebhookType> result = apiInstance.webhookTypesGet();
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling WebhooksApi#webhookTypesGet");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-  }
-}
-```
-
-### Parameters
-This endpoint does not need any parameter.
-
-### Return type
-
-[**List&lt;WebhookType&gt;**](WebhookType.md)
-
-### Authorization
-
-[auth](../README.md#auth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json, */*
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | OK |  -  |
-**400** | Bad Request |  -  |
-**500** | Internal Server Error |  -  |
-
-<a name="webhookWebhookIdDelete"></a>
-# **webhookWebhookIdDelete**
-> webhookWebhookIdDelete(X_ORGANIZATION_ID, webhookId)
-
-Delete webhook
-
-### Example
-```java
-// Import classes:
-import com.sicpa.edison.credentialsclient.client.ApiClient;
-import com.sicpa.edison.credentialsclient.client.ApiException;
-import com.sicpa.edison.credentialsclient.client.Configuration;
-import com.sicpa.edison.credentialsclient.client.auth.*;
-import com.sicpa.edison.credentialsclient.client.models.*;
-import com.sicpa.edison.credentialsclient.api.WebhooksApi;
-
-public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
-    
-    // Configure HTTP bearer authorization: auth
-    HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
-    auth.setBearerToken("BEARER TOKEN");
+    // Configure OAuth2 access token for authorization: auth
+    OAuth auth = (OAuth) defaultClient.getAuthentication("auth");
+    auth.setAccessToken("YOUR ACCESS TOKEN");
 
     WebhooksApi apiInstance = new WebhooksApi(defaultClient);
     Integer X_ORGANIZATION_ID = 56; // Integer | 
     Integer webhookId = 56; // Integer | A webhook ID.
     try {
-      apiInstance.webhookWebhookIdDelete(X_ORGANIZATION_ID, webhookId);
+      apiInstance.deleteWebhook(X_ORGANIZATION_ID, webhookId);
     } catch (ApiException e) {
-      System.err.println("Exception when calling WebhooksApi#webhookWebhookIdDelete");
+      System.err.println("Exception when calling WebhooksApi#deleteWebhook");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -208,15 +145,15 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | No Content |  -  |
-**400** | Bad Request |  -  |
 **500** | Internal Server Error |  -  |
+**400** | Bad Request |  -  |
+**204** | No Content |  -  |
 
-<a name="webhookWebhookIdGet"></a>
-# **webhookWebhookIdGet**
-> Webhook webhookWebhookIdGet(X_ORGANIZATION_ID, webhookId)
+<a name="getWebhookById"></a>
+# **getWebhookById**
+> Webhook getWebhookById(X_ORGANIZATION_ID, webhookId)
 
-Get webhook
+Get a webhook configuration
 
 ### Example
 ```java
@@ -231,20 +168,20 @@ import com.sicpa.edison.credentialsclient.api.WebhooksApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("http://localhost/edison-credentials-api");
     
-    // Configure HTTP bearer authorization: auth
-    HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
-    auth.setBearerToken("BEARER TOKEN");
+    // Configure OAuth2 access token for authorization: auth
+    OAuth auth = (OAuth) defaultClient.getAuthentication("auth");
+    auth.setAccessToken("YOUR ACCESS TOKEN");
 
     WebhooksApi apiInstance = new WebhooksApi(defaultClient);
     Integer X_ORGANIZATION_ID = 56; // Integer | 
     Integer webhookId = 56; // Integer | An webhook ID.
     try {
-      Webhook result = apiInstance.webhookWebhookIdGet(X_ORGANIZATION_ID, webhookId);
+      Webhook result = apiInstance.getWebhookById(X_ORGANIZATION_ID, webhookId);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling WebhooksApi#webhookWebhookIdGet");
+      System.err.println("Exception when calling WebhooksApi#getWebhookById");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -272,22 +209,20 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json, */*
+ - **Accept**: */*, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**400** | Bad Request |  -  |
 **500** | Internal Server Error |  -  |
+**400** | Bad Request |  -  |
+**200** | OK |  -  |
 
-<a name="webhookWebhookIdPut"></a>
-# **webhookWebhookIdPut**
-> Webhook webhookWebhookIdPut(X_ORGANIZATION_ID, webhookId, webhookUpdate)
+<a name="getWebhookTypes"></a>
+# **getWebhookTypes**
+> List&lt;WebhookType&gt; getWebhookTypes()
 
-Update a webhook
-
-The update is done in such manner that all fields passed in the payload updates the existing entity. Null valuesin the payload will indicate that no changes will be applied to the existing entity.
+List available webhook types and their respective filters
 
 ### Example
 ```java
@@ -302,21 +237,155 @@ import com.sicpa.edison.credentialsclient.api.WebhooksApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("http://localhost/edison-credentials-api");
     
-    // Configure HTTP bearer authorization: auth
-    HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
-    auth.setBearerToken("BEARER TOKEN");
+    // Configure OAuth2 access token for authorization: auth
+    OAuth auth = (OAuth) defaultClient.getAuthentication("auth");
+    auth.setAccessToken("YOUR ACCESS TOKEN");
+
+    WebhooksApi apiInstance = new WebhooksApi(defaultClient);
+    try {
+      List<WebhookType> result = apiInstance.getWebhookTypes();
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling WebhooksApi#getWebhookTypes");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**List&lt;WebhookType&gt;**](WebhookType.md)
+
+### Authorization
+
+[auth](../README.md#auth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: */*, application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**500** | Internal Server Error |  -  |
+**400** | Bad Request |  -  |
+**200** | OK |  -  |
+
+<a name="listWebhooks"></a>
+# **listWebhooks**
+> List&lt;Webhook&gt; listWebhooks(X_ORGANIZATION_ID, active)
+
+List all webhook configurations
+
+### Example
+```java
+// Import classes:
+import com.sicpa.edison.credentialsclient.client.ApiClient;
+import com.sicpa.edison.credentialsclient.client.ApiException;
+import com.sicpa.edison.credentialsclient.client.Configuration;
+import com.sicpa.edison.credentialsclient.client.auth.*;
+import com.sicpa.edison.credentialsclient.client.models.*;
+import com.sicpa.edison.credentialsclient.api.WebhooksApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost/edison-credentials-api");
+    
+    // Configure OAuth2 access token for authorization: auth
+    OAuth auth = (OAuth) defaultClient.getAuthentication("auth");
+    auth.setAccessToken("YOUR ACCESS TOKEN");
+
+    WebhooksApi apiInstance = new WebhooksApi(defaultClient);
+    Integer X_ORGANIZATION_ID = 56; // Integer | 
+    Boolean active = true; // Boolean | List only active webhooks
+    try {
+      List<Webhook> result = apiInstance.listWebhooks(X_ORGANIZATION_ID, active);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling WebhooksApi#listWebhooks");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **X_ORGANIZATION_ID** | **Integer**|  |
+ **active** | **Boolean**| List only active webhooks | [optional]
+
+### Return type
+
+[**List&lt;Webhook&gt;**](Webhook.md)
+
+### Authorization
+
+[auth](../README.md#auth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: */*, application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**500** | Internal Server Error |  -  |
+**400** | Bad Request |  -  |
+**200** | OK |  -  |
+
+<a name="updateWebhook"></a>
+# **updateWebhook**
+> Webhook updateWebhook(X_ORGANIZATION_ID, webhookId, webhookUpdate)
+
+Update a webhook configuration
+
+This updates all fields passed in the payload. Null valuesin the payload indicate that no changes will be applied to the currently persisted value.
+
+### Example
+```java
+// Import classes:
+import com.sicpa.edison.credentialsclient.client.ApiClient;
+import com.sicpa.edison.credentialsclient.client.ApiException;
+import com.sicpa.edison.credentialsclient.client.Configuration;
+import com.sicpa.edison.credentialsclient.client.auth.*;
+import com.sicpa.edison.credentialsclient.client.models.*;
+import com.sicpa.edison.credentialsclient.api.WebhooksApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost/edison-credentials-api");
+    
+    // Configure OAuth2 access token for authorization: auth
+    OAuth auth = (OAuth) defaultClient.getAuthentication("auth");
+    auth.setAccessToken("YOUR ACCESS TOKEN");
 
     WebhooksApi apiInstance = new WebhooksApi(defaultClient);
     Integer X_ORGANIZATION_ID = 56; // Integer | 
     Integer webhookId = 56; // Integer | An webhook ID.
     WebhookUpdate webhookUpdate = new WebhookUpdate(); // WebhookUpdate | 
     try {
-      Webhook result = apiInstance.webhookWebhookIdPut(X_ORGANIZATION_ID, webhookId, webhookUpdate);
+      Webhook result = apiInstance.updateWebhook(X_ORGANIZATION_ID, webhookId, webhookUpdate);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling WebhooksApi#webhookWebhookIdPut");
+      System.err.println("Exception when calling WebhooksApi#updateWebhook");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -345,81 +414,12 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: application/json, */*
+ - **Accept**: */*, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**400** | Bad Request |  -  |
 **500** | Internal Server Error |  -  |
-
-<a name="webhooksGet1"></a>
-# **webhooksGet1**
-> List&lt;Webhook&gt; webhooksGet1(X_ORGANIZATION_ID, active)
-
-List all webhooks
-
-### Example
-```java
-// Import classes:
-import com.sicpa.edison.credentialsclient.client.ApiClient;
-import com.sicpa.edison.credentialsclient.client.ApiException;
-import com.sicpa.edison.credentialsclient.client.Configuration;
-import com.sicpa.edison.credentialsclient.client.auth.*;
-import com.sicpa.edison.credentialsclient.client.models.*;
-import com.sicpa.edison.credentialsclient.api.WebhooksApi;
-
-public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
-    
-    // Configure HTTP bearer authorization: auth
-    HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
-    auth.setBearerToken("BEARER TOKEN");
-
-    WebhooksApi apiInstance = new WebhooksApi(defaultClient);
-    Integer X_ORGANIZATION_ID = 56; // Integer | 
-    Boolean active = true; // Boolean | Filter active webhooks
-    try {
-      List<Webhook> result = apiInstance.webhooksGet1(X_ORGANIZATION_ID, active);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling WebhooksApi#webhooksGet1");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-  }
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **X_ORGANIZATION_ID** | **Integer**|  |
- **active** | **Boolean**| Filter active webhooks | [optional]
-
-### Return type
-
-[**List&lt;Webhook&gt;**](Webhook.md)
-
-### Authorization
-
-[auth](../README.md#auth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json, */*
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | OK |  -  |
 **400** | Bad Request |  -  |
-**500** | Internal Server Error |  -  |
+**200** | OK |  -  |
 

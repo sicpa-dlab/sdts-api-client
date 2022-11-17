@@ -3,6 +3,7 @@
 # RequestedAttribute
 
 The requested attributes. In order for the verification to be successful, all requested attribute should be validated
+
 ## Properties
 
 Name | Type | Description | Notes

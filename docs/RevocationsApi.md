@@ -1,17 +1,17 @@
 # RevocationsApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://localhost/edison-credentials-api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**revocationPost**](RevocationsApi.md#revocationPost) | **POST** /revocations | Revoke credential
+[**revoke**](RevocationsApi.md#revoke) | **POST** /revocations | Revoke a credential
 
 
-<a name="revocationPost"></a>
-# **revocationPost**
-> revocationPost(X_ORGANIZATION_ID, revocationCreate)
+<a name="revoke"></a>
+# **revoke**
+> revoke(X_ORGANIZATION_ID, revocationCreate)
 
-Revoke credential
+Revoke a credential
 
 ### Example
 ```java
@@ -26,19 +26,19 @@ import com.sicpa.edison.credentialsclient.api.RevocationsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("http://localhost/edison-credentials-api");
     
-    // Configure HTTP bearer authorization: auth
-    HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
-    auth.setBearerToken("BEARER TOKEN");
+    // Configure OAuth2 access token for authorization: auth
+    OAuth auth = (OAuth) defaultClient.getAuthentication("auth");
+    auth.setAccessToken("YOUR ACCESS TOKEN");
 
     RevocationsApi apiInstance = new RevocationsApi(defaultClient);
     Integer X_ORGANIZATION_ID = 56; // Integer | 
     RevocationCreate revocationCreate = new RevocationCreate(); // RevocationCreate | 
     try {
-      apiInstance.revocationPost(X_ORGANIZATION_ID, revocationCreate);
+      apiInstance.revoke(X_ORGANIZATION_ID, revocationCreate);
     } catch (ApiException e) {
-      System.err.println("Exception when calling RevocationsApi#revocationPost");
+      System.err.println("Exception when calling RevocationsApi#revoke");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -71,7 +71,7 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | No Content |  -  |
-**400** | Bad Request |  -  |
 **500** | Internal Server Error |  -  |
+**400** | Bad Request |  -  |
+**204** | No Content |  -  |
 

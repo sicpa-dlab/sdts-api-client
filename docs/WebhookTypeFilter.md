@@ -3,6 +3,7 @@
 # WebhookTypeFilter
 
 List of filters available
+
 ## Properties
 
 Name | Type | Description | Notes

@@ -2,6 +2,7 @@
 
 # ConnectionInvitationCreate
 
+
 ## Properties
 
 Name | Type | Description | Notes

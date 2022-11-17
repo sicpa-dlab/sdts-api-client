@@ -3,6 +3,7 @@
 # Restriction
 
 A list of predicate restrictions
+
 ## Properties
 
 Name | Type | Description | Notes

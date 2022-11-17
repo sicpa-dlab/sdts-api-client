@@ -1,19 +1,21 @@
 # CredentialsApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://localhost/edison-credentials-api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**credentialCredentialIdDelete**](CredentialsApi.md#credentialCredentialIdDelete) | **DELETE** /credentials/{credentialId} | Delete the specified credential
-[**credentialCredentialIdGet**](CredentialsApi.md#credentialCredentialIdGet) | **GET** /credentials/{credentialId} | Get the specified credential
-[**credentialsGet**](CredentialsApi.md#credentialsGet) | **GET** /credentials | List all credentials
+[**deleteCredential**](CredentialsApi.md#deleteCredential) | **DELETE** /credentials/{credentialId} | Delete a credential
+[**getCredentialById**](CredentialsApi.md#getCredentialById) | **GET** /credentials/{credentialId} | Get a credential
+[**listCredentials**](CredentialsApi.md#listCredentials) | **GET** /credentials | List credentials
 
 
-<a name="credentialCredentialIdDelete"></a>
-# **credentialCredentialIdDelete**
-> credentialCredentialIdDelete(X_ORGANIZATION_ID, credentialId)
+<a name="deleteCredential"></a>
+# **deleteCredential**
+> deleteCredential(X_ORGANIZATION_ID, credentialId)
 
-Delete the specified credential
+Delete a credential
+
+Delete a credential from the organization&#39;s wallet.
 
 ### Example
 ```java
@@ -28,19 +30,19 @@ import com.sicpa.edison.credentialsclient.api.CredentialsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("http://localhost/edison-credentials-api");
     
-    // Configure HTTP bearer authorization: auth
-    HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
-    auth.setBearerToken("BEARER TOKEN");
+    // Configure OAuth2 access token for authorization: auth
+    OAuth auth = (OAuth) defaultClient.getAuthentication("auth");
+    auth.setAccessToken("YOUR ACCESS TOKEN");
 
     CredentialsApi apiInstance = new CredentialsApi(defaultClient);
     Integer X_ORGANIZATION_ID = 56; // Integer | 
     String credentialId = "credentialId_example"; // String | A credential ID.
     try {
-      apiInstance.credentialCredentialIdDelete(X_ORGANIZATION_ID, credentialId);
+      apiInstance.deleteCredential(X_ORGANIZATION_ID, credentialId);
     } catch (ApiException e) {
-      System.err.println("Exception when calling CredentialsApi#credentialCredentialIdDelete");
+      System.err.println("Exception when calling CredentialsApi#deleteCredential");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -73,15 +75,17 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | No Content |  -  |
-**400** | Bad Request |  -  |
 **500** | Internal Server Error |  -  |
+**400** | Bad Request |  -  |
+**204** | No Content |  -  |
 
-<a name="credentialCredentialIdGet"></a>
-# **credentialCredentialIdGet**
-> Credential credentialCredentialIdGet(X_ORGANIZATION_ID, credentialId)
+<a name="getCredentialById"></a>
+# **getCredentialById**
+> Credential getCredentialById(X_ORGANIZATION_ID, credentialId)
 
-Get the specified credential
+Get a credential
+
+Get a single credential from the organization&#39;s wallet.
 
 ### Example
 ```java
@@ -96,20 +100,20 @@ import com.sicpa.edison.credentialsclient.api.CredentialsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("http://localhost/edison-credentials-api");
     
-    // Configure HTTP bearer authorization: auth
-    HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
-    auth.setBearerToken("BEARER TOKEN");
+    // Configure OAuth2 access token for authorization: auth
+    OAuth auth = (OAuth) defaultClient.getAuthentication("auth");
+    auth.setAccessToken("YOUR ACCESS TOKEN");
 
     CredentialsApi apiInstance = new CredentialsApi(defaultClient);
     Integer X_ORGANIZATION_ID = 56; // Integer | 
     String credentialId = "credentialId_example"; // String | A credential ID.
     try {
-      Credential result = apiInstance.credentialCredentialIdGet(X_ORGANIZATION_ID, credentialId);
+      Credential result = apiInstance.getCredentialById(X_ORGANIZATION_ID, credentialId);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling CredentialsApi#credentialCredentialIdGet");
+      System.err.println("Exception when calling CredentialsApi#getCredentialById");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -137,20 +141,22 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json, */*
+ - **Accept**: */*, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**400** | Bad Request |  -  |
 **500** | Internal Server Error |  -  |
+**400** | Bad Request |  -  |
+**200** | OK |  -  |
 
-<a name="credentialsGet"></a>
-# **credentialsGet**
-> List&lt;Credential&gt; credentialsGet(X_ORGANIZATION_ID)
+<a name="listCredentials"></a>
+# **listCredentials**
+> List&lt;Credential&gt; listCredentials(X_ORGANIZATION_ID)
 
-List all credentials
+List credentials
+
+List all credentials in the organization&#39;s wallet.
 
 ### Example
 ```java
@@ -165,19 +171,19 @@ import com.sicpa.edison.credentialsclient.api.CredentialsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("http://localhost/edison-credentials-api");
     
-    // Configure HTTP bearer authorization: auth
-    HttpBearerAuth auth = (HttpBearerAuth) defaultClient.getAuthentication("auth");
-    auth.setBearerToken("BEARER TOKEN");
+    // Configure OAuth2 access token for authorization: auth
+    OAuth auth = (OAuth) defaultClient.getAuthentication("auth");
+    auth.setAccessToken("YOUR ACCESS TOKEN");
 
     CredentialsApi apiInstance = new CredentialsApi(defaultClient);
     Integer X_ORGANIZATION_ID = 56; // Integer | 
     try {
-      List<Credential> result = apiInstance.credentialsGet(X_ORGANIZATION_ID);
+      List<Credential> result = apiInstance.listCredentials(X_ORGANIZATION_ID);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling CredentialsApi#credentialsGet");
+      System.err.println("Exception when calling CredentialsApi#listCredentials");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -204,12 +210,12 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json, */*
+ - **Accept**: */*, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**400** | Bad Request |  -  |
 **500** | Internal Server Error |  -  |
+**400** | Bad Request |  -  |
+**200** | OK |  -  |
 
