@@ -2538,5 +2538,5 @@ components:
       type: oauth2
       flows:
         clientCredentials:
-          tokenUrl: https://signin.adaptivespace.io
-          scopes: {}
+          tokenUrl: https://signin.adaptivespace.io/oauth2/token
+          scopes: { }
