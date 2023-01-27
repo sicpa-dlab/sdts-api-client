@@ -2399,10 +2399,11 @@ components:
       - credential
       - credentialType
       - proofType
+      - revocable
       - verificationMethod
       type: object
       allOf:
-      #- $ref: '#/components/schemas/CredentialSigning'
+      - $ref: '#/components/schemas/CredentialSigning'
       - type: object
         properties:
           credential:
@@ -2538,7 +2539,7 @@ components:
       - proofType
       type: object
       allOf:
-      #- $ref: '#/components/schemas/CredentialSending'
+      - $ref: '#/components/schemas/CredentialSending'
       - type: object
         properties:
           credential:
@@ -2887,5 +2888,5 @@ components:
       type: oauth2
       flows:
         clientCredentials:
-          tokenUrl: https://signin.adaptivespace.io
+          tokenUrl: https://signin.adaptivespace.io/oauth2/token
           scopes: {}

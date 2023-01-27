@@ -12,7 +12,7 @@
     <properties>
         <groupId>com.sicpa.edison</groupId>
         <artifactId>edison-credentials-client</artifactId>
-        <artifactVersion>0.0.49</artifactVersion>
+        <artifactVersion>0.0.50-kotlin</artifactVersion>
         <!-- used to configure the SCM (releases) -->
         <github.repository>sicpa-dlab/edison-credentials-client</github.repository>
         <!--
@@ -77,13 +77,14 @@
                             <artifactVersion>${artifactVersion}</artifactVersion>
 
                             <inputSpec>${project.basedir}/api/openapi.yaml</inputSpec>
-                            <generatorName>java</generatorName>
+                            <generatorName>kotlin</generatorName>
                             <generateModelDocumentation>true</generateModelDocumentation>
                             <generateApiDocumentation>true</generateApiDocumentation>
 
                             <modelPackage>${project.groupId}.credentialsclient.model</modelPackage>
                             <apiPackage>${project.groupId}.credentialsclient.api</apiPackage>
                             <invokerPackage>${project.groupId}.credentialsclient.client</invokerPackage>
+                            <packageName>${project.groupId}.credentialsclient.client</packageName>
 
                             <skipIfSpecIsUnchanged>true</skipIfSpecIsUnchanged>
 
@@ -92,6 +93,7 @@
 
                             <configOptions>
                                 <openApiNullable>false</openApiNullable>
+                                <library>jvm-okhttp3</library>
                                 <dateLibrary>java8</dateLibrary>
                             </configOptions>
                         </configuration>
