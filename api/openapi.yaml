@@ -1050,11 +1050,12 @@ paths:
         schema:
           type: integer
           format: int32
-      - name: didAuthenticationRequest
-        in: query
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DIDAuthenticationRequest'
         required: true
-        schema:
-          $ref: '#/components/schemas/DIDAuthenticationRequest'
       responses:
         "400":
           description: Bad Request
