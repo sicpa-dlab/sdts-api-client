@@ -12,7 +12,7 @@
     <properties>
         <groupId>com.sicpa.edison</groupId>
         <artifactId>edison-credentials-client</artifactId>
-        <artifactVersion>0.0.51</artifactVersion>
+        <artifactVersion>0.0.52</artifactVersion>
         <!-- used to configure the SCM (releases) -->
         <github.repository>sicpa-dlab/edison-credentials-client</github.repository>
         <!--
@@ -108,7 +108,8 @@
                     <maxmem>512m</maxmem>
                     <compilerArgs>
                         <arg>-Xlint:all</arg>
-                        <arg>-J-Xss4m</arg><!-- Compiling the generated JSON.java file may require larger stack size. -->
+                        <arg>-J-Xss4m
+                        </arg><!-- Compiling the generated JSON.java file may require larger stack size. -->
                     </compilerArgs>
                 </configuration>
             </plugin>
