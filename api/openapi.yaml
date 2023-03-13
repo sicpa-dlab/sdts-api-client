@@ -1000,6 +1000,48 @@ paths:
                 $ref: '#/components/schemas/IssuanceDid'
       security:
       - auth: []
+  /organizations/{organizationId}/did-doc-publication:
+    post:
+      tags:
+      - Organizations
+      summary: Publish a new issuance DID doc for a given organization.
+      operationId: publishDid
+      parameters:
+      - name: organizationId
+        in: path
+        description: An organization ID.
+        required: true
+        schema:
+          type: integer
+          format: int32
+        example: 0
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssuanceDid'
+        required: true
+      responses:
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+      security:
+      - auth: []
   /messages:
     post:
       tags:
@@ -1070,7 +1112,20 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiError'
         "202":
-          description: Accepted
+          description: A DID authentication successfully started.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DIDAuthenticationAcknowledgement'
+        "404":
+          description: A DID document or service could not be resolved from the DID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DIDAuthenticationAcknowledgement'
+        "424":
+          description: A DID document or OpenId configuration was invalid or could
+            not be processed.
           content:
             application/json:
               schema:
@@ -1078,42 +1133,6 @@ paths:
       security:
       - auth: []
   /credentials-send:
-    get:
-      tags:
-      - Credentials Send
-      summary: List all credentials
-      description: List all credentials sent by an organization
-      operationId: listCredentialSent
-      parameters:
-      - name: X-ORGANIZATION-ID
-        in: header
-        required: true
-        schema:
-          type: integer
-          format: int32
-      responses:
-        "400":
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/CredentialSent'
-      security:
-      - auth: []
     post:
       tags:
       - Credentials Send
@@ -1442,6 +1461,84 @@ paths:
                   $ref: '#/components/schemas/WebhookType'
       security:
       - auth: []
+  /w3c-credentials:
+    get:
+      tags:
+      - Credentials
+      summary: List w3c credentials
+      description: List all W3c credentials in the organization's wallet.
+      operationId: listW3cCredentials
+      parameters:
+      - name: X-ORGANIZATION-ID
+        in: header
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LDCredential'
+      security:
+      - auth: []
+  /w3c-credentials/{credentialId}:
+    get:
+      tags:
+      - Credentials
+      summary: Get a w3c credential
+      description: Get a single w3c credential from the organization's wallet.
+      operationId: getW3cCredentialById
+      parameters:
+      - name: X-ORGANIZATION-ID
+        in: header
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: credentialId
+        in: path
+        description: A w3c credential ID.
+        required: true
+        schema:
+          type: string
+      responses:
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LDCredential'
+      security:
+      - auth: []
   /verifications/{verificationId}:
     get:
       tags:
@@ -1712,48 +1809,6 @@ paths:
                 $ref: '#/components/schemas/ApiError'
         "204":
           description: No Content
-      security:
-      - auth: []
-  /credentials-send/{sendId}:
-    get:
-      tags:
-      - Credentials Send
-      summary: Get a credential send
-      description: Get the specified credential sent. Can be used to check on the
-        sending state.
-      operationId: getCredentialSendById
-      parameters:
-      - name: X-ORGANIZATION-ID
-        in: header
-        required: true
-        schema:
-          type: integer
-          format: int32
-      - name: sendId
-        in: path
-        description: An credential sent ID.
-        required: true
-        schema:
-          type: string
-      responses:
-        "400":
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CredentialSent'
       security:
       - auth: []
   /credentials-issuance/{issuanceId}:
@@ -2441,9 +2496,6 @@ components:
     SignedDocResponse:
       type: object
       properties:
-        errorMsg:
-          type: string
-          description: Description of the error in case it happens
         signedDoc:
           type: object
           description: Document signed
@@ -2822,6 +2874,35 @@ components:
           - ACTIVE
           - ERROR
           - INACTIVE
+    LDCredential:
+      required:
+      - contexts
+      - credential
+      - issuer
+      - proofType
+      - subjectId
+      type: object
+      properties:
+        contexts:
+          type: array
+          description: Credential context
+          items:
+            type: string
+            description: Credential context
+        credential:
+          type: object
+          description: Credential Values
+        issuer:
+          type: string
+          description: Issuer did
+        proofType:
+          type: array
+          items:
+            type: string
+        subjectId:
+          type: array
+          items:
+            type: string
     VerificationSummary:
       required:
       - name
