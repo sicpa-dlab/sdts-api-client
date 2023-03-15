@@ -54,14 +54,14 @@ paths:
           type: integer
           format: int32
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -103,14 +103,14 @@ paths:
               $ref: '#/components/schemas/WebhookUpdate'
         required: true
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -143,14 +143,14 @@ paths:
           type: integer
           format: int32
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -180,14 +180,14 @@ paths:
           type: integer
           format: int32
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -226,14 +226,14 @@ paths:
               $ref: '#/components/schemas/VerificationTemplateUpdate'
         required: true
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -266,14 +266,14 @@ paths:
           type: integer
           format: int32
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -298,14 +298,14 @@ paths:
           format: int32
         example: 0
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -339,14 +339,14 @@ paths:
               $ref: '#/components/schemas/OrganizationUpdate'
         required: true
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -374,14 +374,14 @@ paths:
           format: int32
         example: 0
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -406,14 +406,14 @@ paths:
           format: int32
         example: 0
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -449,14 +449,14 @@ paths:
                   description: The image to upload. Only PNG and JPEG images are supported
                   format: binary
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -480,14 +480,14 @@ paths:
           format: int32
         example: 0
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -516,14 +516,14 @@ paths:
         schema:
           type: boolean
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -557,14 +557,14 @@ paths:
               $ref: '#/components/schemas/WebhookCreate'
         required: true
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -599,14 +599,14 @@ paths:
           type: string
         example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -640,14 +640,14 @@ paths:
               $ref: '#/components/schemas/VerificationCreate'
         required: true
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -674,14 +674,14 @@ paths:
           type: integer
           format: int32
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -715,14 +715,14 @@ paths:
               $ref: '#/components/schemas/VerificationTemplateCreate'
         required: true
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -756,14 +756,14 @@ paths:
               $ref: '#/components/schemas/LDCredentialSigning'
         required: true
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -799,14 +799,14 @@ paths:
               $ref: '#/components/schemas/SchemaCreate'
         required: true
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -839,14 +839,14 @@ paths:
               $ref: '#/components/schemas/RevocationCreate'
         required: true
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -862,14 +862,14 @@ paths:
       summary: List all organizations
       operationId: listOrganizations
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -896,14 +896,14 @@ paths:
               $ref: '#/components/schemas/OrganizationCreate'
         required: true
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -935,14 +935,14 @@ paths:
           format: int32
         example: 0
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -980,14 +980,14 @@ paths:
               $ref: '#/components/schemas/DidCreationRequest'
         required: true
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -998,6 +998,47 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/IssuanceDid'
+      security:
+      - auth: []
+  /organizations/{organizationId}/did-doc-publication:
+    post:
+      tags:
+      - Organizations
+      summary: Publish a new issuance DID doc for a given organization.
+      operationId: publishDid
+      parameters:
+      - name: organizationId
+        in: path
+        description: An organization ID.
+        required: true
+        schema:
+          type: integer
+          format: int32
+        example: 0
+      - name: didPublicationRequest
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
       security:
       - auth: []
   /messages:
@@ -1020,14 +1061,14 @@ paths:
               $ref: '#/components/schemas/Message'
         required: true
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -1057,20 +1098,33 @@ paths:
               $ref: '#/components/schemas/DIDAuthenticationRequest'
         required: true
       responses:
-        "400":
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
         "500":
           description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
         "202":
-          description: Accepted
+          description: A DID authentication successfully started.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DIDAuthenticationAcknowledgement'
+        "404":
+          description: A DID document or service could not be resolved from the DID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DIDAuthenticationAcknowledgement'
+        "424":
+          description: A DID document or OpenId configuration was invalid or could
+            not be processed.
           content:
             application/json:
               schema:
@@ -1078,42 +1132,6 @@ paths:
       security:
       - auth: []
   /credentials-send:
-    get:
-      tags:
-      - Credentials Send
-      summary: List all credentials
-      description: List all credentials sent by an organization
-      operationId: listCredentialSent
-      parameters:
-      - name: X-ORGANIZATION-ID
-        in: header
-        required: true
-        schema:
-          type: integer
-          format: int32
-      responses:
-        "400":
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/CredentialSent'
-      security:
-      - auth: []
     post:
       tags:
       - Credentials Send
@@ -1136,14 +1154,14 @@ paths:
               $ref: '#/components/schemas/LDCredentialSending'
         required: true
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -1171,14 +1189,14 @@ paths:
           type: integer
           format: int32
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -1215,14 +1233,14 @@ paths:
               $ref: '#/components/schemas/CredentialCreate'
         required: true
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -1258,14 +1276,14 @@ paths:
               $ref: '#/components/schemas/CredentialDefinitionCreate'
         required: true
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -1307,14 +1325,14 @@ paths:
           - ERROR
           - INACTIVE
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -1350,14 +1368,14 @@ paths:
               $ref: '#/components/schemas/ConnectionInvitationCreate'
         required: true
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -1393,14 +1411,14 @@ paths:
               $ref: '#/components/schemas/ConnectionInvitation'
         required: true
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -1420,14 +1438,14 @@ paths:
       summary: List available webhook types and their respective filters
       operationId: getWebhookTypes
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -1440,6 +1458,84 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/WebhookType'
+      security:
+      - auth: []
+  /w3c-credentials:
+    get:
+      tags:
+      - Credentials
+      summary: List w3c credentials
+      description: List all W3c credentials in the organization's wallet.
+      operationId: listW3cCredentials
+      parameters:
+      - name: X-ORGANIZATION-ID
+        in: header
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LDCredential'
+      security:
+      - auth: []
+  /w3c-credentials/{credentialId}:
+    get:
+      tags:
+      - Credentials
+      summary: Get a w3c credential
+      description: Get a single w3c credential from the organization's wallet.
+      operationId: getW3cCredentialById
+      parameters:
+      - name: X-ORGANIZATION-ID
+        in: header
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: credentialId
+        in: path
+        description: A w3c credential ID.
+        required: true
+        schema:
+          type: string
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LDCredential'
       security:
       - auth: []
   /verifications/{verificationId}:
@@ -1463,14 +1559,14 @@ paths:
           pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
           type: string
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -1504,14 +1600,14 @@ paths:
           pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
           type: string
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -1544,14 +1640,14 @@ paths:
           type: string
         example: 0
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -1578,14 +1674,14 @@ paths:
           type: integer
           format: int32
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -1615,14 +1711,14 @@ paths:
           type: integer
           format: int32
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -1658,14 +1754,14 @@ paths:
         schema:
           type: string
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -1698,62 +1794,20 @@ paths:
         schema:
           type: string
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
         "204":
           description: No Content
-      security:
-      - auth: []
-  /credentials-send/{sendId}:
-    get:
-      tags:
-      - Credentials Send
-      summary: Get a credential send
-      description: Get the specified credential sent. Can be used to check on the
-        sending state.
-      operationId: getCredentialSendById
-      parameters:
-      - name: X-ORGANIZATION-ID
-        in: header
-        required: true
-        schema:
-          type: integer
-          format: int32
-      - name: sendId
-        in: path
-        description: An credential sent ID.
-        required: true
-        schema:
-          type: string
-      responses:
-        "400":
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CredentialSent'
       security:
       - auth: []
   /credentials-issuance/{issuanceId}:
@@ -1778,14 +1832,14 @@ paths:
         schema:
           type: string
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -1819,14 +1873,14 @@ paths:
         schema:
           type: string
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -1857,14 +1911,14 @@ paths:
           type: string
         example: 0
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -1891,14 +1945,14 @@ paths:
           type: integer
           format: int32
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -1936,14 +1990,14 @@ paths:
           type: string
         example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -1978,14 +2032,14 @@ paths:
           type: string
         example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -2441,9 +2495,6 @@ components:
     SignedDocResponse:
       type: object
       properties:
-        errorMsg:
-          type: string
-          description: Description of the error in case it happens
         signedDoc:
           type: object
           description: Document signed
@@ -2822,6 +2873,35 @@ components:
           - ACTIVE
           - ERROR
           - INACTIVE
+    LDCredential:
+      required:
+      - contexts
+      - credential
+      - issuer
+      - proofType
+      - subjectId
+      type: object
+      properties:
+        contexts:
+          type: array
+          description: Credential context
+          items:
+            type: string
+            description: Credential context
+        credential:
+          type: object
+          description: Credential Values
+        issuer:
+          type: string
+          description: Issuer did
+        proofType:
+          type: array
+          items:
+            type: string
+        subjectId:
+          type: array
+          items:
+            type: string
     VerificationSummary:
       required:
       - name
