@@ -839,14 +839,45 @@ paths:
               $ref: '#/components/schemas/RevocationCreate'
         required: true
       responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
         "400":
           description: Bad Request
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
+        "204":
+          description: No Content
+      security:
+      - auth: []
+  /revocations/w3c-revocation:
+    post:
+      tags:
+      - Revocations
+      summary: Revoke a 3c credential
+      operationId: revokeW3CCredential
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties:
+                type: object
+        required: true
+      responses:
         "500":
           description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -1035,10 +1066,6 @@ paths:
                 $ref: '#/components/schemas/ApiError'
         "200":
           description: OK
-          content:
-            application/json:
-              schema:
-                type: object
       security:
       - auth: []
   /messages:
@@ -3008,5 +3035,5 @@ components:
       type: oauth2
       flows:
         clientCredentials:
-          tokenUrl: https://signin.adaptivespace.io/oauth2/token
-          scopes: { }
+          tokenUrl: https://signin.adaptivespace.io
+          scopes: {}
