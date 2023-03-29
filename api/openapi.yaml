@@ -157,6 +157,10 @@ paths:
                 $ref: '#/components/schemas/ApiError'
         "204":
           description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
       security:
       - auth: []
   /verification-templates/{verificationTemplateId}:
@@ -839,14 +843,14 @@ paths:
               $ref: '#/components/schemas/RevocationCreate'
         required: true
       responses:
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
@@ -870,14 +874,14 @@ paths:
                 type: object
         required: true
       responses:
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
@@ -2119,7 +2123,6 @@ components:
             $ref: '#/components/schemas/WebhookWebhookTypeUpsert'
     WebhookWebhookTypeUpsert:
       required:
-      - filters
       - id
       type: object
       properties:
@@ -2127,13 +2130,6 @@ components:
           type: integer
           description: The webhook type id
           format: int32
-        filters:
-          type: array
-          description: List of webhook type filters id
-          items:
-            type: integer
-            description: List of webhook type filters id
-            format: int32
       description: The webhook types associated with this webhook
     Webhook:
       required:
@@ -2167,7 +2163,6 @@ components:
             $ref: '#/components/schemas/WebhookType'
     WebhookType:
       required:
-      - filters
       - id
       - name
       type: object
@@ -2182,29 +2177,7 @@ components:
         description:
           type: string
           description: The webhook type description
-        filters:
-          type: array
-          description: List of filters available
-          items:
-            $ref: '#/components/schemas/WebhookTypeFilter'
       description: The webhook types associated with this webhook
-    WebhookTypeFilter:
-      required:
-      - id
-      - name
-      type: object
-      properties:
-        id:
-          type: integer
-          description: The webhook type id
-          format: int32
-        name:
-          type: string
-          description: The webhook type name
-        description:
-          type: string
-          description: The webhook type description
-      description: List of filters available
     PredicateRestriction:
       required:
       - credentialDefinitionId
