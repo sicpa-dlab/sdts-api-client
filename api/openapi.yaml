@@ -865,6 +865,19 @@ paths:
       - Revocations
       summary: Revoke a 3c credential
       operationId: revokeW3CCredential
+      parameters:
+      - name: X-CLIENT-ID
+        in: header
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: X-ORGANIZATION-ID
+        in: header
+        required: true
+        schema:
+          type: integer
+          format: int32
       requestBody:
         content:
           application/json:
