@@ -1,14 +1,16 @@
 openapi: 3.0.1
 info:
   title: Edison Credentials API
+  description: "Create and manage organizations, connect to other agents, issue and\
+    \ verify credentials"
   version: 0.0.1
 servers:
 - url: /edison-credentials-api
 tags:
+- name: Credential Issuance
+  description: Issue w3c credentials.
 - name: Credentials Signing
   description: Sign credentials and returns the signed credential or an error msg.
-- name: Credentials Send
-  description: Send credentials and retrieve issued credentials.
 - name: Credential Definitions
   description: Create and retrieve credential definitions
 - name: Connections
@@ -579,6 +581,50 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Webhook'
+      security:
+      - auth: []
+  /w3c-credential-issuance:
+    post:
+      tags:
+      - Credential Issuance
+      summary: Request issuance of a w3c credential
+      description: (ASYNC) Request the issuance of a w3c credential through DIDComm
+        or OpenId4VC protocols.This operation is asynchronous.
+      operationId: issueCredential
+      parameters:
+      - name: X-CLIENT-ID
+        in: header
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: X-ORGANIZATION-ID
+        in: header
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssuanceRequestPayload'
+        required: true
+      responses:
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "202":
+          description: Accepted
       security:
       - auth: []
   /verifications:
@@ -1175,49 +1221,6 @@ paths:
                 $ref: '#/components/schemas/DIDAuthenticationAcknowledgement'
       security:
       - auth: []
-  /credentials-send:
-    post:
-      tags:
-      - Credentials Send
-      summary: Send a new credential
-      description: "(ASYNC) Send a new credential. This operation is asynchronous,\
-        \ to follow the progress of the issuance, use webhooks or check the issuance\
-        \ status using the API."
-      operationId: sendCredential
-      parameters:
-      - name: X-ORGANIZATION-ID
-        in: header
-        required: true
-        schema:
-          type: integer
-          format: int32
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/LDCredentialSending'
-        required: true
-      responses:
-        "400":
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CredentialSent'
-      security:
-      - auth: []
   /credentials-issuance:
     get:
       tags:
@@ -1262,7 +1265,7 @@ paths:
       description: "(ASYNC) Issue a new credential to an existing established connection.\
         \ This operation is asynchronous, to follow the progress of the issuance,\
         \ use webhooks or check the issuance status using the API."
-      operationId: issueCredential
+      operationId: issueCredential_1
       parameters:
       - name: X-ORGANIZATION-ID
         in: header
@@ -2415,6 +2418,47 @@ components:
           description: The webhook types associated with this webhook
           items:
             $ref: '#/components/schemas/WebhookWebhookTypeUpsert'
+    DIDCommIssuanceParameters:
+      required:
+      - connectionId
+      type: object
+      properties:
+        connectionId:
+          type: string
+          description: Connection through which to issue the credential
+      description: Parameters required for DIDComm issuance
+    IssuanceRequestPayload:
+      required:
+      - credential
+      - didcomm
+      - issuerDid
+      - openIdConnect
+      - proofType
+      - revocable
+      type: object
+      properties:
+        issuerDid:
+          type: string
+          description: Issuer DID
+        proofType:
+          type: string
+          description: Proof type used to sign and verify the credential
+          enum:
+          - ed25519
+          - bls12381g2
+        revocable:
+          type: boolean
+          description: Make the credential revocable
+        didcomm:
+          $ref: '#/components/schemas/DIDCommIssuanceParameters'
+        openIdConnect:
+          $ref: '#/components/schemas/OpenIdIssuanceParameters'
+        credential:
+          type: object
+          description: Credential as a JSON object
+    OpenIdIssuanceParameters:
+      type: object
+      description: Parameters required for OpenId Connect issuance
     VerificationCreate:
       required:
       - connectionId
@@ -2637,27 +2681,6 @@ components:
           enum:
           - DIDEXCHANGE
           - SIOPV2
-    LDCredentialSending:
-      required:
-      - connectionId
-      - credential
-      - proofType
-      type: object
-      properties:
-        credential:
-          type: object
-          description: Credential
-        proofType:
-          type: string
-          description: Key type "ed25519" or "bls12381g2"
-          enum:
-          - ed25519
-          - bls12381g2
-        connectionId:
-          pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
-          type: string
-          description: The connection id
-          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
     CredentialAttribute:
       required:
       - name
@@ -2674,49 +2697,6 @@ components:
           type: string
           description: An optional credential mime type
       description: A list of credential attributes
-    CredentialProposal:
-      required:
-      - attributes
-      type: object
-      properties:
-        attributes:
-          type: array
-          description: A list of credential attributes
-          items:
-            $ref: '#/components/schemas/CredentialAttribute'
-    CredentialSent:
-      required:
-      - credential
-      - issuanceId
-      - state
-      type: object
-      properties:
-        issuanceId:
-          type: string
-          description: A credential issuance ID
-        errorMessage:
-          type: string
-          description: Optional error message
-        state:
-          type: string
-          description: State of the credential transaction
-        updatedAt:
-          type: string
-          format: date-time
-        credential:
-          $ref: '#/components/schemas/SendingCredentialResponse'
-    SendingCredentialResponse:
-      required:
-      - credentialProposal
-      type: object
-      properties:
-        credentialId:
-          type: string
-        comment:
-          type: string
-          description: A human readable comment
-        credentialProposal:
-          $ref: '#/components/schemas/CredentialProposal'
     CredentialCreate:
       required:
       - attributes
@@ -2787,6 +2767,16 @@ components:
           format: date-time
         credential:
           $ref: '#/components/schemas/Credential'
+    CredentialProposal:
+      required:
+      - attributes
+      type: object
+      properties:
+        attributes:
+          type: array
+          description: A list of credential attributes
+          items:
+            $ref: '#/components/schemas/CredentialAttribute'
     CredentialDefinitionCreate:
       required:
       - schemaId
