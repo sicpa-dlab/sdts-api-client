@@ -2338,7 +2338,8 @@ paths:
         description: An organization id
         required: true
         schema:
-          type: string
+          type: integer
+          format: int32
       responses:
         200:
           description: 'The public DID document of the organization'
