@@ -34,6 +34,7 @@ tags:
   description: Create and manage organizations
 - name: DID Authentication
   description: Request proof of ownership of a DID using interactive protocols.
+- name: Public DID document
 paths:
   /webhooks/{webhookId}:
     get:
@@ -2325,6 +2326,26 @@ paths:
           description: OK
       security:
       - auth: []
+  /resolver/org/{organizationId}/did.json:
+    get:
+      tags:
+      - Public DID document
+      summary: Retrieve the public DID document
+      operationId: getPublicDidDocument
+      parameters:
+      - name: organizationId
+        in: path
+        description: An organization id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: 'The public DID document of the organization'
+          content:
+            application/json:
+              schema:
+                type: object
 components:
   schemas:
     ApiError:
