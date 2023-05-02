@@ -2131,6 +2131,200 @@ paths:
                 $ref: '#/components/schemas/Connection'
       security:
       - auth: []
+  /credentials-issuance-2.0:
+    get:
+      tags:
+      - Credentials Issuance
+      summary: List all credentials 2.0
+      description: List all credentials 2.0 issued by an organization
+      operationId: listCredentialIssuancesV20
+      parameters:
+      - name: X-ORGANIZATION-ID
+        in: header
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CredentialIssuance'
+      security:
+      - auth: []
+    post:
+      tags:
+      - Credentials Issuance
+      summary: Issue a new credential 2.0
+      operationId: issueCredentialV20
+      parameters:
+      - name: X-ORGANIZATION-ID
+        in: header
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CredentialCreateV20'
+        required: true
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CredentialIssuance'
+      security:
+      - auth: []
+  /credentials-issuance-2.0/{credExId}:
+    get:
+      tags:
+      - Credentials Issuance
+      summary: Get a credential 2.0 issuance
+      description: Get the specified credential 2.0 issuance. Can be used to check on
+        the issuance state.
+      operationId: getCredentialIssuanceV20ById
+      parameters:
+      - name: X-ORGANIZATION-ID
+        in: header
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: credExId
+        in: path
+        description: An credential issuance ID.
+        required: true
+        schema:
+          type: string
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CredentialIssuance'
+      security:
+      - auth: []
+  /credentials-issuance-2.0/{credExId}/accept:
+    put:
+      tags:
+      - Credentials Issuance
+      summary: Decline a new credential 2.0 issuance offer
+      operationId: declineCredentialIssuanceV20
+      parameters:
+      - name: X-ORGANIZATION-ID
+        in: header
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: credExId
+        in: path
+        description: A credential exchange ID.
+        required: true
+        schema:
+          pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+          type: string
+        example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "200":
+          description: OK
+      security:
+      - auth: []
+  /credentials-issuance-2.0/{credExId}/decline:
+    put:
+      tags:
+      - Credentials Issuance
+      summary: Accept a new credential 2.0 issuance offer
+      operationId: acceptCredentialIssuanceV20
+      parameters:
+      - name: X-ORGANIZATION-ID
+        in: header
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: credExId
+        in: path
+        description: A credential exchange ID.
+        required: true
+        schema:
+          pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+          type: string
+        example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "200":
+          description: OK
+      security:
+      - auth: []
 components:
   schemas:
     ApiError:
@@ -2749,6 +2943,31 @@ components:
           type: string
           description: An optional credential mime type
       description: A list of credential attributes
+    CredentialCreateV20:
+      type: object
+      required: ['connectionId', 'schemaId', 'ldType', 'attributes']
+      properties:
+        connectionId:
+          pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+          type: string
+          description: A connection ID
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        schemaId:
+          type: string
+          description: "The URL of the JSON-LD schema"
+          example: "https://did.adaptivespace.io/context/iata_tids.jsonld"
+        ldType:
+          type: string
+          description: "The type of the credentials as named in the schema"
+          example: "IATATIDSCredential"
+        comment:
+          type: string
+          description: A human readable comment
+        attributes:
+          type: array
+          description: A list of credential attributes
+          items:
+            $ref: '#/components/schemas/CredentialAttribute'
     CredentialCreate:
       required:
       - attributes
