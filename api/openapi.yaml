@@ -2908,16 +2908,23 @@ components:
       - did
       type: object
       properties:
+        alias:
+          type: string
+        label:
+          type: string
         did:
           pattern: "^did:([a-zA-Z0-9_]+):([a-zA-Z0-9_.%-]+(:[a-zA-Z0-9_.%-]+)*)((;[a-zA-Z0-9_.:%-]+=[a-zA-Z0-9_.:%-]*)*)(/[^#?]*)?([?][^#]*)?(#.*)?$$"
           type: string
           example: did:sov:29r83t9qhfQWJFMFASF
     DIDAuthenticationAcknowledgement:
       required:
+      - connectionId
       - did
       - method
       type: object
       properties:
+        connectionId:
+          type: string
         did:
           pattern: "^did:([a-zA-Z0-9_]+):([a-zA-Z0-9_.%-]+(:[a-zA-Z0-9_.%-]+)*)((;[a-zA-Z0-9_.:%-]+=[a-zA-Z0-9_.:%-]*)*)(/[^#?]*)?([?][^#]*)?(#.*)?$$"
           type: string
@@ -3038,6 +3045,8 @@ components:
           format: date-time
         credential:
           $ref: '#/components/schemas/Credential'
+        role:
+          type: string
     CredentialProposal:
       required:
       - attributes
@@ -3154,6 +3163,18 @@ components:
         label:
           type: string
           description: The connection's label
+        alias:
+          type: string
+        theirRole:
+          type: string
+        theirDid:
+          type: string
+        myDid:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
         connectionId:
           type: string
         state:
