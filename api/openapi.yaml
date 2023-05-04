@@ -2254,8 +2254,8 @@ paths:
     put:
       tags:
       - Credentials Issuance
-      summary: Decline a new credential 2.0 issuance offer
-      operationId: declineCredentialIssuanceV20
+      summary: Accept a new credential 2.0 issuance offer
+      operationId: acceptCredentialIssuanceV20
       parameters:
       - name: X-ORGANIZATION-ID
         in: header
@@ -2292,8 +2292,8 @@ paths:
     put:
       tags:
       - Credentials Issuance
-      summary: Accept a new credential 2.0 issuance offer
-      operationId: acceptCredentialIssuanceV20
+      summary: Decline a new credential 2.0 issuance offer
+      operationId: declineCredentialIssuanceV20
       parameters:
       - name: X-ORGANIZATION-ID
         in: header
