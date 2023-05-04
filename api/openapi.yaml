@@ -1230,6 +1230,11 @@ paths:
         schema:
           type: integer
           format: int32
+      - name: connectionId
+        in: query
+        required: false
+        schema:
+          type: string
       responses:
         "400":
           description: Bad Request
@@ -2146,6 +2151,11 @@ paths:
         schema:
           type: integer
           format: int32
+      - name: connectionId
+        in: query
+        required: false
+        schema:
+          type: string
       responses:
         "500":
           description: Internal Server Error
