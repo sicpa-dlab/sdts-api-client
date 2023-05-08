@@ -3260,6 +3260,7 @@ components:
           - INACTIVE
     LDCredential:
       required:
+      - credentialId
       - contexts
       - credential
       - issuer
@@ -3267,6 +3268,8 @@ components:
       - subjectId
       type: object
       properties:
+        credentialId:
+          type: string
         contexts:
           type: array
           description: Credential context
