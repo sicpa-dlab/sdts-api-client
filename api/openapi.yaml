@@ -2260,6 +2260,43 @@ paths:
                 $ref: '#/components/schemas/CredentialIssuance'
       security:
       - auth: []
+    delete:
+      tags:
+        - Credentials Issuance
+      summary: Delete a credential 2.0 issuance offer
+      operationId: deleteCredentialIssuanceV20
+      parameters:
+        - name: X-ORGANIZATION-ID
+          in: header
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: credExId
+          in: path
+          description: A credential exchange ID.
+          required: true
+          schema:
+            pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+            type: string
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "200":
+          description: OK
+      security:
+        - auth: []
   /credentials-issuance-2.0/{credExId}/accept:
     put:
       tags:
