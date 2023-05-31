@@ -2428,7 +2428,9 @@ components:
       - issuerDid
       - openIdConnect
       - proofType
+      - recipientDid
       - revocable
+      - schemaId
       type: object
       properties:
         issuerDid:
@@ -2443,6 +2445,12 @@ components:
         revocable:
           type: boolean
           description: Make the credential revocable
+        recipientDid:
+          type: string
+          description: DID intended as the credential recipient
+        schemaId:
+          type: string
+          description: Schema used for the issued credential
         didcomm:
           $ref: '#/components/schemas/DIDCommIssuanceParameters'
         openIdConnect:
