@@ -2441,6 +2441,7 @@ components:
           description: Proof type used to sign and verify the credential
           enum:
           - ed25519
+          - ed25519_2020
           - bls12381g2
         revocable:
           type: boolean
@@ -2573,6 +2574,7 @@ components:
           description: Key type "ed25519" or "bls12381g2"
           enum:
           - ed25519
+          - ed25519_2020
           - bls12381g2
         revocable:
           type: boolean
