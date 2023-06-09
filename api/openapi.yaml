@@ -2397,7 +2397,9 @@ paths:
           content:
             'application/json':
               schema:
-                $ref: '#/components/schemas/ListVerificationsV20Response'
+                type: array
+                items:
+                  $ref: '#/components/schemas/VerificationV20Dto'
     post:
       tags: ['Verifications']
       summary: 'Create a new verification 2.0'
@@ -3541,21 +3543,14 @@ components:
           type: string
           description: 'Date and time of last update formatted using ISO 8601 with timezone'
           example: '2023-04-27T13:59:16.821Z'
-    ListVerificationsV20Response:
-      required: ['items']
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/VerificationV20Dto'
     CreateVerificationV20Request:
-      required: ['connectionId', 'schemaId', 'attributes']
+      required: ['connectionId', 'schemaId', 'requestedAttributes']
       properties:
         connectionId:
           type: string
         schemaId:
           type: string
-        attributes:
+        requestedAttributes:
           type: array
           items:
             type: string
