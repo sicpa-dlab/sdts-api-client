@@ -2262,24 +2262,24 @@ paths:
       - auth: []
     delete:
       tags:
-        - Credentials Issuance
+      - Credentials Issuance
       summary: Delete a credential 2.0 issuance offer
       operationId: deleteCredentialIssuanceV20
       parameters:
-        - name: X-ORGANIZATION-ID
-          in: header
-          required: true
-          schema:
-            type: integer
-            format: int32
-        - name: credExId
-          in: path
-          description: A credential exchange ID.
-          required: true
-          schema:
-            pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
-            type: string
-          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+      - name: X-ORGANIZATION-ID
+        in: header
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: credExId
+        in: path
+        description: A credential exchange ID.
+        required: true
+        schema:
+          pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+          type: string
+        example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
       responses:
         "500":
           description: Internal Server Error
@@ -2296,7 +2296,7 @@ paths:
         "200":
           description: OK
       security:
-        - auth: []
+      - auth: []
   /credentials-issuance-2.0/{credExId}/accept:
     put:
       tags:
@@ -2373,6 +2373,155 @@ paths:
           description: OK
       security:
       - auth: []
+  /verifications-2.0:
+    get:
+      tags: ['Verifications']
+      summary: 'List existing verifications 2.0'
+      description: 'List existing verifications 2.0'
+      operationId: 'listVerificationsV20'
+      parameters:
+      - name: X-ORGANIZATION-ID
+        in: header
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: connectionId
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        200:
+          description: 'A list of verifications'
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/ListVerificationsV20Response'
+    post:
+      tags: ['Verifications']
+      summary: 'Create a new verification 2.0'
+      description: 'Create a new verification 2.0 and send it to another wallet that must be accepted by the remote wallet before it can be validated'
+      operationId: 'createVerificationV20'
+      parameters:
+      - name: X-ORGANIZATION-ID
+        in: header
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: 'Attributes of the new verification 2.0'
+        required: true
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/CreateVerificationV20Request'
+      responses:
+        201:
+          description: 'Proof exchange successfully created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerificationV20Dto'
+  /verifications-2.0/{verificationId}:
+    get:
+      tags: ['Verifications']
+      summary: 'Get an existing verification 2.0 by id'
+      description: 'Get an existing verification 2.0 by id'
+      operationId: 'getVerificationV20ById'
+      parameters:
+      - name: X-ORGANIZATION-ID
+        in: header
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - in: 'path'
+        name: 'verificationId'
+        description: 'The identifier of the existing verification 2.0'
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: 'The verification'
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/VerificationV20Dto'
+    delete:
+      tags: ['Verifications']
+      summary: 'Delete an existing verification 2.0'
+      description: 'Delete an existing verification 2.0'
+      operationId: 'deleteVerificationV20'
+      parameters:
+      - name: X-ORGANIZATION-ID
+        in: header
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - in: 'path'
+        name: 'verificationId'
+        description: 'The identifier of the existing verification'
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: 'The verification has been successfully deleted'
+  /verifications-2.0/{verificationId}/accept:
+    put:
+      tags: ['Verifications']
+      summary: 'Accept an existing verification 2.0 and send the selected credential to the original requester'
+      description: 'Accept an existing verification 2.0 and send the selected credentials to the original requester'
+      operationId: 'acceptVerificationV20'
+      parameters:
+      - name: X-ORGANIZATION-ID
+        in: header
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - in: 'path'
+        name: 'verificationId'
+        description: 'The identifier of the verification'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: 'Attributes of the new verification acceptance'
+        required: true
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/AcceptVerificationV20Request'
+      responses:
+        200:
+          description: 'The verification has been successfully accepted'
+  /verifications-2.0/{verificationId}/decline:
+    put:
+      tags: ['Verifications']
+      summary: 'Decline an existing verification 2.0'
+      description: 'Decline an existing verification 2.0'
+      operationId: 'declineVerificationV20'
+      parameters:
+      - name: X-ORGANIZATION-ID
+        in: header
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - in: 'path'
+        name: 'verificationId'
+        description: 'The identifier of the existing verification'
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: 'The verification has been successfully declined'
   /resolver/org/{organizationId}/did.json:
     get:
       tags:
@@ -3369,10 +3518,75 @@ components:
         anchored:
           type: boolean
           description: Whether the credential definition is anchored or not
+    VerificationV20Dto:
+      required: ['verificationId']
+      properties:
+        verificationId:
+          type: string
+          description: 'The identifier of the verification'
+        credential:
+          type: object
+          description: 'Credential Values'
+        state:
+          $ref: '#/components/schemas/VerificationV20State'
+        role:
+          $ref: '#/components/schemas/VerificationV20Role'
+        connectionId:
+          type: string
+        createdAt:
+          type: string
+          description: 'Date and time of creation formatted using ISO 8601 with timezone'
+          example: '2023-04-27T13:59:16.821Z'
+        updatedAt:
+          type: string
+          description: 'Date and time of last update formatted using ISO 8601 with timezone'
+          example: '2023-04-27T13:59:16.821Z'
+    ListVerificationsV20Response:
+      required: ['items']
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/VerificationV20Dto'
+    CreateVerificationV20Request:
+      required: ['connectionId', 'schemaId', 'attributes']
+      properties:
+        connectionId:
+          type: string
+        schemaId:
+          type: string
+        attributes:
+          type: array
+          items:
+            type: string
+    AcceptVerificationV20Request:
+      required: ['credentialId']
+      properties:
+        credentialId:
+          type: string
+          description: 'The identifier of the w3c credential 2.0 to use and send to the requesting wallet for this proof exchange'
+    VerificationV20State:
+      type: string
+      description: 'The current status of a verification 2.0'
+      enum:
+      - 'proposal-sent'
+      - 'proposal-received'
+      - 'request-sent'
+      - 'request-received'
+      - 'presentation-sent'
+      - 'presentation-received'
+      - 'done'
+      - 'abandoned'
+    VerificationV20Role:
+      type: string
+      description: 'Role of a peer in the context of a verification 2.0'
+      enum:
+      - 'prover'
+      - 'verifier'
   securitySchemes:
     auth:
       type: oauth2
       flows:
         clientCredentials:
           tokenUrl: https://signin.adaptivespace.io
-          scopes: {}
+          scopes: { }
