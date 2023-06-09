@@ -2579,6 +2579,8 @@ components:
         revocable:
           type: boolean
     SignedDocResponse:
+      required:
+      - signedDoc
       type: object
       properties:
         signedDoc:
