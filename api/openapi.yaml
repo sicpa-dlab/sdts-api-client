@@ -3529,6 +3529,9 @@ components:
         credential:
           type: object
           description: 'Credential Values'
+        verified:
+          type: boolean
+          description: 'Whether the provided credential have been verified'
         state:
           $ref: '#/components/schemas/VerificationV20State'
         role:
