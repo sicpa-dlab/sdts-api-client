@@ -3529,6 +3529,14 @@ components:
         credential:
           type: object
           description: 'Credential Values'
+        schemaId:
+          type: string
+          description: 'The schemaId requested by the verifier'
+        requestedAttributes:
+          type: array
+          description: 'The attributes requested by the verifier'
+          items:
+            type: string
         verified:
           type: boolean
           description: 'Whether the provided credential have been verified'
