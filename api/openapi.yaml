@@ -3555,16 +3555,12 @@ components:
           description: 'Date and time of last update formatted using ISO 8601 with timezone'
           example: '2023-04-27T13:59:16.821Z'
     CreateVerificationV20Request:
-      required: ['connectionId', 'schemaId', 'requestedAttributes']
+      required: ['connectionId', 'verificationTemplateId']
       properties:
         connectionId:
           type: string
-        schemaId:
+        verificationTemplateId:
           type: string
-        requestedAttributes:
-          type: array
-          items:
-            type: string
     AcceptVerificationV20Request:
       required: ['credentialId']
       properties:
