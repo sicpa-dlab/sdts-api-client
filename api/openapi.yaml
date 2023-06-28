@@ -2645,8 +2645,6 @@ components:
           description: The webhook type description
       description: The webhook types associated with this webhook
     PredicateRestriction:
-      required:
-      - credentialDefinitionId
       type: object
       properties:
         credentialDefinitionId:
@@ -2678,8 +2676,6 @@ components:
       description: "The requested attributes. In order for the verification to be\
         \ successful, all requested attribute should be validated"
     RequestedAttributeRestriction:
-      required:
-      - credentialDefinitionId
       type: object
       properties:
         credentialDefinitionId:
