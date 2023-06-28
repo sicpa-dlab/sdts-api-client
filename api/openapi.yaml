@@ -738,7 +738,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/VerificationTemplateSummary'
+                  $ref: '#/components/schemas/VerificationTemplate'
       security:
       - auth: []
     post:
