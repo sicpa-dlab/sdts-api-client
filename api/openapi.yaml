@@ -2679,6 +2679,10 @@ components:
           pattern: "^did:([a-zA-Z0-9_]+):([a-zA-Z0-9_.%-]+(:[a-zA-Z0-9_.%-]+)*)((;[a-zA-Z0-9_.:%-]+=[a-zA-Z0-9_.:%-]*)*)(/[^#?]*)?([?][^#]*)?(#.*)?$$"
           type: string
           example: did:sov:29r83t9qhfQWJFMFASF
+        usePublicDid:
+          type: boolean
+          nullable: true
+          example: true
     DIDAuthenticationAcknowledgement:
       required:
       - did
