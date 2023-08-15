@@ -1004,6 +1004,43 @@ paths:
                 $ref: '#/components/schemas/Organization'
       security:
       - auth: []
+  /organizations/{organizationId}/key-rotation:
+    post:
+      tags:
+      - Organizations
+      summary: Rotate keys of a DID and publish the new DID document
+      operationId: rotateKeys
+      parameters:
+      - name: organizationId
+        in: path
+        description: An organization ID.
+        required: true
+        schema:
+          type: integer
+          format: int32
+        example: 0
+      - name: did
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "202":
+          description: Accepted
+      security:
+      - auth: []
   /organizations/{organizationId}/issuance-dids:
     get:
       tags:
