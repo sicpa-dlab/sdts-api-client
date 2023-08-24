@@ -2747,8 +2747,11 @@ components:
         - $ref: "#/components/schemas/DifVerificationTemplateContent"
     DifVerificationTemplateContent:
       type: object
-      required: ['schemaId', 'requestedAttributes']
+      required: [ 'type', 'schemaId', 'requestedAttributes' ]
       properties:
+        type:
+          type: string
+          enum: [ 'dif' ]
         schemaId:
           type: string
           description: "The schema id related to this template"
@@ -2765,10 +2768,14 @@ components:
                 description: "The name of the requested attribute"
     IndyVerificationTemplateContent:
       required:
+      - type
       - requestedAttributes
       - requestedPredicates
       type: object
       properties:
+        type:
+          type: string
+          enum: [ 'indy' ]
         requestedAttributes:
           type: array
           description: "The requested attributes. In order for the verification to\
