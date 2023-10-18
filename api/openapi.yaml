@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: Edison Credentials API
+  title: Sicpa Digital Trust Suite API
   description: "Create and manage organizations, connect to other agents, issue and\
     \ verify credentials"
   version: 0.0.1
