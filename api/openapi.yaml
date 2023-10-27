@@ -15,156 +15,22 @@ tags:
   description: Create and retrieve credential definitions
 - name: Connections
   description: "Create and receive invitations, manage existing connections"
+- name: Schemas
+  description: Create and retrieve schemas
 - name: Messages
   description: Send basic messages through established connections
 - name: Credentials Issuance
   description: Issue credentials over established connections and retrieve issued
     credentials.
-- name: Credentials
-  description: Retrieve and manage credentials held in the organization wallet.
-- name: Verifications
-  description: Manage verification templates and verify credentials
-- name: Revocations
-  description: Revoke issued credentials
-- name: Webhooks
-  description: The Webhooks API
-- name: Schemas
-  description: Create and retrieve schemas
 - name: Organizations
   description: Create and manage organizations
+- name: Credentials
+  description: Retrieve and manage credentials held in the organization wallet.
 - name: DID Authentication
   description: Request proof of ownership of a DID using interactive protocols.
+- name: Verifications
+  description: Manage verification templates and verify credentials
 paths:
-  /webhooks/{webhookId}:
-    get:
-      tags:
-      - Webhooks
-      summary: Get a webhook configuration
-      operationId: getWebhookById
-      parameters:
-      - name: X-ORGANIZATION-ID
-        in: header
-        required: true
-        schema:
-          type: integer
-          format: int32
-      - name: webhookId
-        in: path
-        description: An webhook ID.
-        required: true
-        schema:
-          type: integer
-          format: int32
-      responses:
-        "500":
-          description: Internal Server Error
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "400":
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Webhook'
-      security:
-      - auth: []
-    put:
-      tags:
-      - Webhooks
-      summary: Update a webhook configuration
-      description: This updates all fields passed in the payload. Null valuesin the
-        payload indicate that no changes will be applied to the currently persisted
-        value.
-      operationId: updateWebhook
-      parameters:
-      - name: X-ORGANIZATION-ID
-        in: header
-        required: true
-        schema:
-          type: integer
-          format: int32
-      - name: webhookId
-        in: path
-        description: An webhook ID.
-        required: true
-        schema:
-          type: integer
-          format: int32
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/WebhookUpdate'
-        required: true
-      responses:
-        "500":
-          description: Internal Server Error
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "400":
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Webhook'
-      security:
-      - auth: []
-    delete:
-      tags:
-      - Webhooks
-      summary: Delete a webhook configuration
-      operationId: deleteWebhook
-      parameters:
-      - name: X-ORGANIZATION-ID
-        in: header
-        required: true
-        schema:
-          type: integer
-          format: int32
-      - name: webhookId
-        in: path
-        description: A webhook ID.
-        required: true
-        schema:
-          type: integer
-          format: int32
-      responses:
-        "500":
-          description: Internal Server Error
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "400":
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "204":
-          description: No Content
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Webhook'
-      security:
-      - auth: []
   /verification-templates/{verificationTemplateId}:
     get:
       tags:
@@ -502,87 +368,6 @@ paths:
           description: No Content
       security:
       - auth: []
-  /webhooks:
-    get:
-      tags:
-      - Webhooks
-      summary: List all webhook configurations
-      operationId: listWebhooks
-      parameters:
-      - name: X-ORGANIZATION-ID
-        in: header
-        required: true
-        schema:
-          type: integer
-          format: int32
-      - name: active
-        in: query
-        description: List only active webhooks
-        required: false
-        schema:
-          type: boolean
-      responses:
-        "500":
-          description: Internal Server Error
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "400":
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Webhook'
-      security:
-      - auth: []
-    post:
-      tags:
-      - Webhooks
-      summary: Create a new webhook configuration
-      operationId: createWebhook
-      parameters:
-      - name: X-ORGANIZATION-ID
-        in: header
-        required: true
-        schema:
-          type: integer
-          format: int32
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/WebhookCreate'
-        required: true
-      responses:
-        "500":
-          description: Internal Server Error
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "400":
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Webhook'
-      security:
-      - auth: []
   /w3c-credential-issuance:
     post:
       tags:
@@ -866,7 +651,7 @@ paths:
   /revocations:
     post:
       tags:
-      - Revocations
+      - Revocations Indy
       summary: Revoke a credential
       operationId: revoke
       parameters:
@@ -902,8 +687,8 @@ paths:
   /revocations/w3c-revocation:
     post:
       tags:
-      - Revocations
-      summary: Revoke a 3c credential
+      - Revocations W3C
+      summary: Revoke a W3C credential
       operationId: revokeW3CCredential
       parameters:
       - name: X-CLIENT-ID
@@ -922,9 +707,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties:
-                type: object
+              $ref: '#/components/schemas/CredentialRevocationRequest'
         required: true
       responses:
         "500":
@@ -1025,14 +808,14 @@ paths:
         schema:
           type: string
       responses:
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiError'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           content:
             '*/*':
               schema:
@@ -1160,6 +943,46 @@ paths:
                 $ref: '#/components/schemas/ApiError'
         "200":
           description: OK
+      security:
+      - auth: []
+  /oidc/credential_offer:
+    post:
+      tags:
+      - OpenID
+      summary: Generate OpenID Credential Offer
+      operationId: generateOpenIdCredentialOffer
+      parameters:
+      - name: X-ORGANIZATION-ID
+        in: header
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CredentialOfferGenerationRequest'
+        required: true
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Uri'
       security:
       - auth: []
   /messages:
@@ -1507,35 +1330,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Connection'
-      security:
-      - auth: []
-  /webhooks/types:
-    get:
-      tags:
-      - Webhooks
-      summary: List available webhook types and their respective filters
-      operationId: getWebhookTypes
-      responses:
-        "500":
-          description: Internal Server Error
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "400":
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/WebhookType'
       security:
       - auth: []
   /w3c-credentials:
@@ -2149,82 +1943,6 @@ components:
           type: string
         path:
           type: string
-    WebhookUpdate:
-      required:
-      - webhookTypes
-      type: object
-      properties:
-        active:
-          type: boolean
-          description: Defines if the webhook is active or not
-        name:
-          type: string
-          description: The webhook's name
-        url:
-          type: string
-          description: Defines the webhook url
-        webhookTypes:
-          type: array
-          description: The webhook types associated with this webhook
-          items:
-            $ref: '#/components/schemas/WebhookWebhookTypeUpsert'
-    WebhookWebhookTypeUpsert:
-      required:
-      - id
-      type: object
-      properties:
-        id:
-          type: integer
-          description: The webhook type id
-          format: int32
-      description: The webhook types associated with this webhook
-    Webhook:
-      required:
-      - active
-      - id
-      - name
-      - url
-      - webhookTypes
-      type: object
-      properties:
-        id:
-          type: integer
-          description: The webhook's id
-          format: int32
-        name:
-          type: string
-          description: The webhook's name
-        url:
-          type: string
-          description: The webhook's url
-        active:
-          type: boolean
-          description: Defines if the webhook is active or not
-        secret:
-          type: string
-          description: Api key to authenticate against the url
-        webhookTypes:
-          type: array
-          description: The webhook types associated with this webhook
-          items:
-            $ref: '#/components/schemas/WebhookType'
-    WebhookType:
-      required:
-      - id
-      - name
-      type: object
-      properties:
-        id:
-          type: integer
-          description: The webhook type id
-          format: int32
-        name:
-          type: string
-          description: The webhook type name
-        description:
-          type: string
-          description: The webhook type description
-      description: The webhook types associated with this webhook
     PredicateRestriction:
       required:
       - credentialDefinitionId
@@ -2427,28 +2145,6 @@ components:
           nullable: true
           items:
             $ref: '#/components/schemas/IssuanceDid'
-    WebhookCreate:
-      required:
-      - active
-      - name
-      - url
-      - webhookTypes
-      type: object
-      properties:
-        url:
-          type: string
-          description: The webhook's url
-        name:
-          type: string
-          description: The webhook's name
-        active:
-          type: boolean
-          description: Defines if the webhook is active or not
-        webhookTypes:
-          type: array
-          description: The webhook types associated with this webhook
-          items:
-            $ref: '#/components/schemas/WebhookWebhookTypeUpsert'
     DIDCommIssuanceParameters:
       required:
       - connectionId
@@ -2467,7 +2163,6 @@ components:
       - proofType
       - recipientDid
       - revocable
-      - schemaId
       type: object
       properties:
         issuerDid:
@@ -2486,9 +2181,6 @@ components:
         recipientDid:
           type: string
           description: DID intended as the credential recipient
-        schemaId:
-          type: string
-          description: Schema used for the issued credential
         didcomm:
           $ref: '#/components/schemas/DIDCommIssuanceParameters'
         openIdConnect:
@@ -2670,6 +2362,23 @@ components:
           pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
           type: string
           description: A credential issuance ID
+    CredentialRevocationRequest:
+      required:
+      - statusListCredential
+      - statusListIndex
+      type: object
+      properties:
+        credentialId:
+          type: string
+          description: Credential identifier. It will be included in webhooks event
+        statusListIndex:
+          type: integer
+          description: Bit index indicating the status of the verifiable credential
+            in the corresponding status list
+          format: int32
+        statusListCredential:
+          type: string
+          description: URL of the status list credential
     OrganizationCreate:
       required:
       - name
@@ -2696,6 +2405,31 @@ components:
         did:
           type: string
           description: The did to use (if applicable)
+    CredentialOfferGenerationRequest:
+      required:
+      - credential
+      - issuerDid
+      - recipientDid
+      type: object
+      properties:
+        issuerDid:
+          type: string
+          description: Issuer DID
+        recipientDid:
+          type: string
+          description: DID intended as the credential recipient
+        credential:
+          type: object
+          additionalProperties:
+            type: object
+            description: Credential as a JSON object
+          description: Credential as a JSON object
+    Uri:
+      type: object
+      properties:
+        credentialOfferUri:
+          type: string
+          format: uri
     Message:
       required:
       - connectionId

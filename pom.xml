@@ -12,7 +12,7 @@
     <properties>
         <groupId>com.sicpa.edison</groupId>
         <artifactId>edison-credentials-client</artifactId>
-        <artifactVersion>2.2.1</artifactVersion>
+        <artifactVersion>3.0.0</artifactVersion>
         <!-- used to configure the SCM (releases) -->
         <github.repository>sicpa-dlab/edison-credentials-client</github.repository>
         <!--
