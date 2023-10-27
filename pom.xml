@@ -10,8 +10,8 @@
     <description>OpenAPI Generated client for Edison credentials API</description>
 
     <properties>
-        <groupId>com.sicpa.edison</groupId>
-        <artifactId>edison-credentials-client</artifactId>
+        <groupId>com.sicpa</groupId>
+        <artifactId>sdts-api-client</artifactId>
         <artifactVersion>3.0.0</artifactVersion>
         <!-- used to configure the SCM (releases) -->
         <github.repository>sicpa-dlab/edison-credentials-client</github.repository>
