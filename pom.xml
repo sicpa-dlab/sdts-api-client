@@ -6,7 +6,7 @@
     <packaging>jar</packaging>
     <name>edison-credentials-client</name>
     <version>${artifactVersion}</version>
-    <url>https://github.com/sicpa-dlab/edison-credentials-client</url>
+    <url>https://github.com/sicpa-dlab/sdts-api-client</url>
     <description>OpenAPI Generated client for Edison credentials API</description>
 
     <properties>
@@ -14,7 +14,7 @@
         <artifactId>sdts-api-client</artifactId>
         <artifactVersion>3.0.0</artifactVersion>
         <!-- used to configure the SCM (releases) -->
-        <github.repository>sicpa-dlab/edison-credentials-client</github.repository>
+        <github.repository>sicpa-dlab/sdts-api-client</github.repository>
         <!--
         IMPORTANT ! determines the <server> to use in settings.xml (called github in GitHub actions auto-generated settings.xml).
         It should contain the username and personal access token (again, provided automatically by Github actions)
