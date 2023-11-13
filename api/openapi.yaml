@@ -11,11 +11,6 @@ tags:
   description: Create and retrieve credential definitions
 - name: W3C Json-LD
   description: Sign credentials and returns the signed credential or an error msg.
-- name: DIDComm
-  description: Issue credentials over established connections and retrieve issued
-    credentials.
-- name: DIDComm
-  description: Send basic messages through established DIDComm connections
 - name: Wallet
   description: Operations related to the credentials held in the organization's wallet.
 paths:
@@ -442,7 +437,7 @@ paths:
   /verifications/w3c-verification:
     post:
       tags:
-      - W3C Json-LD
+      - DIDComm
       summary: Initiate W3C Credential verification
       operationId: createVerificationV20
       parameters:
@@ -1532,7 +1527,7 @@ paths:
   /verifications/w3c-verification/{verificationId}:
     get:
       tags:
-      - W3C Json-LD
+      - DIDComm
       summary: Get a verification record with it's status
       operationId: getVerificationV20ById
       parameters:
@@ -1544,7 +1539,6 @@ paths:
           format: int32
       - name: verificationId
         in: path
-        description: A verification ID.
         required: true
         schema:
           type: string
@@ -2245,7 +2239,8 @@ components:
             description: List of claims that the credential needs to contain
         requiredType:
           type: string
-          description: Type of the credential containing the required claims
+          description: List of possible credential types that the claims need to come
+            from
           nullable: true
           default: VerifiableCredential
         checkExpired:
@@ -2307,13 +2302,13 @@ components:
           format: date-time
         presentedCredentials:
           type: array
-          description: Presented credential
+          description: Presented credentials
           items:
             type: object
             additionalProperties:
               type: object
-              description: Presented credential
-            description: Presented credential
+              description: Presented credentials
+            description: Presented credentials
     VerificationTemplateCreate:
       required:
       - content
@@ -2489,7 +2484,7 @@ components:
       required:
       - credential
       - issuerDid
-      - recipientDid
+      - revocable
       type: object
       properties:
         issuerDid:
@@ -2498,12 +2493,16 @@ components:
         recipientDid:
           type: string
           description: DID intended as the credential recipient
+          nullable: true
         credential:
           type: object
           additionalProperties:
             type: object
             description: Credential as a JSON object
           description: Credential as a JSON object
+        revocable:
+          type: boolean
+          description: Make the credential revocable
     Uri:
       type: object
       properties:

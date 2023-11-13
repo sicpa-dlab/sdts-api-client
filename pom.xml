@@ -89,8 +89,6 @@
 
                             <generateModelTests>false</generateModelTests>
                             <generateApiTests>false</generateApiTests>
-                            <skipValidateSpec>true</skipValidateSpec>
-
                             <configOptions>
                                 <openApiNullable>false</openApiNullable>
                                 <dateLibrary>java8</dateLibrary>
