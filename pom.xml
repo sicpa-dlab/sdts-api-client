@@ -4,7 +4,7 @@
     <groupId>${groupId}</groupId>
     <artifactId>${artifactId}</artifactId>
     <packaging>jar</packaging>
-    <name>edison-credentials-client</name>
+    <name>sdts-api-client</name>
     <version>${artifactVersion}</version>
     <url>https://github.com/sicpa-dlab/sdts-api-client</url>
     <description>OpenAPI Generated client for Edison credentials API</description>
@@ -89,7 +89,6 @@
 
                             <generateModelTests>false</generateModelTests>
                             <generateApiTests>false</generateApiTests>
-
                             <configOptions>
                                 <openApiNullable>false</openApiNullable>
                                 <dateLibrary>java8</dateLibrary>

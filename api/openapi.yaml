@@ -1,40 +1,23 @@
 openapi: 3.0.1
 info:
   title: Sicpa Digital Trust Suite API
-  description: "Create and manage organizations, connect to other agents, issue and\
-    \ verify credentials"
   version: 0.0.1
 servers:
-- url: /edison-credentials-api
+- url: /
 tags:
-- name: Credential Issuance
-  description: Issue w3c credentials.
-- name: Credentials Signing
-  description: Sign credentials and returns the signed credential or an error msg.
-- name: Credential Definitions
-  description: Create and retrieve credential definitions
-- name: Connections
-  description: "Create and receive invitations, manage existing connections"
 - name: Schemas
   description: Create and retrieve schemas
-- name: Messages
-  description: Send basic messages through established connections
-- name: Credentials Issuance
-  description: Issue credentials over established connections and retrieve issued
-    credentials.
-- name: Organizations
-  description: Create and manage organizations
-- name: Credentials
-  description: Retrieve and manage credentials held in the organization wallet.
-- name: DID Authentication
-  description: Request proof of ownership of a DID using interactive protocols.
-- name: Verifications
-  description: Manage verification templates and verify credentials
+- name: Definitions
+  description: Create and retrieve credential definitions
+- name: W3C Json-LD
+  description: Sign credentials and returns the signed credential or an error msg.
+- name: Wallet
+  description: Operations related to the credentials held in the organization's wallet.
 paths:
   /verification-templates/{verificationTemplateId}:
     get:
       tags:
-      - Verifications
+      - Anoncreds templates
       summary: Get verification template
       operationId: getVerificationTemplateById
       parameters:
@@ -74,7 +57,7 @@ paths:
       - auth: []
     put:
       tags:
-      - Verifications
+      - Anoncreds templates
       summary: Update verification template
       operationId: updateVerificationTemplate
       parameters:
@@ -120,7 +103,7 @@ paths:
       - auth: []
     delete:
       tags:
-      - Verifications
+      - Anoncreds templates
       summary: Delete a verification template
       operationId: deleteVerificationTemplate
       parameters:
@@ -265,7 +248,7 @@ paths:
   /organizations/{organizationId}/image:
     get:
       tags:
-      - Organizations
+      - Organizations Image
       summary: Get an organization's image
       operationId: getOrganizationImageById
       parameters:
@@ -296,7 +279,7 @@ paths:
       - auth: []
     put:
       tags:
-      - Organizations
+      - Organizations Image
       summary: Update an organization image
       operationId: updateOrganizationImage
       parameters:
@@ -339,7 +322,7 @@ paths:
       - auth: []
     delete:
       tags:
-      - Organizations
+      - Organizations Image
       summary: Delete an organization image
       operationId: deleteOrganizationImage
       parameters:
@@ -368,48 +351,10 @@ paths:
           description: No Content
       security:
       - auth: []
-  /w3c-credential-issuance:
-    post:
-      tags:
-      - Credential Issuance
-      summary: Request issuance of a w3c credential
-      description: (ASYNC) Request the issuance of a w3c credential through DIDComm
-        or OpenId4VC protocols.This operation is asynchronous.
-      operationId: issueW3cCredential
-      parameters:
-      - name: X-ORGANIZATION-ID
-        in: header
-        required: true
-        schema:
-          type: integer
-          format: int32
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/IssuanceRequestPayload'
-        required: true
-      responses:
-        "500":
-          description: Internal Server Error
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "400":
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "202":
-          description: Accepted
-      security:
-      - auth: []
   /verifications:
     get:
       tags:
-      - Verifications
+      - Anoncreds
       summary: List all verification entries
       operationId: listVerifications
       parameters:
@@ -452,7 +397,7 @@ paths:
       - auth: []
     post:
       tags:
-      - Verifications
+      - Anoncreds
       summary: Create a new verification
       operationId: createVerification
       parameters:
@@ -489,10 +434,50 @@ paths:
                 $ref: '#/components/schemas/Verification'
       security:
       - auth: []
+  /verifications/w3c-verification:
+    post:
+      tags:
+      - DIDComm
+      summary: Initiate W3C Credential verification
+      operationId: createVerificationV20
+      parameters:
+      - name: X-ORGANIZATION-ID
+        in: header
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerificationV20Request'
+        required: true
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerificationV20Record'
+      security:
+      - auth: []
   /verification-templates:
     get:
       tags:
-      - Verifications
+      - Anoncreds templates
       summary: List all verification templates
       operationId: listVerificationTemplates
       parameters:
@@ -527,7 +512,7 @@ paths:
       - auth: []
     post:
       tags:
-      - Verifications
+      - Anoncreds templates
       summary: Create a new verification template
       operationId: createVerificationTemplate
       parameters:
@@ -567,8 +552,8 @@ paths:
   /sign-credential:
     post:
       tags:
-      - Credentials Signing
-      summary: Sign a credential
+      - W3C Json-LD
+      summary: Sign a w3c json-ld credential
       description: Sign a credential
       operationId: signCredential
       parameters:
@@ -648,47 +633,13 @@ paths:
                 $ref: '#/components/schemas/SchemaSummary'
       security:
       - auth: []
-  /revocations:
-    post:
-      tags:
-      - Revocations Indy
-      summary: Revoke a credential
-      operationId: revoke
-      parameters:
-      - name: X-ORGANIZATION-ID
-        in: header
-        required: true
-        schema:
-          type: integer
-          format: int32
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RevocationCreate'
-        required: true
-      responses:
-        "500":
-          description: Internal Server Error
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "400":
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "204":
-          description: No Content
-      security:
-      - auth: []
   /revocations/w3c-revocation:
     post:
       tags:
-      - Revocations W3C
-      summary: Revoke a W3C credential
+      - W3C Json-LD
+      summary: Revoke a W3C json-ld credential using Status List v2021
+      description: "This will manipulate the Status List Credential and set the credential\
+        \ status under the index you have provided to #revoked#"
       operationId: revokeW3CCredential
       parameters:
       - name: X-CLIENT-ID
@@ -708,6 +659,42 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CredentialRevocationRequest'
+        required: true
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "204":
+          description: No Content
+      security:
+      - auth: []
+  /revocations/anoncreds-revocation:
+    post:
+      tags:
+      - Anoncreds
+      summary: Revoke an AnonCreds credential
+      operationId: revoke
+      parameters:
+      - name: X-ORGANIZATION-ID
+        in: header
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RevocationCreate'
         required: true
       responses:
         "500":
@@ -790,7 +777,7 @@ paths:
   /organizations/{organizationId}/key-rotation:
     post:
       tags:
-      - Organizations
+      - DIDs
       summary: Rotate keys of a DID and publish the new DID document
       operationId: rotateKeys
       parameters:
@@ -827,7 +814,7 @@ paths:
   /organizations/{organizationId}/issuance-dids:
     get:
       tags:
-      - Organizations
+      - DIDs
       summary: Retrieve public DIDs for a given organization.
       description: "Retrieve public DIDs along with their status regarding ledger\
         \ writes. DIDs in state READY_TO_WRITE are fully ready to operate on the ledger\
@@ -867,7 +854,7 @@ paths:
       - auth: []
     post:
       tags:
-      - Organizations
+      - DIDs
       summary: Create a new issuance DID for a given organization.
       description: "Create a new issuance DID. If it's a did:sov, get it endorsed\
         \ automatically."
@@ -911,7 +898,7 @@ paths:
   /organizations/{organizationId}/did-doc-publication:
     post:
       tags:
-      - Organizations
+      - DIDs
       summary: Publish a new issuance DID doc for a given organization.
       operationId: publishDid
       parameters:
@@ -945,10 +932,48 @@ paths:
           description: OK
       security:
       - auth: []
-  /oidc/credential_offer:
+  /openid4vc/w3c-jsonld-credentials-issuance:
     post:
       tags:
-      - OpenID
+      - OpenID4VC
+      summary: Request issuance of a w3c json-ld credential
+      description: (ASYNC) Request the issuance of a w3c json-ld credential through
+        OpenId4VC protocol.This operation is asynchronous.
+      operationId: issueOpenIDCredential
+      parameters:
+      - name: X-ORGANIZATION-ID
+        in: header
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssuanceOpenIdRequestPayload'
+        required: true
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "202":
+          description: Accepted
+      security:
+      - auth: []
+  /openid4vc/credential_offer:
+    post:
+      tags:
+      - OpenID4VC
       summary: Generate OpenID Credential Offer
       operationId: generateOpenIdCredentialOffer
       parameters:
@@ -988,8 +1013,8 @@ paths:
   /messages:
     post:
       tags:
-      - Messages
-      summary: Sends a message
+      - DIDComm
+      summary: Sends a message through a DIDComm established connection
       operationId: sendMessage
       parameters:
       - name: X-ORGANIZATION-ID
@@ -1021,12 +1046,100 @@ paths:
           description: No Content
       security:
       - auth: []
+  /didcomm/w3c-jsonld-credentials-issuance:
+    post:
+      tags:
+      - DIDComm
+      summary: Issue a W3C JSON-LD credential
+      description: "(ASYNC) Issue a new W3C JSON-LD credential to an existing established\
+        \ DIDComm connection. This operation is asynchronous, to follow the progress\
+        \ of the issuance, use webhooks or check the issuance status using the API."
+      operationId: issueW3cCredential
+      parameters:
+      - name: X-ORGANIZATION-ID
+        in: header
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssuanceDidcommRequestPayload'
+        required: true
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "202":
+          description: Accepted
+      security:
+      - auth: []
+  /didcomm/anoncreds-credentials-issuance:
+    post:
+      tags:
+      - DIDComm
+      summary: Issue an Anoncreds Credential
+      description: "(ASYNC) Issue a new AnonCreds credential to an existing established\
+        \ DIDComm connection. This operation is asynchronous, to follow the progress\
+        \ of the issuance, use webhooks or check the issuance status using the API."
+      operationId: issueCredential
+      parameters:
+      - name: X-ORGANIZATION-ID
+        in: header
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CredentialCreate'
+        required: true
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CredentialIssuance'
+      security:
+      - auth: []
   /did-authentication:
     post:
       tags:
-      - DID Authentication
+      - Smart Flow
       summary: Authenticate a DID
-      description: Authenticate a DID using either DIDComm or OpenID protocols.
+      description: |-
+        (ASYNC) Requests a proof of control for keys associated with a DID.
+        DID document is de-referenced from the DID.
+        If the DID document lists DIDComm as an available service, engage in a DID Exchange protocol (Aries RFC 0023) using a key listed in the DID document.
+        If the DID document lists a LinkedDomain service, try to resolve openid configuration files at the domain's well-known location. If found, engage in a SIOPv2 protocol where the identity token is expected to be signed
+        with a key listed in the DID document.
+        The protocol propagation is automatic.Webhook event type = DID_AUTHENTICATION
       operationId: authenticate
       parameters:
       - name: X-ORGANIZATION-ID
@@ -1075,89 +1188,10 @@ paths:
                 $ref: '#/components/schemas/DIDAuthenticationAcknowledgement'
       security:
       - auth: []
-  /credentials-issuance:
-    get:
-      tags:
-      - Credentials Issuance
-      summary: List all credentials
-      description: List all credentials issued by an organization
-      operationId: listCredentialIssuances
-      parameters:
-      - name: X-ORGANIZATION-ID
-        in: header
-        required: true
-        schema:
-          type: integer
-          format: int32
-      responses:
-        "500":
-          description: Internal Server Error
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "400":
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/CredentialIssuance'
-      security:
-      - auth: []
-    post:
-      tags:
-      - Credentials Issuance
-      summary: Issue a new credential
-      description: "(ASYNC) Issue a new credential to an existing established connection.\
-        \ This operation is asynchronous, to follow the progress of the issuance,\
-        \ use webhooks or check the issuance status using the API."
-      operationId: issueCredential
-      parameters:
-      - name: X-ORGANIZATION-ID
-        in: header
-        required: true
-        schema:
-          type: integer
-          format: int32
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CredentialCreate'
-        required: true
-      responses:
-        "500":
-          description: Internal Server Error
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "400":
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CredentialIssuance'
-      security:
-      - auth: []
   /credential-definitions:
     post:
       tags:
-      - Credential Definitions
+      - Definitions
       summary: Create a new credential definition
       description: "(ASYNC) create and anchor a new schema on the ledger. This is\
         \ an asynchronous operation, to follow anchoring progress, use webhooks or\
@@ -1200,9 +1234,10 @@ paths:
   /connections:
     get:
       tags:
-      - Connections
+      - DIDComm
       summary: List connections
-      description: List all connection records from the organization's wallet.
+      description: List all DIDComm connection (Aries RFC 0160) records from the organization's
+        wallet.
       operationId: listConnections
       parameters:
       - name: X-ORGANIZATION-ID
@@ -1213,7 +1248,8 @@ paths:
           format: int32
       - name: state
         in: query
-        description: Filter result by connection state.
+        description: "Filter result by connection state. [invited, requested, responded,\
+          \ complete]"
         required: false
         schema:
           type: string
@@ -1250,10 +1286,10 @@ paths:
       - auth: []
     post:
       tags:
-      - Connections
-      summary: Create a new connection invitation
-      description: Creates a new connection invitation to be consumed by external
-        agents.
+      - DIDComm
+      summary: Create a connection invitation
+      description: Creates a new Connection invitation (Aries RFC 0160) to be consumed
+        by external agents.
       operationId: createInvitation
       parameters:
       - name: X-ORGANIZATION-ID
@@ -1292,11 +1328,10 @@ paths:
   /connections/invitation:
     post:
       tags:
-      - Connections
+      - DIDComm
       summary: Receive and accept a new connection invitation
-      description: (ASYNC) Consume a connection invitation and established. Establishing
-        connection is asynchronous. Usewebhooks or check the connection status from
-        the API to follow the connection process.
+      description: "(ASYNC) Consume a connection invitation (Aries RFC 0160). The\
+        \ protocol propagation is automatic \nWebhook event type = CONNECTION"
       operationId: receiveInvitation
       parameters:
       - name: X-ORGANIZATION-ID
@@ -1335,9 +1370,9 @@ paths:
   /w3c-credentials:
     get:
       tags:
-      - Credentials
-      summary: List w3c credentials
-      description: List all W3c credentials in the organization's wallet.
+      - Wallet
+      summary: List W3C credentials
+      description: Retrieves all W3C credentials from the organization's wallet.
       operationId: listW3cCredentials
       parameters:
       - name: X-ORGANIZATION-ID
@@ -1372,9 +1407,10 @@ paths:
   /w3c-credentials/{credentialId}:
     get:
       tags:
-      - Credentials
-      summary: Get a w3c credential
-      description: Get a single w3c credential from the organization's wallet.
+      - Wallet
+      summary: Retrieve a W3C credential
+      description: Retrieves a specific W3C credential from the organization's wallet
+        using the given credential ID.
       operationId: getW3cCredentialById
       parameters:
       - name: X-ORGANIZATION-ID
@@ -1413,7 +1449,7 @@ paths:
   /verifications/{verificationId}:
     get:
       tags:
-      - Verifications
+      - Anoncreds
       summary: Get a verification entry
       operationId: getVerificationById
       parameters:
@@ -1453,7 +1489,7 @@ paths:
       - auth: []
     delete:
       tags:
-      - Verifications
+      - Anoncreds
       summary: Delete a verification entry
       description: "Delete log entry for a verification, this does not cancel a verification."
       operationId: deleteVerificationEntry
@@ -1486,6 +1522,46 @@ paths:
                 $ref: '#/components/schemas/ApiError'
         "204":
           description: No Content
+      security:
+      - auth: []
+  /verifications/w3c-verification/{verificationId}:
+    get:
+      tags:
+      - DIDComm
+      summary: Get a verification record with it's status
+      operationId: getVerificationV20ById
+      parameters:
+      - name: X-ORGANIZATION-ID
+        in: header
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: verificationId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerificationV20Record'
       security:
       - auth: []
   /schemas/{schemaId}:
@@ -1568,203 +1644,10 @@ paths:
                   $ref: '#/components/schemas/SchemaSummary'
       security:
       - auth: []
-  /credentials:
-    get:
-      tags:
-      - Credentials
-      summary: List credentials
-      description: List all credentials in the organization's wallet.
-      operationId: listCredentials
-      parameters:
-      - name: X-ORGANIZATION-ID
-        in: header
-        required: true
-        schema:
-          type: integer
-          format: int32
-      responses:
-        "500":
-          description: Internal Server Error
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "400":
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Credential'
-      security:
-      - auth: []
-  /credentials/{credentialId}:
-    get:
-      tags:
-      - Credentials
-      summary: Get a credential
-      description: Get a single credential from the organization's wallet.
-      operationId: getCredentialById
-      parameters:
-      - name: X-ORGANIZATION-ID
-        in: header
-        required: true
-        schema:
-          type: integer
-          format: int32
-      - name: credentialId
-        in: path
-        description: A credential ID.
-        required: true
-        schema:
-          type: string
-      responses:
-        "500":
-          description: Internal Server Error
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "400":
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Credential'
-      security:
-      - auth: []
-    delete:
-      tags:
-      - Credentials
-      summary: Delete a credential
-      description: Delete a credential from the organization's wallet.
-      operationId: deleteCredential
-      parameters:
-      - name: X-ORGANIZATION-ID
-        in: header
-        required: true
-        schema:
-          type: integer
-          format: int32
-      - name: credentialId
-        in: path
-        description: A credential ID.
-        required: true
-        schema:
-          type: string
-      responses:
-        "500":
-          description: Internal Server Error
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "400":
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "204":
-          description: No Content
-      security:
-      - auth: []
-  /credentials-issuance/{issuanceId}:
-    get:
-      tags:
-      - Credentials Issuance
-      summary: Get a credential issuance
-      description: Get the specified credential issuance. Can be used to check on
-        the issuance state.
-      operationId: getCredentialIssuanceById
-      parameters:
-      - name: X-ORGANIZATION-ID
-        in: header
-        required: true
-        schema:
-          type: integer
-          format: int32
-      - name: issuanceId
-        in: path
-        description: An credential issuance ID.
-        required: true
-        schema:
-          type: string
-      responses:
-        "500":
-          description: Internal Server Error
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "400":
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CredentialIssuance'
-      security:
-      - auth: []
-    delete:
-      tags:
-      - Credentials Issuance
-      summary: Delete a credential issuance record
-      description: Delete the specified credential issuance record (this does not
-        delete the credential from a remote wallet).
-      operationId: deleteCredentialIssuance
-      parameters:
-      - name: X-ORGANIZATION-ID
-        in: header
-        required: true
-        schema:
-          type: integer
-          format: int32
-      - name: issuanceId
-        in: path
-        description: An credential issuance ID.
-        required: true
-        schema:
-          type: string
-      responses:
-        "500":
-          description: Internal Server Error
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "400":
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        "204":
-          description: No Content
-      security:
-      - auth: []
   /credential-definitions/{credentialDefinitionId}:
     get:
       tags:
-      - Credential Definitions
+      - Definitions
       summary: Get a single credential definition
       operationId: getCredentialDefinitionById
       parameters:
@@ -1806,7 +1689,7 @@ paths:
   /credential-definitions/created:
     get:
       tags:
-      - Credential Definitions
+      - Definitions
       summary: List all created credential definitions
       operationId: listCredentialDefinitions
       parameters:
@@ -1842,9 +1725,10 @@ paths:
   /connections/{connectionId}:
     get:
       tags:
-      - Connections
-      summary: Get connection
-      description: Retrieve a connection record from the organization's wallet
+      - DIDComm
+      summary: Retrieve a connection
+      description: Retrieve a DIDComm connection record (Aries RFC 0160).  from the
+        organization's wallet using the given connection ID
       operationId: getConnectionById
       parameters:
       - name: X-ORGANIZATION-ID
@@ -1855,7 +1739,7 @@ paths:
           format: int32
       - name: connectionId
         in: path
-        description: A connection ID.
+        description: Connection ID
         required: true
         schema:
           pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
@@ -1884,9 +1768,10 @@ paths:
       - auth: []
     delete:
       tags:
-      - Connections
-      summary: Delete connection
-      description: Delete a connection from the organization's wallet.
+      - DIDComm
+      summary: Delete a connection
+      description: Deletes a DIDComm connection (Aries RFC 0160) from the organization's
+        wallet.
       operationId: deleteConnection
       parameters:
       - name: X-ORGANIZATION-ID
@@ -1897,7 +1782,7 @@ paths:
           format: int32
       - name: connectionId
         in: path
-        description: A connection ID.
+        description: Connection ID
         required: true
         schema:
           pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
@@ -1918,6 +1803,122 @@ paths:
                 $ref: '#/components/schemas/ApiError'
         "200":
           description: OK
+      security:
+      - auth: []
+  /anoncreds-credentials:
+    get:
+      tags:
+      - Wallet
+      summary: List anoncreds credentials
+      description: Retrieves all anoncreds credentials from the organization's wallet.
+      operationId: listCredentials
+      parameters:
+      - name: X-ORGANIZATION-ID
+        in: header
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Credential'
+      security:
+      - auth: []
+  /anoncreds-credentials/{credentialId}:
+    get:
+      tags:
+      - Wallet
+      summary: Retrieve an anoncreds credential
+      description: Retrieves a single anoncreds credential from the organization's
+        wallet using the provided credential ID.
+      operationId: getCredentialById
+      parameters:
+      - name: X-ORGANIZATION-ID
+        in: header
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: credentialId
+        in: path
+        description: An anoncreds credential ID.
+        required: true
+        schema:
+          type: string
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Credential'
+      security:
+      - auth: []
+    delete:
+      tags:
+      - Wallet
+      summary: Delete an anoncreds credential
+      description: Deletes an anoncreds credential from the organization's wallet
+        using the provided credential ID.
+      operationId: deleteCredential
+      parameters:
+      - name: X-ORGANIZATION-ID
+        in: header
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: credentialId
+        in: path
+        description: An anoncreds credential ID.
+        required: true
+        schema:
+          type: string
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        "204":
+          description: No Content
       security:
       - auth: []
 components:
@@ -2145,59 +2146,6 @@ components:
           nullable: true
           items:
             $ref: '#/components/schemas/IssuanceDid'
-    DIDCommIssuanceParameters:
-      required:
-      - connectionId
-      type: object
-      properties:
-        connectionId:
-          type: string
-          description: Connection through which to issue the credential
-      description: Parameters required for DIDComm issuance
-    IssuanceRequestPayload:
-      required:
-      - credential
-      - didcomm
-      - issuerDid
-      - openIdConnect
-      - proofType
-      - recipientDid
-      - revocable
-      type: object
-      properties:
-        issuerDid:
-          type: string
-          description: Issuer DID
-        proofType:
-          type: string
-          description: Proof type used to sign and verify the credential
-          enum:
-          - ed25519
-          - ed25519_2020
-          - bls12381g2
-        revocable:
-          type: boolean
-          description: Make the credential revocable
-        recipientDid:
-          type: string
-          description: DID intended as the credential recipient
-        didcomm:
-          $ref: '#/components/schemas/DIDCommIssuanceParameters'
-        openIdConnect:
-          $ref: '#/components/schemas/OpenIdIssuanceParameters'
-        credential:
-          type: object
-          description: Credential as a JSON object
-    OpenIdIssuanceParameters:
-      required:
-      - wellKnownUrl
-      type: object
-      properties:
-        wellKnownUrl:
-          type: string
-          description: Endpoint to which OIDC credential offers can be sent.
-          format: url
-      description: Parameters required for OpenId Connect issuance
     VerificationCreate:
       required:
       - connectionId
@@ -2212,7 +2160,7 @@ components:
         connectionId:
           pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
           type: string
-          description: The connection id
+          description: DIDComm Connection ID
           example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
         comment:
           type: string
@@ -2233,7 +2181,7 @@ components:
           example: ac32f24e-2f90-4e90-9427-c59482078a4b
         connectionId:
           type: string
-          description: The connection id
+          description: DIDComm Connection ID
           example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
         verificationRequest:
           $ref: '#/components/schemas/VerificationRequest'
@@ -2278,6 +2226,89 @@ components:
           description: The date at which the credential should be valid
           format: date-time
       description: The verification request
+    VerificationV20Options:
+      required:
+      - requiredClaims
+      type: object
+      properties:
+        requiredClaims:
+          type: array
+          description: List of claims that the credential needs to contain
+          items:
+            type: string
+            description: List of claims that the credential needs to contain
+        requiredType:
+          type: string
+          description: List of possible credential types that the claims need to come
+            from
+          nullable: true
+          default: VerifiableCredential
+        checkExpired:
+          type: boolean
+          description: Flag to indicate if verification should fail when expiry date
+            has passed
+          nullable: true
+          default: true
+      description: Options defining verification checks that should be performed
+    VerificationV20Request:
+      required:
+      - connectionId
+      - verificationOptions
+      type: object
+      properties:
+        connectionId:
+          pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+          type: string
+          description: The connection id
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        verificationOptions:
+          $ref: '#/components/schemas/VerificationV20Options'
+        comment:
+          type: string
+          description: An optional comment
+          example: optional comment
+    VerificationV20Record:
+      required:
+      - connectionId
+      - createdAt
+      - state
+      - updatedAt
+      - verificationId
+      type: object
+      properties:
+        verificationId:
+          type: string
+          description: The verification id
+          example: ac32f24e-2f90-4e90-9427-c59482078a4b
+        connectionId:
+          type: string
+          description: DIDComm Connection ID
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        state:
+          type: string
+          description: The verification state
+          enum:
+          - SUCCESS
+          - PENDING
+          - FAILURE
+          - ERROR
+        createdAt:
+          type: string
+          description: 'The creation date '
+          format: date-time
+        updatedAt:
+          type: string
+          description: The update date
+          format: date-time
+        presentedCredentials:
+          type: array
+          description: Presented credentials
+          items:
+            type: object
+            additionalProperties:
+              type: object
+              description: Presented credentials
+            description: Presented credentials
     VerificationTemplateCreate:
       required:
       - content
@@ -2353,15 +2384,6 @@ components:
         transactionStatus:
           type: string
           description: The transaction status regarding anchoring
-    RevocationCreate:
-      required:
-      - issuanceId
-      type: object
-      properties:
-        issuanceId:
-          pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
-          type: string
-          description: A credential issuance ID
     CredentialRevocationRequest:
       required:
       - statusListCredential
@@ -2379,6 +2401,15 @@ components:
         statusListCredential:
           type: string
           description: URL of the status list credential
+    RevocationCreate:
+      required:
+      - issuanceId
+      type: object
+      properties:
+        issuanceId:
+          pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+          type: string
+          description: A credential issuance ID
     OrganizationCreate:
       required:
       - name
@@ -2402,14 +2433,58 @@ components:
         keyType:
           type: string
           description: The key type to use
+          enum:
+          - ed25519
+          - bls12381g2
         did:
           type: string
           description: The did to use (if applicable)
+    IssuanceOpenIdRequestPayload:
+      required:
+      - credential
+      - issuerDid
+      - openIdConnect
+      - proofType
+      - recipientDid
+      - revocable
+      type: object
+      properties:
+        issuerDid:
+          type: string
+          description: Issuer DID
+        proofType:
+          type: string
+          description: Proof type used to sign and verify the credential
+          enum:
+          - ed25519
+          - ed25519_2020
+          - bls12381g2
+        revocable:
+          type: boolean
+          description: Make the credential revocable
+        recipientDid:
+          type: string
+          description: DID intended as the credential recipient
+        openIdConnect:
+          $ref: '#/components/schemas/OpenIdIssuanceParameters'
+        credential:
+          type: object
+          description: Credential as a JSON object
+    OpenIdIssuanceParameters:
+      required:
+      - wellKnownUrl
+      type: object
+      properties:
+        wellKnownUrl:
+          type: string
+          description: Endpoint to which OIDC credential offers can be sent.
+          format: url
+      description: Parameters required for OpenId Connect issuance
     CredentialOfferGenerationRequest:
       required:
       - credential
       - issuerDid
-      - recipientDid
+      - revocable
       type: object
       properties:
         issuerDid:
@@ -2418,12 +2493,16 @@ components:
         recipientDid:
           type: string
           description: DID intended as the credential recipient
+          nullable: true
         credential:
           type: object
           additionalProperties:
             type: object
             description: Credential as a JSON object
           description: Credential as a JSON object
+        revocable:
+          type: boolean
+          description: Make the credential revocable
     Uri:
       type: object
       properties:
@@ -2438,37 +2517,51 @@ components:
       properties:
         text:
           type: string
+          description: Message text
         connectionId:
           pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
           type: string
-    DIDAuthenticationRequest:
+          description: DIDComm Connection ID
+    DIDCommIssuanceParameters:
       required:
-      - did
+      - connectionId
       type: object
       properties:
-        did:
-          pattern: "^did:([a-zA-Z0-9_]+):([a-zA-Z0-9_.%-]+(:[a-zA-Z0-9_.%-]+)*)((;[a-zA-Z0-9_.:%-]+=[a-zA-Z0-9_.:%-]*)*)(/[^#?]*)?([?][^#]*)?(#.*)?$$"
+        connectionId:
           type: string
-          example: did:sov:29r83t9qhfQWJFMFASF
-        usePublicDid:
-          type: boolean
-          nullable: true
-          example: true
-    DIDAuthenticationAcknowledgement:
+          description: Connection through which to issue the credential
+      description: Parameters required for DIDComm issuance
+    IssuanceDidcommRequestPayload:
       required:
-      - did
-      - method
+      - credential
+      - didcomm
+      - issuerDid
+      - proofType
+      - recipientDid
+      - revocable
       type: object
       properties:
-        did:
-          pattern: "^did:([a-zA-Z0-9_]+):([a-zA-Z0-9_.%-]+(:[a-zA-Z0-9_.%-]+)*)((;[a-zA-Z0-9_.:%-]+=[a-zA-Z0-9_.:%-]*)*)(/[^#?]*)?([?][^#]*)?(#.*)?$$"
+        issuerDid:
           type: string
-          example: did:sov:29r83t9qhfQWJFMFASF
-        method:
+          description: Issuer DID
+        proofType:
           type: string
+          description: Proof type used to sign and verify the credential
           enum:
-          - DIDEXCHANGE
-          - SIOPV2
+          - ed25519
+          - ed25519_2020
+          - bls12381g2
+        revocable:
+          type: boolean
+          description: Make the credential revocable
+        recipientDid:
+          type: string
+          description: DID intended as the credential recipient
+        didcomm:
+          $ref: '#/components/schemas/DIDCommIssuanceParameters'
+        credential:
+          type: object
+          description: Credential as a JSON object
     CredentialAttribute:
       required:
       - name
@@ -2496,7 +2589,7 @@ components:
         connectionId:
           pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
           type: string
-          description: A connection ID
+          description: DIDComm Connection ID
           example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
         schemaId:
           pattern: "^[1-9A-HJ-NP-Za-km-z]{21,22}:2:.+:[0-9.]+$"
@@ -2524,11 +2617,11 @@ components:
         schemaId:
           pattern: "^[1-9A-HJ-NP-Za-km-z]{21,22}:2:.+:[0-9.]+$"
           type: string
-          description: A schema ID
+          description: A AnonCreds credential schema ID
         credentialDefinitionId:
           pattern: "[1-9A-HJ-NP-Za-km-z]{21,22}:3:CL:(([1-9][0-9]*)|([1-9A-HJ-NP-Za-km-z]{21,22}:2:.+:[0-9.]+)):.*$"
           type: string
-          description: A credential definition ID
+          description: A AnonCreds credential definition ID
         comment:
           type: string
           description: A human readable comment
@@ -2565,6 +2658,34 @@ components:
           description: A list of credential attributes
           items:
             $ref: '#/components/schemas/CredentialAttribute'
+    DIDAuthenticationRequest:
+      required:
+      - did
+      type: object
+      properties:
+        did:
+          pattern: "^did:([a-zA-Z0-9_]+):([a-zA-Z0-9_.%-]+(:[a-zA-Z0-9_.%-]+)*)((;[a-zA-Z0-9_.:%-]+=[a-zA-Z0-9_.:%-]*)*)(/[^#?]*)?([?][^#]*)?(#.*)?$$"
+          type: string
+          example: did:sov:29r83t9qhfQWJFMFASF
+        usePublicDid:
+          type: boolean
+          nullable: true
+          example: true
+    DIDAuthenticationAcknowledgement:
+      required:
+      - did
+      - method
+      type: object
+      properties:
+        did:
+          pattern: "^did:([a-zA-Z0-9_]+):([a-zA-Z0-9_.%-]+(:[a-zA-Z0-9_.%-]+)*)((;[a-zA-Z0-9_.:%-]+=[a-zA-Z0-9_.:%-]*)*)(/[^#?]*)?([?][^#]*)?(#.*)?$$"
+          type: string
+          example: did:sov:29r83t9qhfQWJFMFASF
+        method:
+          type: string
+          enum:
+          - DIDEXCHANGE
+          - SIOPV2
     CredentialDefinitionCreate:
       required:
       - schemaId
@@ -2653,6 +2774,7 @@ components:
         connectionId:
           pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
           type: string
+          description: DIDComm Connection ID
     ConnectionInvitation:
       required:
       - connectionInvitationContent
@@ -2673,6 +2795,7 @@ components:
           description: The connection's label
         connectionId:
           type: string
+          description: DIDComm Connection ID
         state:
           type: string
           enum:
@@ -2700,7 +2823,7 @@ components:
             description: Credential context
         credential:
           type: object
-          description: Credential Values
+          description: Credential Values as a JSON object
         issuer:
           type: string
           description: Issuer did
@@ -2733,12 +2856,12 @@ components:
       properties:
         id:
           type: integer
-          description: The verificationTemplate id
+          description: The verification template id
           format: int32
           example: 0
         name:
           type: string
-          description: The verificationTemplate name
+          description: The verification template name
           example: example
     Schema:
       required:
@@ -2777,11 +2900,14 @@ components:
       properties:
         id:
           type: integer
+          description: The organization id
           format: int32
         name:
           type: string
+          description: The organization name
         imgUrl:
           type: string
+          description: The image url of the Organization
     CredentialDefinition:
       required:
       - anchored
